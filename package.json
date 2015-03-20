@@ -1,0 +1,42 @@
+{
+  "name": "tribus",
+  "repository": "http://github.com/maxdavidson/tribus",
+  "author": "Max Davidson <davidsonmax@gmail.com>",
+  "version": "0.1.0-alpha",
+  "license": "MIT",
+  "registry": "jspm",
+  "main": "dist/tribus",
+  "jspm": {
+    "main": "tribus",
+    "directories": {
+      "lib": "lib",
+      "packages": "jspm_packages"
+    },
+    "dependencies": {
+      "bacon.js": "github:baconjs/bacon.js@^0.7.53",
+      "doT": "npm:dot@^1.0.3",
+      "gl-matrix": "github:toji/gl-matrix@master",
+      "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
+      "memoizee": "npm:memoizee@^0.3.8",
+      "text": "github:systemjs/plugin-text@^0.0.2"
+    }
+  },
+  "devDependencies": {
+    "chai": "^2.1.2",
+    "gulp": "^3.8.11",
+    "gulp-bump": "^0.3.0",
+    "gulp-shell": "^0.4.0",
+    "gulp-watch": "^4.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jspm": "^1.1.4",
+    "karma-mocha": "^0.1.10",
+    "karma-mocha-reporter": "^1.0.2",
+    "karma-sauce-launcher": "^0.2.10",
+    "karma-sinon": "^1.0.4",
+    "mocha": "^2.2.1",
+    "regenerator": "^0.8.17",
+    "semver": "^4.3.1",
+    "sinon": "^1.14.1"
+  }
+}

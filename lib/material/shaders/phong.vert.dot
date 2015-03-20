@@ -1,0 +1,48 @@
+uniform mat4 mvpMatrix;
+uniform mat4 modelMatrix;
+uniform mat3 normalMatrix;
+
+attribute highp vec3 vertex;
+attribute highp vec3 normal;
+{{? it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture'}}
+attribute mediump vec2 texcoord;
+{{?}}
+
+varying highp vec3 worldFragPos;
+varying mediump vec3 worldNormal;
+
+{{? it.ambient === 'texture' }}
+uniform mediump vec4 ambientTexcoordBounds;
+varying mediump vec2 ambientTexcoord;
+{{?}}
+
+{{? it.diffuse === 'texture' }}
+uniform mediump vec4 diffuseTexcoordBounds;
+varying mediump vec2 diffuseTexcoord;
+{{?}}
+
+{{? it.specular === 'texture' }}
+uniform mediump vec4 specularTexcoordBounds;
+varying mediump vec2 specularTexcoord;
+{{?}}
+
+
+void main() {
+
+    worldFragPos = vec3(modelMatrix * vec4(vertex, 1.0));
+    worldNormal = normalize(normalMatrix * normal);
+
+    {{? it.ambient === 'texture' }}
+    ambientTexcoord = ambientTexcoordBounds.xy + texcoord * ambientTexcoordBounds.zw;
+    {{?}}
+
+    {{? it.diffuse === 'texture' }}
+    diffuseTexcoord = diffuseTexcoordBounds.xy + texcoord * diffuseTexcoordBounds.zw;
+    {{?}}
+
+    {{? it.specular === 'texture' }}
+    specularTexcoord = specularTexcoordBounds.xy + texcoord * specularTexcoordBounds.zw;
+    {{?}}
+
+    gl_Position = mvpMatrix * vec4(vertex, 1.0);
+}
