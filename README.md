@@ -14,6 +14,8 @@ WebGL 3D engine and scene graph, built in ES6+ on top of [Babel](https://babeljs
 
 Should work in all web browsers that support WebGL and the OES_vertex_array_object extension.
 
+Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://maxdavidson.github.io/tribus/windmill/)
+
 
 ### Features
 
