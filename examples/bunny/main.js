@@ -25,7 +25,7 @@ const canvas = document.createElement('canvas');
 function main() {
     document.body.appendChild(canvas);
 
-    const renderer = new Renderer(scene, camera, canvas);
+    const renderer = new Renderer(scene, camera, canvas, { showFPS: true });
 
     renderer.start();
 }

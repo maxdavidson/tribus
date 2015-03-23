@@ -55,7 +55,7 @@ domready(() => {
 
     const controller = new MouseViewController(camera, canvas);
 
-    const renderer = new Renderer(scene, camera, canvas, { debug: false });
+    const renderer = new Renderer(scene, camera, canvas, { showFPS: true });
 
     renderer.start();
 });

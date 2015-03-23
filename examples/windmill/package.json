@@ -5,8 +5,8 @@
       "packages": "jspm_packages"
     },
     "dependencies": {
-      "tribus": "github:maxdavidson/tribus@master",
-      "domready": "github:ded/domready@^1.0.7"
+      "domready": "github:ded/domready@^1.0.7",
+      "tribus": "github:maxdavidson/tribus@master"
     }
   }
 }

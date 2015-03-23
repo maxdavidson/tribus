@@ -57,6 +57,7 @@ System.config({
       "gl-matrix": "github:toji/gl-matrix@2.2.1",
       "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
       "memoizee": "npm:memoizee@0.3.8",
+      "stats.js": "github:mrdoob/stats.js@master",
       "text": "github:systemjs/plugin-text@0.0.2"
     },
     "npm:assert@1.3.0": {
