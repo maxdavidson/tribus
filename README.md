@@ -56,7 +56,7 @@ Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://ma
 
 #### ES6:
 
-```
+```javascript
 import { Renderer, Group, Model, Geometry, PhongMaterial, PerspectiveCamera, PointLight } from 'tribus';
 
 // or: import * as Tribus from 'tribus';
@@ -99,7 +99,7 @@ if (document.body) {
 
 #### ES5:
 
-```
+```javascript
 var geometry = Tribus.Geometry.fromFile('bunny.obj');
 var material = new Tribus.PhongMaterial({
     diffuse: [0.5, 0.5, 0.5],
