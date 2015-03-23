@@ -20,6 +20,7 @@ System.config({
     "gl-matrix": "github:toji/gl-matrix@master",
     "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
     "memoizee": "npm:memoizee@0.3.8",
+    "stats.js": "github:mrdoob/stats.js@master",
     "text": "github:systemjs/plugin-text@0.0.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

@@ -48,58 +48,58 @@
 #}}
 
 {{## def.MAX_DIRECTIONAL_LIGHTS: {{= it.MAX_DIRECTIONAL_LIGHTS || 2 }} #}}
-{{## def.MAX_POINT_LIGHTS: {{= it.MAX_POINT_LIGHTS || 5 }} #}}
-{{## def.MAX_SPOT_LIGHTS: {{= it.MAX_SPOT_LIGHTS || 5 }} #}}
+{{## def.MAX_POINT_LIGHTS: {{= it.MAX_POINT_LIGHTS || 2 }} #}}
+{{## def.MAX_SPOT_LIGHTS: {{= it.MAX_SPOT_LIGHTS || 2 }} #}}
 
-precision highp float;
+precision mediump float;
 
 struct DirectionalLight {
     bool enabled;
-    highp   vec3  direction;
-    mediump vec3  diffuse, specular;
+    vec3  direction;
+    vec3  diffuse, specular;
 };
 
 struct PointLight {
     bool enabled;
-    highp   vec3  position;
-    mediump vec3  diffuse, specular;
-    mediump float constant, linear, quadratic;
+    vec3  position;
+    vec3  diffuse, specular;
+    float constant, linear, quadratic;
 };
 
 struct SpotLight {
     bool enabled;
-    highp   vec3  position, direction;
-    mediump vec3  diffuse, specular;
-    mediump float cutoff, outerCutoff;
-    mediump float constant, linear, quadratic;
+    vec3  position, direction;
+    vec3  diffuse, specular;
+    float cutoff, outerCutoff;
+    float constant, linear, quadratic;
 };
 
 struct Material {
     lowp float shininess;
-    {{? it.ambient === 'static' }} mediump vec3 ambient; {{?}}
-    {{? it.diffuse === 'static' }} mediump vec3 diffuse; {{?}}
-    {{? it.specular === 'static' }} mediump vec3 specular; {{?}}
+    {{? it.ambient === 'static' }} vec3 ambient; {{?}}
+    {{? it.diffuse === 'static' }} vec3 diffuse; {{?}}
+    {{? it.specular === 'static' }} vec3 specular; {{?}}
 };
 
 
-varying highp vec3 worldFragPos;
-varying highp vec3 worldNormal;
+varying vec3 worldFragPos;
+varying vec3 worldNormal;
 
-uniform highp vec3 viewPos;
+uniform vec3 viewPos;
 
 {{? it.ambient === 'texture' }}
 uniform sampler2D ambientSampler;
-varying mediump vec2 ambientTexcoord;
+varying vec2 ambientTexcoord;
 {{?}}
 
 {{?it.diffuse === 'texture' }}
 uniform sampler2D diffuseSampler;
-varying mediump vec2 diffuseTexcoord;
+varying vec2 diffuseTexcoord;
 {{?}}
 
 {{?it.specular === 'texture' }}
 uniform sampler2D specularSampler;
-varying mediump vec2 specularTexcoord;
+varying vec2 specularTexcoord;
 {{?}}
 
 
@@ -143,5 +143,6 @@ void main() {
     }
 
     gl_FragColor = vec4(color, 1.0);
+
     //gl_FragColor = vec4(abs(worldNormal2), 1.0);
 }
