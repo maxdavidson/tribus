@@ -1,19 +1,24 @@
 System.config({
   "transpiler": "babel",
+  "babelOptions": {
+    "loose": "all",
+    "optional": [
+      "runtime",
+      "es7.classProperties"
+    ]
+  },
   "paths": {
     "*": "*.js",
     "github:*": "jspm_packages/github/*.js",
     "npm:*": "jspm_packages/npm/*.js"
-  },
-  "babelOptions": {
-    "experimental": true,
-    "playground": true,
-    "loose": "all"
   }
 });
 
 System.config({
   "map": {
+    "babel": "npm:babel-core@5.1.2",
+    "babel-runtime": "npm:babel-runtime@5.1.2",
+    "core-js": "npm:core-js@0.8.2",
     "domready": "github:ded/domready@1.0.7",
     "tribus": "github:maxdavidson/tribus@master",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -67,6 +72,9 @@ System.config({
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"
+    },
+    "npm:core-js@0.8.2": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"

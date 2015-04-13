@@ -1,5 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){(function(global){"use strict";if(global._babelPolyfill){throw new Error("only one instance of babel/polyfill is allowed")}global._babelPolyfill=true;require("core-js/shim");require("regenerator-babel/runtime")}).call(this,typeof global!=="undefined"?global:typeof self!=="undefined"?self:typeof window!=="undefined"?window:{})},{"core-js/shim":2,"regenerator-babel/runtime":3}],2:[function(require,module,exports){!function(global,framework,undefined){"use strict";var OBJECT="Object",FUNCTION="Function",ARRAY="Array",STRING="String",NUMBER="Number",REGEXP="RegExp",DATE="Date",MAP="Map",SET="Set",WEAKMAP="WeakMap",WEAKSET="WeakSet",SYMBOL="Symbol",PROMISE="Promise",MATH="Math",ARGUMENTS="Arguments",PROTOTYPE="prototype",CONSTRUCTOR="constructor",TO_STRING="toString",TO_STRING_TAG=TO_STRING+"Tag",TO_LOCALE="toLocaleString",HAS_OWN="hasOwnProperty",FOR_EACH="forEach",ITERATOR="iterator",FF_ITERATOR="@@"+ITERATOR,PROCESS="process",CREATE_ELEMENT="createElement",Function=global[FUNCTION],Object=global[OBJECT],Array=global[ARRAY],String=global[STRING],Number=global[NUMBER],RegExp=global[REGEXP],Date=global[DATE],Map=global[MAP],Set=global[SET],WeakMap=global[WEAKMAP],WeakSet=global[WEAKSET],Symbol=global[SYMBOL],Math=global[MATH],TypeError=global.TypeError,RangeError=global.RangeError,setTimeout=global.setTimeout,setImmediate=global.setImmediate,clearImmediate=global.clearImmediate,parseInt=global.parseInt,isFinite=global.isFinite,process=global[PROCESS],nextTick=process&&process.nextTick,document=global.document,html=document&&document.documentElement,navigator=global.navigator,define=global.define,console=global.console||{},ArrayProto=Array[PROTOTYPE],ObjectProto=Object[PROTOTYPE],FunctionProto=Function[PROTOTYPE],Infinity=1/0,DOT=".";function isObject(it){return it!==null&&(typeof it=="object"||typeof it=="function")}function isFunction(it){return typeof it=="function"}var isNative=ctx(/./.test,/\[native code\]\s*\}\s*$/,1);var toString=ObjectProto[TO_STRING];function setToStringTag(it,tag,stat){if(it&&!has(it=stat?it:it[PROTOTYPE],SYMBOL_TAG))hidden(it,SYMBOL_TAG,tag)}function cof(it){return toString.call(it).slice(8,-1)}function classof(it){var O,T;return it==undefined?it===undefined?"Undefined":"Null":typeof(T=(O=Object(it))[SYMBOL_TAG])=="string"?T:cof(O)}var call=FunctionProto.call,apply=FunctionProto.apply,REFERENCE_GET;function part(){var fn=assertFunction(this),length=arguments.length,args=Array(length),i=0,_=path._,holder=false;while(length>i)if((args[i]=arguments[i++])===_)holder=true;return function(){var that=this,_length=arguments.length,i=0,j=0,_args;if(!holder&&!_length)return invoke(fn,args,that);_args=args.slice();if(holder)for(;length>i;i++)if(_args[i]===_)_args[i]=arguments[j++];while(_length>j)_args.push(arguments[j++]);return invoke(fn,_args,that)}}function ctx(fn,that,length){assertFunction(fn);if(~length&&that===undefined)return fn;switch(length){case 1:return function(a){return fn.call(that,a)};case 2:return function(a,b){return fn.call(that,a,b)};case 3:return function(a,b,c){return fn.call(that,a,b,c)}}return function(){return fn.apply(that,arguments)}}function invoke(fn,args,that){var un=that===undefined;switch(args.length|0){case 0:return un?fn():fn.call(that);case 1:return un?fn(args[0]):fn.call(that,args[0]);case 2:return un?fn(args[0],args[1]):fn.call(that,args[0],args[1]);case 3:return un?fn(args[0],args[1],args[2]):fn.call(that,args[0],args[1],args[2]);case 4:return un?fn(args[0],args[1],args[2],args[3]):fn.call(that,args[0],args[1],args[2],args[3]);case 5:return un?fn(args[0],args[1],args[2],args[3],args[4]):fn.call(that,args[0],args[1],args[2],args[3],args[4])}return fn.apply(that,args)}var create=Object.create,getPrototypeOf=Object.getPrototypeOf,setPrototypeOf=Object.setPrototypeOf,defineProperty=Object.defineProperty,defineProperties=Object.defineProperties,getOwnDescriptor=Object.getOwnPropertyDescriptor,getKeys=Object.keys,getNames=Object.getOwnPropertyNames,getSymbols=Object.getOwnPropertySymbols,isFrozen=Object.isFrozen,has=ctx(call,ObjectProto[HAS_OWN],2),ES5Object=Object,Dict;function toObject(it){return ES5Object(assertDefined(it))}function returnIt(it){return it}function returnThis(){return this}function get(object,key){if(has(object,key))return object[key]}function ownKeys(it){assertObject(it);return getSymbols?getNames(it).concat(getSymbols(it)):getNames(it)}var assign=Object.assign||function(target,source){var T=Object(assertDefined(target)),l=arguments.length,i=1;while(l>i){var S=ES5Object(arguments[i++]),keys=getKeys(S),length=keys.length,j=0,key;while(length>j)T[key=keys[j++]]=S[key]}return T};function keyOf(object,el){var O=toObject(object),keys=getKeys(O),length=keys.length,index=0,key;while(length>index)if(O[key=keys[index++]]===el)return key}function array(it){return String(it).split(",")}var push=ArrayProto.push,unshift=ArrayProto.unshift,slice=ArrayProto.slice,splice=ArrayProto.splice,indexOf=ArrayProto.indexOf,forEach=ArrayProto[FOR_EACH];function createArrayMethod(type){var isMap=type==1,isFilter=type==2,isSome=type==3,isEvery=type==4,isFindIndex=type==6,noholes=type==5||isFindIndex;return function(callbackfn){var O=Object(assertDefined(this)),that=arguments[1],self=ES5Object(O),f=ctx(callbackfn,that,3),length=toLength(self.length),index=0,result=isMap?Array(length):isFilter?[]:undefined,val,res;for(;length>index;index++)if(noholes||index in self){val=self[index];res=f(val,index,O);if(type){if(isMap)result[index]=res;else if(res)switch(type){case 3:return true;case 5:return val;case 6:return index;case 2:result.push(val)}else if(isEvery)return false}}return isFindIndex?-1:isSome||isEvery?isEvery:result}}function createArrayContains(isContains){return function(el){var O=toObject(this),length=toLength(O.length),index=toIndex(arguments[1],length);if(isContains&&el!=el){for(;length>index;index++)if(sameNaN(O[index]))return isContains||index}else for(;length>index;index++)if(isContains||index in O){if(O[index]===el)return isContains||index}return!isContains&&-1}}function generic(A,B){return typeof A=="function"?A:B}var MAX_SAFE_INTEGER=9007199254740991,pow=Math.pow,abs=Math.abs,ceil=Math.ceil,floor=Math.floor,max=Math.max,min=Math.min,random=Math.random,trunc=Math.trunc||function(it){return(it>0?floor:ceil)(it)};function sameNaN(number){return number!=number}function toInteger(it){return isNaN(it)?0:trunc(it)}function toLength(it){return it>0?min(toInteger(it),MAX_SAFE_INTEGER):0}function toIndex(index,length){var index=toInteger(index);return index<0?max(index+length,0):min(index,length)}function lz(num){return num>9?num:"0"+num}function createReplacer(regExp,replace,isStatic){var replacer=isObject(replace)?function(part){return replace[part]}:replace;return function(it){return String(isStatic?it:this).replace(regExp,replacer)}}function createPointAt(toString){return function(pos){var s=String(assertDefined(this)),i=toInteger(pos),l=s.length,a,b;if(i<0||i>=l)return toString?"":undefined;a=s.charCodeAt(i);return a<55296||a>56319||i+1===l||(b=s.charCodeAt(i+1))<56320||b>57343?toString?s.charAt(i):a:toString?s.slice(i,i+2):(a-55296<<10)+(b-56320)+65536}}var REDUCE_ERROR="Reduce of empty object with no initial value";function assert(condition,msg1,msg2){if(!condition)throw TypeError(msg2?msg1+msg2:msg1)}function assertDefined(it){if(it==undefined)throw TypeError("Function called on null or undefined");return it}function assertFunction(it){assert(isFunction(it),it," is not a function!");return it}function assertObject(it){assert(isObject(it),it," is not an object!");return it}function assertInstance(it,Constructor,name){assert(it instanceof Constructor,name,": use the 'new' operator!")}function descriptor(bitmap,value){return{enumerable:!(bitmap&1),configurable:!(bitmap&2),writable:!(bitmap&4),value:value}}function simpleSet(object,key,value){object[key]=value;return object}function createDefiner(bitmap){return DESC?function(object,key,value){return defineProperty(object,key,descriptor(bitmap,value))}:simpleSet}function uid(key){return SYMBOL+"("+key+")_"+(++sid+random())[TO_STRING](36)}function getWellKnownSymbol(name,setter){return Symbol&&Symbol[name]||(setter?Symbol:safeSymbol)(SYMBOL+DOT+name)}var DESC=!!function(){try{return defineProperty({},"a",{get:function(){return 2}}).a==2}catch(e){}}(),sid=0,hidden=createDefiner(1),set=Symbol?simpleSet:hidden,safeSymbol=Symbol||uid;function assignHidden(target,src){for(var key in src)hidden(target,key,src[key]);return target}var SYMBOL_UNSCOPABLES=getWellKnownSymbol("unscopables"),ArrayUnscopables=ArrayProto[SYMBOL_UNSCOPABLES]||{},SYMBOL_TAG=getWellKnownSymbol(TO_STRING_TAG),SYMBOL_SPECIES=getWellKnownSymbol("species"),SYMBOL_ITERATOR;function setSpecies(C){if(DESC&&(framework||!isNative(C)))defineProperty(C,SYMBOL_SPECIES,{configurable:true,get:returnThis})}var NODE=cof(process)==PROCESS,core={},path=framework?global:core,old=global.core,exportGlobal,FORCED=1,GLOBAL=2,STATIC=4,PROTO=8,BIND=16,WRAP=32;function $define(type,name,source){var key,own,out,exp,isGlobal=type&GLOBAL,target=isGlobal?global:type&STATIC?global[name]:(global[name]||ObjectProto)[PROTOTYPE],exports=isGlobal?core:core[name]||(core[name]={});if(isGlobal)source=name;for(key in source){own=!(type&FORCED)&&target&&key in target&&(!isFunction(target[key])||isNative(target[key]));out=(own?target:source)[key];if(!framework&&isGlobal&&!isFunction(target[key]))exp=source[key];else if(type&BIND&&own)exp=ctx(out,global);else if(type&WRAP&&!framework&&target[key]==out){exp=function(param){return this instanceof out?new out(param):out(param)};exp[PROTOTYPE]=out[PROTOTYPE]}else exp=type&PROTO&&isFunction(out)?ctx(call,out):out;if(framework&&target&&!own){if(isGlobal)target[key]=out;else delete target[key]&&hidden(target,key,out)}if(exports[key]!=out)hidden(exports,key,exp)}}if(typeof module!="undefined"&&module.exports)module.exports=core;else if(isFunction(define)&&define.amd)define(function(){return core});else exportGlobal=true;if(exportGlobal||framework){core.noConflict=function(){global.core=old;return core};global.core=core}SYMBOL_ITERATOR=getWellKnownSymbol(ITERATOR);var ITER=safeSymbol("iter"),KEY=1,VALUE=2,Iterators={},IteratorPrototype={},BUGGY_ITERATORS="keys"in ArrayProto&&!("next"in[].keys());setIterator(IteratorPrototype,returnThis);function setIterator(O,value){hidden(O,SYMBOL_ITERATOR,value);FF_ITERATOR in ArrayProto&&hidden(O,FF_ITERATOR,value)}function createIterator(Constructor,NAME,next,proto){Constructor[PROTOTYPE]=create(proto||IteratorPrototype,{next:descriptor(1,next)});setToStringTag(Constructor,NAME+" Iterator")}function defineIterator(Constructor,NAME,value,DEFAULT){var proto=Constructor[PROTOTYPE],iter=get(proto,SYMBOL_ITERATOR)||get(proto,FF_ITERATOR)||DEFAULT&&get(proto,DEFAULT)||value;if(framework){setIterator(proto,iter);if(iter!==value){var iterProto=getPrototypeOf(iter.call(new Constructor));setToStringTag(iterProto,NAME+" Iterator",true);has(proto,FF_ITERATOR)&&setIterator(iterProto,returnThis)}}Iterators[NAME]=iter;Iterators[NAME+" Iterator"]=returnThis;return iter}function defineStdIterators(Base,NAME,Constructor,next,DEFAULT,IS_SET){function createIter(kind){return function(){return new Constructor(this,kind)}}createIterator(Constructor,NAME,next);var entries=createIter(KEY+VALUE),values=createIter(VALUE);if(DEFAULT==VALUE)values=defineIterator(Base,NAME,values,"values");else entries=defineIterator(Base,NAME,entries,"entries");if(DEFAULT){$define(PROTO+FORCED*BUGGY_ITERATORS,NAME,{entries:entries,keys:IS_SET?values:createIter(KEY),values:values})}}function iterResult(done,value){return{value:value,done:!!done}}function isIterable(it){var O=Object(it),Symbol=global[SYMBOL],hasExt=(Symbol&&Symbol[ITERATOR]||FF_ITERATOR)in O;return hasExt||SYMBOL_ITERATOR in O||has(Iterators,classof(O))}function getIterator(it){var Symbol=global[SYMBOL],ext=it[Symbol&&Symbol[ITERATOR]||FF_ITERATOR],getIter=ext||it[SYMBOL_ITERATOR]||Iterators[classof(it)];return assertObject(getIter.call(it))}function stepCall(fn,value,entries){return entries?invoke(fn,value):fn(value)}function checkDangerIterClosing(fn){var danger=true;var O={next:function(){throw 1},"return":function(){danger=false}};O[SYMBOL_ITERATOR]=returnThis;try{fn(O)}catch(e){}return danger}function closeIterator(iterator){var ret=iterator["return"];if(ret!==undefined)ret.call(iterator)}function safeIterClose(exec,iterator){try{exec(iterator)}catch(e){closeIterator(iterator);throw e}}function forOf(iterable,entries,fn,that){safeIterClose(function(iterator){var f=ctx(fn,that,entries?2:1),step;while(!(step=iterator.next()).done)if(stepCall(f,step.value,entries)===false){return closeIterator(iterator)}},getIterator(iterable))}!function(TAG,SymbolRegistry,AllSymbols,setter){if(!isNative(Symbol)){Symbol=function(description){assert(!(this instanceof Symbol),SYMBOL+" is not a "+CONSTRUCTOR);var tag=uid(description),sym=set(create(Symbol[PROTOTYPE]),TAG,tag);AllSymbols[tag]=sym;DESC&&setter&&defineProperty(ObjectProto,tag,{configurable:true,set:function(value){hidden(this,tag,value)}});return sym};hidden(Symbol[PROTOTYPE],TO_STRING,function(){return this[TAG]})}$define(GLOBAL+WRAP,{Symbol:Symbol});var symbolStatics={"for":function(key){return has(SymbolRegistry,key+="")?SymbolRegistry[key]:SymbolRegistry[key]=Symbol(key)},iterator:SYMBOL_ITERATOR||getWellKnownSymbol(ITERATOR),keyFor:part.call(keyOf,SymbolRegistry),species:SYMBOL_SPECIES,toStringTag:SYMBOL_TAG=getWellKnownSymbol(TO_STRING_TAG,true),unscopables:SYMBOL_UNSCOPABLES,pure:safeSymbol,set:set,useSetter:function(){setter=true},useSimple:function(){setter=false}};forEach.call(array("hasInstance,isConcatSpreadable,match,replace,search,split,toPrimitive"),function(it){symbolStatics[it]=getWellKnownSymbol(it)});$define(STATIC,SYMBOL,symbolStatics);setToStringTag(Symbol,SYMBOL);$define(STATIC+FORCED*!isNative(Symbol),OBJECT,{getOwnPropertyNames:function(it){var names=getNames(toObject(it)),result=[],key,i=0;while(names.length>i)has(AllSymbols,key=names[i++])||result.push(key);return result},getOwnPropertySymbols:function(it){var names=getNames(toObject(it)),result=[],key,i=0;while(names.length>i)has(AllSymbols,key=names[i++])&&result.push(AllSymbols[key]);return result}});setToStringTag(Math,MATH,true);setToStringTag(global.JSON,"JSON",true)}(safeSymbol("tag"),{},{},true);!function(){var objectStatic={assign:assign,is:function(x,y){return x===y?x!==0||1/x===1/y:x!=x&&y!=y}};"__proto__"in ObjectProto&&function(buggy,set){try{set=ctx(call,getOwnDescriptor(ObjectProto,"__proto__").set,2);set({},ArrayProto)}catch(e){buggy=true}objectStatic.setPrototypeOf=setPrototypeOf=setPrototypeOf||function(O,proto){assertObject(O);assert(proto===null||isObject(proto),proto,": can't set as prototype!");if(buggy)O.__proto__=proto;else set(O,proto);return O}}();$define(STATIC,OBJECT,objectStatic)}();!function(tmp){tmp[SYMBOL_TAG]=DOT;if(cof(tmp)!=DOT)hidden(ObjectProto,TO_STRING,function(){return"[object "+classof(this)+"]"})}({});!function(){function wrapObjectMethod(key,MODE){var fn=Object[key],exp=core[OBJECT][key],f=0,o={};if(!exp||isNative(exp)){o[key]=MODE==1?function(it){return isObject(it)?fn(it):it}:MODE==2?function(it){return isObject(it)?fn(it):true}:MODE==3?function(it){return isObject(it)?fn(it):false}:MODE==4?function(it,key){return fn(toObject(it),key)}:function(it){return fn(toObject(it))};try{fn(DOT)}catch(e){f=1}$define(STATIC+FORCED*f,OBJECT,o)}}wrapObjectMethod("freeze",1);wrapObjectMethod("seal",1);wrapObjectMethod("preventExtensions",1);wrapObjectMethod("isFrozen",2);wrapObjectMethod("isSealed",2);wrapObjectMethod("isExtensible",3);wrapObjectMethod("getOwnPropertyDescriptor",4);wrapObjectMethod("getPrototypeOf");wrapObjectMethod("keys");wrapObjectMethod("getOwnPropertyNames")}();!function(NAME){NAME in FunctionProto||DESC&&defineProperty(FunctionProto,NAME,{configurable:true,get:function(){var match=String(this).match(/^\s*function ([^ (]*)/),name=match?match[1]:"";has(this,NAME)||defineProperty(this,NAME,descriptor(5,name));return name},set:function(value){has(this,NAME)||defineProperty(this,NAME,descriptor(0,value))}})}("name");Number("0o1")&&Number("0b1")||function(_Number,NumberProto){function toNumber(it){if(isObject(it))it=toPrimitive(it);if(typeof it=="string"&&it.length>2&&it.charCodeAt(0)==48){var binary=false;switch(it.charCodeAt(1)){case 66:case 98:binary=true;case 79:case 111:return parseInt(it.slice(2),binary?2:8)}}return+it}function toPrimitive(it){var fn,val;if(isFunction(fn=it.valueOf)&&!isObject(val=fn.call(it)))return val;if(isFunction(fn=it[TO_STRING])&&!isObject(val=fn.call(it)))return val;throw TypeError("Can't convert object to number")}Number=function Number(it){return this instanceof Number?new _Number(toNumber(it)):toNumber(it)};forEach.call(DESC?getNames(_Number):array("MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY"),function(key){key in Number||defineProperty(Number,key,getOwnDescriptor(_Number,key))});Number[PROTOTYPE]=NumberProto;NumberProto[CONSTRUCTOR]=Number;hidden(global,NUMBER,Number)}(Number,Number[PROTOTYPE]);!function(isInteger){$define(STATIC,NUMBER,{EPSILON:pow(2,-52),isFinite:function(it){return typeof it=="number"&&isFinite(it)},isInteger:isInteger,isNaN:sameNaN,isSafeInteger:function(number){return isInteger(number)&&abs(number)<=MAX_SAFE_INTEGER},MAX_SAFE_INTEGER:MAX_SAFE_INTEGER,MIN_SAFE_INTEGER:-MAX_SAFE_INTEGER,parseFloat:parseFloat,parseInt:parseInt})}(Number.isInteger||function(it){return!isObject(it)&&isFinite(it)&&floor(it)===it});!function(){var E=Math.E,exp=Math.exp,log=Math.log,sqrt=Math.sqrt,sign=Math.sign||function(x){return(x=+x)==0||x!=x?x:x<0?-1:1};function asinh(x){return!isFinite(x=+x)||x==0?x:x<0?-asinh(-x):log(x+sqrt(x*x+1))}function expm1(x){return(x=+x)==0?x:x>-1e-6&&x<1e-6?x+x*x/2:exp(x)-1}$define(STATIC,MATH,{acosh:function(x){return(x=+x)<1?NaN:isFinite(x)?log(x/E+sqrt(x+1)*sqrt(x-1)/E)+1:x},asinh:asinh,atanh:function(x){return(x=+x)==0?x:log((1+x)/(1-x))/2},cbrt:function(x){return sign(x=+x)*pow(abs(x),1/3)},clz32:function(x){return(x>>>=0)?32-x[TO_STRING](2).length:32},cosh:function(x){return(exp(x=+x)+exp(-x))/2},expm1:expm1,fround:function(x){return new Float32Array([x])[0]},hypot:function(value1,value2){var sum=0,len1=arguments.length,len2=len1,args=Array(len1),larg=-Infinity,arg;while(len1--){arg=args[len1]=+arguments[len1];if(arg==Infinity||arg==-Infinity)return Infinity;if(arg>larg)larg=arg}larg=arg||1;while(len2--)sum+=pow(args[len2]/larg,2);return larg*sqrt(sum)},imul:function(x,y){var UInt16=65535,xn=+x,yn=+y,xl=UInt16&xn,yl=UInt16&yn;return 0|xl*yl+((UInt16&xn>>>16)*yl+xl*(UInt16&yn>>>16)<<16>>>0)},log1p:function(x){return(x=+x)>-1e-8&&x<1e-8?x-x*x/2:log(1+x)},log10:function(x){return log(x)/Math.LN10},log2:function(x){return log(x)/Math.LN2},sign:sign,sinh:function(x){return abs(x=+x)<1?(expm1(x)-expm1(-x))/2:(exp(x-1)-exp(-x-1))*(E/2)},tanh:function(x){var a=expm1(x=+x),b=expm1(-x);return a==Infinity?1:b==Infinity?-1:(a-b)/(exp(x)+exp(-x))},trunc:trunc})}();!function(fromCharCode){function assertNotRegExp(it){if(cof(it)==REGEXP)throw TypeError()}$define(STATIC,STRING,{fromCodePoint:function(x){var res=[],len=arguments.length,i=0,code;while(len>i){code=+arguments[i++];if(toIndex(code,1114111)!==code)throw RangeError(code+" is not a valid code point");res.push(code<65536?fromCharCode(code):fromCharCode(((code-=65536)>>10)+55296,code%1024+56320))}return res.join("")},raw:function(callSite){var raw=toObject(callSite.raw),len=toLength(raw.length),sln=arguments.length,res=[],i=0;while(len>i){res.push(String(raw[i++]));if(i<sln)res.push(String(arguments[i]))}return res.join("")}});$define(PROTO,STRING,{codePointAt:createPointAt(false),endsWith:function(searchString){assertNotRegExp(searchString);var that=String(assertDefined(this)),endPosition=arguments[1],len=toLength(that.length),end=endPosition===undefined?len:min(toLength(endPosition),len);searchString+="";return that.slice(end-searchString.length,end)===searchString},includes:function(searchString){assertNotRegExp(searchString);return!!~String(assertDefined(this)).indexOf(searchString,arguments[1])},repeat:function(count){var str=String(assertDefined(this)),res="",n=toInteger(count);if(0>n||n==Infinity)throw RangeError("Count can't be negative");for(;n>0;(n>>>=1)&&(str+=str))if(n&1)res+=str;return res},startsWith:function(searchString){assertNotRegExp(searchString);var that=String(assertDefined(this)),index=toLength(min(arguments[1],that.length));searchString+="";return that.slice(index,index+searchString.length)===searchString}})}(String.fromCharCode);!function(){$define(STATIC+FORCED*checkDangerIterClosing(Array.from),ARRAY,{from:function(arrayLike){var O=Object(assertDefined(arrayLike)),mapfn=arguments[1],mapping=mapfn!==undefined,f=mapping?ctx(mapfn,arguments[2],2):undefined,index=0,length,result,step;if(isIterable(O)){result=new(generic(this,Array));safeIterClose(function(iterator){for(;!(step=iterator.next()).done;index++){result[index]=mapping?f(step.value,index):step.value}},getIterator(O))}else{result=new(generic(this,Array))(length=toLength(O.length));for(;length>index;index++){result[index]=mapping?f(O[index],index):O[index]}}result.length=index;return result}});$define(STATIC,ARRAY,{of:function(){var index=0,length=arguments.length,result=new(generic(this,Array))(length);while(length>index)result[index]=arguments[index++];result.length=length;return result}});setSpecies(Array)}();!function(){$define(PROTO,ARRAY,{copyWithin:function(target,start){var O=Object(assertDefined(this)),len=toLength(O.length),to=toIndex(target,len),from=toIndex(start,len),end=arguments[2],fin=end===undefined?len:toIndex(end,len),count=min(fin-from,len-to),inc=1;if(from<to&&to<from+count){inc=-1;from=from+count-1;to=to+count-1}while(count-->0){if(from in O)O[to]=O[from];else delete O[to];to+=inc;from+=inc}return O},fill:function(value){var O=Object(assertDefined(this)),length=toLength(O.length),index=toIndex(arguments[1],length),end=arguments[2],endPos=end===undefined?length:toIndex(end,length);while(endPos>index)O[index++]=value;return O},find:createArrayMethod(5),findIndex:createArrayMethod(6)});if(framework){forEach.call(array("find,findIndex,fill,copyWithin,entries,keys,values"),function(it){ArrayUnscopables[it]=true});SYMBOL_UNSCOPABLES in ArrayProto||hidden(ArrayProto,SYMBOL_UNSCOPABLES,ArrayUnscopables)}}();!function(at){defineStdIterators(Array,ARRAY,function(iterated,kind){set(this,ITER,{o:toObject(iterated),i:0,k:kind})},function(){var iter=this[ITER],O=iter.o,kind=iter.k,index=iter.i++;if(!O||index>=O.length){iter.o=undefined;return iterResult(1)}if(kind==KEY)return iterResult(0,index);if(kind==VALUE)return iterResult(0,O[index]);return iterResult(0,[index,O[index]])},VALUE);Iterators[ARGUMENTS]=Iterators[ARRAY];defineStdIterators(String,STRING,function(iterated){set(this,ITER,{o:String(iterated),i:0})},function(){var iter=this[ITER],O=iter.o,index=iter.i,point;if(index>=O.length)return iterResult(1);point=at.call(O,index);iter.i+=point.length;return iterResult(0,point)})}(createPointAt(true));DESC&&!function(RegExpProto,_RegExp){if(!function(){try{return RegExp(/a/g,"i")=="/a/i"}catch(e){}}()){RegExp=function RegExp(pattern,flags){return new _RegExp(cof(pattern)==REGEXP&&flags!==undefined?pattern.source:pattern,flags)};forEach.call(getNames(_RegExp),function(key){key in RegExp||defineProperty(RegExp,key,{configurable:true,get:function(){return _RegExp[key]},set:function(it){_RegExp[key]=it}})});RegExpProto[CONSTRUCTOR]=RegExp;RegExp[PROTOTYPE]=RegExpProto;hidden(global,REGEXP,RegExp)}if(/./g.flags!="g")defineProperty(RegExpProto,"flags",{configurable:true,get:createReplacer(/^.*\/(\w*)$/,"$1")});setSpecies(RegExp)}(RegExp[PROTOTYPE],RegExp);isFunction(setImmediate)&&isFunction(clearImmediate)||function(ONREADYSTATECHANGE){var postMessage=global.postMessage,addEventListener=global.addEventListener,MessageChannel=global.MessageChannel,counter=0,queue={},defer,channel,port;setImmediate=function(fn){var args=[],i=1;while(arguments.length>i)args.push(arguments[i++]);queue[++counter]=function(){invoke(isFunction(fn)?fn:Function(fn),args)};defer(counter);return counter};clearImmediate=function(id){delete queue[id]};function run(id){if(has(queue,id)){var fn=queue[id];delete queue[id];fn()}}function listner(event){run(event.data)}if(NODE){defer=function(id){nextTick(part.call(run,id))}}else if(addEventListener&&isFunction(postMessage)&&!global.importScripts){defer=function(id){postMessage(id,"*")};addEventListener("message",listner,false)}else if(isFunction(MessageChannel)){channel=new MessageChannel;port=channel.port2;channel.port1.onmessage=listner;defer=ctx(port.postMessage,port,1)}else if(document&&ONREADYSTATECHANGE in document[CREATE_ELEMENT]("script")){defer=function(id){html.appendChild(document[CREATE_ELEMENT]("script"))[ONREADYSTATECHANGE]=function(){html.removeChild(this);run(id)}}}else{defer=function(id){setTimeout(run,0,id)}}}("onreadystatechange");$define(GLOBAL+BIND,{setImmediate:setImmediate,clearImmediate:clearImmediate});!function(Promise,test){isFunction(Promise)&&isFunction(Promise.resolve)&&Promise.resolve(test=new Promise(function(){}))==test||function(asap,RECORD){function isThenable(it){var then;if(isObject(it))then=it.then;return isFunction(then)?then:false}function handledRejectionOrHasOnRejected(promise){var record=promise[RECORD],chain=record.c,i=0,react;if(record.h)return true;while(chain.length>i){react=chain[i++];if(react.fail||handledRejectionOrHasOnRejected(react.P))return true}}function notify(record,reject){var chain=record.c;if(reject||chain.length)asap(function(){var promise=record.p,value=record.v,ok=record.s==1,i=0;if(reject&&!handledRejectionOrHasOnRejected(promise)){setTimeout(function(){if(!handledRejectionOrHasOnRejected(promise)){if(NODE){if(!process.emit("unhandledRejection",value,promise)){}}else if(isFunction(console.error)){console.error("Unhandled promise rejection",value)}}},1e3)}else while(chain.length>i)!function(react){var cb=ok?react.ok:react.fail,ret,then;try{if(cb){if(!ok)record.h=true;ret=cb===true?value:cb(value);if(ret===react.P){react.rej(TypeError(PROMISE+"-chain cycle"))}else if(then=isThenable(ret)){then.call(ret,react.res,react.rej)}else react.res(ret)}else react.rej(value)}catch(err){react.rej(err)}}(chain[i++]);chain.length=0})}function resolve(value){var record=this,then,wrapper;if(record.d)return;record.d=true;record=record.r||record;try{if(then=isThenable(value)){wrapper={r:record,d:false};then.call(value,ctx(resolve,wrapper,1),ctx(reject,wrapper,1))}else{record.v=value;record.s=1;notify(record)}}catch(err){reject.call(wrapper||{r:record,d:false},err)}}function reject(value){var record=this;if(record.d)return;record.d=true;record=record.r||record;record.v=value;record.s=2;notify(record,true)}function getConstructor(C){var S=assertObject(C)[SYMBOL_SPECIES];return S!=undefined?S:C}Promise=function(executor){assertFunction(executor);assertInstance(this,Promise,PROMISE);var record={p:this,c:[],s:0,d:false,v:undefined,h:false};hidden(this,RECORD,record);try{executor(ctx(resolve,record,1),ctx(reject,record,1))}catch(err){reject.call(record,err)}};assignHidden(Promise[PROTOTYPE],{then:function(onFulfilled,onRejected){var S=assertObject(assertObject(this)[CONSTRUCTOR])[SYMBOL_SPECIES];var react={ok:isFunction(onFulfilled)?onFulfilled:true,fail:isFunction(onRejected)?onRejected:false},P=react.P=new(S!=undefined?S:Promise)(function(resolve,reject){react.res=assertFunction(resolve);react.rej=assertFunction(reject)}),record=this[RECORD];record.c.push(react);record.s&&notify(record);return P},"catch":function(onRejected){return this.then(undefined,onRejected)}});assignHidden(Promise,{all:function(iterable){var Promise=getConstructor(this),values=[];return new Promise(function(resolve,reject){forOf(iterable,false,push,values);var remaining=values.length,results=Array(remaining);if(remaining)forEach.call(values,function(promise,index){Promise.resolve(promise).then(function(value){results[index]=value;--remaining||resolve(results)},reject)});else resolve(results)})},race:function(iterable){var Promise=getConstructor(this);return new Promise(function(resolve,reject){forOf(iterable,false,function(promise){Promise.resolve(promise).then(resolve,reject)})})},reject:function(r){return new(getConstructor(this))(function(resolve,reject){reject(r)})},resolve:function(x){return isObject(x)&&RECORD in x&&getPrototypeOf(x)===this[PROTOTYPE]?x:new(getConstructor(this))(function(resolve,reject){resolve(x)})}})}(nextTick||setImmediate,safeSymbol("record"));setToStringTag(Promise,PROMISE);setSpecies(Promise);$define(GLOBAL+FORCED*!isNative(Promise),{Promise:Promise})}(global[PROMISE]);!function(){var UID=safeSymbol("uid"),O1=safeSymbol("O1"),WEAK=safeSymbol("weak"),LEAK=safeSymbol("leak"),LAST=safeSymbol("last"),FIRST=safeSymbol("first"),SIZE=DESC?safeSymbol("size"):"size",uid=0,tmp={};function getCollection(C,NAME,methods,commonMethods,isMap,isWeak){var ADDER=isMap?"set":"add",proto=C&&C[PROTOTYPE],O={};function initFromIterable(that,iterable){if(iterable!=undefined)forOf(iterable,isMap,that[ADDER],that);return that}function fixSVZ(key,chain){var method=proto[key];if(framework)proto[key]=function(a,b){var result=method.call(this,a===0?0:a,b);return chain?this:result}}if(!isNative(C)||!(isWeak||!BUGGY_ITERATORS&&has(proto,FOR_EACH)&&has(proto,"entries"))){C=isWeak?function(iterable){assertInstance(this,C,NAME);set(this,UID,uid++);initFromIterable(this,iterable)}:function(iterable){var that=this;assertInstance(that,C,NAME);set(that,O1,create(null));set(that,SIZE,0);set(that,LAST,undefined);set(that,FIRST,undefined);initFromIterable(that,iterable)};assignHidden(assignHidden(C[PROTOTYPE],methods),commonMethods);isWeak||!DESC||defineProperty(C[PROTOTYPE],"size",{get:function(){return assertDefined(this[SIZE])}})}else{var Native=C,inst=new C,chain=inst[ADDER](isWeak?{}:-0,1),buggyZero;if(checkDangerIterClosing(function(O){new C(O)})){C=function(iterable){assertInstance(this,C,NAME);return initFromIterable(new Native,iterable)};C[PROTOTYPE]=proto;if(framework)proto[CONSTRUCTOR]=C}isWeak||inst[FOR_EACH](function(val,key){buggyZero=1/key===-Infinity});if(buggyZero){fixSVZ("delete");fixSVZ("has");isMap&&fixSVZ("get")}if(buggyZero||chain!==inst)fixSVZ(ADDER,true)}setToStringTag(C,NAME);setSpecies(C);O[NAME]=C;$define(GLOBAL+WRAP+FORCED*!isNative(C),O);isWeak||defineStdIterators(C,NAME,function(iterated,kind){set(this,ITER,{o:iterated,k:kind})},function(){var iter=this[ITER],kind=iter.k,entry=iter.l;while(entry&&entry.r)entry=entry.p;if(!iter.o||!(iter.l=entry=entry?entry.n:iter.o[FIRST])){iter.o=undefined;return iterResult(1)}if(kind==KEY)return iterResult(0,entry.k);if(kind==VALUE)return iterResult(0,entry.v);return iterResult(0,[entry.k,entry.v])},isMap?KEY+VALUE:VALUE,!isMap);return C}function fastKey(it,create){if(!isObject(it))return(typeof it=="string"?"S":"P")+it;if(isFrozen(it))return"F";if(!has(it,UID)){if(!create)return"E";hidden(it,UID,++uid)}return"O"+it[UID]}function getEntry(that,key){var index=fastKey(key),entry;if(index!="F")return that[O1][index];for(entry=that[FIRST];entry;entry=entry.n){if(entry.k==key)return entry}}function def(that,key,value){var entry=getEntry(that,key),prev,index;if(entry)entry.v=value;else{that[LAST]=entry={i:index=fastKey(key,true),k:key,v:value,p:prev=that[LAST],n:undefined,r:false};if(!that[FIRST])that[FIRST]=entry;if(prev)prev.n=entry;that[SIZE]++;if(index!="F")that[O1][index]=entry}return that}var collectionMethods={clear:function(){for(var that=this,data=that[O1],entry=that[FIRST];entry;entry=entry.n){entry.r=true;
-if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAST]=undefined;that[SIZE]=0},"delete":function(key){var that=this,entry=getEntry(that,key);if(entry){var next=entry.n,prev=entry.p;delete that[O1][entry.i];entry.r=true;if(prev)prev.n=next;if(next)next.p=prev;if(that[FIRST]==entry)that[FIRST]=next;if(that[LAST]==entry)that[LAST]=prev;that[SIZE]--}return!!entry},forEach:function(callbackfn){var f=ctx(callbackfn,arguments[1],3),entry;while(entry=entry?entry.n:this[FIRST]){f(entry.v,entry.k,this);while(entry&&entry.r)entry=entry.p}},has:function(key){return!!getEntry(this,key)}};Map=getCollection(Map,MAP,{get:function(key){var entry=getEntry(this,key);return entry&&entry.v},set:function(key,value){return def(this,key===0?0:key,value)}},collectionMethods,true);Set=getCollection(Set,SET,{add:function(value){return def(this,value=value===0?0:value,value)}},collectionMethods);function defWeak(that,key,value){if(isFrozen(assertObject(key)))leakStore(that).set(key,value);else{has(key,WEAK)||hidden(key,WEAK,{});key[WEAK][that[UID]]=value}return that}function leakStore(that){return that[LEAK]||hidden(that,LEAK,new Map)[LEAK]}var weakMethods={"delete":function(key){if(!isObject(key))return false;if(isFrozen(key))return leakStore(this)["delete"](key);return has(key,WEAK)&&has(key[WEAK],this[UID])&&delete key[WEAK][this[UID]]},has:function(key){if(!isObject(key))return false;if(isFrozen(key))return leakStore(this).has(key);return has(key,WEAK)&&has(key[WEAK],this[UID])}};WeakMap=getCollection(WeakMap,WEAKMAP,{get:function(key){if(isObject(key)){if(isFrozen(key))return leakStore(this).get(key);if(has(key,WEAK))return key[WEAK][this[UID]]}},set:function(key,value){return defWeak(this,key,value)}},weakMethods,true,true);if(framework&&(new WeakMap).set(Object.freeze(tmp),7).get(tmp)!=7){forEach.call(array("delete,has,get,set"),function(key){var method=WeakMap[PROTOTYPE][key];WeakMap[PROTOTYPE][key]=function(a,b){if(isObject(a)&&isFrozen(a)){var result=leakStore(this)[key](a,b);return key=="set"?this:result}return method.call(this,a,b)}})}WeakSet=getCollection(WeakSet,WEAKSET,{add:function(value){return defWeak(this,value,true)}},weakMethods,false,true)}();!function(){function Enumerate(iterated){var keys=[],key;for(key in iterated)keys.push(key);set(this,ITER,{o:iterated,a:keys,i:0})}createIterator(Enumerate,OBJECT,function(){var iter=this[ITER],keys=iter.a,key;do{if(iter.i>=keys.length)return iterResult(1)}while(!((key=keys[iter.i++])in iter.o));return iterResult(0,key)});function wrap(fn){return function(it){assertObject(it);try{return fn.apply(undefined,arguments),true}catch(e){return false}}}function reflectGet(target,propertyKey){var receiver=arguments.length<3?target:arguments[2],desc=getOwnDescriptor(assertObject(target),propertyKey),proto;if(desc)return has(desc,"value")?desc.value:desc.get===undefined?undefined:desc.get.call(receiver);return isObject(proto=getPrototypeOf(target))?reflectGet(proto,propertyKey,receiver):undefined}function reflectSet(target,propertyKey,V){var receiver=arguments.length<4?target:arguments[3],ownDesc=getOwnDescriptor(assertObject(target),propertyKey),existingDescriptor,proto;if(!ownDesc){if(isObject(proto=getPrototypeOf(target))){return reflectSet(proto,propertyKey,V,receiver)}ownDesc=descriptor(0)}if(has(ownDesc,"value")){if(ownDesc.writable===false||!isObject(receiver))return false;existingDescriptor=getOwnDescriptor(receiver,propertyKey)||descriptor(0);existingDescriptor.value=V;return defineProperty(receiver,propertyKey,existingDescriptor),true}return ownDesc.set===undefined?false:(ownDesc.set.call(receiver,V),true)}var isExtensible=Object.isExtensible||returnIt;var reflect={apply:ctx(call,apply,3),construct:function(target,argumentsList){var proto=assertFunction(arguments.length<3?target:arguments[2])[PROTOTYPE],instance=create(isObject(proto)?proto:ObjectProto),result=apply.call(target,instance,argumentsList);return isObject(result)?result:instance},defineProperty:wrap(defineProperty),deleteProperty:function(target,propertyKey){var desc=getOwnDescriptor(assertObject(target),propertyKey);return desc&&!desc.configurable?false:delete target[propertyKey]},enumerate:function(target){return new Enumerate(assertObject(target))},get:reflectGet,getOwnPropertyDescriptor:function(target,propertyKey){return getOwnDescriptor(assertObject(target),propertyKey)},getPrototypeOf:function(target){return getPrototypeOf(assertObject(target))},has:function(target,propertyKey){return propertyKey in target},isExtensible:function(target){return!!isExtensible(assertObject(target))},ownKeys:ownKeys,preventExtensions:wrap(Object.preventExtensions||returnIt),set:reflectSet};if(setPrototypeOf)reflect.setPrototypeOf=function(target,proto){return setPrototypeOf(assertObject(target),proto),true};$define(GLOBAL,{Reflect:{}});$define(STATIC,"Reflect",reflect)}();!function(){$define(PROTO,ARRAY,{includes:createArrayContains(true)});$define(PROTO,STRING,{at:createPointAt(true)});function createObjectToArray(isEntries){return function(object){var O=toObject(object),keys=getKeys(object),length=keys.length,i=0,result=Array(length),key;if(isEntries)while(length>i)result[i]=[key=keys[i++],O[key]];else while(length>i)result[i]=O[keys[i++]];return result}}$define(STATIC,OBJECT,{getOwnPropertyDescriptors:function(object){var O=toObject(object),result={};forEach.call(ownKeys(O),function(key){defineProperty(result,key,descriptor(0,getOwnDescriptor(O,key)))});return result},values:createObjectToArray(false),entries:createObjectToArray(true)});$define(STATIC,REGEXP,{escape:createReplacer(/([\\\-[\]{}()*+?.,^$|])/g,"\\$1",true)})}();!function(REFERENCE){REFERENCE_GET=getWellKnownSymbol(REFERENCE+"Get",true);var REFERENCE_SET=getWellKnownSymbol(REFERENCE+SET,true),REFERENCE_DELETE=getWellKnownSymbol(REFERENCE+"Delete",true);$define(STATIC,SYMBOL,{referenceGet:REFERENCE_GET,referenceSet:REFERENCE_SET,referenceDelete:REFERENCE_DELETE});hidden(FunctionProto,REFERENCE_GET,returnThis);function setMapMethods(Constructor){if(Constructor){var MapProto=Constructor[PROTOTYPE];hidden(MapProto,REFERENCE_GET,MapProto.get);hidden(MapProto,REFERENCE_SET,MapProto.set);hidden(MapProto,REFERENCE_DELETE,MapProto["delete"])}}setMapMethods(Map);setMapMethods(WeakMap)}("reference");!function(arrayStatics){function setArrayStatics(keys,length){forEach.call(array(keys),function(key){if(key in ArrayProto)arrayStatics[key]=ctx(call,ArrayProto[key],length)})}setArrayStatics("pop,reverse,shift,keys,values,entries",1);setArrayStatics("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3);setArrayStatics("join,slice,concat,push,splice,unshift,sort,lastIndexOf,"+"reduce,reduceRight,copyWithin,fill,turn");$define(STATIC,ARRAY,arrayStatics)}({});!function(NodeList){if(framework&&NodeList&&!(SYMBOL_ITERATOR in NodeList[PROTOTYPE])){hidden(NodeList[PROTOTYPE],SYMBOL_ITERATOR,Iterators[ARRAY])}Iterators.NodeList=Iterators[ARRAY]}(global.NodeList)}(typeof self!="undefined"&&self.Math===Math?self:Function("return this")(),true)},{}],3:[function(require,module,exports){(function(global){!function(global){"use strict";var hasOwn=Object.prototype.hasOwnProperty;var undefined;var iteratorSymbol=typeof Symbol==="function"&&Symbol.iterator||"@@iterator";var inModule=typeof module==="object";var runtime=global.regeneratorRuntime;if(runtime){if(inModule){module.exports=runtime}return}runtime=global.regeneratorRuntime=inModule?module.exports:{};function wrap(innerFn,outerFn,self,tryLocsList){return new Generator(innerFn,outerFn,self||null,tryLocsList||[])}runtime.wrap=wrap;function tryCatch(fn,obj,arg){try{return{type:"normal",arg:fn.call(obj,arg)}}catch(err){return{type:"throw",arg:err}}}var GenStateSuspendedStart="suspendedStart";var GenStateSuspendedYield="suspendedYield";var GenStateExecuting="executing";var GenStateCompleted="completed";var ContinueSentinel={};function GeneratorFunction(){}function GeneratorFunctionPrototype(){}var Gp=GeneratorFunctionPrototype.prototype=Generator.prototype;GeneratorFunction.prototype=Gp.constructor=GeneratorFunctionPrototype;GeneratorFunctionPrototype.constructor=GeneratorFunction;GeneratorFunction.displayName="GeneratorFunction";runtime.isGeneratorFunction=function(genFun){var ctor=typeof genFun==="function"&&genFun.constructor;return ctor?ctor===GeneratorFunction||(ctor.displayName||ctor.name)==="GeneratorFunction":false};runtime.mark=function(genFun){genFun.__proto__=GeneratorFunctionPrototype;genFun.prototype=Object.create(Gp);return genFun};runtime.async=function(innerFn,outerFn,self,tryLocsList){return new Promise(function(resolve,reject){var generator=wrap(innerFn,outerFn,self,tryLocsList);var callNext=step.bind(generator.next);var callThrow=step.bind(generator["throw"]);function step(arg){var record=tryCatch(this,null,arg);if(record.type==="throw"){reject(record.arg);return}var info=record.arg;if(info.done){resolve(info.value)}else{Promise.resolve(info.value).then(callNext,callThrow)}}callNext()})};function Generator(innerFn,outerFn,self,tryLocsList){var generator=outerFn?Object.create(outerFn.prototype):this;var context=new Context(tryLocsList);var state=GenStateSuspendedStart;function invoke(method,arg){if(state===GenStateExecuting){throw new Error("Generator is already running")}if(state===GenStateCompleted){return doneResult()}while(true){var delegate=context.delegate;if(delegate){var record=tryCatch(delegate.iterator[method],delegate.iterator,arg);if(record.type==="throw"){context.delegate=null;method="throw";arg=record.arg;continue}method="next";arg=undefined;var info=record.arg;if(info.done){context[delegate.resultName]=info.value;context.next=delegate.nextLoc}else{state=GenStateSuspendedYield;return info}context.delegate=null}if(method==="next"){if(state===GenStateSuspendedStart&&typeof arg!=="undefined"){throw new TypeError("attempt to send "+JSON.stringify(arg)+" to newborn generator")}if(state===GenStateSuspendedYield){context.sent=arg}else{delete context.sent}}else if(method==="throw"){if(state===GenStateSuspendedStart){state=GenStateCompleted;throw arg}if(context.dispatchException(arg)){method="next";arg=undefined}}else if(method==="return"){context.abrupt("return",arg)}state=GenStateExecuting;var record=tryCatch(innerFn,self,context);if(record.type==="normal"){state=context.done?GenStateCompleted:GenStateSuspendedYield;var info={value:record.arg,done:context.done};if(record.arg===ContinueSentinel){if(context.delegate&&method==="next"){arg=undefined}}else{return info}}else if(record.type==="throw"){state=GenStateCompleted;if(method==="next"){context.dispatchException(record.arg)}else{arg=record.arg}}}}generator.next=invoke.bind(generator,"next");generator["throw"]=invoke.bind(generator,"throw");generator["return"]=invoke.bind(generator,"return");return generator}Gp[iteratorSymbol]=function(){return this};Gp.toString=function(){return"[object Generator]"};function pushTryEntry(locs){var entry={tryLoc:locs[0]};if(1 in locs){entry.catchLoc=locs[1]}if(2 in locs){entry.finallyLoc=locs[2];entry.afterLoc=locs[3]}this.tryEntries.push(entry)}function resetTryEntry(entry){var record=entry.completion||{};record.type="normal";delete record.arg;entry.completion=record}function Context(tryLocsList){this.tryEntries=[{tryLoc:"root"}];tryLocsList.forEach(pushTryEntry,this);this.reset()}runtime.keys=function(object){var keys=[];for(var key in object){keys.push(key)}keys.reverse();return function next(){while(keys.length){var key=keys.pop();if(key in object){next.value=key;next.done=false;return next}}next.done=true;return next}};function values(iterable){if(iterable){var iteratorMethod=iterable[iteratorSymbol];if(iteratorMethod){return iteratorMethod.call(iterable)}if(typeof iterable.next==="function"){return iterable}if(!isNaN(iterable.length)){var i=-1,next=function next(){while(++i<iterable.length){if(hasOwn.call(iterable,i)){next.value=iterable[i];next.done=false;return next}}next.value=undefined;next.done=true;return next};return next.next=next}}return{next:doneResult}}runtime.values=values;function doneResult(){return{value:undefined,done:true}}Context.prototype={constructor:Context,reset:function(){this.prev=0;this.next=0;this.sent=undefined;this.done=false;this.delegate=null;this.tryEntries.forEach(resetTryEntry);for(var tempIndex=0,tempName;hasOwn.call(this,tempName="t"+tempIndex)||tempIndex<20;++tempIndex){this[tempName]=null}},stop:function(){this.done=true;var rootEntry=this.tryEntries[0];var rootRecord=rootEntry.completion;if(rootRecord.type==="throw"){throw rootRecord.arg}return this.rval},dispatchException:function(exception){if(this.done){throw exception}var context=this;function handle(loc,caught){record.type="throw";record.arg=exception;context.next=loc;return!!caught}for(var i=this.tryEntries.length-1;i>=0;--i){var entry=this.tryEntries[i];var record=entry.completion;if(entry.tryLoc==="root"){return handle("end")}if(entry.tryLoc<=this.prev){var hasCatch=hasOwn.call(entry,"catchLoc");var hasFinally=hasOwn.call(entry,"finallyLoc");if(hasCatch&&hasFinally){if(this.prev<entry.catchLoc){return handle(entry.catchLoc,true)}else if(this.prev<entry.finallyLoc){return handle(entry.finallyLoc)}}else if(hasCatch){if(this.prev<entry.catchLoc){return handle(entry.catchLoc,true)}}else if(hasFinally){if(this.prev<entry.finallyLoc){return handle(entry.finallyLoc)}}else{throw new Error("try statement without catch or finally")}}}},abrupt:function(type,arg){for(var i=this.tryEntries.length-1;i>=0;--i){var entry=this.tryEntries[i];if(entry.tryLoc<=this.prev&&hasOwn.call(entry,"finallyLoc")&&this.prev<entry.finallyLoc){var finallyEntry=entry;break}}if(finallyEntry&&(type==="break"||type==="continue")&&finallyEntry.tryLoc<=arg&&arg<finallyEntry.finallyLoc){finallyEntry=null}var record=finallyEntry?finallyEntry.completion:{};record.type=type;record.arg=arg;if(finallyEntry){this.next=finallyEntry.finallyLoc}else{this.complete(record)}return ContinueSentinel},complete:function(record,afterLoc){if(record.type==="throw"){throw record.arg}if(record.type==="break"||record.type==="continue"){this.next=record.arg}else if(record.type==="return"){this.rval=record.arg;this.next="end"}else if(record.type==="normal"&&afterLoc){this.next=afterLoc}return ContinueSentinel},finish:function(finallyLoc){for(var i=this.tryEntries.length-1;i>=0;--i){var entry=this.tryEntries[i];if(entry.finallyLoc===finallyLoc){return this.complete(entry.completion,entry.afterLoc)}}},"catch":function(tryLoc){for(var i=this.tryEntries.length-1;i>=0;--i){var entry=this.tryEntries[i];if(entry.tryLoc===tryLoc){var record=entry.completion;if(record.type==="throw"){var thrown=record.arg;resetTryEntry(entry)}return thrown}}throw new Error("illegal catch attempt")},delegateYield:function(iterable,resultName,nextLoc){this.delegate={iterator:values(iterable),resultName:resultName,nextLoc:nextLoc};return ContinueSentinel}}}(typeof global==="object"?global:typeof window==="object"?window:this)}).call(this,typeof global!=="undefined"?global:typeof self!=="undefined"?self:typeof window!=="undefined"?window:{})},{}]},{},[1]);"format register";
 (function(global) {
 
   var defined = {};
@@ -23,7 +21,7 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
   function register(name, deps, declare, execute) {
     if (typeof name != 'string')
       throw "System.register provided no module name";
-    
+
     var entry;
 
     // dynamic
@@ -45,9 +43,9 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
     }
 
     entry.name = name;
-    
+
     // we never overwrite an existing define
-    if (!defined[name])
+    if (!(name in defined))
       defined[name] = entry; 
 
     entry.deps = dedupe(entry.deps);
@@ -69,17 +67,17 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
     for (var i = 0, l = entry.normalizedDeps.length; i < l; i++) {
       var depName = entry.normalizedDeps[i];
       var depEntry = defined[depName];
-      
+
       // not in the registry means already linked / ES6
       if (!depEntry || depEntry.evaluated)
         continue;
-      
+
       // now we know the entry is in our unlinked linkage group
       var depGroupIndex = entry.groupIndex + (depEntry.declarative != entry.declarative);
 
       // the group index of an entry is always the maximum
       if (depEntry.groupIndex === undefined || depEntry.groupIndex < depGroupIndex) {
-        
+
         // if already in a group, remove from the old group
         if (depEntry.groupIndex !== undefined) {
           groups[depEntry.groupIndex].splice(indexOf.call(groups[depEntry.groupIndex], depEntry), 1);
@@ -155,7 +153,7 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
       module.locked = false;
       return value;
     });
-    
+
     module.setters = declaration.setters;
     module.execute = declaration.execute;
 
@@ -175,7 +173,10 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
         depExports = depModule.exports;
       }
       else if (depEntry && !depEntry.declarative) {
-        depExports = { 'default': depEntry.module.exports, __useDefault: true };
+        if (depEntry.module.exports && depEntry.module.exports.__esModule)
+          depExports = depEntry.module.exports;
+        else
+          depExports = { 'default': depEntry.module.exports, __useDefault: true };
       }
       // in the module registry
       else if (!depEntry) {
@@ -216,7 +217,7 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
     else {
       if (entry.declarative)
         ensureEvaluated(name, []);
-    
+
       else if (!entry.evaluated)
         linkDynamicModule(entry);
 
@@ -257,7 +258,7 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
       }
       throw new TypeError('Module ' + name + ' not declared as a dependency.');
     }, exports, module);
-    
+
     if (output)
       module.exports = output;
   }
@@ -275,7 +276,7 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
     var entry = defined[moduleName];
 
     // if already seen, that means it's an already-evaluated non circular dependency
-    if (entry.evaluated || !entry.declarative)
+    if (!entry || entry.evaluated || !entry.declarative)
       return;
 
     // this only applies to declarative modules which late-execute
@@ -321,953 +322,680 @@ if(entry.p)entry.p=entry.p.n=undefined;delete data[entry.i]}that[FIRST]=that[LAS
     // remove from the registry
     defined[name] = undefined;
 
-    var module = entry.declarative ? entry.module.exports : { 'default': entry.module.exports, '__useDefault': true };
+    var module = entry.module.exports;
+
+    if (!module || !entry.declarative && module.__esModule !== true)
+      module = { 'default': module, __useDefault: true };
 
     // return the defined module object
     return modules[name] = module;
   };
 
-  return function(main, declare) {
+  return function(mains, declare) {
 
     var System;
+    var System = {
+      register: register, 
+      get: load, 
+      set: function(name, module) {
+        modules[name] = module; 
+      },
+      newModule: function(module) {
+        return module;
+      },
+      global: global 
+    };
+    System.set('@empty', {});
 
-    // if there's a system loader, define onto it
-    if (typeof System != 'undefined' && System.register) {
-      declare(System);
-      System['import'](main);
-    }
-    // otherwise, self execute
-    else {
-      declare(System = {
-        register: register, 
-        get: load, 
-        set: function(name, module) {
-          modules[name] = module; 
-        },
-        newModule: function(module) {
-          return module;
-        },
-        global: global 
-      });
-      System.set('@empty', System.newModule({}));
-      load(main);
-    }
-  };
+    declare(System);
+
+    for (var i = 0; i < mains.length; i++)
+      load(mains[i]);
+  }
 
 })(typeof window != 'undefined' ? window : global)
-/* ('mainModule', function(System) {
+/* (['mainModule'], function(System) {
   System.register(...);
 }); */
 
-('lib/extra/globalizer', function(System) {
-
-System.register("lib/extra/webgl-debug", [], function (_export) {
-  var log, error, glValidEnumContexts, glEnums, enumStringToValue;
-
-  /**
-   * Initializes this module. Safe to call more than once.
-   * @param {!WebGLRenderingContext} ctx A WebGL context. If
-   *    you have more than one context it doesn't matter which one
-   *    you pass in, it is only used to pull out constants.
-   */
-  function init(ctx) {
-    if (glEnums == null) {
-      glEnums = {};
-      enumStringToValue = {};
-      for (var propertyName in ctx) {
-        if (typeof ctx[propertyName] == "number") {
-          glEnums[ctx[propertyName]] = propertyName;
-          enumStringToValue[propertyName] = ctx[propertyName];
-        }
-      }
-    }
-  }
-
-  /**
-   * Checks the utils have been initialized.
-   */
-  function checkInit() {
-    if (glEnums == null) {
-      throw "WebGLDebugUtils.init(ctx) not called";
-    }
-  }
-
-  /**
-   * Returns true or false if value matches any WebGL enum
-   * @param {*} value Value to check if it might be an enum.
-   * @return {boolean} True if value matches one of the WebGL defined enums
-   */
-  function mightBeEnum(value) {
-    checkInit();
-    return glEnums[value] !== undefined;
-  }
-
-  /**
-   * Gets an string version of an WebGL enum.
-   *
-   * Example:
-   *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
-   *
-   * @param {number} value Value to return an enum for
-   * @return {string} The string version of the enum.
-   */
-  function glEnumToString(value) {
-    checkInit();
-    var name = glEnums[value];
-    return name !== undefined ? "gl." + name : "/*UNKNOWN WebGL ENUM*/ 0x" + value.toString(16) + "";
-  }
-
-  /**
-   * Returns the string version of a WebGL argument.
-   * Attempts to convert enum arguments to strings.
-   * @param {string} functionName the name of the WebGL function.
-   * @param {number} numArgs the number of arguments passed to the function.
-   * @param {number} argumentIndx the index of the argument.
-   * @param {*} value The value of the argument.
-   * @return {string} The value as a string.
-   */
-  function glFunctionArgToString(functionName, numArgs, argumentIndex, value) {
-    var funcInfo = glValidEnumContexts[functionName];
-    if (funcInfo !== undefined) {
-      var funcInfo = funcInfo[numArgs];
-      if (funcInfo !== undefined) {
-        if (funcInfo[argumentIndex]) {
-          if (typeof funcInfo[argumentIndex] === "object" && funcInfo[argumentIndex].enumBitwiseOr !== undefined) {
-            var enums = funcInfo[argumentIndex].enumBitwiseOr;
-            var orResult = 0;
-            var orEnums = [];
-            for (var i = 0; i < enums.length; ++i) {
-              var enumValue = enumStringToValue[enums[i]];
-              if ((value & enumValue) !== 0) {
-                orResult |= enumValue;
-                orEnums.push(glEnumToString(enumValue));
-              }
-            }
-            if (orResult === value) {
-              return orEnums.join(" | ");
-            } else {
-              return glEnumToString(value);
-            }
-          } else {
-            return glEnumToString(value);
-          }
-        }
-      }
-    }
-    if (value === null) {
-      return "null";
-    } else if (value === undefined) {
-      return "undefined";
-    } else {
-      return value.toString();
-    }
-  }
-
-  /**
-   * Converts the arguments of a WebGL function to a string.
-   * Attempts to convert enum arguments to strings.
-   *
-   * @param {string} functionName the name of the WebGL function.
-   * @param {number} args The arguments.
-   * @return {string} The arguments as a string.
-   */
-  function glFunctionArgsToString(functionName, args) {
-    // apparently we can't do args.join(",");
-    var argStr = "";
-    var numArgs = args.length;
-    for (var ii = 0; ii < numArgs; ++ii) {
-      argStr += (ii == 0 ? "" : ", ") + glFunctionArgToString(functionName, numArgs, ii, args[ii]);
-    }
-    return argStr;
-  }
-
-  function makePropertyWrapper(wrapper, original, propertyName) {
-    //log("wrap prop: " + propertyName);
-    wrapper.__defineGetter__(propertyName, function () {
-      return original[propertyName];
-    });
-    // TODO(gmane): this needs to handle properties that take more than
-    // one value?
-    wrapper.__defineSetter__(propertyName, function (value) {
-      //log("set: " + propertyName);
-      original[propertyName] = value;
-    });
-  }
-
-  // Makes a function that calls a function on another object.
-  function makeFunctionWrapper(original, functionName) {
-    //log("wrap fn: " + functionName);
-    var f = original[functionName];
-    return function () {
-      //log("call: " + functionName);
-      var result = f.apply(original, arguments);
-      return result;
-    };
-  }
-
-  /**
-   * Given a WebGL context returns a wrapped context that calls
-   * gl.getError after every command and calls a function if the
-   * result is not gl.NO_ERROR.
-   *
-   * @param {!WebGLRenderingContext} ctx The webgl context to
-   *        wrap.
-   * @param {!function(err, funcName, args): void} opt_onErrorFunc
-   *        The function to call when gl.getError returns an
-   *        error. If not specified the default function calls
-   *        console.log with a message.
-   * @param {!function(funcName, args): void} opt_onFunc The
-   *        function to call when each webgl function is called.
-   *        You can use this to log all calls for example.
-   * @param {!WebGLRenderingContext} opt_err_ctx The webgl context
-   *        to call getError on if different than ctx.
-   */
-  function makeDebugContext(ctx, opt_onErrorFunc, opt_onFunc, opt_err_ctx) {
-    opt_err_ctx = opt_err_ctx || ctx;
-    init(ctx);
-    opt_onErrorFunc = opt_onErrorFunc || function (err, functionName, args) {
-      // apparently we can't do args.join(",");
-      var argStr = "";
-      var numArgs = args.length;
-      for (var ii = 0; ii < numArgs; ++ii) {
-        argStr += (ii == 0 ? "" : ", ") + glFunctionArgToString(functionName, numArgs, ii, args[ii]);
-      }
-      error("WebGL error " + glEnumToString(err) + " in " + functionName + "(" + argStr + ")");
-    };
-
-    // Holds booleans for each GL error so after we get the error ourselves
-    // we can still return it to the client app.
-    var glErrorShadow = {};
-
-    // Makes a function that calls a WebGL function and then calls getError.
-    function makeErrorWrapper(ctx, functionName) {
-      return function () {
-        if (opt_onFunc) {
-          opt_onFunc(functionName, arguments);
-        }
-        var result = ctx[functionName].apply(ctx, arguments);
-        var err = opt_err_ctx.getError();
-        if (err != 0) {
-          glErrorShadow[err] = true;
-          opt_onErrorFunc(err, functionName, arguments);
-        }
-        return result;
-      };
-    }
-
-    // Make a an object that has a copy of every property of the WebGL context
-    // but wraps all functions.
-    var wrapper = {};
-    for (var propertyName in ctx) {
-      if (typeof ctx[propertyName] == "function") {
-        if (propertyName != "getExtension") {
-          wrapper[propertyName] = makeErrorWrapper(ctx, propertyName);
-        } else {
-          var wrapped = makeErrorWrapper(ctx, propertyName);
-          wrapper[propertyName] = function () {
-            var result = wrapped.apply(ctx, arguments);
-            return makeDebugContext(result, opt_onErrorFunc, opt_onFunc, opt_err_ctx);
-          };
-        }
-      } else {
-        makePropertyWrapper(wrapper, ctx, propertyName);
-      }
-    }
-
-    // Override the getError function with one that returns our saved results.
-    wrapper.getError = function () {
-      for (var err in glErrorShadow) {
-        if (glErrorShadow.hasOwnProperty(err)) {
-          if (glErrorShadow[err]) {
-            glErrorShadow[err] = false;
-            return err;
-          }
-        }
-      }
-      return ctx.NO_ERROR;
-    };
-
-    return wrapper;
-  }
-
-  function resetToInitialState(ctx) {
-    var numAttribs = ctx.getParameter(ctx.MAX_VERTEX_ATTRIBS);
-    var tmp = ctx.createBuffer();
-    ctx.bindBuffer(ctx.ARRAY_BUFFER, tmp);
-    for (var ii = 0; ii < numAttribs; ++ii) {
-      ctx.disableVertexAttribArray(ii);
-      ctx.vertexAttribPointer(ii, 4, ctx.FLOAT, false, 0, 0);
-      ctx.vertexAttrib1f(ii, 0);
-    }
-    ctx.deleteBuffer(tmp);
-
-    var numTextureUnits = ctx.getParameter(ctx.MAX_TEXTURE_IMAGE_UNITS);
-    for (var ii = 0; ii < numTextureUnits; ++ii) {
-      ctx.activeTexture(ctx.TEXTURE0 + ii);
-      ctx.bindTexture(ctx.TEXTURE_CUBE_MAP, null);
-      ctx.bindTexture(ctx.TEXTURE_2D, null);
-    }
-
-    ctx.activeTexture(ctx.TEXTURE0);
-    ctx.useProgram(null);
-    ctx.bindBuffer(ctx.ARRAY_BUFFER, null);
-    ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, null);
-    ctx.bindFramebuffer(ctx.FRAMEBUFFER, null);
-    ctx.bindRenderbuffer(ctx.RENDERBUFFER, null);
-    ctx.disable(ctx.BLEND);
-    ctx.disable(ctx.CULL_FACE);
-    ctx.disable(ctx.DEPTH_TEST);
-    ctx.disable(ctx.DITHER);
-    ctx.disable(ctx.SCISSOR_TEST);
-    ctx.blendColor(0, 0, 0, 0);
-    ctx.blendEquation(ctx.FUNC_ADD);
-    ctx.blendFunc(ctx.ONE, ctx.ZERO);
-    ctx.clearColor(0, 0, 0, 0);
-    ctx.clearDepth(1);
-    ctx.clearStencil(-1);
-    ctx.colorMask(true, true, true, true);
-    ctx.cullFace(ctx.BACK);
-    ctx.depthFunc(ctx.LESS);
-    ctx.depthMask(true);
-    ctx.depthRange(0, 1);
-    ctx.frontFace(ctx.CCW);
-    ctx.hint(ctx.GENERATE_MIPMAP_HINT, ctx.DONT_CARE);
-    ctx.lineWidth(1);
-    ctx.pixelStorei(ctx.PACK_ALIGNMENT, 4);
-    ctx.pixelStorei(ctx.UNPACK_ALIGNMENT, 4);
-    ctx.pixelStorei(ctx.UNPACK_FLIP_Y_WEBGL, false);
-    ctx.pixelStorei(ctx.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
-    // TODO: Delete this IF.
-    if (ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL) {
-      ctx.pixelStorei(ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL, ctx.BROWSER_DEFAULT_WEBGL);
-    }
-    ctx.polygonOffset(0, 0);
-    ctx.sampleCoverage(1, false);
-    ctx.scissor(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.stencilFunc(ctx.ALWAYS, 0, 4294967295);
-    ctx.stencilMask(4294967295);
-    ctx.stencilOp(ctx.KEEP, ctx.KEEP, ctx.KEEP);
-    ctx.viewport(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.clear(ctx.COLOR_BUFFER_BIT | ctx.DEPTH_BUFFER_BIT | ctx.STENCIL_BUFFER_BIT);
-
-    // TODO: This should NOT be needed but Firefox fails with 'hint'
-    while (ctx.getError());
-  }
-
-  function makeLostContextSimulatingCanvas(canvas) {
-    var unwrappedContext_;
-    var wrappedContext_;
-    var onLost_ = [];
-    var onRestored_ = [];
-    var wrappedContext_ = {};
-    var contextId_ = 1;
-    var contextLost_ = false;
-    var resourceId_ = 0;
-    var resourceDb_ = [];
-    var numCallsToLoseContext_ = 0;
-    var numCalls_ = 0;
-    var canRestore_ = false;
-    var restoreTimeout_ = 0;
-
-    // Holds booleans for each GL error so can simulate errors.
-    var glErrorShadow_ = {};
-
-    canvas.getContext = (function (f) {
-      return function () {
-        var ctx = f.apply(canvas, arguments);
-        // Did we get a context and is it a WebGL context?
-        if (ctx instanceof WebGLRenderingContext) {
-          if (ctx != unwrappedContext_) {
-            if (unwrappedContext_) {
-              throw "got different context";
-            }
-            unwrappedContext_ = ctx;
-            wrappedContext_ = makeLostContextSimulatingContext(unwrappedContext_);
-          }
-          return wrappedContext_;
-        }
-        return ctx;
-      };
-    })(canvas.getContext);
-
-    function wrapEvent(listener) {
-      if (typeof listener == "function") {
-        return listener;
-      } else {
-        return function (info) {
-          listener.handleEvent(info);
-        };
-      }
-    }
-
-    var addOnContextLostListener = function addOnContextLostListener(listener) {
-      onLost_.push(wrapEvent(listener));
-    };
-
-    var addOnContextRestoredListener = function addOnContextRestoredListener(listener) {
-      onRestored_.push(wrapEvent(listener));
-    };
-
-    function wrapAddEventListener(canvas) {
-      var f = canvas.addEventListener;
-      canvas.addEventListener = function (type, listener, bubble) {
-        switch (type) {
-          case "webglcontextlost":
-            addOnContextLostListener(listener);
-            break;
-          case "webglcontextrestored":
-            addOnContextRestoredListener(listener);
-            break;
-          default:
-            f.apply(canvas, arguments);
-        }
-      };
-    }
-
-    wrapAddEventListener(canvas);
-
-    canvas.loseContext = function () {
-      if (!contextLost_) {
-        contextLost_ = true;
-        numCallsToLoseContext_ = 0;
-        ++contextId_;
-        while (unwrappedContext_.getError());
-        clearErrors();
-        glErrorShadow_[unwrappedContext_.CONTEXT_LOST_WEBGL] = true;
-        var event = makeWebGLContextEvent("context lost");
-        var callbacks = onLost_.slice();
-        setTimeout(function () {
-          //log("numCallbacks:" + callbacks.length);
-          for (var ii = 0; ii < callbacks.length; ++ii) {
-            //log("calling callback:" + ii);
-            callbacks[ii](event);
-          }
-          if (restoreTimeout_ >= 0) {
-            setTimeout(function () {
-              canvas.restoreContext();
-            }, restoreTimeout_);
-          }
-        }, 0);
-      }
-    };
-
-    canvas.restoreContext = function () {
-      if (contextLost_) {
-        if (onRestored_.length) {
-          setTimeout(function () {
-            if (!canRestore_) {
-              throw "can not restore. webglcontestlost listener did not call event.preventDefault";
-            }
-            freeResources();
-            resetToInitialState(unwrappedContext_);
-            contextLost_ = false;
-            numCalls_ = 0;
-            canRestore_ = false;
-            var callbacks = onRestored_.slice();
-            var event = makeWebGLContextEvent("context restored");
-            for (var ii = 0; ii < callbacks.length; ++ii) {
-              callbacks[ii](event);
-            }
-          }, 0);
-        }
-      }
-    };
-
-    canvas.loseContextInNCalls = function (numCalls) {
-      if (contextLost_) {
-        throw "You can not ask a lost contet to be lost";
-      }
-      numCallsToLoseContext_ = numCalls_ + numCalls;
-    };
-
-    canvas.getNumCalls = function () {
-      return numCalls_;
-    };
-
-    canvas.setRestoreTimeout = function (timeout) {
-      restoreTimeout_ = timeout;
-    };
-
-    function isWebGLObject(obj) {
-      //return false;
-      return obj instanceof WebGLBuffer || obj instanceof WebGLFramebuffer || obj instanceof WebGLProgram || obj instanceof WebGLRenderbuffer || obj instanceof WebGLShader || obj instanceof WebGLTexture;
-    }
-
-    function checkResources(args) {
-      for (var ii = 0; ii < args.length; ++ii) {
-        var arg = args[ii];
-        if (isWebGLObject(arg)) {
-          return arg.__webglDebugContextLostId__ == contextId_;
-        }
-      }
-      return true;
-    }
-
-    function clearErrors() {
-      var k = Object.keys(glErrorShadow_);
-      for (var ii = 0; ii < k.length; ++ii) {
-        delete glErrorShadow_[k];
-      }
-    }
-
-    function loseContextIfTime() {
-      ++numCalls_;
-      if (!contextLost_) {
-        if (numCallsToLoseContext_ == numCalls_) {
-          canvas.loseContext();
-        }
-      }
-    }
-
-    // Makes a function that simulates WebGL when out of context.
-    function makeLostContextFunctionWrapper(ctx, functionName) {
-      var f = ctx[functionName];
-      return function () {
-        // log("calling:" + functionName);
-        // Only call the functions if the context is not lost.
-        loseContextIfTime();
-        if (!contextLost_) {
-          //if (!checkResources(arguments)) {
-          //  glErrorShadow_[wrappedContext_.INVALID_OPERATION] = true;
-          //  return;
-          //}
-          var result = f.apply(ctx, arguments);
-          return result;
-        }
-      };
-    }
-
-    function freeResources() {
-      for (var ii = 0; ii < resourceDb_.length; ++ii) {
-        var resource = resourceDb_[ii];
-        if (resource instanceof WebGLBuffer) {
-          unwrappedContext_.deleteBuffer(resource);
-        } else if (resource instanceof WebGLFramebuffer) {
-          unwrappedContext_.deleteFramebuffer(resource);
-        } else if (resource instanceof WebGLProgram) {
-          unwrappedContext_.deleteProgram(resource);
-        } else if (resource instanceof WebGLRenderbuffer) {
-          unwrappedContext_.deleteRenderbuffer(resource);
-        } else if (resource instanceof WebGLShader) {
-          unwrappedContext_.deleteShader(resource);
-        } else if (resource instanceof WebGLTexture) {
-          unwrappedContext_.deleteTexture(resource);
-        }
-      }
-    }
-
-    function makeWebGLContextEvent(statusMessage) {
-      return {
-        statusMessage: statusMessage,
-        preventDefault: function preventDefault() {
-          canRestore_ = true;
-        }
-      };
-    }
-
-    return canvas;
-
-    function makeLostContextSimulatingContext(ctx) {
-      // copy all functions and properties to wrapper
-      for (var propertyName in ctx) {
-        if (typeof ctx[propertyName] == "function") {
-          wrappedContext_[propertyName] = makeLostContextFunctionWrapper(ctx, propertyName);
-        } else {
-          makePropertyWrapper(wrappedContext_, ctx, propertyName);
-        }
-      }
-
-      // Wrap a few functions specially.
-      wrappedContext_.getError = function () {
-        loseContextIfTime();
-        if (!contextLost_) {
-          var err;
-          while (err = unwrappedContext_.getError()) {
-            glErrorShadow_[err] = true;
-          }
-        }
-        for (var err in glErrorShadow_) {
-          if (glErrorShadow_[err]) {
-            delete glErrorShadow_[err];
-            return err;
-          }
-        }
-        return wrappedContext_.NO_ERROR;
-      };
-
-      var creationFunctions = ["createBuffer", "createFramebuffer", "createProgram", "createRenderbuffer", "createShader", "createTexture"];
-      for (var ii = 0; ii < creationFunctions.length; ++ii) {
-        var functionName = creationFunctions[ii];
-        wrappedContext_[functionName] = (function (f) {
-          return function () {
-            loseContextIfTime();
-            if (contextLost_) {
-              return null;
-            }
-            var obj = f.apply(ctx, arguments);
-            obj.__webglDebugContextLostId__ = contextId_;
-            resourceDb_.push(obj);
-            return obj;
-          };
-        })(ctx[functionName]);
-      }
-
-      var functionsThatShouldReturnNull = ["getActiveAttrib", "getActiveUniform", "getBufferParameter", "getContextAttributes", "getAttachedShaders", "getFramebufferAttachmentParameter", "getParameter", "getProgramParameter", "getProgramInfoLog", "getRenderbufferParameter", "getShaderParameter", "getShaderInfoLog", "getShaderSource", "getTexParameter", "getUniform", "getUniformLocation", "getVertexAttrib"];
-      for (var ii = 0; ii < functionsThatShouldReturnNull.length; ++ii) {
-        var functionName = functionsThatShouldReturnNull[ii];
-        wrappedContext_[functionName] = (function (f) {
-          return function () {
-            loseContextIfTime();
-            if (contextLost_) {
-              return null;
-            }
-            return f.apply(ctx, arguments);
-          };
-        })(wrappedContext_[functionName]);
-      }
-
-      var isFunctions = ["isBuffer", "isEnabled", "isFramebuffer", "isProgram", "isRenderbuffer", "isShader", "isTexture"];
-      for (var ii = 0; ii < isFunctions.length; ++ii) {
-        var functionName = isFunctions[ii];
-        wrappedContext_[functionName] = (function (f) {
-          return function () {
-            loseContextIfTime();
-            if (contextLost_) {
-              return false;
-            }
-            return f.apply(ctx, arguments);
-          };
-        })(wrappedContext_[functionName]);
-      }
-
-      wrappedContext_.checkFramebufferStatus = (function (f) {
-        return function () {
-          loseContextIfTime();
-          if (contextLost_) {
-            return wrappedContext_.FRAMEBUFFER_UNSUPPORTED;
-          }
-          return f.apply(ctx, arguments);
-        };
-      })(wrappedContext_.checkFramebufferStatus);
-
-      wrappedContext_.getAttribLocation = (function (f) {
-        return function () {
-          loseContextIfTime();
-          if (contextLost_) {
-            return -1;
-          }
-          return f.apply(ctx, arguments);
-        };
-      })(wrappedContext_.getAttribLocation);
-
-      wrappedContext_.getVertexAttribOffset = (function (f) {
-        return function () {
-          loseContextIfTime();
-          if (contextLost_) {
-            return 0;
-          }
-          return f.apply(ctx, arguments);
-        };
-      })(wrappedContext_.getVertexAttribOffset);
-
-      wrappedContext_.isContextLost = function () {
-        return contextLost_;
-      };
-
-      return wrappedContext_;
-    }
-  }
-
-  return {
-    setters: [],
-    execute: function () {
-      "use strict";
-
-      /*
-      ** Copyright (c) 2012 The Khronos Group Inc.
-      **
-      ** Permission is hereby granted, free of charge, to any person obtaining a
-      ** copy of this software and/or associated documentation files (the
-      ** "Materials"), to deal in the Materials without restriction, including
-      ** without limitation the rights to use, copy, modify, merge, publish,
-      ** distribute, sublicense, and/or sell copies of the Materials, and to
-      ** permit persons to whom the Materials are furnished to do so, subject to
-      ** the following conditions:
-      **
-      ** The above copyright notice and this permission notice shall be included
-      ** in all copies or substantial portions of the Materials.
-      **
-      ** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-      ** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-      ** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-      ** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-      ** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-      ** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-      ** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
-      */
-
-      // Various functions for helping debug WebGL apps.
-
-      /**
-       * Wrapped logging function.
-       * @param {string} msg Message to log.
-       */
-
-      log = function log(msg) {
-        if (window.console && window.console.log) {
-          window.console.log(msg);
-        }
-      };
-
-      /**
-       * Wrapped error logging function.
-       * @param {string} msg Message to log.
-       */
-
-      error = function error(msg) {
-        if (window.console && window.console.error) {
-          window.console.error(msg);
-        } else {
-          log(msg);
-        }
-      };
-
-      /**
-       * Which arguments are enums based on the number of arguments to the function.
-       * So
-       *    'texImage2D': {
-       *       9: { 0:true, 2:true, 6:true, 7:true },
-       *       6: { 0:true, 2:true, 3:true, 4:true },
-       *    },
-       *
-       * means if there are 9 arguments then 6 and 7 are enums, if there are 6
-       * arguments 3 and 4 are enums
-       *
-       * @type {!Object.<number, !Object.<number, string>}
-       */
-      glValidEnumContexts = {
-        // Generic setters and getters
-
-        enable: { 1: { 0: true } },
-        disable: { 1: { 0: true } },
-        getParameter: { 1: { 0: true } },
-
-        // Rendering
-
-        drawArrays: { 3: { 0: true } },
-        drawElements: { 4: { 0: true, 2: true } },
-
-        // Shaders
-
-        createShader: { 1: { 0: true } },
-        getShaderParameter: { 2: { 1: true } },
-        getProgramParameter: { 2: { 1: true } },
-        getShaderPrecisionFormat: { 2: { 0: true, 1: true } },
-
-        // Vertex attributes
-
-        getVertexAttrib: { 2: { 1: true } },
-        vertexAttribPointer: { 6: { 2: true } },
-
-        // Textures
-
-        bindTexture: { 2: { 0: true } },
-        activeTexture: { 1: { 0: true } },
-        getTexParameter: { 2: { 0: true, 1: true } },
-        texParameterf: { 3: { 0: true, 1: true } },
-        texParameteri: { 3: { 0: true, 1: true, 2: true } },
-        texImage2D: {
-          9: { 0: true, 2: true, 6: true, 7: true },
-          6: { 0: true, 2: true, 3: true, 4: true }
-        },
-        texSubImage2D: {
-          9: { 0: true, 6: true, 7: true },
-          7: { 0: true, 4: true, 5: true }
-        },
-        copyTexImage2D: { 8: { 0: true, 2: true } },
-        copyTexSubImage2D: { 8: { 0: true } },
-        generateMipmap: { 1: { 0: true } },
-        compressedTexImage2D: { 7: { 0: true, 2: true } },
-        compressedTexSubImage2D: { 8: { 0: true, 6: true } },
-
-        // Buffer objects
-
-        bindBuffer: { 2: { 0: true } },
-        bufferData: { 3: { 0: true, 2: true } },
-        bufferSubData: { 3: { 0: true } },
-        getBufferParameter: { 2: { 0: true, 1: true } },
-
-        // Renderbuffers and framebuffers
-
-        pixelStorei: { 2: { 0: true, 1: true } },
-        readPixels: { 7: { 4: true, 5: true } },
-        bindRenderbuffer: { 2: { 0: true } },
-        bindFramebuffer: { 2: { 0: true } },
-        checkFramebufferStatus: { 1: { 0: true } },
-        framebufferRenderbuffer: { 4: { 0: true, 1: true, 2: true } },
-        framebufferTexture2D: { 5: { 0: true, 1: true, 2: true } },
-        getFramebufferAttachmentParameter: { 3: { 0: true, 1: true, 2: true } },
-        getRenderbufferParameter: { 2: { 0: true, 1: true } },
-        renderbufferStorage: { 4: { 0: true, 1: true } },
-
-        // Frame buffer operations (clear, blend, depth test, stencil)
-
-        clear: { 1: { 0: { enumBitwiseOr: ["COLOR_BUFFER_BIT", "DEPTH_BUFFER_BIT", "STENCIL_BUFFER_BIT"] } } },
-        depthFunc: { 1: { 0: true } },
-        blendFunc: { 2: { 0: true, 1: true } },
-        blendFuncSeparate: { 4: { 0: true, 1: true, 2: true, 3: true } },
-        blendEquation: { 1: { 0: true } },
-        blendEquationSeparate: { 2: { 0: true, 1: true } },
-        stencilFunc: { 3: { 0: true } },
-        stencilFuncSeparate: { 4: { 0: true, 1: true } },
-        stencilMaskSeparate: { 2: { 0: true } },
-        stencilOp: { 3: { 0: true, 1: true, 2: true } },
-        stencilOpSeparate: { 4: { 0: true, 1: true, 2: true, 3: true } },
-
-        // Culling
-
-        cullFace: { 1: { 0: true } },
-        frontFace: { 1: { 0: true } },
-
-        // ANGLE_instanced_arrays extension
-
-        drawArraysInstancedANGLE: { 4: { 0: true } },
-        drawElementsInstancedANGLE: { 5: { 0: true, 2: true } },
-
-        // EXT_blend_minmax extension
-
-        blendEquationEXT: { 1: { 0: true } }
-      };
-
-      /**
-       * Map of numbers to names.
-       * @type {Object}
-       */
-      glEnums = null;
-
-      /**
-       * Map of names to numbers.
-       * @type {Object}
-       */
-      enumStringToValue = null;
-      ;
-      _export("default", {
-        /**
-         * Initializes this module. Safe to call more than once.
-         * @param {!WebGLRenderingContext} ctx A WebGL context. If
-         *    you have more than one context it doesn't matter which one
-         *    you pass in, it is only used to pull out constants.
-         */
-        init: init,
-
-        /**
-         * Returns true or false if value matches any WebGL enum
-         * @param {*} value Value to check if it might be an enum.
-         * @return {boolean} True if value matches one of the WebGL defined enums
-         */
-        mightBeEnum: mightBeEnum,
-
-        /**
-         * Gets an string version of an WebGL enum.
-         *
-         * Example:
-         *   WebGLDebugUtil.init(ctx);
-         *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
-         *
-         * @param {number} value Value to return an enum for
-         * @return {string} The string version of the enum.
-         */
-        glEnumToString: glEnumToString,
-
-        /**
-         * Converts the argument of a WebGL function to a string.
-         * Attempts to convert enum arguments to strings.
-         *
-         * Example:
-         *   WebGLDebugUtil.init(ctx);
-         *   var str = WebGLDebugUtil.glFunctionArgToString('bindTexture', 2, 0, gl.TEXTURE_2D);
-         *
-         * would return 'TEXTURE_2D'
-         *
-         * @param {string} functionName the name of the WebGL function.
-         * @param {number} numArgs The number of arguments
-         * @param {number} argumentIndx the index of the argument.
-         * @param {*} value The value of the argument.
-         * @return {string} The value as a string.
-         */
-        glFunctionArgToString: glFunctionArgToString,
-
-        /**
-         * Converts the arguments of a WebGL function to a string.
-         * Attempts to convert enum arguments to strings.
-         *
-         * @param {string} functionName the name of the WebGL function.
-         * @param {number} args The arguments.
-         * @return {string} The arguments as a string.
-         */
-        glFunctionArgsToString: glFunctionArgsToString,
-
-        /**
-         * Given a WebGL context returns a wrapped context that calls
-         * gl.getError after every command and calls a function if the
-         * result is not NO_ERROR.
-         *
-         * You can supply your own function if you want. For example, if you'd like
-         * an exception thrown on any GL error you could do this
-         *
-         *    function throwOnGLError(err, funcName, args) {
-         *      throw WebGLDebugUtils.glEnumToString(err) +
-         *            " was caused by call to " + funcName;
-         *    };
-         *
-         *    ctx = WebGLDebugUtils.makeDebugContext(
-         *        canvas.getContext("webgl"), throwOnGLError);
-         *
-         * @param {!WebGLRenderingContext} ctx The webgl context to wrap.
-         * @param {!function(err, funcName, args): void} opt_onErrorFunc The function
-         *     to call when gl.getError returns an error. If not specified the default
-         *     function calls console.log with a message.
-         * @param {!function(funcName, args): void} opt_onFunc The
-         *     function to call when each webgl function is called. You
-         *     can use this to log all calls for example.
-         */
-        makeDebugContext: makeDebugContext,
-
-        /**
-         * Given a canvas element returns a wrapped canvas element that will
-         * simulate lost context. The canvas returned adds the following functions.
-         *
-         * loseContext:
-         *   simulates a lost context event.
-         *
-         * restoreContext:
-         *   simulates the context being restored.
-         *
-         * lostContextInNCalls:
-         *   loses the context after N gl calls.
-         *
-         * getNumCalls:
-         *   tells you how many gl calls there have been so far.
-         *
-         * setRestoreTimeout:
-         *   sets the number of milliseconds until the context is restored
-         *   after it has been lost. Defaults to 0. Pass -1 to prevent
-         *   automatic restoring.
-         *
-         * @param {!Canvas} canvas The canvas element to wrap.
-         */
-        makeLostContextSimulatingCanvas: makeLostContextSimulatingCanvas,
-
-        /**
-         * Resets a context to the initial state.
-         * @param {!WebGLRenderingContext} ctx The webgl context to
-         *     reset.
-         */
-        resetToInitialState: resetToInitialState
-      });
+(['lib/extra/exporter'], function(System) {
+
+System.register("npm:babel-runtime@5.1.2/helpers/class-call-check", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = function(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
     }
   };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
 });
+
+System.register("npm:core-js@0.8.2/library/modules/$.fw", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function($) {
+    $.FW = false;
+    $.path = $.core;
+    return $;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.string-at", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$");
+  module.exports = function(TO_STRING) {
+    return function(pos) {
+      var s = String($.assertDefined(this)),
+          i = $.toInteger(pos),
+          l = s.length,
+          a,
+          b;
+      if (i < 0 || i >= l)
+        return TO_STRING ? '' : undefined;
+      a = s.charCodeAt(i);
+      return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.uid", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var sid = 0;
+  function uid(key) {
+    return 'Symbol(' + key + ')_' + (++sid + Math.random()).toString(36);
+  }
+  uid.safe = require("npm:core-js@0.8.2/library/modules/$").g.Symbol || uid;
+  module.exports = uid;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.assert", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$");
+  function assert(condition, msg1, msg2) {
+    if (!condition)
+      throw TypeError(msg2 ? msg1 + msg2 : msg1);
+  }
+  assert.def = $.assertDefined;
+  assert.fn = function(it) {
+    if (!$.isFunction(it))
+      throw TypeError(it + ' is not a function!');
+    return it;
+  };
+  assert.obj = function(it) {
+    if (!$.isObject(it))
+      throw TypeError(it + ' is not an object!');
+    return it;
+  };
+  assert.inst = function(it, Constructor, name) {
+    if (!(it instanceof Constructor))
+      throw TypeError(name + ": use the 'new' operator!");
+    return it;
+  };
+  module.exports = assert;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.wks", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.uid"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var global = require("npm:core-js@0.8.2/library/modules/$").g,
+      store = {};
+  module.exports = function(name) {
+    return store[name] || (store[name] = global.Symbol && global.Symbol[name] || require("npm:core-js@0.8.2/library/modules/$.uid").safe('Symbol.' + name));
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.def", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      global = $.g,
+      core = $.core,
+      isFunction = $.isFunction;
+  function ctx(fn, that) {
+    return function() {
+      return fn.apply(that, arguments);
+    };
+  }
+  $def.F = 1;
+  $def.G = 2;
+  $def.S = 4;
+  $def.P = 8;
+  $def.B = 16;
+  $def.W = 32;
+  function $def(type, name, source) {
+    var key,
+        own,
+        out,
+        exp,
+        isGlobal = type & $def.G,
+        target = isGlobal ? global : type & $def.S ? global[name] : (global[name] || {}).prototype,
+        exports = isGlobal ? core : core[name] || (core[name] = {});
+    if (isGlobal)
+      source = name;
+    for (key in source) {
+      own = !(type & $def.F) && target && key in target;
+      if (own && key in exports)
+        continue;
+      out = own ? target[key] : source[key];
+      if (isGlobal && !isFunction(target[key]))
+        exp = source[key];
+      else if (type & $def.B && own)
+        exp = ctx(out, global);
+      else if (type & $def.W && target[key] == out)
+        !function(C) {
+          exp = function(param) {
+            return this instanceof C ? new C(param) : C(param);
+          };
+          exp.prototype = C.prototype;
+        }(out);
+      else
+        exp = type & $def.P && isFunction(out) ? ctx(Function.call, out) : out;
+      $.hide(exports, key, exp);
+    }
+  }
+  module.exports = $def;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.unscope", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      UNSCOPABLES = require("npm:core-js@0.8.2/library/modules/$.wks")('unscopables');
+  if ($.FW && !(UNSCOPABLES in []))
+    $.hide(Array.prototype, UNSCOPABLES, {});
+  module.exports = function(key) {
+    if ($.FW)
+      [][UNSCOPABLES][key] = true;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.array-methods", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      ctx = require("npm:core-js@0.8.2/library/modules/$.ctx");
+  module.exports = function(TYPE) {
+    var IS_MAP = TYPE == 1,
+        IS_FILTER = TYPE == 2,
+        IS_SOME = TYPE == 3,
+        IS_EVERY = TYPE == 4,
+        IS_FIND_INDEX = TYPE == 6,
+        NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+    return function(callbackfn) {
+      var O = Object($.assertDefined(this)),
+          self = $.ES5Object(O),
+          f = ctx(callbackfn, arguments[1], 3),
+          length = $.toLength(self.length),
+          index = 0,
+          result = IS_MAP ? Array(length) : IS_FILTER ? [] : undefined,
+          val,
+          res;
+      for (; length > index; index++)
+        if (NO_HOLES || index in self) {
+          val = self[index];
+          res = f(val, index, O);
+          if (TYPE) {
+            if (IS_MAP)
+              result[index] = res;
+            else if (res)
+              switch (TYPE) {
+                case 3:
+                  return true;
+                case 5:
+                  return val;
+                case 6:
+                  return index;
+                case 2:
+                  result.push(val);
+              }
+            else if (IS_EVERY)
+              return false;
+          }
+        }
+      return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+    };
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.iter-detect", ["npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var SYMBOL_ITERATOR = require("npm:core-js@0.8.2/library/modules/$.wks")('iterator'),
+      SAFE_CLOSING = false;
+  try {
+    var riter = [7][SYMBOL_ITERATOR]();
+    riter['return'] = function() {
+      SAFE_CLOSING = true;
+    };
+    Array.from(riter, function() {
+      throw 2;
+    });
+  } catch (e) {}
+  module.exports = function(exec) {
+    if (!SAFE_CLOSING)
+      return false;
+    var safe = false;
+    try {
+      var arr = [7],
+          iter = arr[SYMBOL_ITERATOR]();
+      iter.next = function() {
+        safe = true;
+      };
+      arr[SYMBOL_ITERATOR] = function() {
+        return iter;
+      };
+      exec(arr);
+    } catch (e) {}
+    return safe;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.species", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$");
+  module.exports = function(C) {
+    if ($.DESC && $.FW)
+      $.setDesc(C, require("npm:core-js@0.8.2/library/modules/$.wks")('species'), {
+        configurable: true,
+        get: $.that
+      });
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/es6.weak-set", ["npm:core-js@0.8.2/library/modules/$.collection-weak", "npm:core-js@0.8.2/library/modules/$.collection"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var weak = require("npm:core-js@0.8.2/library/modules/$.collection-weak");
+  require("npm:core-js@0.8.2/library/modules/$.collection")('WeakSet', {add: function add(value) {
+      return weak.def(this, value, true);
+    }}, weak, false, true);
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.invoke", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = function(fn, args, that) {
+    var un = that === undefined;
+    switch (args.length) {
+      case 0:
+        return un ? fn() : fn.call(that);
+      case 1:
+        return un ? fn(args[0]) : fn.call(that, args[0]);
+      case 2:
+        return un ? fn(args[0], args[1]) : fn.call(that, args[0], args[1]);
+      case 3:
+        return un ? fn(args[0], args[1], args[2]) : fn.call(that, args[0], args[1], args[2]);
+      case 4:
+        return un ? fn(args[0], args[1], args[2], args[3]) : fn.call(that, args[0], args[1], args[2], args[3]);
+      case 5:
+        return un ? fn(args[0], args[1], args[2], args[3], args[4]) : fn.call(that, args[0], args[1], args[2], args[3], args[4]);
+    }
+    return fn.apply(that, args);
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:process@0.10.1/browser", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var process = module.exports = {};
+  var queue = [];
+  var draining = false;
+  function drainQueue() {
+    if (draining) {
+      return ;
+    }
+    draining = true;
+    var currentQueue;
+    var len = queue.length;
+    while (len) {
+      currentQueue = queue;
+      queue = [];
+      var i = -1;
+      while (++i < len) {
+        currentQueue[i]();
+      }
+      len = queue.length;
+    }
+    draining = false;
+  }
+  process.nextTick = function(fun) {
+    queue.push(fun);
+    if (!draining) {
+      setTimeout(drainQueue, 0);
+    }
+  };
+  process.title = 'browser';
+  process.browser = true;
+  process.env = {};
+  process.argv = [];
+  process.version = '';
+  process.versions = {};
+  function noop() {}
+  process.on = noop;
+  process.addListener = noop;
+  process.once = noop;
+  process.off = noop;
+  process.removeListener = noop;
+  process.removeAllListeners = noop;
+  process.emit = noop;
+  process.binding = function(name) {
+    throw new Error('process.binding is not supported');
+  };
+  process.cwd = function() {
+    return '/';
+  };
+  process.chdir = function(dir) {
+    throw new Error('process.chdir is not supported');
+  };
+  process.umask = function() {
+    return 0;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/core.iter-helpers", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.iter"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var core = require("npm:core-js@0.8.2/library/modules/$").core,
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter");
+  core.isIterable = $iter.is;
+  core.getIterator = $iter.get;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/es6.object.statics-accept-primitives", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.def"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      isObject = $.isObject,
+      toObject = $.toObject;
+  function wrapObjectMethod(METHOD, MODE) {
+    var fn = ($.core.Object || {})[METHOD] || Object[METHOD],
+        f = 0,
+        o = {};
+    o[METHOD] = MODE == 1 ? function(it) {
+      return isObject(it) ? fn(it) : it;
+    } : MODE == 2 ? function(it) {
+      return isObject(it) ? fn(it) : true;
+    } : MODE == 3 ? function(it) {
+      return isObject(it) ? fn(it) : false;
+    } : MODE == 4 ? function getOwnPropertyDescriptor(it, key) {
+      return fn(toObject(it), key);
+    } : MODE == 5 ? function getPrototypeOf(it) {
+      return fn(Object($.assertDefined(it)));
+    } : function(it) {
+      return fn(toObject(it));
+    };
+    try {
+      fn('z');
+    } catch (e) {
+      f = 1;
+    }
+    $def($def.S + $def.F * f, 'Object', o);
+  }
+  wrapObjectMethod('freeze', 1);
+  wrapObjectMethod('seal', 1);
+  wrapObjectMethod('preventExtensions', 1);
+  wrapObjectMethod('isFrozen', 2);
+  wrapObjectMethod('isSealed', 2);
+  wrapObjectMethod('isExtensible', 3);
+  wrapObjectMethod('getOwnPropertyDescriptor', 4);
+  wrapObjectMethod('getPrototypeOf', 5);
+  wrapObjectMethod('keys');
+  wrapObjectMethod('getOwnPropertyNames');
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("github:mrdoob/stats.js@master/src/Stats", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var Stats = function() {
+    var startTime = Date.now(),
+        prevTime = startTime;
+    var ms = 0,
+        msMin = Infinity,
+        msMax = 0;
+    var fps = 0,
+        fpsMin = Infinity,
+        fpsMax = 0;
+    var frames = 0,
+        mode = 0;
+    var container = document.createElement('div');
+    container.id = 'stats';
+    container.addEventListener('mousedown', function(event) {
+      event.preventDefault();
+      setMode(++mode % 2);
+    }, false);
+    container.style.cssText = 'width:80px;opacity:0.9;cursor:pointer';
+    var fpsDiv = document.createElement('div');
+    fpsDiv.id = 'fps';
+    fpsDiv.style.cssText = 'padding:0 0 3px 3px;text-align:left;background-color:#002';
+    container.appendChild(fpsDiv);
+    var fpsText = document.createElement('div');
+    fpsText.id = 'fpsText';
+    fpsText.style.cssText = 'color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px';
+    fpsText.innerHTML = 'FPS';
+    fpsDiv.appendChild(fpsText);
+    var fpsGraph = document.createElement('div');
+    fpsGraph.id = 'fpsGraph';
+    fpsGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0ff';
+    fpsDiv.appendChild(fpsGraph);
+    while (fpsGraph.children.length < 74) {
+      var bar = document.createElement('span');
+      bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113';
+      fpsGraph.appendChild(bar);
+    }
+    var msDiv = document.createElement('div');
+    msDiv.id = 'ms';
+    msDiv.style.cssText = 'padding:0 0 3px 3px;text-align:left;background-color:#020;display:none';
+    container.appendChild(msDiv);
+    var msText = document.createElement('div');
+    msText.id = 'msText';
+    msText.style.cssText = 'color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px';
+    msText.innerHTML = 'MS';
+    msDiv.appendChild(msText);
+    var msGraph = document.createElement('div');
+    msGraph.id = 'msGraph';
+    msGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0f0';
+    msDiv.appendChild(msGraph);
+    while (msGraph.children.length < 74) {
+      var bar = document.createElement('span');
+      bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131';
+      msGraph.appendChild(bar);
+    }
+    var setMode = function(value) {
+      mode = value;
+      switch (mode) {
+        case 0:
+          fpsDiv.style.display = 'block';
+          msDiv.style.display = 'none';
+          break;
+        case 1:
+          fpsDiv.style.display = 'none';
+          msDiv.style.display = 'block';
+          break;
+      }
+    };
+    var updateGraph = function(dom, value) {
+      var child = dom.appendChild(dom.firstChild);
+      child.style.height = value + 'px';
+    };
+    return {
+      REVISION: 12,
+      domElement: container,
+      setMode: setMode,
+      begin: function() {
+        startTime = Date.now();
+      },
+      end: function() {
+        var time = Date.now();
+        ms = time - startTime;
+        msMin = Math.min(msMin, ms);
+        msMax = Math.max(msMax, ms);
+        msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+        updateGraph(msGraph, Math.min(30, 30 - (ms / 200) * 30));
+        frames++;
+        if (time > prevTime + 1000) {
+          fps = Math.round((frames * 1000) / (time - prevTime));
+          fpsMin = Math.min(fpsMin, fps);
+          fpsMax = Math.max(fpsMax, fps);
+          fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+          updateGraph(fpsGraph, Math.min(30, 30 - (fps / 100) * 30));
+          prevTime = time;
+          frames = 0;
+        }
+        return time;
+      },
+      update: function() {
+        startTime = this.end();
+      }
+    };
+  };
+  if (typeof module === 'object') {
+    module.exports = Stats;
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.1.2/helpers/inherits", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = function(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      subClass.__proto__ = superClass;
+  };
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.1.2/helpers/create-class", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = (function() {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    return function(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  })();
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/fn/symbol/iterator", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$.wks")('iterator');
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.keyof", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$");
+  module.exports = function(object, el) {
+    var O = $.toObject(object),
+        keys = $.getKeys(O),
+        length = keys.length,
+        index = 0,
+        key;
+    while (length > index)
+      if (O[key = keys[index++]] === el)
+        return key;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
 (function() {
 function define(){};  define.amd = {};
 (function(_global) {
@@ -3665,251 +3393,224 @@ function define(){};  define.amd = {};
     ;
   })(shim.exports);
 })(this);
-
-
 })();
-System.register("lib/extra/event-aggregator", [], function (_export) {
-    var _toConsumableArray, _prototypeProperties, _classCallCheck, debug, EventAggregator;
-
-    return {
-        setters: [],
-        execute: function () {
-            "use strict";
-
-            _toConsumableArray = function (arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } };
-
-            _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            debug = false;
-
-            EventAggregator = (function () {
-                function EventAggregator() {
-                    var bubbleTarget = arguments[0] === undefined ? null : arguments[0];
-
-                    _classCallCheck(this, EventAggregator);
-
-                    EventAggregator.privates.set(this, { callbacks: new Map(), buffers: new Map(), bubbleTarget: bubbleTarget });
-                }
-
-                EventAggregator.prototype.on = function on(event) {
-                    var callback = arguments[1] === undefined ? null : arguments[1];
-
-                    if (!this._callbacks.has(event)) this._callbacks.set(event, new Set());
-
-                    if (debug) console.log("" + this.constructor.name + " bound handler to: " + event);
-
-                    // Add callback
-                    this._callbacks.get(event).add(callback);
-
-                    var buffer = this._buffers.get(event);
-                    if (buffer !== undefined) {
-                        for (var _iterator = buffer, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                            var _ref2;
-
-                            var _ref;
-
-                            if (_isArray) {
-                                if (_i >= _iterator.length) break;
-                                _ref = _iterator[_i++];
-                            } else {
-                                _i = _iterator.next();
-                                if (_i.done) break;
-                                _ref = _i.value;
-                            }
-
-                            var args = _ref.args;
-                            var options = _ref.options;
-
-                            (_ref2 = this).trigger.apply(_ref2, [event, optinos].concat(_toConsumableArray(args)));
-                            if (debug) console.log("" + this.constructor.name + " (" + options.target.constructor.name + ") released: " + event);
-                        }
-                        this._buffers["delete"](event);
-                    }
-                };
-
-                EventAggregator.prototype.off = function off(event) {
-                    var callback = arguments[1] === undefined ? null : arguments[1];
-
-                    if (this._callbacks.has(event)) {
-                        if (callback === null) this._callbacks["delete"](event);
-
-                        this._callbacks.get(event)["delete"](callback);
-
-                        if (this._callbacks.get(event).size === 0) this._callbacks["delete"](event);
-                    }
-                };
-
-                EventAggregator.prototype.once = function once(event, callback) {
-                    var _this = this;
-
-                    var cb = function () {
-                        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-                            args[_key] = arguments[_key];
-                        }
-
-                        callback.apply(undefined, args);
-                        _this.off(event, cb);
-                    };
-                    this.on(event, cb);
-                };
-
-                EventAggregator.prototype.trigger = function trigger(event) {
-                    for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                        args[_key - 2] = arguments[_key];
-                    }
-
-                    var options = arguments[1] === undefined ? {} : arguments[1];
-                    var _options$bubble = options.bubble;
-                    var bubble = _options$bubble === undefined ? false : _options$bubble;
-                    var _options$buffer = options.buffer;
-                    var buffer = _options$buffer === undefined ? false : _options$buffer;
-                    var _options$sync = options.sync;
-                    var sync = _options$sync === undefined ? false : _options$sync;
-                    var _options$target = options.target;
-                    var target = _options$target === undefined ? this : _options$target;
-                    var _options$delay = options.delay;
-                    var delay = _options$delay === undefined ? 0 : _options$delay;
-
-                    if (this._callbacks.has(event)) {
-                        if (sync) {
-                            for (var _iterator = this._callbacks.get(event), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                                var _ref;
-
-                                if (_isArray) {
-                                    if (_i >= _iterator.length) break;
-                                    _ref = _iterator[_i++];
-                                } else {
-                                    _i = _iterator.next();
-                                    if (_i.done) break;
-                                    _ref = _i.value;
-                                }
-
-                                var handler = _ref;
-
-                                handler.apply(undefined, args.concat([target]));
-                            }
-                        } else {
-                            for (var _iterator2 = this._callbacks.get(event), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-                                var _ref2;
-
-                                var _ret = (function () {
-                                    if (_isArray2) {
-                                        if (_i2 >= _iterator2.length) return "break";
-                                        _ref2 = _iterator2[_i2++];
-                                    } else {
-                                        _i2 = _iterator2.next();
-                                        if (_i2.done) return "break";
-                                        _ref2 = _i2.value;
-                                    }
-
-                                    var handler = _ref2;
-
-                                    window.setTimeout(function () {
-                                        return handler.apply(undefined, args.concat([target]));
-                                    }, delay);
-                                })();
-
-                                if (_ret === "break") break;
-                            }
-                        }
-                    } else if (bubble && EventAggregator.privates.get(this).bubbleTarget !== null) {
-                        var _EventAggregator$privates$get$bubbleTarget;
-
-                        (_EventAggregator$privates$get$bubbleTarget = EventAggregator.privates.get(this).bubbleTarget).trigger.apply(_EventAggregator$privates$get$bubbleTarget, [event, options].concat(args));
-                    } else if (buffer) {
-                        if (!this._buffers.has(event)) this._buffers.set(event, []);
-                        this._buffers.get(event).push({ args: args, options: options });
-                    }
-                };
-
-                _prototypeProperties(EventAggregator, null, {
-                    _callbacks: {
-                        get: function () {
-                            return EventAggregator.privates.get(this).callbacks || (EventAggregator.privates.get(this).callbacks = new Map());
-                        },
-                        configurable: true
-                    },
-                    _buffers: {
-                        get: function () {
-                            return EventAggregator.privates.get(this).buffers || (EventAggregator.privates.get(this).buffers = new Map());
-                        },
-                        configurable: true
-                    }
-                });
-
-                return EventAggregator;
-            })();
-
-            _export("default", EventAggregator);
-
-            EventAggregator.privates = new WeakMap();
-        }
-    };
-});
-System.register("npm:process@0.10.1/browser", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.8.2/library/modules/$.collection-strong", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.assert", "npm:core-js@0.8.2/library/modules/$.iter"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var process = module.exports = {};
-  var queue = [];
-  var draining = false;
-  function drainQueue() {
-    if (draining) {
-      return ;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      ctx = require("npm:core-js@0.8.2/library/modules/$.ctx"),
+      safe = require("npm:core-js@0.8.2/library/modules/$.uid").safe,
+      assert = require("npm:core-js@0.8.2/library/modules/$.assert"),
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+      has = $.has,
+      set = $.set,
+      isObject = $.isObject,
+      hide = $.hide,
+      step = $iter.step,
+      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      ID = safe('id'),
+      O1 = safe('O1'),
+      LAST = safe('last'),
+      FIRST = safe('first'),
+      ITER = safe('iter'),
+      SIZE = $.DESC ? safe('size') : 'size',
+      id = 0;
+  function fastKey(it, create) {
+    if (!isObject(it))
+      return (typeof it == 'string' ? 'S' : 'P') + it;
+    if (isFrozen(it))
+      return 'F';
+    if (!has(it, ID)) {
+      if (!create)
+        return 'E';
+      hide(it, ID, ++id);
     }
-    draining = true;
-    var currentQueue;
-    var len = queue.length;
-    while (len) {
-      currentQueue = queue;
-      queue = [];
-      var i = -1;
-      while (++i < len) {
-        currentQueue[i]();
-      }
-      len = queue.length;
-    }
-    draining = false;
+    return 'O' + it[ID];
   }
-  process.nextTick = function(fun) {
-    queue.push(fun);
-    if (!draining) {
-      setTimeout(drainQueue, 0);
+  function getEntry(that, key) {
+    var index = fastKey(key),
+        entry;
+    if (index != 'F')
+      return that[O1][index];
+    for (entry = that[FIRST]; entry; entry = entry.n) {
+      if (entry.k == key)
+        return entry;
     }
-  };
-  process.title = 'browser';
-  process.browser = true;
-  process.env = {};
-  process.argv = [];
-  process.version = '';
-  process.versions = {};
-  function noop() {}
-  process.on = noop;
-  process.addListener = noop;
-  process.once = noop;
-  process.off = noop;
-  process.removeListener = noop;
-  process.removeAllListeners = noop;
-  process.emit = noop;
-  process.binding = function(name) {
-    throw new Error('process.binding is not supported');
-  };
-  process.cwd = function() {
-    return '/';
-  };
-  process.chdir = function(dir) {
-    throw new Error('process.chdir is not supported');
-  };
-  process.umask = function() {
-    return 0;
+  }
+  module.exports = {
+    getConstructor: function(NAME, IS_MAP, ADDER) {
+      function C(iterable) {
+        var that = assert.inst(this, C, NAME);
+        set(that, O1, $.create(null));
+        set(that, SIZE, 0);
+        set(that, LAST, undefined);
+        set(that, FIRST, undefined);
+        if (iterable != undefined)
+          $iter.forOf(iterable, IS_MAP, that[ADDER], that);
+      }
+      $.mix(C.prototype, {
+        clear: function clear() {
+          for (var that = this,
+              data = that[O1],
+              entry = that[FIRST]; entry; entry = entry.n) {
+            entry.r = true;
+            if (entry.p)
+              entry.p = entry.p.n = undefined;
+            delete data[entry.i];
+          }
+          that[FIRST] = that[LAST] = undefined;
+          that[SIZE] = 0;
+        },
+        'delete': function(key) {
+          var that = this,
+              entry = getEntry(that, key);
+          if (entry) {
+            var next = entry.n,
+                prev = entry.p;
+            delete that[O1][entry.i];
+            entry.r = true;
+            if (prev)
+              prev.n = next;
+            if (next)
+              next.p = prev;
+            if (that[FIRST] == entry)
+              that[FIRST] = next;
+            if (that[LAST] == entry)
+              that[LAST] = prev;
+            that[SIZE]--;
+          }
+          return !!entry;
+        },
+        forEach: function forEach(callbackfn) {
+          var f = ctx(callbackfn, arguments[1], 3),
+              entry;
+          while (entry = entry ? entry.n : this[FIRST]) {
+            f(entry.v, entry.k, this);
+            while (entry && entry.r)
+              entry = entry.p;
+          }
+        },
+        has: function has(key) {
+          return !!getEntry(this, key);
+        }
+      });
+      if ($.DESC)
+        $.setDesc(C.prototype, 'size', {get: function() {
+            return assert.def(this[SIZE]);
+          }});
+      return C;
+    },
+    def: function(that, key, value) {
+      var entry = getEntry(that, key),
+          prev,
+          index;
+      if (entry) {
+        entry.v = value;
+      } else {
+        that[LAST] = entry = {
+          i: index = fastKey(key, true),
+          k: key,
+          v: value,
+          p: prev = that[LAST],
+          n: undefined,
+          r: false
+        };
+        if (!that[FIRST])
+          that[FIRST] = entry;
+        if (prev)
+          prev.n = entry;
+        that[SIZE]++;
+        if (index != 'F')
+          that[O1][index] = entry;
+      }
+      return that;
+    },
+    getEntry: getEntry,
+    getIterConstructor: function() {
+      return function(iterated, kind) {
+        set(this, ITER, {
+          o: iterated,
+          k: kind
+        });
+      };
+    },
+    next: function() {
+      var iter = this[ITER],
+          kind = iter.k,
+          entry = iter.l;
+      while (entry && entry.r)
+        entry = entry.p;
+      if (!iter.o || !(iter.l = entry = entry ? entry.n : iter.o[FIRST])) {
+        iter.o = undefined;
+        return step(1);
+      }
+      if (kind == 'key')
+        return step(0, entry.k);
+      if (kind == 'value')
+        return step(0, entry.v);
+      return step(0, [entry.k, entry.v]);
+    }
   };
   global.define = __define;
   return module.exports;
 });
 
+System.register("npm:core-js@0.8.2/library/modules/es6.set", ["npm:core-js@0.8.2/library/modules/$.collection-strong", "npm:core-js@0.8.2/library/modules/$.collection"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var strong = require("npm:core-js@0.8.2/library/modules/$.collection-strong");
+  require("npm:core-js@0.8.2/library/modules/$.collection")('Set', {add: function add(value) {
+      return strong.def(this, value = value === 0 ? 0 : value, value);
+    }}, strong);
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:core-js@0.8.2/library/modules/es7.set.to-json", ["npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.iter"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      forOf = require("npm:core-js@0.8.2/library/modules/$.iter").forOf;
+  $def($def.P, 'Set', {toJSON: function() {
+      var arr = [];
+      forOf(this, false, arr.push, arr);
+      return arr;
+    }});
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:es5-ext@0.10.6/object/normalize-options", ["github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var forEach = Array.prototype.forEach,
+        create = Object.create;
+    var process = function(src, obj) {
+      var key;
+      for (key in src)
+        obj[key] = src[key];
+    };
+    module.exports = function(options) {
+      var result = create(null);
+      forEach.call(arguments, function(options) {
+        if (options == null)
+          return ;
+        process(Object(options), result);
+      });
+      return result;
+    };
+  })(require("github:jspm/nodelibs-process@0.1.1"));
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/math/sign/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
@@ -3926,8 +3627,6 @@ System.register("npm:es5-ext@0.10.6/math/sign/is-implemented", [], true, functio
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/math/sign/shim", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -3943,8 +3642,6 @@ System.register("npm:es5-ext@0.10.6/math/sign/shim", [], true, function(require,
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/valid-callable", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -3959,8 +3656,6 @@ System.register("npm:es5-ext@0.10.6/object/valid-callable", [], true, function(r
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/is-callable", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -3972,8 +3667,6 @@ System.register("npm:es5-ext@0.10.6/object/is-callable", [], true, function(requ
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/object/valid-value", [], true, function(require, exports, module) {
   var global = System.global,
@@ -3989,8 +3682,6 @@ System.register("npm:es5-ext@0.10.6/object/valid-value", [], true, function(requ
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/lib/registered-extensions", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4000,8 +3691,6 @@ System.register("npm:memoizee@0.3.8/lib/registered-extensions", [], true, functi
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/object/assign/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4021,8 +3710,6 @@ System.register("npm:es5-ext@0.10.6/object/assign/is-implemented", [], true, fun
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/keys/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4040,8 +3727,6 @@ System.register("npm:es5-ext@0.10.6/object/keys/is-implemented", [], true, funct
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/keys/shim", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4054,8 +3739,6 @@ System.register("npm:es5-ext@0.10.6/object/keys/shim", [], true, function(requir
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/object/mixin", ["npm:es5-ext@0.10.6/object/valid-value"], true, function(require, exports, module) {
   var global = System.global,
@@ -4084,8 +3767,6 @@ System.register("npm:es5-ext@0.10.6/object/mixin", ["npm:es5-ext@0.10.6/object/v
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/assign", ["npm:es5-ext@0.10.6/object/assign/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4094,8 +3775,6 @@ System.register("npm:es5-ext@0.10.6/object/assign", ["npm:es5-ext@0.10.6/object/
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/string/#/contains/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4112,8 +3791,6 @@ System.register("npm:es5-ext@0.10.6/string/#/contains/is-implemented", [], true,
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/string/#/contains/shim", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4126,8 +3803,6 @@ System.register("npm:es5-ext@0.10.6/string/#/contains/shim", [], true, function(
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:event-emitter@0.3.3/index", ["npm:d@0.1.1", "npm:es5-ext@0.10.6/object/valid-callable"], true, function(require, exports, module) {
   var global = System.global,
@@ -4274,8 +3949,6 @@ System.register("npm:event-emitter@0.3.3/index", ["npm:d@0.1.1", "npm:es5-ext@0.
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/array/from/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4294,8 +3967,6 @@ System.register("npm:es5-ext@0.10.6/array/from/is-implemented", [], true, functi
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es6-symbol@2.0.1/is-implemented", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4330,8 +4001,6 @@ System.register("npm:es6-symbol@2.0.1/is-implemented", [], true, function(requir
   return module.exports;
 });
 
-
-
 System.register("npm:es6-symbol@2.0.1/is-symbol", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4343,8 +4012,6 @@ System.register("npm:es6-symbol@2.0.1/is-symbol", [], true, function(require, ex
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/function/is-arguments", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4362,8 +4029,6 @@ System.register("npm:es5-ext@0.10.6/function/is-arguments", [], true, function(r
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/function/noop", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4373,8 +4038,6 @@ System.register("npm:es5-ext@0.10.6/function/noop", [], true, function(require, 
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/string/is-string", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4389,8 +4052,6 @@ System.register("npm:es5-ext@0.10.6/string/is-string", [], true, function(requir
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/lib/resolve-normalize", ["npm:es5-ext@0.10.6/object/valid-callable"], true, function(require, exports, module) {
   var global = System.global,
@@ -4419,8 +4080,6 @@ System.register("npm:memoizee@0.3.8/lib/resolve-normalize", ["npm:es5-ext@0.10.6
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/normalizers/primitive", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4440,8 +4099,6 @@ System.register("npm:memoizee@0.3.8/normalizers/primitive", [], true, function(r
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/normalizers/get-primitive-fixed", [], true, function(require, exports, module) {
   var global = System.global,
@@ -4467,8 +4124,6 @@ System.register("npm:memoizee@0.3.8/normalizers/get-primitive-fixed", [], true, 
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/array/#/e-index-of", ["npm:es5-ext@0.10.6/number/to-pos-integer", "npm:es5-ext@0.10.6/object/valid-value"], true, function(require, exports, module) {
   var global = System.global,
@@ -4510,8 +4165,6 @@ System.register("npm:es5-ext@0.10.6/array/#/e-index-of", ["npm:es5-ext@0.10.6/nu
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/normalizers/get-1", ["npm:es5-ext@0.10.6/array/#/e-index-of"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4548,8 +4201,6 @@ System.register("npm:memoizee@0.3.8/normalizers/get-1", ["npm:es5-ext@0.10.6/arr
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/normalizers/get-fixed", ["npm:es5-ext@0.10.6/array/#/e-index-of"], true, function(require, exports, module) {
   var global = System.global,
@@ -4640,8 +4291,6 @@ System.register("npm:memoizee@0.3.8/normalizers/get-fixed", ["npm:es5-ext@0.10.6
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/array/from", ["npm:es5-ext@0.10.6/array/from/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4650,8 +4299,6 @@ System.register("npm:es5-ext@0.10.6/array/from", ["npm:es5-ext@0.10.6/array/from
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:next-tick@0.2.2/index", ["github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
@@ -4726,8 +4373,6 @@ System.register("npm:next-tick@0.2.2/index", ["github:jspm/nodelibs-process@0.1.
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/ext/dispose", ["npm:es5-ext@0.10.6/object/valid-callable", "npm:es5-ext@0.10.6/object/for-each", "npm:memoizee@0.3.8/lib/registered-extensions"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4765,8 +4410,6 @@ System.register("npm:memoizee@0.3.8/ext/dispose", ["npm:es5-ext@0.10.6/object/va
   return module.exports;
 });
 
-
-
 System.register("npm:timers-ext@0.1.0/max-timeout", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4776,8 +4419,6 @@ System.register("npm:timers-ext@0.1.0/max-timeout", [], true, function(require, 
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:lru-queue@0.1.0/index", ["npm:es5-ext@0.10.6/number/to-pos-integer"], true, function(require, exports, module) {
   var global = System.global,
@@ -4845,8 +4486,6 @@ System.register("npm:lru-queue@0.1.0/index", ["npm:es5-ext@0.10.6/number/to-pos-
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/ext/ref-counter", ["npm:d@0.1.1", "npm:memoizee@0.3.8/lib/registered-extensions"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -4900,464 +4539,17 @@ System.register("npm:memoizee@0.3.8/ext/ref-counter", ["npm:d@0.1.1", "npm:memoi
   return module.exports;
 });
 
-
-
-System.register("lib/webgl/buffer", [], function (_export) {
-    var _classCallCheck, GL, GLBuffer;
-
-    return {
-        setters: [],
-        execute: function () {
-            "use strict";
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            GL = WebGLRenderingContext;
-
-            GLBuffer = (function () {
-                function GLBuffer(gl, data, vao) {
-                    var _ref = arguments[3] === undefined ? {} : arguments[3];
-
-                    var _ref$mode = _ref.mode;
-                    var mode = _ref$mode === undefined ? GL.STATIC_DRAW : _ref$mode;
-                    var _ref$size = _ref.size;
-                    var size = _ref$size === undefined ? 3 : _ref$size;
-                    var _ref$bufferType = _ref.bufferType;
-                    var bufferType = _ref$bufferType === undefined ? GL.ARRAY_BUFFER : _ref$bufferType;
-                    var _ref$dataType = _ref.dataType;
-                    var dataType = _ref$dataType === undefined ? GL.FLOAT : _ref$dataType;
-                    this.data = null;
-
-                    _classCallCheck(this, GLBuffer);
-
-                    this.gl = gl;
-                    this.vaoExtension = gl.getExtension("OES_vertex_array_object");
-                    if (this.vaoExtension === undefined) {
-                        throw "Your browser's implementation of WebGL does not support Vertex Array Objects! Too bad!";
-                    }
-
-                    this.vao = vao;
-
-                    this.size = size;
-                    this.mode = mode;
-                    this.bufferType = bufferType;
-                    this.dataType = dataType;
-
-                    this.vbo = gl.createBuffer();
-
-                    this.updateData(data);
-                }
-
-                /**
-                 * Execute a function inside the VAO state, with this buffer bound.
-                 * @param {Function} fn
-                 * @private
-                 */
-
-                GLBuffer.prototype._executeBound = function _executeBound(fn) {
-                    this.vaoExtension.bindVertexArrayOES(this.vao);
-
-                    this.gl.bindBuffer(this.bufferType, this.vbo);
-                    fn();
-
-                    this.vaoExtension.bindVertexArrayOES(null);
-                };
-
-                /**
-                 * Updates the objects bound data and uploads it to the GPU.
-                 */
-
-                GLBuffer.prototype.updateData = function updateData(data) {
-                    var _this = this;
-
-                    this.data = data;
-
-                    this._executeBound(function () {
-                        _this.gl.bufferData(_this.bufferType, _this.data, _this.mode);
-                    });
-                };
-
-                GLBuffer.prototype.updateSubData = function updateSubData(subData, offset) {
-                    var _this = this;
-
-                    this.data.set(subData, offset);
-
-                    this._executeBound(function () {
-                        _this.gl.bufferSubData(_this.bufferType, subData, _this.mode);
-                    });
-                };
-
-                /**
-                 * Bind this buffer to an attribute location in a shader program.
-                 */
-
-                GLBuffer.prototype.setAttribLocation = function setAttribLocation(location, program) {
-                    var _this = this;
-
-                    if (program.gl !== this.gl) {
-                        console.error("Couldn't set attribute location: the program's WebGL context is not the same as the buffer's!");
-                    }
-
-                    var loc = program.getAttribLocation(location);
-                    if (loc === -1) {
-                        console.error("Couldn't bind buffer to location: \"" + location + "\"");
-                    }
-
-                    this._executeBound(function () {
-                        _this.gl.vertexAttribPointer(loc, _this.size, _this.dataType, false, 0, 0);
-                        _this.gl.enableVertexAttribArray(loc);
-                    });
-                };
-
-                GLBuffer.prototype.destroy = function destroy() {
-                    var _this = this;
-
-                    this._executeBound(function () {
-                        _this.gl.deleteBuffer(_this.vbo);
-                    });
-                };
-
-                return GLBuffer;
-            })();
-
-            _export("default", GLBuffer);
-        }
-    };
+System.register("npm:babel-runtime@5.1.2/helpers/bind", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = Function.prototype.bind;
+  exports.__esModule = true;
+  global.define = __define;
+  return module.exports;
 });
 
-// The underlying VBO handle
-
-// The vertex array object the vbo belongs to
-
-// The currently bound underlying typed array
-System.register("lib/extra/ajax", [], function (_export) {
-    _export("getString", getString);
-
-    _export("getJson", getJson);
-
-    _export("getArrayBuffer", getArrayBuffer);
-
-    _export("ajax", ajax);
-
-    function getString(url) {
-        return ajax(url);
-    }
-
-    function getJson(url) {
-        return ajax(url, { responseType: "json" });
-    }
-
-    function getArrayBuffer(url) {
-        return ajax(url, { responseType: "arraybuffer" });
-    }
-
-    function ajax(url) {
-        var _ref = arguments[1] === undefined ? {} : arguments[1];
-
-        var _ref$responseType = _ref.responseType;
-        var responseType = _ref$responseType === undefined ? "text" : _ref$responseType;
-
-        var xhr = new XMLHttpRequest();
-        return new Promise(function (resolve, reject) {
-            xhr.open("GET", url);
-            xhr.responseType = responseType;
-            xhr.onload = function () {
-                if (xhr.status == 200) {
-                    resolve(xhr.response);
-                } else {
-                    reject(new Error(xhr.statusText));
-                }
-            };
-            xhr.onerror = function () {
-                reject(new Error("Network Error"));
-            };
-            xhr.send();
-        });
-    }
-
-    return {
-        setters: [],
-        execute: function () {
-            "use strict";
-        }
-    };
-});
-System.register("lib/extra/functional", [], function (_export) {
-  var _applyConstructor, construct, delegate;
-
-  return {
-    setters: [],
-    execute: function () {
-      "use strict";
-
-      _applyConstructor = function (Constructor, args) { var instance = Object.create(Constructor.prototype); var result = Constructor.apply(instance, args); return result != null && (typeof result == "object" || typeof result == "function") ? result : instance; };
-
-      /**
-       * Takes a type and returns a function that constructs a new object of that type.
-       */
-      construct = _export("construct", function (Type) {
-        return function () {
-          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-          }
-
-          return _applyConstructor(Type, args);
-        };
-      });
-
-      /**
-       *
-       */
-      delegate = _export("delegate", function (fn) {
-        return function () {
-          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-          }
-
-          return fn.apply(undefined, args).apply(undefined, args);
-        };
-      });
-    }
-  };
-});
-System.register("lib/workers/worker-pool", [], function (_export) {
-    var _slicedToArray, _toConsumableArray, _classCallCheck, workerCount, taskCount, WorkerPool;
-
-    return {
-        setters: [],
-        execute: function () {
-            "use strict";
-
-            _slicedToArray = function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) { _arr.push(_step.value); if (i && _arr.length === i) break; } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } };
-
-            _toConsumableArray = function (arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            workerCount = 0;
-            taskCount = 0;
-
-            /**
-             * A wrapper around Web Workers;
-             * Passes messages to the first available worker, or creates a new one.
-             * Kills workers not used for a certain time.
-             */
-
-            WorkerPool = (function () {
-                function WorkerPool(sourceURL) {
-                    var _ref = arguments[1] === undefined ? {} : arguments[1];
-
-                    var _ref$poolSize = _ref.poolSize;
-                    var poolSize = _ref$poolSize === undefined ? 2 : _ref$poolSize;
-                    var _ref$spawnLazily = _ref.spawnLazily;
-                    var spawnLazily = _ref$spawnLazily === undefined ? true : _ref$spawnLazily;
-                    var _ref$timeout = _ref.timeout;
-                    var timeout = _ref$timeout === undefined ? 5 : _ref$timeout;
-
-                    _classCallCheck(this, WorkerPool);
-
-                    this._workerState = new Map();
-                    this._timeout = timeout;
-                    this._sourceURL = sourceURL;
-
-                    this.poolSize = poolSize;
-
-                    this._completers = new Map();
-                    this._taskQueue = [];
-
-                    if (!spawnLazily) {
-                        for (var i = 0; i < poolSize; ++i) {
-                            this.spawnWorker();
-                        }
-                    }
-                }
-
-                WorkerPool.prototype._grabWork = function _grabWork(worker) {
-                    var state = this._workerState.get(worker);
-                    window.clearTimeout(state.timeout);
-                    state.ready = false;
-
-                    var _taskQueue$shift = this._taskQueue.shift();
-
-                    var id = _taskQueue$shift.id;
-                    var message = _taskQueue$shift.message;
-                    var transfers = _taskQueue$shift.transfers;
-
-                    //console.log(`Started work #${id} on worker #${state.id}`);
-                    worker.postMessage({ id: id, message: message }, transfers);
-                };
-
-                WorkerPool.prototype.spawnWorker = function spawnWorker() {
-                    var _this = this;
-
-                    // If we are below the pool size limit
-                    if (this._workerState.size < this.poolSize) {
-                        var _ret = (function () {
-                            var worker = new Worker(_this._sourceURL);
-                            var that = _this;
-
-                            var onMessage = function (e) {
-                                var _e$data = e.data;
-                                var id = _e$data.id;
-                                var message = _e$data.message;
-
-                                var state = that._workerState.get(worker);
-
-                                var _that$_completers$get = that._completers.get(id);
-
-                                var resolve = _that$_completers$get.resolve;
-                                var reject = _that$_completers$get.reject;
-
-                                resolve(message);
-                                that._completers["delete"](id);
-                                state.ready = true;
-                                state.timeout = createTimeout();
-                                if (that._taskQueue.length !== 0) {
-                                    that._grabWork(worker);
-                                }
-                            };
-
-                            var createTimeout = function () {
-                                return window.setTimeout(function () {
-                                    that._workerState["delete"](worker);
-                                    worker.removeEventListener("message", onMessage, false);
-                                    worker.terminate();
-                                }, 1000 * that._timeout);
-                            };
-
-                            worker.addEventListener("message", onMessage, false);
-
-                            _this._workerState.set(worker, {
-                                ready: true,
-                                timeout: createTimeout(),
-                                id: ++workerCount
-                            });
-
-                            return {
-                                v: worker
-                            };
-                        })();
-
-                        if (typeof _ret === "object") {
-                            return _ret.v;
-                        }
-                    }
-                };
-
-                /**
-                 * Schedule work to run in the pool.
-                 * Each worker is passed a message of the form { id, message }, and must respond similarly.
-                 * The promise return the sent by the worker.
-                 */
-
-                WorkerPool.prototype.run = function run(message) {
-                    var _this = this;
-
-                    var _ref = arguments[1] === undefined ? {} : arguments[1];
-
-                    var transfers = _ref.transfers;
-
-                    var id = ++taskCount;
-                    return new Promise(function (resolve, reject) {
-                        _this._completers.set(id, { resolve: resolve, reject: reject });
-                        _this._taskQueue.push({ id: id, message: message, transfers: transfers });
-
-                        var worker = undefined;
-
-                        // Find an available worker
-                        for (var _iterator = _this._workerState.entries(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                            var _ref;
-
-                            if (_isArray) {
-                                if (_i >= _iterator.length) break;
-                                _ref = _iterator[_i++];
-                            } else {
-                                _i = _iterator.next();
-                                if (_i.done) break;
-                                _ref = _i.value;
-                            }
-
-                            var _ref2 = _slicedToArray(_ref, 2);
-
-                            var w = _ref2[0];
-                            var state = _ref2[1];
-
-                            if (state.ready) {
-                                worker = w;
-                                if (!_isArray && _iterator["return"]) _iterator["return"]();
-                                break;
-                            }
-                        }
-
-                        // ...or spawn a new one if none is found
-                        if (worker === undefined) {
-                            worker = _this.spawnWorker();
-                        }
-
-                        // It may still be undefined if pool is full, in which case work will start as soon as one finishes
-                        if (worker !== undefined) {
-                            _this._grabWork(worker);
-                        }
-                    });
-                };
-
-                /**
-                 * Creates a WorkerPool by stringifying a function taking a resolve callback.
-                 */
-
-                WorkerPool.fromFunction = function fromFunction(fn) {
-                    var dependencies = arguments[1] === undefined ? [] : arguments[1];
-                    var options = arguments[2] === undefined ? {} : arguments[2];
-
-                    var variables = {
-                        location: window.location
-                    };
-
-                    // Magic, magic, magic
-                    for (var i = 0; i < dependencies.length; ++i) {
-                        switch (typeof dependencies[i]) {
-                            case "function":
-                                dependencies[i] = dependencies[i].toString();
-                                break;
-                            case "object":
-                                for (var _iterator = Object.keys(dependencies[i]), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                                    var _ref;
-
-                                    if (_isArray) {
-                                        if (_i >= _iterator.length) break;
-                                        _ref = _iterator[_i++];
-                                    } else {
-                                        _i = _iterator.next();
-                                        if (_i.done) break;
-                                        _ref = _i.value;
-                                    }
-
-                                    var key = _ref;
-
-                                    variables[key] = dependencies[i][key];
-                                }}
-                    }
-
-                    // Hogwarts next
-                    var magic = Object.keys(variables).map(function (key) {
-                        return "var " + key + " = " + JSON.stringify(variables[key]) + ";";
-                    });
-
-                    // TODO: rejection handler
-                    var worker = "self.onmessage = function(event) {\n                (" + fn.toString() + ")(event.data.message, function resolve(message, transfers) {\n                    self.postMessage({ id: event.data.id, message: message }, transfers);\n                });\n            };";
-
-                    var blob = new Blob([[].concat(_toConsumableArray(magic), _toConsumableArray(dependencies), [worker]).join(";\n")], { type: "application/javascript" });
-                    var url = window.URL.createObjectURL(blob);
-                    return new WorkerPool(url, options);
-                };
-
-                return WorkerPool;
-            })();
-
-            _export("default", WorkerPool);
-        }
-    };
-});
 System.register("github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -5367,47 +4559,56 @@ System.register("github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:syste
   return module.exports;
 });
 
-
-
-System.register("lib/extra/errors", [], function (_export) {
-    var _prototypeProperties, _inherits, _classCallCheck, UnimplementedMethodError;
-
-    return {
-        setters: [],
-        execute: function () {
-            "use strict";
-
-            _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            UnimplementedMethodError = _export("UnimplementedMethodError", (function (Error) {
-                function UnimplementedMethodError() {
-                    var message = arguments[0] === undefined ? "Method not implemented!" : arguments[0];
-
-                    _classCallCheck(this, UnimplementedMethodError);
-
-                    Error.call(this, message);
-                }
-
-                _inherits(UnimplementedMethodError, Error);
-
-                _prototypeProperties(UnimplementedMethodError, null, {
-                    name: {
-                        get: function () {
-                            return "UnimplementedMethod";
-                        },
-                        configurable: true
-                    }
-                });
-
-                return UnimplementedMethodError;
-            })(Error));
-        }
-    };
+System.register("npm:core-js@0.8.2/library/fn/object/freeze", ["npm:core-js@0.8.2/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.object.statics-accept-primitives");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Object.freeze;
+  global.define = __define;
+  return module.exports;
 });
+
+System.register("npm:core-js@0.8.2/library/modules/es6.array.from", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx", "npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.iter", "npm:core-js@0.8.2/library/modules/$.iter-detect"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      ctx = require("npm:core-js@0.8.2/library/modules/$.ctx"),
+      $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+      stepCall = $iter.stepCall;
+  $def($def.S + $def.F * !require("npm:core-js@0.8.2/library/modules/$.iter-detect")(function(iter) {
+    Array.from(iter);
+  }), 'Array', {from: function from(arrayLike) {
+      var O = Object($.assertDefined(arrayLike)),
+          mapfn = arguments[1],
+          mapping = mapfn !== undefined,
+          f = mapping ? ctx(mapfn, arguments[2], 2) : undefined,
+          index = 0,
+          length,
+          result,
+          step,
+          iterator;
+      if ($iter.is(O)) {
+        iterator = $iter.get(O);
+        result = new (typeof this == 'function' ? this : Array);
+        for (; !(step = iterator.next()).done; index++) {
+          result[index] = mapping ? stepCall(iterator, f, [step.value, index], true) : step.value;
+        }
+      } else {
+        result = new (typeof this == 'function' ? this : Array)(length = $.toLength(O.length));
+        for (; length > index; index++) {
+          result[index] = mapping ? f(O[index], index) : O[index];
+        }
+      }
+      result.length = index;
+      return result;
+    }});
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -5417,28 +4618,26 @@ System.register("github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/pl
   return module.exports;
 });
 
-
-
 System.register("lib/material/shaders/phong.vert.dot!lib/plugins/dot", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = function anonymous(it) {
-    var out = 'uniform mat4 mvpMatrix;\nuniform mat4 modelMatrix;\nuniform mat3 normalMatrix;\n\nattribute highp vec3 vertex;\nattribute highp vec3 normal;\n';
+    var out = 'uniform mat4 mvpMatrix;\nuniform mat4 modelMatrix;\nuniform mat3 normalMatrix;\n\nattribute vec3 vertex;\nattribute vec3 normal;\n';
     if (it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture') {
-      out += '\nattribute mediump vec2 texcoord;\n';
+      out += '\nattribute vec2 texcoord;\n';
     }
-    out += '\n\nvarying highp vec3 worldFragPos;\nvarying mediump vec3 worldNormal;\n\n';
+    out += '\n\nvarying vec3 worldFragPos;\nvarying vec3 worldNormal;\n\n';
     if (it.ambient === 'texture') {
-      out += '\nuniform mediump vec4 ambientTexcoordBounds;\nvarying mediump vec2 ambientTexcoord;\n';
+      out += '\nuniform vec4 ambientTexcoordBounds;\nvarying vec2 ambientTexcoord;\n';
     }
     out += '\n\n';
     if (it.diffuse === 'texture') {
-      out += '\nuniform mediump vec4 diffuseTexcoordBounds;\nvarying mediump vec2 diffuseTexcoord;\n';
+      out += '\nuniform vec4 diffuseTexcoordBounds;\nvarying vec2 diffuseTexcoord;\n';
     }
     out += '\n\n';
     if (it.specular === 'texture') {
-      out += '\nuniform mediump vec4 specularTexcoordBounds;\nvarying mediump vec2 specularTexcoord;\n';
+      out += '\nuniform vec4 specularTexcoordBounds;\nvarying vec2 specularTexcoord;\n';
     }
     out += '\n\n\nvoid main() {\n\n    worldFragPos = vec3(modelMatrix * vec4(vertex, 1.0));\n    worldNormal = normalize(normalMatrix * normal);\n\n    ';
     if (it.ambient === 'texture') {
@@ -5459,38 +4658,36 @@ System.register("lib/material/shaders/phong.vert.dot!lib/plugins/dot", [], true,
   return module.exports;
 });
 
-
-
 System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = function anonymous(it) {
-    var out = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nprecision highp float;\n\nstruct DirectionalLight {\n    bool enabled;\n    highp   vec3  direction;\n    mediump vec3  diffuse, specular;\n};\n\nstruct PointLight {\n    bool enabled;\n    highp   vec3  position;\n    mediump vec3  diffuse, specular;\n    mediump float constant, linear, quadratic;\n};\n\nstruct SpotLight {\n    bool enabled;\n    highp   vec3  position, direction;\n    mediump vec3  diffuse, specular;\n    mediump float cutoff, outerCutoff;\n    mediump float constant, linear, quadratic;\n};\n\nstruct Material {\n    lowp float shininess;\n    ';
+    var out = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nprecision mediump float;\n\nstruct DirectionalLight {\n    bool enabled;\n    vec3  direction;\n    vec3  diffuse, specular;\n};\n\nstruct PointLight {\n    bool enabled;\n    vec3  position;\n    vec3  diffuse, specular;\n    float constant, linear, quadratic;\n};\n\nstruct SpotLight {\n    bool enabled;\n    vec3  position, direction;\n    vec3  diffuse, specular;\n    float cutoff, outerCutoff;\n    float constant, linear, quadratic;\n};\n\nstruct Material {\n    lowp float shininess;\n    ';
     if (it.ambient === 'static') {
-      out += ' mediump vec3 ambient; ';
+      out += ' vec3 ambient; ';
     }
     out += '\n    ';
     if (it.diffuse === 'static') {
-      out += ' mediump vec3 diffuse; ';
+      out += ' vec3 diffuse; ';
     }
     out += '\n    ';
     if (it.specular === 'static') {
-      out += ' mediump vec3 specular; ';
+      out += ' vec3 specular; ';
     }
-    out += '\n};\n\n\nvarying highp vec3 worldFragPos;\nvarying highp vec3 worldNormal;\n\nuniform highp vec3 viewPos;\n\n';
+    out += '\n};\n\n\nvarying vec3 worldFragPos;\nvarying vec3 worldNormal;\n\nuniform vec3 viewPos;\n\n';
     if (it.ambient === 'texture') {
-      out += '\nuniform sampler2D ambientSampler;\nvarying mediump vec2 ambientTexcoord;\n';
+      out += '\nuniform sampler2D ambientSampler;\nvarying vec2 ambientTexcoord;\n';
     }
     out += '\n\n';
     if (it.diffuse === 'texture') {
-      out += '\nuniform sampler2D diffuseSampler;\nvarying mediump vec2 diffuseTexcoord;\n';
+      out += '\nuniform sampler2D diffuseSampler;\nvarying vec2 diffuseTexcoord;\n';
     }
     out += '\n\n';
     if (it.specular === 'texture') {
-      out += '\nuniform sampler2D specularSampler;\nvarying mediump vec2 specularTexcoord;\n';
+      out += '\nuniform sampler2D specularSampler;\nvarying vec2 specularTexcoord;\n';
     }
-    out += '\n\n\nuniform Material material;\n\nuniform DirectionalLight directionalLights[ ' + (it.MAX_DIRECTIONAL_LIGHTS || 2) + ' ];\nuniform PointLight pointLights[ ' + (it.MAX_POINT_LIGHTS || 5) + ' ];\nuniform SpotLight spotLights[ ' + (it.MAX_SPOT_LIGHTS || 5) + ' ];\n\n\nvoid main() {\n\n    vec3 worldNormal2 = normalize(worldNormal);\n\n    // Direction from fragment to camera\n    vec3 viewDir = normalize(viewPos - worldFragPos);\n    vec3 color =  ';
+    out += '\n\n\nuniform Material material;\n\nuniform DirectionalLight directionalLights[ ' + (it.MAX_DIRECTIONAL_LIGHTS || 2) + ' ];\nuniform PointLight pointLights[ ' + (it.MAX_POINT_LIGHTS || 2) + ' ];\nuniform SpotLight spotLights[ ' + (it.MAX_SPOT_LIGHTS || 2) + ' ];\n\n\nvoid main() {\n\n    vec3 worldNormal2 = normalize(worldNormal);\n\n    // Direction from fragment to camera\n    vec3 viewDir = normalize(viewPos - worldFragPos);\n    vec3 color =  ';
     if (it.ambient === 'texture') {
       out += ' texture2D(ambientSampler, ambientTexcoord).stp ';
     } else {
@@ -5514,7 +4711,7 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
     } else {
       out += ' material.specular ';
     }
-    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n            color += shade;\n        }\n    }\n\n    for (int i = 0; i <  ' + (it.MAX_POINT_LIGHTS || 5) + ' ; ++i) {\n        PointLight light = pointLights[i];\n        if (light.enabled) {\n            \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse  = light.diffuse *  ';
+    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n            color += shade;\n        }\n    }\n\n    for (int i = 0; i <  ' + (it.MAX_POINT_LIGHTS || 2) + ' ; ++i) {\n        PointLight light = pointLights[i];\n        if (light.enabled) {\n            \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse  = light.diffuse *  ';
     if (it.diffuse === 'texture') {
       out += ' texture2D(diffuseSampler, diffuseTexcoord).stp ';
     } else {
@@ -5532,7 +4729,7 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
     } else {
       out += ' material.specular ';
     }
-    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n            color += shade;\n        }\n    }\n\n    for (int i = 0; i <  ' + (it.MAX_SPOT_LIGHTS || 5) + ' ; ++i) {\n        SpotLight light = spotLights[i];\n        if (light.enabled) {\n            \n    \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse  = light.diffuse *  ';
+    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n            color += shade;\n        }\n    }\n\n    for (int i = 0; i <  ' + (it.MAX_SPOT_LIGHTS || 2) + ' ; ++i) {\n        SpotLight light = spotLights[i];\n        if (light.enabled) {\n            \n    \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse  = light.diffuse *  ';
     if (it.diffuse === 'texture') {
       out += ' texture2D(diffuseSampler, diffuseTexcoord).stp ';
     } else {
@@ -5550,358 +4747,37 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
     } else {
       out += ' material.specular ';
     }
-    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n\n    float theta = dot(lightDir, light.direction);\n    float epsilon = light.cutoff - light.outerCutoff;\n    float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);\n\n    shade *= intensity;\n\n            color += shade;\n        }\n    }\n\n    gl_FragColor = vec4(color, 1.0);\n    //gl_FragColor = vec4(abs(worldNormal2), 1.0);\n}\n';
+    out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n\n    float theta = dot(lightDir, light.direction);\n    float epsilon = light.cutoff - light.outerCutoff;\n    float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);\n\n    shade *= intensity;\n\n            color += shade;\n        }\n    }\n\n    gl_FragColor = vec4(color, 1.0);\n\n    //gl_FragColor = vec4(abs(worldNormal2), 1.0);\n}\n';
     return out;
   };
   global.define = __define;
   return module.exports;
 });
 
-
-
-System.register("lib/light/base", ["lib/scene/base", "npm:memoizee@0.3.8", "github:toji/gl-matrix@master"], function (_export) {
-    var Scene, memoize, glm, _inherits, _classCallCheck, Light, lightCounts, LightRenderer;
-
-    return {
-        setters: [function (_libSceneBase) {
-            Scene = _libSceneBase["default"];
-        }, function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            /**
-             * @abstract
-             */
-            Light = _export("Light", (function (Scene) {
-                function Light(name, RendererType) {
-                    var _this = this;
-
-                    var options = arguments[2] === undefined ? {} : arguments[2];
-
-                    _classCallCheck(this, Light);
-
-                    Scene.call(this, name, options);
-
-                    var _options$diffuse = options.diffuse;
-                    var diffuse = _options$diffuse === undefined ? glm.vec3.fromValues(1, 1, 1) : _options$diffuse;
-                    var _options$specular = options.specular;
-                    var specular = _options$specular === undefined ? diffuse : _options$specular;
-
-                    this.diffuse = diffuse;
-                    this.specular = specular;
-
-                    this.getRenderer = memoize(function (gl) {
-                        return new RendererType(_this, gl);
-                    });
-                }
-
-                _inherits(Light, Scene);
-
-                return Light;
-            })(Scene));
-            lightCounts = new WeakMap();
-
-            /**
-             * @abstract
-             */
-            LightRenderer = _export("LightRenderer", (function () {
-                function LightRenderer(light, gl) {
-                    _classCallCheck(this, LightRenderer);
-
-                    this.light = light;
-                    this.gl = gl;
-                    this.id = LightRenderer.allocateLight(light.constructor);
-
-                    // Each instance has a local reference to a
-                    this.getLocations = memoize(this.getLocations.bind(this));
-                }
-
-                LightRenderer.allocateLight = function allocateLight(LightType) {
-                    var count = lightCounts.get(LightType) || 0;
-                    lightCounts.set(LightType, count + 1);
-                    return count;
-                };
-
-                LightRenderer.prototype.getLocations = function getLocations(program) {};
-
-                LightRenderer.prototype.render = function render() {};
-
-                return LightRenderer;
-            })());
-        }
-    };
-});
-
-// Color
-System.register("lib/scene/group", ["lib/scene/base"], function (_export) {
-    var Scene, _applyConstructor, _inherits, _classCallCheck, Group;
-
-    _export("group", group);
-
-    function group() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _applyConstructor(Group, args);
+System.register("npm:core-js@0.8.2/library/modules/$.assign", ["npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$");
+  module.exports = Object.assign || function assign(target, source) {
+    var T = Object($.assertDefined(target)),
+        l = arguments.length,
+        i = 1;
+    while (l > i) {
+      var S = $.ES5Object(arguments[i++]),
+          keys = $.getKeys(S),
+          length = keys.length,
+          j = 0,
+          key;
+      while (length > j)
+        T[key = keys[j++]] = S[key];
     }
-
-    return {
-        setters: [function (_libSceneBase) {
-            Scene = _libSceneBase["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _applyConstructor = function (Constructor, args) { var instance = Object.create(Constructor.prototype); var result = Constructor.apply(instance, args); return result != null && (typeof result == "object" || typeof result == "function") ? result : instance; };
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            /** The "<div>" of the scene graph. Manages a set of subnodes. */
-
-            Group = (function (Scene) {
-                function Group(name) {
-                    var options = arguments[1] === undefined ? {} : arguments[1];
-                    var children = arguments[2] === undefined ? [] : arguments[2];
-                    this.children = [];
-
-                    _classCallCheck(this, Group);
-
-                    Scene.call(this, name, options);
-                    for (var _iterator = children, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                        var _ref;
-
-                        if (_isArray) {
-                            if (_i >= _iterator.length) break;
-                            _ref = _iterator[_i++];
-                        } else {
-                            _i = _iterator.next();
-                            if (_i.done) break;
-                            _ref = _i.value;
-                        }
-
-                        var child = _ref;
-
-                        this.add(child);
-                    }
-                }
-
-                _inherits(Group, Scene);
-
-                Group.prototype.forEach = function forEach(cb) {
-                    cb(this);
-                    // Depth-first iteration
-                    var children = this.children;
-                    for (var i = 0, len = children.length; i < len; ++i) {
-                        children[i].forEach(cb);
-                    }
-                    /*
-                    for (let child: Scene of this.children) {
-                         child.forEach(cb);
-                    }*/
-                };
-
-                Group.prototype.recalculate = function recalculate(deltaTime) {
-                    Scene.prototype.recalculate.call(this, deltaTime);
-                    var children = this.children;
-                    for (var i = 0, len = children.length; i < len; ++i) {
-                        children[i].recalculate(deltaTime);
-                    }
-                    /*
-                    for (let child: Scene of this.children) {
-                        child.recalculate(deltaTime);
-                    }*/
-                };
-
-                Group.prototype.add = function add(node) {
-                    node.parent = this;
-                    this.children.push(node);
-                    this.trigger("didAddNode", { bubble: true }, node);
-                };
-
-                Group.prototype.remove = function remove(node) {
-                    node.parent = null;
-                    //this.children.slice(node);
-                    this.trigger("didRemoveNode", { bubble: true }, node);
-                };
-
-                return Group;
-            })(Scene);
-
-            _export("default", Group);
-
-            Group.prototype[Symbol.iterator] = regeneratorRuntime.mark(function callee$0$0() {
-                var _this = this;
-
-                var _iterator, _isArray, _i, _ref, child;
-
-                return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
-                    while (1) switch (context$1$0.prev = context$1$0.next) {
-                        case 0:
-                            context$1$0.next = 2;
-                            return _this;
-
-                        case 2:
-                            _iterator = _this.children, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
-
-                        case 3:
-                            if (!_isArray) {
-                                context$1$0.next = 9;
-                                break;
-                            }
-
-                            if (!(_i >= _iterator.length)) {
-                                context$1$0.next = 6;
-                                break;
-                            }
-
-                            return context$1$0.abrupt("break", 17);
-
-                        case 6:
-                            _ref = _iterator[_i++];
-                            context$1$0.next = 13;
-                            break;
-
-                        case 9:
-                            _i = _iterator.next();
-
-                            if (!_i.done) {
-                                context$1$0.next = 12;
-                                break;
-                            }
-
-                            return context$1$0.abrupt("break", 17);
-
-                        case 12:
-                            _ref = _i.value;
-
-                        case 13:
-                            child = _ref;
-                            return context$1$0.delegateYield(child, "t0", 15);
-
-                        case 15:
-                            context$1$0.next = 3;
-                            break;
-
-                        case 17:
-                        case "end":
-                            return context$1$0.stop();
-                    }
-                }, callee$0$0, this);
-            });
-        }
-    };
+    return T;
+  };
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/camera/base", ["github:toji/gl-matrix@master", "lib/scene/base"], function (_export) {
-    var glm, Scene, _inherits, _classCallCheck, mat4, Camera;
 
-    return {
-        setters: [function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_libSceneBase) {
-            Scene = _libSceneBase["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            mat4 = glm.mat4;
-
-            /**
-             * @abstract
-             */
-
-            Camera = (function (Scene) {
-                function Camera() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-                    this.cameraMatrix = mat4.create();
-                    this.viewMatrix = mat4.create();
-                    this.projectionMatrix = mat4.create();
-                    this.mvpMatrix = mat4.create();
-
-                    _classCallCheck(this, Camera);
-
-                    Scene.call(this, "camera", options);
-                }
-
-                _inherits(Camera, Scene);
-
-                Camera.prototype.recalculate = function recalculate() {
-                    Scene.prototype.recalculate.call(this);
-                    mat4.invert(this.viewMatrix, this.worldTransform);
-                    mat4.multiply(this.cameraMatrix, this.projectionMatrix, this.viewMatrix);
-                };
-
-                Camera.prototype.calculateMvpMatrix = function calculateMvpMatrix(model) {
-                    return mat4.multiply(this.mvpMatrix, this.cameraMatrix, model.worldTransform);
-                };
-
-                // TODO: implement bounds checking
-
-                Camera.prototype.canSee = function canSee(model) {
-                    return true;
-                };
-
-                return Camera;
-            })(Scene);
-
-            _export("default", Camera);
-        }
-    };
-});
-System.register("lib/texture/cubemap", ["lib/texture/common"], function (_export) {
-    var getImage, _applyConstructor, _toConsumableArray, _classCallCheck, CubeMap;
-
-    return {
-        setters: [function (_libTextureCommon) {
-            getImage = _libTextureCommon.getImage;
-        }],
-        execute: function () {
-            "use strict";
-
-            _applyConstructor = function (Constructor, args) { var instance = Object.create(Constructor.prototype); var result = Constructor.apply(instance, args); return result != null && (typeof result == "object" || typeof result == "function") ? result : instance; };
-
-            _toConsumableArray = function (arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            CubeMap = (function () {
-                function CubeMap(right, left, top, bottom, front, back) {
-                    _classCallCheck(this, CubeMap);
-
-                    this.right = right;this.left = left;
-                    this.top = top;this.bottom = bottom;
-                    this.front = front;this.back = back;
-                }
-
-                CubeMap.fromFiles = function fromFiles(right, left, top, bottom, front, back, format) {
-                    return Promise.all([right, left, top, bottom, front, back].map(function (filename) {
-                        return getImage(filename, format);
-                    })).then(function (images) {
-                        return _applyConstructor(CubeMap, _toConsumableArray(images));
-                    });
-                };
-
-                return CubeMap;
-            })();
-
-            _export("default", CubeMap);
-        }
-    };
-});
 System.register("lib/material/shaders/skybox.vert!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -5910,8 +4786,6 @@ System.register("lib/material/shaders/skybox.vert!github:systemjs/plugin-text@0.
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("lib/material/shaders/skybox.frag!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
   var global = System.global,
@@ -5922,185 +4796,6 @@ System.register("lib/material/shaders/skybox.frag!github:systemjs/plugin-text@0.
   return module.exports;
 });
 
-
-
-System.register("lib/geometry/shapes", ["lib/geometry/geometry", "github:toji/gl-matrix@master"], function (_export) {
-    var Geometry, glm, _inherits, _classCallCheck, vec3, mat4, vec3buf, mat4buf, Cube, Plane;
-
-    return {
-        setters: [function (_libGeometryGeometry) {
-            Geometry = _libGeometryGeometry["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-            mat4 = glm.mat4;
-            vec3buf = vec3.create();
-            mat4buf = mat4.create();
-
-            /**
-             * A cube of size 1x1x1
-             */
-            Cube = _export("Cube", (function (Geometry) {
-                function Cube() {
-                    _classCallCheck(this, Cube);
-
-                    var points = [1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1];
-                    Geometry.call(this, {
-                        vertices: points.map(function (n) {
-                            return 0.5 * n;
-                        }),
-                        normals: points.map(function (n) {
-                            return Math.sqrt(3) / 3 * n;
-                        }),
-                        texcoords: [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1],
-                        indices: [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 1, 9, 8, 9, 10, 11, 12, 13, 11, 13, 14, 15, 16, 2, 15, 2, 17, 15, 18, 19, 15, 19, 10]
-                    });
-                }
-
-                _inherits(Cube, Geometry);
-
-                return Cube;
-            })(Geometry));
-
-            /**
-             * A plane of size 1x1 in the xz-plane, facing up.
-             * If a texture map is used, no normals are generated, use generateNormals() manually.
-             */
-            Plane = _export("Plane", (function (Geometry) {
-                function Plane() {
-                    var _ref = arguments[0] === undefined ? {} : arguments[0];
-
-                    var _ref$size = _ref.size;
-                    var size = _ref$size === undefined ? 8 : _ref$size;
-                    var _ref$heightmap = _ref.heightmap;
-                    var heightmap = _ref$heightmap === undefined ? null : _ref$heightmap;
-
-                    _classCallCheck(this, Plane);
-
-                    var data = null;
-                    var width = undefined,
-                        height = undefined;
-
-                    this.heightmap = heightmap;
-
-                    if (heightmap === null) {
-                        width = size;
-                        height = size;
-                    } else {
-                        width = heightmap.width;
-                        height = heightmap.height;
-                        data = heightmap.imageData.data;
-                    }
-
-                    var vertexCount = width * height;
-                    var triangleCount = (width - 1) * height * 2;
-
-                    var vertices = new Float32Array(3 * vertexCount);
-                    var texcoords = new Float32Array(2 * vertexCount);
-                    var indices = new Uint16Array(3 * triangleCount);
-
-                    var x = undefined,
-                        z = undefined,
-                        offset = undefined;
-
-                    for (x = 0; x < width; ++x) {
-                        for (z = 0; z < height; ++z) {
-                            offset = x + z * width;
-
-                            // Vertex array. You need to scale this properly
-                            vertices[3 * offset + 0] = x / (width - 1) - 0.5;
-                            vertices[3 * offset + 1] = data !== null ? data[4 * offset] / 255 : 0; // Sample R-value in texture
-                            vertices[3 * offset + 2] = z / (height - 1) - 0.5;
-
-                            // Texture coordinates. You may want to scale them.
-                            texcoords[2 * offset + 0] = x / width;
-                            texcoords[2 * offset + 1] = 1 - z / height;
-                        }
-                    }
-
-                    for (x = 0; x < width - 1; ++x) {
-                        for (z = 0; z < height - 1; ++z) {
-                            offset = 6 * (x + z * (width - 1));
-
-                            // Triangle 1
-                            indices[offset + 0] = x + z * width;
-                            indices[offset + 1] = x + (z + 1) * width;
-                            indices[offset + 2] = x + 1 + z * width;
-
-                            // Triangle 2
-                            indices[offset + 3] = x + 1 + z * width;
-                            indices[offset + 4] = x + (z + 1) * width;
-                            indices[offset + 5] = x + 1 + (z + 1) * width;
-                        }
-                    }
-
-                    Geometry.call(this, { vertices: vertices, texcoords: texcoords, indices: indices });
-                }
-
-                _inherits(Plane, Geometry);
-
-                // UGLY, ugly piece of S**T
-
-                Plane.prototype.getHeightAtWorldPosition = function getHeightAtWorldPosition(camera, model) {
-                    var _this = this;
-
-                    var localPosition = vec3.transformMat4(vec3buf, camera.worldPosition, mat4.invert(mat4buf, model.worldTransform));
-
-                    if (this.heightmap === null) {
-                        localPosition[1] = 0;
-                    } else {
-                        (function () {
-
-                            var clamp = function (x, min, max) {
-                                return Math.min(Math.max(x, min), max);
-                            };
-
-                            var width = _this.heightmap.imageData.width;
-                            var height = _this.heightmap.imageData.height;
-
-                            var x = clamp(width * (localPosition[0] + 0.5), 0, width - 1);
-                            var z = clamp(height * (localPosition[2] + 0.5), 0, height - 1);
-
-                            var x_left = Math.floor(x);
-                            var x_right = Math.ceil(x);
-                            var z_top = Math.floor(z);
-                            var z_down = Math.ceil(z);
-
-                            var sample = function (x, z) {
-                                return _this.heightmap.imageData.data[4 * (x + z * width)] / 256;
-                            };
-
-                            var lerp = function (a, b, t) {
-                                return a + t * (b - a);
-                            };
-
-                            localPosition[1] = lerp(sample(x_left, z_top), sample(x_right, z_top), x % 1);
-                        })();
-                    }
-
-                    var worldPosition = vec3.transformMat4(vec3buf, localPosition, model.worldTransform);
-
-                    return worldPosition[1];
-
-                    /*
-                    const cameraSpacePosition = vec3.transformMat4(vec3.create(), worldPosition, mat4.invert(mat4.create(), camera.worldTransform));
-                     return cameraSpacePosition[1];
-                    */
-                };
-
-                return Plane;
-            })(Geometry));
-        }
-    };
-});
 (function() {
 function define(){};  define.amd = {};
 (function() {
@@ -9409,373 +8104,382 @@ function define(){};  define.amd = {};
     this.Bacon = Bacon;
   }
 }).call(this);
-
-
 })();
-System.register("lib/light/directional-light", ["github:toji/gl-matrix@master", "npm:memoizee@0.3.8", "lib/extra/functional", "lib/light/base"], function (_export) {
-    var glm, memoize, construct, Light, LightRenderer, _inherits, _classCallCheck, ensureVector, DirectionalLight, DirectionalLightRenderer;
-
+System.register("npm:core-js@0.8.2/library/modules/$", ["npm:core-js@0.8.2/library/modules/$.fw"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var global = typeof self != 'undefined' ? self : Function('return this')(),
+      core = {},
+      defineProperty = Object.defineProperty,
+      hasOwnProperty = {}.hasOwnProperty,
+      ceil = Math.ceil,
+      floor = Math.floor,
+      max = Math.max,
+      min = Math.min;
+  var DESC = !!function() {
+    try {
+      return defineProperty({}, 'a', {get: function() {
+          return 2;
+        }}).a == 2;
+    } catch (e) {}
+  }();
+  var hide = createDefiner(1);
+  function toInteger(it) {
+    return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+  }
+  function desc(bitmap, value) {
     return {
-        setters: [function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }, function (_libExtraFunctional) {
-            construct = _libExtraFunctional.construct;
-        }, function (_libLightBase) {
-            Light = _libLightBase.Light;
-            LightRenderer = _libLightBase.LightRenderer;
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            ensureVector = function (value) {
-                return typeof value === "number" ? glm.vec3.fromValues(value, value, value) : glm.vec3.clone(value);
-            };
-
-            DirectionalLight = (function (Light) {
-                function DirectionalLight() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-
-                    _classCallCheck(this, DirectionalLight);
-
-                    Light.call(this, "directional-light", DirectionalLightRenderer, options);
-                    //Object.seal(this);
-                }
-
-                _inherits(DirectionalLight, Light);
-
-                return DirectionalLight;
-            })(Light);
-
-            _export("default", DirectionalLight);
-
-            DirectionalLightRenderer = (function (LightRenderer) {
-                function DirectionalLightRenderer(light, gl) {
-                    _classCallCheck(this, DirectionalLightRenderer);
-
-                    LightRenderer.call(this, light, gl);
-                    //Object.freeze(this);
-                }
-
-                _inherits(DirectionalLightRenderer, LightRenderer);
-
-                DirectionalLightRenderer.prototype.getLocations = function getLocations(program) {
-                    return Object.freeze({
-                        enabled: program.getUniformLocation("directionalLights[" + this.id + "].enabled"),
-                        direction: program.getUniformLocation("directionalLights[" + this.id + "].direction"),
-                        diffuse: program.getUniformLocation("directionalLights[" + this.id + "].diffuse"),
-                        specular: program.getUniformLocation("directionalLights[" + this.id + "].specular")
-                    });
-                };
-
-                DirectionalLightRenderer.prototype.render = function render(program) {
-                    var gl = this.gl;
-                    var light = this.light;
-                    var locations = this.getLocations(program);
-
-                    gl.uniform1i(locations.enabled, true);
-                    gl.uniform3fv(locations.direction, light.direction); // Only local direction used
-                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
-                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
-                };
-
-                return DirectionalLightRenderer;
-            })(LightRenderer);
-        }
+      enumerable: !(bitmap & 1),
+      configurable: !(bitmap & 2),
+      writable: !(bitmap & 4),
+      value: value
     };
+  }
+  function simpleSet(object, key, value) {
+    object[key] = value;
+    return object;
+  }
+  function createDefiner(bitmap) {
+    return DESC ? function(object, key, value) {
+      return $.setDesc(object, key, desc(bitmap, value));
+    } : simpleSet;
+  }
+  function isObject(it) {
+    return it !== null && (typeof it == 'object' || typeof it == 'function');
+  }
+  function isFunction(it) {
+    return typeof it == 'function';
+  }
+  function assertDefined(it) {
+    if (it == undefined)
+      throw TypeError("Can't call method on  " + it);
+    return it;
+  }
+  var $ = module.exports = require("npm:core-js@0.8.2/library/modules/$.fw")({
+    g: global,
+    core: core,
+    html: global.document && document.documentElement,
+    isObject: isObject,
+    isFunction: isFunction,
+    it: function(it) {
+      return it;
+    },
+    that: function() {
+      return this;
+    },
+    toInteger: toInteger,
+    toLength: function(it) {
+      return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
+    },
+    toIndex: function(index, length) {
+      index = toInteger(index);
+      return index < 0 ? max(index + length, 0) : min(index, length);
+    },
+    has: function(it, key) {
+      return hasOwnProperty.call(it, key);
+    },
+    create: Object.create,
+    getProto: Object.getPrototypeOf,
+    DESC: DESC,
+    desc: desc,
+    getDesc: Object.getOwnPropertyDescriptor,
+    setDesc: defineProperty,
+    getKeys: Object.keys,
+    getNames: Object.getOwnPropertyNames,
+    getSymbols: Object.getOwnPropertySymbols,
+    assertDefined: assertDefined,
+    ES5Object: Object,
+    toObject: function(it) {
+      return $.ES5Object(assertDefined(it));
+    },
+    hide: hide,
+    def: createDefiner(0),
+    set: global.Symbol ? simpleSet : hide,
+    mix: function(target, src) {
+      for (var key in src)
+        hide(target, key, src[key]);
+      return target;
+    },
+    each: [].forEach
+  });
+  if (typeof __e != 'undefined')
+    __e = core;
+  if (typeof __g != 'undefined')
+    __g = global;
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/light/pointlight", ["lib/extra/functional", "lib/light/base", "github:toji/gl-matrix@master", "npm:memoizee@0.3.8"], function (_export) {
-    var construct, Light, LightRenderer, glm, memoize, _inherits, _classCallCheck, vec3, buf, ensureVector, PointLight, PointLightRenderer;
 
-    return {
-        setters: [function (_libExtraFunctional) {
-            construct = _libExtraFunctional.construct;
-        }, function (_libLightBase) {
-            Light = _libLightBase.Light;
-            LightRenderer = _libLightBase.LightRenderer;
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-            buf = vec3.create();
-
-            ensureVector = function (value) {
-                return typeof value === "number" ? vec3.set(buf, value, value, value) : vec3.copy(buf, value);
-            };
-
-            PointLight = (function (Light) {
-                function PointLight() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-
-                    _classCallCheck(this, PointLight);
-
-                    Light.call(this, "pointlight", PointLightRenderer, options);
-
-                    var _options$constant = options.constant;
-                    var constant = _options$constant === undefined ? 1 : _options$constant;
-                    var _options$linear = options.linear;
-                    var linear = _options$linear === undefined ? 0.7 : _options$linear;
-                    var _options$quadratic = options.quadratic;
-                    var quadratic = _options$quadratic === undefined ? 1.8 : _options$quadratic;
-
-                    this.constant = constant;
-                    this.linear = linear;
-                    this.quadratic = quadratic;
-
-                    //Object.seal(this);
-                }
-
-                _inherits(PointLight, Light);
-
-                return PointLight;
-            })(Light);
-
-            _export("default", PointLight);
-
-            PointLightRenderer = (function (LightRenderer) {
-                function PointLightRenderer(light, gl) {
-                    _classCallCheck(this, PointLightRenderer);
-
-                    LightRenderer.call(this, light, gl);
-                    //Object.freeze(this);
-                }
-
-                _inherits(PointLightRenderer, LightRenderer);
-
-                PointLightRenderer.prototype.getLocations = function getLocations(program) {
-                    return Object.freeze({
-                        enabled: program.getUniformLocation("pointLights[" + this.id + "].enabled"),
-                        position: program.getUniformLocation("pointLights[" + this.id + "].position"),
-                        diffuse: program.getUniformLocation("pointLights[" + this.id + "].diffuse"),
-                        specular: program.getUniformLocation("pointLights[" + this.id + "].specular"),
-                        constant: program.getUniformLocation("pointLights[" + this.id + "].constant"),
-                        linear: program.getUniformLocation("pointLights[" + this.id + "].linear"),
-                        quadratic: program.getUniformLocation("pointLights[" + this.id + "].quadratic")
-                    });
-                };
-
-                PointLightRenderer.prototype.render = function render(program) {
-                    var gl = this.gl;
-                    var light = this.light;
-                    var locations = this.getLocations(program);
-
-                    gl.uniform1i(locations.enabled, true);
-                    gl.uniform3fv(locations.position, light.worldPosition);
-                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
-                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
-
-                    gl.uniform1f(locations.constant, light.constant);
-                    gl.uniform1f(locations.linear, light.linear);
-                    gl.uniform1f(locations.quadratic, light.quadratic);
-                };
-
-                return PointLightRenderer;
-            })(LightRenderer);
-        }
+System.register("npm:core-js@0.8.2/library/modules/$.ctx", ["npm:core-js@0.8.2/library/modules/$.assert"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var assertFunction = require("npm:core-js@0.8.2/library/modules/$.assert").fn;
+  module.exports = function(fn, that, length) {
+    assertFunction(fn);
+    if (~length && that === undefined)
+      return fn;
+    switch (length) {
+      case 1:
+        return function(a) {
+          return fn.call(that, a);
+        };
+      case 2:
+        return function(a, b) {
+          return fn.call(that, a, b);
+        };
+      case 3:
+        return function(a, b, c) {
+          return fn.call(that, a, b, c);
+        };
+    }
+    return function() {
+      return fn.apply(that, arguments);
     };
+  };
+  global.define = __define;
+  return module.exports;
 });
 
-// Attenuation
-System.register("lib/light/spotlight", ["lib/extra/functional", "lib/light/base", "github:toji/gl-matrix@master", "npm:memoizee@0.3.8"], function (_export) {
-    var construct, Light, LightRenderer, glm, memoize, _inherits, _classCallCheck, vec3, ensureVector, deg2rad, SpotLight, SpotLightRenderer;
+System.register("npm:core-js@0.8.2/library/modules/$.cof", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      TAG = require("npm:core-js@0.8.2/library/modules/$.wks")('toStringTag'),
+      toString = {}.toString;
+  function cof(it) {
+    return toString.call(it).slice(8, -1);
+  }
+  cof.classof = function(it) {
+    var O,
+        T;
+    return it == undefined ? it === undefined ? 'Undefined' : 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : cof(O);
+  };
+  cof.set = function(it, tag, stat) {
+    if (it && !$.has(it = stat ? it : it.prototype, TAG))
+      $.hide(it, TAG, tag);
+  };
+  module.exports = cof;
+  global.define = __define;
+  return module.exports;
+});
 
-    return {
-        setters: [function (_libExtraFunctional) {
-            construct = _libExtraFunctional.construct;
-        }, function (_libLightBase) {
-            Light = _libLightBase.Light;
-            LightRenderer = _libLightBase.LightRenderer;
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }],
-        execute: function () {
-            "use strict";
+System.register("npm:core-js@0.8.2/library/modules/es6.array.iterator", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.unscope", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.iter"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      setUnscope = require("npm:core-js@0.8.2/library/modules/$.unscope"),
+      ITER = require("npm:core-js@0.8.2/library/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+      step = $iter.step,
+      Iterators = $iter.Iterators;
+  $iter.std(Array, 'Array', function(iterated, kind) {
+    $.set(this, ITER, {
+      o: $.toObject(iterated),
+      i: 0,
+      k: kind
+    });
+  }, function() {
+    var iter = this[ITER],
+        O = iter.o,
+        kind = iter.k,
+        index = iter.i++;
+    if (!O || index >= O.length) {
+      iter.o = undefined;
+      return step(1);
+    }
+    if (kind == 'key')
+      return step(0, index);
+    if (kind == 'value')
+      return step(0, O[index]);
+    return step(0, [index, O[index]]);
+  }, 'value');
+  Iterators.Arguments = Iterators.Array;
+  setUnscope('keys');
+  setUnscope('values');
+  setUnscope('entries');
+  global.define = __define;
+  return module.exports;
+});
 
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-
-            ensureVector = function (value) {
-                return typeof value === "number" ? vec3.fromValues(value, value, value) : vec3.clone(value);
-            };
-
-            deg2rad = Math.PI / 180;
-
-            SpotLight = (function (Light) {
-                function SpotLight() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-
-                    _classCallCheck(this, SpotLight);
-
-                    Light.call(this, "spotlight", SpotLightRenderer, options);
-
-                    var _options$constant = options.constant;
-                    var constant = _options$constant === undefined ? 1 : _options$constant;
-                    var _options$linear = options.linear;
-                    var linear = _options$linear === undefined ? 0.7 : _options$linear;
-                    var _options$quadratic = options.quadratic;
-                    var quadratic = _options$quadratic === undefined ? 1.8 : _options$quadratic;
-                    var _options$cutoff = options.cutoff;
-                    var cutoff = _options$cutoff === undefined ? 40 : _options$cutoff;
-                    var _options$outerCutoff = options.outerCutoff;
-                    var outerCutoff = _options$outerCutoff === undefined ? 35 : _options$outerCutoff;
-
-                    this.constant = constant;
-                    this.linear = linear;
-                    this.quadratic = quadratic;
-                    this.cutoff = cutoff;
-                    this.outerCutoff = outerCutoff;
-
-                    //Object.seal(this);
-                }
-
-                _inherits(SpotLight, Light);
-
-                return SpotLight;
-            })(Light);
-
-            _export("default", SpotLight);
-
-            SpotLightRenderer = (function (LightRenderer) {
-                function SpotLightRenderer(light, gl) {
-                    _classCallCheck(this, SpotLightRenderer);
-
-                    LightRenderer.call(this, light, gl);
-                    //Object.freeze(this);
-                }
-
-                _inherits(SpotLightRenderer, LightRenderer);
-
-                SpotLightRenderer.prototype.getLocations = function getLocations(program) {
-                    return Object.freeze({
-                        enabled: program.getUniformLocation("spotLights[" + this.id + "].enabled"),
-                        position: program.getUniformLocation("spotLights[" + this.id + "].position"),
-                        direction: program.getUniformLocation("spotLights[" + this.id + "].direction"),
-                        diffuse: program.getUniformLocation("spotLights[" + this.id + "].diffuse"),
-                        specular: program.getUniformLocation("spotLights[" + this.id + "].specular"),
-                        constant: program.getUniformLocation("spotLights[" + this.id + "].constant"),
-                        linear: program.getUniformLocation("spotLights[" + this.id + "].linear"),
-                        quadratic: program.getUniformLocation("spotLights[" + this.id + "].quadratic"),
-                        cutoff: program.getUniformLocation("spotLights[" + this.id + "].cutoff"),
-                        outerCutoff: program.getUniformLocation("spotLights[" + this.id + "].outerCutoff")
-                    });
-                };
-
-                SpotLightRenderer.prototype.render = function render(program) {
-                    var gl = this.gl;
-                    var light = this.light;
-                    var locations = this.getLocations(program);
-
-                    gl.uniform1i(locations.enabled, true);
-                    gl.uniform3fv(locations.position, light.worldPosition);
-                    gl.uniform3fv(locations.direction, light.worldDirection);
-
-                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
-                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
-
-                    gl.uniform1f(locations.constant, light.constant);
-                    gl.uniform1f(locations.linear, light.linear);
-                    gl.uniform1f(locations.quadratic, light.quadratic);
-
-                    gl.uniform1f(locations.cutoff, light.cutoff * deg2rad);
-                    gl.uniform1f(locations.outerCutoff, light.outerCutoff * deg2rad);
-                };
-
-                return SpotLightRenderer;
-            })(LightRenderer);
+System.register("npm:core-js@0.8.2/library/modules/$.collection-weak", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.assert", "npm:core-js@0.8.2/library/modules/$.iter", "npm:core-js@0.8.2/library/modules/$.array-methods"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      safe = require("npm:core-js@0.8.2/library/modules/$.uid").safe,
+      assert = require("npm:core-js@0.8.2/library/modules/$.assert"),
+      forOf = require("npm:core-js@0.8.2/library/modules/$.iter").forOf,
+      _has = $.has,
+      isObject = $.isObject,
+      hide = $.hide,
+      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      id = 0,
+      ID = safe('id'),
+      WEAK = safe('weak'),
+      LEAK = safe('leak'),
+      method = require("npm:core-js@0.8.2/library/modules/$.array-methods"),
+      find = method(5),
+      findIndex = method(6);
+  function findFrozen(store, key) {
+    return find.call(store.array, function(it) {
+      return it[0] === key;
+    });
+  }
+  function leakStore(that) {
+    return that[LEAK] || hide(that, LEAK, {
+      array: [],
+      get: function(key) {
+        var entry = findFrozen(this, key);
+        if (entry)
+          return entry[1];
+      },
+      has: function(key) {
+        return !!findFrozen(this, key);
+      },
+      set: function(key, value) {
+        var entry = findFrozen(this, key);
+        if (entry)
+          entry[1] = value;
+        else
+          this.array.push([key, value]);
+      },
+      'delete': function(key) {
+        var index = findIndex.call(this.array, function(it) {
+          return it[0] === key;
+        });
+        if (~index)
+          this.array.splice(index, 1);
+        return !!~index;
+      }
+    })[LEAK];
+  }
+  module.exports = {
+    getConstructor: function(NAME, IS_MAP, ADDER) {
+      function C(iterable) {
+        $.set(assert.inst(this, C, NAME), ID, id++);
+        if (iterable != undefined)
+          forOf(iterable, IS_MAP, this[ADDER], this);
+      }
+      $.mix(C.prototype, {
+        'delete': function(key) {
+          if (!isObject(key))
+            return false;
+          if (isFrozen(key))
+            return leakStore(this)['delete'](key);
+          return _has(key, WEAK) && _has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
+        },
+        has: function has(key) {
+          if (!isObject(key))
+            return false;
+          if (isFrozen(key))
+            return leakStore(this).has(key);
+          return _has(key, WEAK) && _has(key[WEAK], this[ID]);
         }
-    };
+      });
+      return C;
+    },
+    def: function(that, key, value) {
+      if (isFrozen(assert.obj(key))) {
+        leakStore(that).set(key, value);
+      } else {
+        _has(key, WEAK) || hide(key, WEAK, {});
+        key[WEAK][that[ID]] = value;
+      }
+      return that;
+    },
+    leakStore: leakStore,
+    WEAK: WEAK,
+    ID: ID
+  };
+  global.define = __define;
+  return module.exports;
 });
 
-// Attenuation
-
-// Cutoff
-System.register("lib/camera/orthographic-camera", ["lib/camera/base", "github:toji/gl-matrix@master"], function (_export) {
-    var Camera, glm, _inherits, _classCallCheck, OrthographicCamera;
-
-    return {
-        setters: [function (_libCameraBase) {
-            Camera = _libCameraBase["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            OrthographicCamera = (function (Camera) {
-                function OrthographicCamera() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-
-                    _classCallCheck(this, OrthographicCamera);
-
-                    Camera.call(this, options);
-                    var _options$left = options.left;
-                    var left = _options$left === undefined ? -1 : _options$left;
-                    var _options$right = options.right;
-                    var right = _options$right === undefined ? 1 : _options$right;
-                    var _options$bottom = options.bottom;
-                    var bottom = _options$bottom === undefined ? -1 : _options$bottom;
-                    var _options$top = options.top;
-                    var top = _options$top === undefined ? 1 : _options$top;
-                    var _options$near = options.near;
-                    var near = _options$near === undefined ? 0.1 : _options$near;
-                    var _options$far = options.far;
-                    var far = _options$far === undefined ? 1000 : _options$far;
-
-                    this.left = left;
-                    this.right = right;
-                    this.bottom = bottom;
-                    this.top = top;
-                    this.near = near;
-                    this.far = far;
-                }
-
-                _inherits(OrthographicCamera, Camera);
-
-                OrthographicCamera.prototype.recalculate = function recalculate() {
-                    glm.mat4.ortho(this.projectionMatrix, this.left, this.right, this.bottom, this.top, this.near, this.far);
-                    Camera.prototype.recalculate.call(this);
-                };
-
-                return OrthographicCamera;
-            })(Camera);
-
-            _export("default", OrthographicCamera);
-        }
-    };
-});
-(function() {
-function define(){};  define.amd = {};
-System.register("github:toji/gl-matrix@master", ["github:toji/gl-matrix@master/dist/gl-matrix"], false, function(__require, __exports, __module) {
-  return (function(main) {
-    return main;
-  }).call(this, __require('github:toji/gl-matrix@master/dist/gl-matrix'));
+System.register("npm:core-js@0.8.2/library/modules/$.collection", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.iter", "npm:core-js@0.8.2/library/modules/$.assert", "npm:core-js@0.8.2/library/modules/$.iter-detect", "npm:core-js@0.8.2/library/modules/$.cof", "npm:core-js@0.8.2/library/modules/$.species"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+      assertInstance = require("npm:core-js@0.8.2/library/modules/$.assert").inst;
+  module.exports = function(NAME, methods, common, IS_MAP, isWeak) {
+    var Base = $.g[NAME],
+        C = Base,
+        ADDER = IS_MAP ? 'set' : 'add',
+        proto = C && C.prototype,
+        O = {};
+    function fixMethod(KEY, CHAIN) {
+      var method = proto[KEY];
+      if ($.FW)
+        proto[KEY] = function(a, b) {
+          var result = method.call(this, a === 0 ? 0 : a, b);
+          return CHAIN ? this : result;
+        };
+    }
+    if (!$.isFunction(C) || !(isWeak || !$iter.BUGGY && proto.forEach && proto.entries)) {
+      C = common.getConstructor(NAME, IS_MAP, ADDER);
+      $.mix(C.prototype, methods);
+    } else {
+      var inst = new C,
+          chain = inst[ADDER](isWeak ? {} : -0, 1),
+          buggyZero;
+      if (!require("npm:core-js@0.8.2/library/modules/$.iter-detect")(function(iter) {
+        new C(iter);
+      })) {
+        C = function(iterable) {
+          assertInstance(this, C, NAME);
+          var that = new Base;
+          if (iterable != undefined)
+            $iter.forOf(iterable, IS_MAP, that[ADDER], that);
+          return that;
+        };
+        C.prototype = proto;
+        if ($.FW)
+          proto.constructor = C;
+      }
+      isWeak || inst.forEach(function(val, key) {
+        buggyZero = 1 / key === -Infinity;
+      });
+      if (buggyZero) {
+        fixMethod('delete');
+        fixMethod('has');
+        IS_MAP && fixMethod('get');
+      }
+      if (buggyZero || chain !== inst)
+        fixMethod(ADDER, true);
+    }
+    require("npm:core-js@0.8.2/library/modules/$.cof").set(C, NAME);
+    require("npm:core-js@0.8.2/library/modules/$.species")(C);
+    O[NAME] = C;
+    $def($def.G + $def.W + $def.F * (C != Base), O);
+    if (!isWeak)
+      $iter.std(C, NAME, common.getIterConstructor(), common.next, IS_MAP ? 'key+value' : 'value', !IS_MAP, true);
+    return C;
+  };
+  global.define = __define;
+  return module.exports;
 });
 
+System.register("npm:core-js@0.8.2/library/fn/weak-set", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.weak-set", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.weak-set");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.WeakSet;
+  global.define = __define;
+  return module.exports;
+});
 
-})();
 System.register("npm:process@0.10.1", ["npm:process@0.10.1/browser"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -9785,7 +8489,178 @@ System.register("npm:process@0.10.1", ["npm:process@0.10.1/browser"], true, func
   return module.exports;
 });
 
+System.register("npm:core-js@0.8.2/library/fn/get-iterator", ["npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/core.iter-helpers", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/core.iter-helpers");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.getIterator;
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:core-js@0.8.2/library/fn/object/keys", ["npm:core-js@0.8.2/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.object.statics-accept-primitives");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Object.keys;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("github:mrdoob/stats.js@master", ["github:mrdoob/stats.js@master/src/Stats"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("github:mrdoob/stats.js@master/src/Stats");
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.1.2/core-js/symbol/iterator", ["npm:core-js@0.8.2/library/fn/symbol/iterator"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/symbol/iterator"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/es6.symbol", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.cof", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.keyof", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      setTag = require("npm:core-js@0.8.2/library/modules/$.cof").set,
+      uid = require("npm:core-js@0.8.2/library/modules/$.uid"),
+      $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      keyOf = require("npm:core-js@0.8.2/library/modules/$.keyof"),
+      has = $.has,
+      hide = $.hide,
+      getNames = $.getNames,
+      toObject = $.toObject,
+      Symbol = $.g.Symbol,
+      Base = Symbol,
+      setter = false,
+      TAG = uid.safe('tag'),
+      SymbolRegistry = {},
+      AllSymbols = {};
+  function wrap(tag) {
+    var sym = AllSymbols[tag] = $.set($.create(Symbol.prototype), TAG, tag);
+    $.DESC && setter && $.setDesc(Object.prototype, tag, {
+      configurable: true,
+      set: function(value) {
+        hide(this, tag, value);
+      }
+    });
+    return sym;
+  }
+  if (!$.isFunction(Symbol)) {
+    Symbol = function Symbol(description) {
+      if (this instanceof Symbol)
+        throw TypeError('Symbol is not a constructor');
+      return wrap(uid(description));
+    };
+    hide(Symbol.prototype, 'toString', function() {
+      return this[TAG];
+    });
+  }
+  $def($def.G + $def.W, {Symbol: Symbol});
+  var symbolStatics = {
+    'for': function(key) {
+      return has(SymbolRegistry, key += '') ? SymbolRegistry[key] : SymbolRegistry[key] = Symbol(key);
+    },
+    keyFor: function keyFor(key) {
+      return keyOf(SymbolRegistry, key);
+    },
+    pure: uid.safe,
+    set: $.set,
+    useSetter: function() {
+      setter = true;
+    },
+    useSimple: function() {
+      setter = false;
+    }
+  };
+  $.each.call(('hasInstance,isConcatSpreadable,iterator,match,replace,search,' + 'species,split,toPrimitive,toStringTag,unscopables').split(','), function(it) {
+    var sym = require("npm:core-js@0.8.2/library/modules/$.wks")(it);
+    symbolStatics[it] = Symbol === Base ? sym : wrap(sym);
+  });
+  setter = true;
+  $def($def.S, 'Symbol', symbolStatics);
+  $def($def.S + $def.F * (Symbol != Base), 'Object', {
+    getOwnPropertyNames: function getOwnPropertyNames(it) {
+      var names = getNames(toObject(it)),
+          result = [],
+          key,
+          i = 0;
+      while (names.length > i)
+        has(AllSymbols, key = names[i++]) || result.push(key);
+      return result;
+    },
+    getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+      var names = getNames(toObject(it)),
+          result = [],
+          key,
+          i = 0;
+      while (names.length > i)
+        has(AllSymbols, key = names[i++]) && result.push(AllSymbols[key]);
+      return result;
+    }
+  });
+  setTag(Symbol, 'Symbol');
+  setTag(Math, 'Math', true);
+  setTag($.g.JSON, 'JSON', true);
+  global.define = __define;
+  return module.exports;
+});
+
+(function() {
+function define(){};  define.amd = {};
+System.register("github:toji/gl-matrix@master", ["github:toji/gl-matrix@master/dist/gl-matrix"], false, function(__require, __exports, __module) {
+  return (function(main) {
+    return main;
+  }).call(this, __require('github:toji/gl-matrix@master/dist/gl-matrix'));
+});
+})();
+System.register("npm:core-js@0.8.2/library/modules/es6.map", ["npm:core-js@0.8.2/library/modules/$.collection-strong", "npm:core-js@0.8.2/library/modules/$.collection"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var strong = require("npm:core-js@0.8.2/library/modules/$.collection-strong");
+  require("npm:core-js@0.8.2/library/modules/$.collection")('Map', {
+    get: function get(key) {
+      var entry = strong.getEntry(this, key);
+      return entry && entry.v;
+    },
+    set: function set(key, value) {
+      return strong.def(this, key === 0 ? 0 : key, value);
+    }
+  }, strong, true);
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/fn/set", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.set", "npm:core-js@0.8.2/library/modules/es7.set.to-json", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.set");
+  require("npm:core-js@0.8.2/library/modules/es7.set.to-json");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Set;
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/math/sign/index", ["npm:es5-ext@0.10.6/math/sign/is-implemented", "npm:es5-ext@0.10.6/math/sign/shim"], true, function(require, exports, module) {
   var global = System.global,
@@ -9796,8 +8671,6 @@ System.register("npm:es5-ext@0.10.6/math/sign/index", ["npm:es5-ext@0.10.6/math/
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/object/_iterate", ["npm:es5-ext@0.10.6/object/is-callable", "npm:es5-ext@0.10.6/object/valid-callable", "npm:es5-ext@0.10.6/object/valid-value"], true, function(require, exports, module) {
   var global = System.global,
@@ -9832,8 +8705,6 @@ System.register("npm:es5-ext@0.10.6/object/_iterate", ["npm:es5-ext@0.10.6/objec
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/keys/index", ["npm:es5-ext@0.10.6/object/keys/is-implemented", "npm:es5-ext@0.10.6/object/keys/shim"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -9843,8 +8714,6 @@ System.register("npm:es5-ext@0.10.6/object/keys/index", ["npm:es5-ext@0.10.6/obj
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/function/_define-length", ["npm:es5-ext@0.10.6/number/to-pos-integer", "npm:es5-ext@0.10.6/object/mixin"], true, function(require, exports, module) {
   var global = System.global,
@@ -9910,8 +8779,6 @@ System.register("npm:es5-ext@0.10.6/function/_define-length", ["npm:es5-ext@0.10
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/string/#/contains/index", ["npm:es5-ext@0.10.6/string/#/contains/is-implemented", "npm:es5-ext@0.10.6/string/#/contains/shim"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -9922,8 +8789,6 @@ System.register("npm:es5-ext@0.10.6/string/#/contains/index", ["npm:es5-ext@0.10
   return module.exports;
 });
 
-
-
 System.register("npm:event-emitter@0.3.3", ["npm:event-emitter@0.3.3/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -9932,8 +8797,6 @@ System.register("npm:event-emitter@0.3.3", ["npm:event-emitter@0.3.3/index"], tr
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es6-symbol@2.0.1/validate-symbol", ["npm:es6-symbol@2.0.1/is-symbol"], true, function(require, exports, module) {
   var global = System.global,
@@ -9950,8 +8813,6 @@ System.register("npm:es6-symbol@2.0.1/validate-symbol", ["npm:es6-symbol@2.0.1/i
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/function/is-function", ["npm:es5-ext@0.10.6/function/noop"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -9965,8 +8826,6 @@ System.register("npm:es5-ext@0.10.6/function/is-function", ["npm:es5-ext@0.10.6/
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/normalizers/get", ["npm:es5-ext@0.10.6/array/#/e-index-of"], true, function(require, exports, module) {
   var global = System.global,
@@ -10077,8 +8936,6 @@ System.register("npm:memoizee@0.3.8/normalizers/get", ["npm:es5-ext@0.10.6/array
   return module.exports;
 });
 
-
-
 System.register("npm:next-tick@0.2.2", ["npm:next-tick@0.2.2/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -10087,8 +8944,6 @@ System.register("npm:next-tick@0.2.2", ["npm:next-tick@0.2.2/index"], true, func
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:timers-ext@0.1.0/valid-timeout", ["npm:es5-ext@0.10.6/number/to-pos-integer", "npm:timers-ext@0.1.0/max-timeout"], true, function(require, exports, module) {
   var global = System.global,
@@ -10107,8 +8962,6 @@ System.register("npm:timers-ext@0.1.0/valid-timeout", ["npm:es5-ext@0.10.6/numbe
   return module.exports;
 });
 
-
-
 System.register("npm:lru-queue@0.1.0", ["npm:lru-queue@0.1.0/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -10118,681 +8971,39 @@ System.register("npm:lru-queue@0.1.0", ["npm:lru-queue@0.1.0/index"], true, func
   return module.exports;
 });
 
-
-
-System.register("lib/webgl/shader", ["lib/extra/ajax"], function (_export) {
-    var getString, _classCallCheck, GL, GLShader;
-
-    return {
-        setters: [function (_libExtraAjax) {
-            getString = _libExtraAjax.getString;
-        }],
-        execute: function () {
-            "use strict";
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            GL = WebGLRenderingContext;
-
-            GLShader = (function () {
-                function GLShader(gl, source, type) {
-                    _classCallCheck(this, GLShader);
-
-                    this.gl = gl;
-                    this.type = type;
-                    this.handle = gl.createShader(type);
-
-                    gl.shaderSource(this.handle, source);
-                    gl.compileShader(this.handle);
-
-                    var info = this.getInfoLog();
-                    if (info !== "") {
-                        console.error(info);
-                    }
-                }
-
-                GLShader.prototype.getInfoLog = function getInfoLog() {
-                    return this.gl.getShaderInfoLog(this.handle);
-                };
-
-                GLShader.prototype.getSource = function getSource() {
-                    return this.gl.getShaderSource(this.handle);
-                };
-
-                GLShader.prototype.getTranslatedSource = function getTranslatedSource() {
-                    return this.gl.getExtension("WEBGL_debug_shaders").getTranslatedShaderSource(this.handle);
-                };
-
-                GLShader.fromFile = function fromFile(gl, filename) {
-                    var type = ({ vert: GL.VERTEX_SHADER, frag: GL.FRAGMENT_SHADER })[filename.split(".").pop()];
-                    return getString(filename).then(function (source) {
-                        return new GLShader(gl, source, type);
-                    });
-                };
-
-                return GLShader;
-            })();
-
-            _export("default", GLShader);
-        }
-    };
-});
-System.register("lib/workers/wavefront", ["lib/workers/worker-pool"], function (_export) {
-    var WorkerPool, workerpool;
-
-    function wavefrontWorker(stringBuffer, resolve) {
-
-        var timerName = "Parsing OBJ file";
-
-        console.time(timerName);
-
-        var packed = { v: [], vt: [], vn: [], i: [] };
-
-        var array = new Uint8Array(stringBuffer),
-            char,
-            c1,
-            c2,
-            c3,
-            offset,
-            row = [],
-            len = array.length,
-            i = 0;
-
-        var times = [];
-
-        // Iterate UTF-8 byte stream, to convert to JavaScript UTF-16 characters
-        while (i < len) {
-
-            c1 = array[i++];
-            switch (c1 >> 4) {
-                case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
-                    // 0xxxxxxx
-                    char = c1;
-                    break;
-
-                case 12:case 13:
-                    // 110x xxxx   10xx xxxx
-                    c2 = array[i++];
-                    char = (c1 & 31) << 6 | c2 & 63;
-                    break;
-
-                case 14:
-                    // 1110 xxxx  10xx xxxx  10xx xxxx
-                    c2 = array[i++];
-                    c3 = array[i++];
-                    char = (c1 & 15) << 12 | (c2 & 63) << 6 | (c3 & 63) << 0;
-                    break;
-            }
-
-            // If new line, create string and process
-            if (char === 10) {
-
-                var line = String.fromCharCode.apply(undefined, row).trim().split(/\s+/);
-
-                var type = line[0],
-                    data = line.slice(1);
-
-                switch (type) {
-                    case "v":
-                    case "vn":
-                    case "vt":
-                        Array.prototype.push.apply(packed[type], data.map(parseFloat));
-                        break;
-
-                    case "f":
-
-                        var indices = data.map(function (tuple) {
-                            return tuple.split("/").map(function (n, i) {
-                                n = parseInt(n);
-                                return n < 0 ? n + packed[["v", "vt", "vn"][i]].length : n - 1;
-                            });
-                        });
-
-                        // Repeat points to form a triangle
-                        if (indices.length < 3) {
-                            for (var j = indices.length; j <= 3; ++j) {
-                                indices[j] = indices[indices.length - 1];
-                            }
-                        }
-
-                        for (var j = 1, len2 = indices.length; j < len2 - 1; ++j) {
-                            packed.i.push(indices[0], indices[j], indices[j + 1]);
-                        }
-                }
-
-                row = [];
-            } else {
-                row.push(char);
-            }
-        }
-
-        var uniqueIndices = {},
-            counter = 0,
-            unpackedUniqueIndices = [],
-            unpackedVertexIndices = [],
-            unpackedTexcoordIndices = [],
-            unpackedNormalIndices = [];
-
-        // Compute new, unique indices.
-        for (i = 0, len = packed.i.length; i < len; i += 3) {
-            for (var j = 0; j < 3; ++j) {
-                var ids = packed.i[i + j],
-                    v_id = ids[0],
-                    vt_id = ids[1],
-                    vn_id = ids[2],
-                    key = ids.join(":"),
-                    index = uniqueIndices[key];
-
-                if (index === undefined) {
-                    index = uniqueIndices[key] = counter++;
-                    unpackedVertexIndices.push(v_id);
-
-                    if (vt_id !== undefined) unpackedTexcoordIndices.push(vt_id);
-                    if (vn_id !== undefined) unpackedNormalIndices.push(vn_id);
-                }
-
-                unpackedUniqueIndices.push(index);
-            }
-        }
-
-        // The typed arrays to return.
-        var indices = new Uint16Array(unpackedUniqueIndices),
-            vertices = new Float32Array(3 * unpackedVertexIndices.length),
-            normals = new Float32Array(3 * unpackedNormalIndices.length),
-            texcoords = new Float32Array(2 * unpackedTexcoordIndices.length);
-
-        for (i = 0, len = unpackedVertexIndices.length; i < len; ++i) {
-            offset = 3 * i;
-
-            var v_offset = 3 * unpackedVertexIndices[i];
-
-            vertices[offset] = packed.v[v_offset];
-            vertices[offset + 1] = packed.v[v_offset + 1];
-            vertices[offset + 2] = packed.v[v_offset + 2];
-        }
-
-        for (i = 0, len = unpackedNormalIndices.length; i < len; ++i) {
-            offset = 3 * i;
-
-            var vn_offset = 3 * unpackedNormalIndices[i];
-
-            normals[offset] = packed.vn[vn_offset];
-            normals[offset + 1] = packed.vn[vn_offset + 1];
-            normals[offset + 2] = packed.vn[vn_offset + 2];
-        }
-
-        for (i = 0, len = unpackedTexcoordIndices.length; i < len; ++i) {
-            offset = 2 * i;
-
-            var vt_offset = 2 * unpackedTexcoordIndices[i];
-
-            texcoords[offset] = packed.vt[vt_offset];
-            texcoords[offset + 1] = packed.vt[vt_offset + 1];
-        }
-
-        console.timeEnd(timerName);
-
-        resolve({
-            indices: indices,
-            vertices: vertices,
-            normals: normals,
-            texcoords: texcoords
-        }, [indices.buffer, vertices.buffer, normals.buffer, texcoords.buffer]);
-    }
-
-    return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            workerpool = _export("workerpool", WorkerPool.fromFunction(wavefrontWorker));
-        }
-    };
-});
-System.register("lib/workers/normal-vectors", ["lib/workers/worker-pool", "github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2"], function (_export) {
-    var WorkerPool, vec3Module, workerpool;
-
-    function normalVectorWorker(data, resolve) {
-
-        console.time("Calculating normals");
-
-        var vertices = data.vertices,
-            indices = data.indices;
-
-        var normals = new Float32Array(vertices.length);
-
-        // Array to store adjacent triangle offsets for each vertex.
-        // :: Vertex -> [Triangle]
-        var adjacentTriangles = new Array(vertices.length / 3);
-
-        // Packed normals for each triangle.
-        // :: Triangle -> Normal
-        var triangleNormals = new Float32Array(indices.length);
-
-        // Pre-allocate triangle arrays for each vertex.
-        for (var i = 0, len = adjacentTriangles.length; i < len; ++i) {
-            adjacentTriangles[i] = [];
-        }
-
-        // Calculate adjacent triangles
-        for (var offset = 0, len = indices.length; offset < len; offset += 3) {
-
-            // Fetch id:s for vertices in triangle
-            var v0_id = indices[offset],
-                v1_id = indices[offset + 1],
-                v2_id = indices[offset + 2];
-
-            var v0_offset = 3 * v0_id,
-                v1_offset = 3 * v1_id,
-                v2_offset = 3 * v2_id;
-
-            // Fetch vertex vectors
-            var v0 = vec3.set(tmp0, vertices[v0_offset], vertices[v0_offset + 1], vertices[v0_offset + 2]),
-                v1 = vec3.set(tmp1, vertices[v1_offset], vertices[v1_offset + 1], vertices[v1_offset + 2]),
-                v2 = vec3.set(tmp2, vertices[v2_offset], vertices[v2_offset + 1], vertices[v2_offset + 2]);
-
-            // Store current triangle offsets for each vertex in triangle.
-            adjacentTriangles[v0_id].push(offset);
-            adjacentTriangles[v1_id].push(offset);
-            adjacentTriangles[v2_id].push(offset);
-
-            // Calculate area-weighted normal vectors by not normalizing the cross product
-            var normal = vec3.cross(tmp0, vec3.subtract(tmp1, v1, v0), vec3.subtract(tmp2, v2, v0));
-
-            // Store the calculated "normal"
-            triangleNormals[offset] = normal[0];
-            triangleNormals[offset + 1] = normal[1];
-            triangleNormals[offset + 2] = normal[2];
-        }
-
-        // Iterate all vertices
-        for (var vertex = 0, _len = adjacentTriangles.length; vertex < _len; ++vertex) {
-
-            var vertexNormal = vec3.set(tmp0, 0, 0, 0);
-            var triangles = adjacentTriangles[vertex];
-
-            // Iterate all adjacent triangles
-            for (var _i = 0, len2 = triangles.length; _i < len2; ++_i) {
-                var triangleOffset = triangles[_i];
-
-                vertexNormal[0] += triangleNormals[triangleOffset];
-                vertexNormal[1] += triangleNormals[triangleOffset + 1];
-                vertexNormal[2] += triangleNormals[triangleOffset + 2];
-            }
-
-            vec3.normalize(vertexNormal, vertexNormal);
-
-            var offset = 3 * vertex;
-
-            // Store calculated normal
-            normals[offset] = vertexNormal[0];
-            normals[offset + 1] = vertexNormal[1];
-            normals[offset + 2] = vertexNormal[2];
-        }
-
-        console.timeEnd("Calculating normals");
-
-        resolve({
-            indices: indices,
-            vertices: vertices,
-            normals: normals
-        }, [indices.buffer, vertices.buffer, normals.buffer]);
-    }
-
-    return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool["default"];
-        }, function (_githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002) {
-            vec3Module = _githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            workerpool = _export("workerpool", WorkerPool.fromFunction(normalVectorWorker, ["var GLMAT_ARRAY_TYPE = Float32Array;", vec3Module, "var tmp0 = vec3.create(), tmp1 = vec3.create(), tmp2 = vec3.create();"]));
-        }
-    };
-});
-System.register("lib/material/base", ["lib/extra/errors"], function (_export) {
-  var UnimplementedMethodError, _classCallCheck, GL, textureCounts, Material, MaterialRenderer;
-
-  return {
-    setters: [function (_libExtraErrors) {
-      UnimplementedMethodError = _libExtraErrors.UnimplementedMethodError;
-    }],
-    execute: function () {
-      "use strict";
-
-      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-      GL = WebGLRenderingContext;
-
-      // Keeps track of texture counts for each rendering context.
-      textureCounts = new Map();
-
-      /**
-       * Interface for materials.
-       */
-      Material = _export("Material", (function () {
-        function Material() {
-          var priority = arguments[0] === undefined ? 1 : arguments[0];
-
-          _classCallCheck(this, Material);
-
-          this.priority = priority;
-        }
-
-        /**
-         * Returns a renderer bound to this material instance.
-         * Should always produce the same instance for each WebGL rendering context and material.
-         */
-
-        Material.prototype.getRenderer = function getRenderer(gl) {
-          throw new UnimplementedMethodError();
-        };
-
-        return Material;
-      })());
-
-      /**
-       * Interface for material renderers. Bound to a specific material and WebGL rendering context.
-       */
-      MaterialRenderer = _export("MaterialRenderer", (function () {
-        function MaterialRenderer(material, program) {
-          _classCallCheck(this, MaterialRenderer);
-
-          this.material = material;
-          this.program = program;
-        }
-
-        MaterialRenderer.allocateTextureUnit = function allocateTextureUnit(gl) {
-          var count = textureCounts.get(gl) || 0;
-          textureCounts.set(gl, count + 1);
-          return count;
-        };
-
-        /**
-         * Runs once for each geometry using this material.
-         * Should be used to bind geometry buffers to program attributes, and cache uniforms locations.
-         */
-
-        MaterialRenderer.prototype.didInitGeometry = function didInitGeometry(geometryRenderer) {};
-
-        /**
-         * Runs once per loop before drawing the models using the material.
-         * Should be used to set material uniforms independent of model drawn.
-         */
-
-        MaterialRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {};
-
-        /**
-         * Runs before drawing each model using the material.
-         * Should be used to set material uniforms dependent on model drawn.
-         */
-
-        MaterialRenderer.prototype.draw = function draw(camera, model) {};
-
-        /**
-         * Runs after all models using the bound material have been drawn.
-         * Should be used to clean up modified state.
-         */
-
-        MaterialRenderer.prototype.didDraw = function didDraw() {};
-
-        return MaterialRenderer;
-      })());
-    }
+System.register("npm:babel-runtime@5.1.2/core-js/object/freeze", ["npm:core-js@0.8.2/library/fn/object/freeze"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/object/freeze"),
+    __esModule: true
   };
+  global.define = __define;
+  return module.exports;
 });
 
-// The higher the priority, the earlier geometries using the materials will be drawn in the render loop.
-// Useful for skyboxes, which needs to be drawn either first or last.
-System.register("lib/workers/tga", ["lib/workers/worker-pool", "github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/plugin-text@0.0.2"], function (_export) {
-    var WorkerPool, targaModule, workerpool;
-
-    function TGAworker(tgaBuffer, resolve) {
-        var tga = new TGA();
-        tga.load(new Uint8Array(tgaBuffer));
-        var imageData = tga.getImageData();
-        var buffer = imageData.data.buffer;
-        resolve({
-            buffer: buffer,
-            height: imageData.height,
-            width: imageData.width
-        }, [buffer]);
-    }
-
-    return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool["default"];
-        }, function (_githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002) {
-            targaModule = _githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            workerpool = _export("workerpool", WorkerPool.fromFunction(TGAworker, [targaModule]));
-        }
-    };
+System.register("npm:core-js@0.8.2/library/fn/array/from", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/es6.array.from", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/es6.array.from");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Array.from;
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/camera/perspective-camera", ["lib/camera/base", "github:toji/gl-matrix@master"], function (_export) {
-    var Camera, glm, _inherits, _classCallCheck, deg2rad, PerspectiveCamera;
 
-    return {
-        setters: [function (_libCameraBase) {
-            Camera = _libCameraBase["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            deg2rad = Math.PI / 180;
-
-            PerspectiveCamera = (function (Camera) {
-                function PerspectiveCamera() {
-                    var options = arguments[0] === undefined ? {} : arguments[0];
-
-                    _classCallCheck(this, PerspectiveCamera);
-
-                    Camera.call(this, options);
-                    var _options$fov = options.fov;
-                    var fov = _options$fov === undefined ? 60 : _options$fov;
-                    var _options$aspect = options.aspect;
-                    var aspect = _options$aspect === undefined ? 4 / 3 : _options$aspect;
-                    var _options$near = options.near;
-                    var near = _options$near === undefined ? 0.1 : _options$near;
-                    var _options$far = options.far;
-                    var far = _options$far === undefined ? 100 : _options$far;
-
-                    this.fov = fov;
-                    this.aspect = aspect;
-                    this.near = near;
-                    this.far = far;
-                }
-
-                _inherits(PerspectiveCamera, Camera);
-
-                PerspectiveCamera.prototype.recalculate = function recalculate() {
-                    glm.mat4.perspective(this.projectionMatrix, this.fov * deg2rad, this.aspect, this.near, this.far);
-                    Camera.prototype.recalculate.call(this);
-                };
-
-                return PerspectiveCamera;
-            })(Camera);
-
-            _export("default", PerspectiveCamera);
-        }
-    };
+System.register("npm:core-js@0.8.2/library/modules/es6.object.assign", ["npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.assign"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $def = require("npm:core-js@0.8.2/library/modules/$.def");
+  $def($def.S, 'Object', {assign: require("npm:core-js@0.8.2/library/modules/$.assign")});
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/material/skybox", ["npm:memoizee@0.3.8", "github:toji/gl-matrix@master", "lib/material/base", "lib/texture/cubemap", "lib/extra/functional", "lib/webgl/program", "lib/webgl/shader", "lib/material/shaders/skybox.vert!github:systemjs/plugin-text@0.0.2", "lib/material/shaders/skybox.frag!github:systemjs/plugin-text@0.0.2"], function (_export) {
-    var memoize, glm, Material, MaterialRenderer, CubeMap, construct, GLProgram, GLShader, vertexShader, fragmentShader, _inherits, _classCallCheck, mat4, GL, SkyboxMaterial, SkyboxRenderer;
 
-    return {
-        setters: [function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_libMaterialBase) {
-            Material = _libMaterialBase.Material;
-            MaterialRenderer = _libMaterialBase.MaterialRenderer;
-        }, function (_libTextureCubemap) {
-            CubeMap = _libTextureCubemap["default"];
-        }, function (_libExtraFunctional) {
-            construct = _libExtraFunctional.construct;
-        }, function (_libWebglProgram) {
-            GLProgram = _libWebglProgram["default"];
-        }, function (_libWebglShader) {
-            GLShader = _libWebglShader["default"];
-        }, function (_libMaterialShadersSkyboxVertGithubSystemjsPluginText002) {
-            vertexShader = _libMaterialShadersSkyboxVertGithubSystemjsPluginText002["default"];
-        }, function (_libMaterialShadersSkyboxFragGithubSystemjsPluginText002) {
-            fragmentShader = _libMaterialShadersSkyboxFragGithubSystemjsPluginText002["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            mat4 = glm.mat4;
-            GL = WebGLRenderingContext;
-
-            SkyboxMaterial = (function (Material) {
-                function SkyboxMaterial(cubemap) {
-                    _classCallCheck(this, SkyboxMaterial);
-
-                    Material.call(this, Infinity);
-                    this.cubemap = cubemap;
-                }
-
-                _inherits(SkyboxMaterial, Material);
-
-                /**
-                 * Returns a renderer bound to this material instance.
-                 * Should always produce the same instance for each WebGL rendering context and material.
-                 */
-
-                SkyboxMaterial.prototype.getRenderer = function getRenderer(gl) {
-                    return SkyboxRenderer.create(this, gl);
-                };
-
-                return SkyboxMaterial;
-            })(Material);
-
-            _export("default", SkyboxMaterial);
-
-            SkyboxRenderer = (function (MaterialRenderer) {
-                function SkyboxRenderer(material, gl) {
-                    this.cameraMatrix = mat4.create();
-                    this.locations = {};
-
-                    _classCallCheck(this, SkyboxRenderer);
-
-                    MaterialRenderer.call(this, material, SkyboxRenderer.createProgram(gl));
-
-                    this.unit = MaterialRenderer.allocateTextureUnit(gl);
-                    this.handle = gl.createTexture();
-
-                    gl.activeTexture(GL.TEXTURE0 + this.unit);
-                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, this.handle);
-
-                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
-                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE); //Prevents s-coordinate wrapping (repeating).
-                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE); //Prevents t-coordinate wrapping (repeating).
-
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.right);
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.left);
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.top);
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.bottom);
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.back);
-                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.front);
-
-                    gl.generateMipmap(GL.TEXTURE_CUBE_MAP);
-
-                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, null);
-                }
-
-                _inherits(SkyboxRenderer, MaterialRenderer);
-
-                SkyboxRenderer.create = memoize(construct(SkyboxRenderer), { length: 2 });
-                SkyboxRenderer.createProgram = memoize(function (gl) {
-                    return new GLProgram(gl, new GLShader(gl, vertexShader, GL.VERTEX_SHADER), new GLShader(gl, fragmentShader, GL.FRAGMENT_SHADER));
-                });
-
-                /**
-                 * Runs once for each geometry using this material.
-                 * Should be used to bind geometry buffers to program attributes, and cache uniforms locations.
-                 */
-
-                SkyboxRenderer.prototype.didInitGeometry = function didInitGeometry(geometryBuffer) {
-                    var program = this.program;
-                    var locations = this.locations;
-
-                    locations.sampler = program.getUniformLocation("skybox");
-                    locations.cameraMatrix = program.getUniformLocation("cameraMatrix");
-
-                    geometryBuffer.vertexBuffer.setAttribLocation("vertex", program);
-                };
-
-                /**
-                 * Runs once per loop before drawing the models using the material.
-                 * Should be used to set material uniforms independent of model drawn.
-                 */
-
-                SkyboxRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {
-                    var gl = this.program.gl;
-                    gl.depthMask(false);
-                    gl.disable(GL.CULL_FACE);
-                    gl.uniform1i(this.locations.sampler, this.unit);
-
-                    gl.activeTexture(GL.TEXTURE0 + this.unit);
-                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, this.handle);
-                };
-
-                /**
-                 * Runs before drawing each model using the material.
-                 * Should be used to set material uniforms dependent on model drawn.
-                 */
-
-                SkyboxRenderer.prototype.draw = function draw(camera, model) {
-                    var gl = this.program.gl;
-                    var cameraMatrix = this.cameraMatrix;
-
-                    mat4.copy(cameraMatrix, camera.viewMatrix);
-
-                    cameraMatrix[12] = 0;
-                    cameraMatrix[13] = 0;
-                    cameraMatrix[14] = 0;
-
-                    mat4.multiply(cameraMatrix, camera.projectionMatrix, cameraMatrix);
-
-                    gl.uniformMatrix4fv(this.locations.cameraMatrix, false, cameraMatrix);
-                };
-
-                /**
-                 * Runs after all models using the bound material have been drawn.
-                 * Should be used to clean up modified state.
-                 */
-
-                SkyboxRenderer.prototype.didDraw = function didDraw() {
-                    var gl = this.program.gl;
-                    gl.depthMask(true);
-                    gl.enable(GL.CULL_FACE);
-                };
-
-                return SkyboxRenderer;
-            })(MaterialRenderer);
-        }
-    };
-});
 (function() {
 function define(){};  define.amd = {};
 System.register("github:baconjs/bacon.js@0.7.53", ["github:baconjs/bacon.js@0.7.53/dist/Bacon"], false, function(__require, __exports, __module) {
@@ -10800,193 +9011,204 @@ System.register("github:baconjs/bacon.js@0.7.53", ["github:baconjs/bacon.js@0.7.
     return main;
   }).call(this, __require('github:baconjs/bacon.js@0.7.53/dist/Bacon'));
 });
-
-
 })();
-System.register("lib/scene/base", ["github:toji/gl-matrix@master", "lib/extra/event-aggregator"], function (_export) {
-    var glm, EventAggregator, _inherits, _classCallCheck, vec3, mat3, mat4, quat, deg2rad, forward, tmp, Scene;
-
-    return {
-        setters: [function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_libExtraEventAggregator) {
-            EventAggregator = _libExtraEventAggregator["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-            mat3 = glm.mat3;
-            mat4 = glm.mat4;
-            quat = glm.quat;
-            deg2rad = Math.PI / 180;
-            forward = vec3.fromValues(0, 0, -1);
-            tmp = vec3.create();
-
-            Scene = (function (EventAggregator) {
-                function Scene(name) {
-                    var _ref = arguments[1] === undefined ? {} : arguments[1];
-
-                    var _ref$parent = _ref.parent;
-                    var parent = _ref$parent === undefined ? null : _ref$parent;
-                    var _ref$position = _ref.position;
-                    var position = _ref$position === undefined ? [0, 0, 0] : _ref$position;
-                    var _ref$rotateX = _ref.rotateX;
-                    var rotateX = _ref$rotateX === undefined ? 0 : _ref$rotateX;
-                    var _ref$rotateY = _ref.rotateY;
-                    var rotateY = _ref$rotateY === undefined ? 0 : _ref$rotateY;
-                    var _ref$rotateZ = _ref.rotateZ;
-                    var rotateZ = _ref$rotateZ === undefined ? 0 : _ref$rotateZ;
-                    var _ref$scale = _ref.scale;
-                    var scale = _ref$scale === undefined ? 1 : _ref$scale;
-
-                    _classCallCheck(this, Scene);
-
-                    EventAggregator.call(this, parent);
-
-                    this.name = name;
-                    this.parent = parent;
-
-                    this.orientation = quat.create();
-                    this.position = vec3.create();
-                    this.scale = vec3.fromValues(1, 1, 1);
-
-                    this.localTransform = mat4.create();
-                    this.worldTransform = mat4.create();
-
-                    this.direction = vec3.create();
-                    this.normalMatrix = mat3.create();
-                    this.worldDirection = vec3.create();
-                    this.worldPosition = vec3.create();
-
-                    // Order is important here
-                    this.resize(scale);
-                    this.rotateX(rotateX); // pitch
-                    this.rotateZ(rotateZ); // roll
-                    this.rotateY(rotateY); // yaw
-                    this.translate(position);
-                }
-
-                _inherits(Scene, EventAggregator);
-
-                Scene.prototype.toString = function toString() {
-                    return "" + this.constructor.name + "@" + this.name;
-                };
-
-                // TODO: more complex stuff
-
-                Scene.prototype.query = function query(name) {
-                    for (var _iterator = this, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                        var _ref;
-
-                        if (_isArray) {
-                            if (_i >= _iterator.length) break;
-                            _ref = _iterator[_i++];
-                        } else {
-                            _i = _iterator.next();
-                            if (_i.done) break;
-                            _ref = _i.value;
-                        }
-
-                        var node = _ref;
-
-                        if (node.name === name) {
-                            return node;
-                        }
-                    }
-                };
-
-                Scene.prototype.forEach = function forEach(cb) {
-                    cb(this);
-                };
-
-                Scene.prototype.recalculate = function recalculate() {
-                    vec3.transformQuat(this.direction, forward, this.orientation);
-                    mat4.fromRotationTranslation(this.localTransform, this.orientation, this.position);
-                    mat4.scale(this.localTransform, this.localTransform, this.scale);
-
-                    if (this.parent !== null) {
-                        mat4.multiply(this.worldTransform, this.parent.worldTransform, this.localTransform);
-                        vec3.transformMat3(this.worldDirection, this.direction, this.parent.normalMatrix);
-                        vec3.transformMat4(this.worldPosition, this.position, this.parent.worldTransform);
-                    } else {
-                        mat4.copy(this.worldTransform, this.localTransform);
-                        vec3.copy(this.worldDirection, this.direction);
-                        vec3.copy(this.worldPosition, this.position);
-                    }
-
-                    mat3.normalFromMat4(this.normalMatrix, this.worldTransform);
-                };
-
-                Scene.prototype.resize = function resize(amount) {
-                    if (typeof amount === "number") {
-                        vec3.scale(this.scale, this.scale, amount);
-                    } else {
-                        vec3.multiply(this.scale, this.scale, amount);
-                    }
-                };
-
-                Scene.prototype.rotateX = function rotateX(deg) {
-                    quat.rotateX(this.orientation, this.orientation, deg * deg2rad);
-                };
-
-                Scene.prototype.rotateY = function rotateY(deg) {
-                    quat.rotateY(this.orientation, this.orientation, deg * deg2rad);
-                };
-
-                Scene.prototype.rotateZ = function rotateZ(deg) {
-                    quat.rotateZ(this.orientation, this.orientation, deg * deg2rad);
-                };
-
-                Scene.prototype.lookForward = function lookForward() {
-                    quat.identity(this.orientation);
-                };
-
-                Scene.prototype.translate = function translate(v) {
-                    vec3.add(this.position, this.position, v);
-                };
-
-                Scene.prototype.translateRelatively = function translateRelatively(v) {
-                    vec3.add(this.position, this.position, vec3.transformQuat(tmp, v, this.orientation));
-                };
-
-                Scene.prototype.getEulerAngles = function getEulerAngles() {
-                    var q = this.orientation;
-
-                    var roll = Math.atan2(2 * (q[0] * q[1] + q[2] * q[3]), 1 - 2 * (q[1] * q[1] + q[2] * q[2]));
-                    var pitch = Math.asin(2 * (q[0] * q[2] - q[3] * q[1]));
-                    var yaw = Math.atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] * q[2] + q[3] * q[3]));
-
-                    return { roll: roll, pitch: pitch, yaw: yaw };
-                };
-
-                return Scene;
-            })(EventAggregator);
-
-            _export("default", Scene);
-
-            Scene.prototype[Symbol.iterator] = regeneratorRuntime.mark(function callee$0$0() {
-                var _this = this;
-
-                return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
-                    while (1) switch (context$1$0.prev = context$1$0.next) {
-                        case 0:
-                            context$1$0.next = 2;
-                            return _this;
-
-                        case 2:
-                        case "end":
-                            return context$1$0.stop();
-                    }
-                }, callee$0$0, this);
-            });
+System.register("npm:core-js@0.8.2/library/modules/$.iter", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx", "npm:core-js@0.8.2/library/modules/$.cof", "npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.assert", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      ctx = require("npm:core-js@0.8.2/library/modules/$.ctx"),
+      cof = require("npm:core-js@0.8.2/library/modules/$.cof"),
+      $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+      assertObject = require("npm:core-js@0.8.2/library/modules/$.assert").obj,
+      SYMBOL_ITERATOR = require("npm:core-js@0.8.2/library/modules/$.wks")('iterator'),
+      FF_ITERATOR = '@@iterator',
+      Iterators = {},
+      IteratorPrototype = {};
+  var BUGGY = 'keys' in [] && !('next' in [].keys());
+  setIterator(IteratorPrototype, $.that);
+  function setIterator(O, value) {
+    $.hide(O, SYMBOL_ITERATOR, value);
+    if (FF_ITERATOR in [])
+      $.hide(O, FF_ITERATOR, value);
+  }
+  function defineIterator(Constructor, NAME, value, DEFAULT) {
+    var proto = Constructor.prototype,
+        iter = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT] || value;
+    if ($.FW)
+      setIterator(proto, iter);
+    if (iter !== value) {
+      var iterProto = $.getProto(iter.call(new Constructor));
+      cof.set(iterProto, NAME + ' Iterator', true);
+      if ($.FW)
+        $.has(proto, FF_ITERATOR) && setIterator(iterProto, $.that);
+    }
+    Iterators[NAME] = iter;
+    Iterators[NAME + ' Iterator'] = $.that;
+    return iter;
+  }
+  function getIterator(it) {
+    var Symbol = $.g.Symbol,
+        ext = it[Symbol && Symbol.iterator || FF_ITERATOR],
+        getIter = ext || it[SYMBOL_ITERATOR] || Iterators[cof.classof(it)];
+    return assertObject(getIter.call(it));
+  }
+  function closeIterator(iterator) {
+    var ret = iterator['return'];
+    if (ret !== undefined)
+      assertObject(ret.call(iterator));
+  }
+  function stepCall(iterator, fn, value, entries) {
+    try {
+      return entries ? fn(assertObject(value)[0], value[1]) : fn(value);
+    } catch (e) {
+      closeIterator(iterator);
+      throw e;
+    }
+  }
+  var $iter = module.exports = {
+    BUGGY: BUGGY,
+    Iterators: Iterators,
+    prototype: IteratorPrototype,
+    step: function(done, value) {
+      return {
+        value: value,
+        done: !!done
+      };
+    },
+    stepCall: stepCall,
+    close: closeIterator,
+    is: function(it) {
+      var O = Object(it),
+          Symbol = $.g.Symbol,
+          SYM = Symbol && Symbol.iterator || FF_ITERATOR;
+      return SYM in O || SYMBOL_ITERATOR in O || $.has(Iterators, cof.classof(O));
+    },
+    get: getIterator,
+    set: setIterator,
+    create: function(Constructor, NAME, next, proto) {
+      Constructor.prototype = $.create(proto || $iter.prototype, {next: $.desc(1, next)});
+      cof.set(Constructor, NAME + ' Iterator');
+    },
+    define: defineIterator,
+    std: function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE) {
+      function createIter(kind) {
+        return function() {
+          return new Constructor(this, kind);
+        };
+      }
+      $iter.create(Constructor, NAME, next);
+      var entries = createIter('key+value'),
+          values = createIter('value'),
+          proto = Base.prototype,
+          methods,
+          key;
+      if (DEFAULT == 'value')
+        values = defineIterator(Base, NAME, values, 'values');
+      else
+        entries = defineIterator(Base, NAME, entries, 'entries');
+      if (DEFAULT) {
+        methods = {
+          entries: entries,
+          keys: IS_SET ? values : createIter('key'),
+          values: values
+        };
+        $def($def.P + $def.F * BUGGY, NAME, methods);
+        if (FORCE)
+          for (key in methods) {
+            if (!(key in proto))
+              $.hide(proto, key, methods[key]);
+          }
+      }
+    },
+    forOf: function(iterable, entries, fn, that) {
+      var iterator = getIterator(iterable),
+          f = ctx(fn, that, entries ? 2 : 1),
+          step;
+      while (!(step = iterator.next()).done) {
+        if (stepCall(iterator, f, step.value, entries) === false) {
+          return closeIterator(iterator);
         }
-    };
+      }
+    }
+  };
+  global.define = __define;
+  return module.exports;
 });
+
+System.register("npm:core-js@0.8.2/library/modules/web.dom.iterable", ["npm:core-js@0.8.2/library/modules/es6.array.iterator", "npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.iter", "npm:core-js@0.8.2/library/modules/$.wks"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.array.iterator");
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      Iterators = require("npm:core-js@0.8.2/library/modules/$.iter").Iterators,
+      ITERATOR = require("npm:core-js@0.8.2/library/modules/$.wks")('iterator'),
+      NodeList = $.g.NodeList;
+  if ($.FW && NodeList && !(ITERATOR in NodeList.prototype)) {
+    $.hide(NodeList.prototype, ITERATOR, Iterators.Array);
+  }
+  Iterators.NodeList = Iterators.Array;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/es6.weak-map", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.collection-weak", "npm:core-js@0.8.2/library/modules/$.collection"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  'use strict';
+  var $ = require("npm:core-js@0.8.2/library/modules/$"),
+      weak = require("npm:core-js@0.8.2/library/modules/$.collection-weak"),
+      leakStore = weak.leakStore,
+      ID = weak.ID,
+      WEAK = weak.WEAK,
+      has = $.has,
+      isObject = $.isObject,
+      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      tmp = {};
+  var WeakMap = require("npm:core-js@0.8.2/library/modules/$.collection")('WeakMap', {
+    get: function get(key) {
+      if (isObject(key)) {
+        if (isFrozen(key))
+          return leakStore(this).get(key);
+        if (has(key, WEAK))
+          return key[WEAK][this[ID]];
+      }
+    },
+    set: function set(key, value) {
+      return weak.def(this, key, value);
+    }
+  }, weak, true, true);
+  if ($.FW && new WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7) {
+    $.each.call(['delete', 'has', 'get', 'set'], function(key) {
+      var method = WeakMap.prototype[key];
+      WeakMap.prototype[key] = function(a, b) {
+        if (isObject(a) && isFrozen(a)) {
+          var result = leakStore(this)[key](a, b);
+          return key == 'set' ? this : result;
+        }
+        return method.call(this, a, b);
+      };
+    });
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.1.2/core-js/weak-set", ["npm:core-js@0.8.2/library/fn/weak-set"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/weak-set"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("github:jspm/nodelibs-process@0.1.1/index", ["npm:process@0.10.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -10996,7 +9218,63 @@ System.register("github:jspm/nodelibs-process@0.1.1/index", ["npm:process@0.10.1
   return module.exports;
 });
 
+System.register("npm:babel-runtime@5.1.2/core-js/get-iterator", ["npm:core-js@0.8.2/library/fn/get-iterator"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/get-iterator"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:babel-runtime@5.1.2/core-js/object/keys", ["npm:core-js@0.8.2/library/fn/object/keys"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/object/keys"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/fn/symbol/index", ["npm:core-js@0.8.2/library/modules/es6.symbol", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.symbol");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Symbol;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/fn/map", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.map", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.map");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Map;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.1.2/core-js/set", ["npm:core-js@0.8.2/library/fn/set"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/set"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/number/to-integer", ["npm:es5-ext@0.10.6/math/sign/index"], true, function(require, exports, module) {
   var global = System.global,
@@ -11018,8 +9296,6 @@ System.register("npm:es5-ext@0.10.6/number/to-integer", ["npm:es5-ext@0.10.6/mat
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/for-each", ["npm:es5-ext@0.10.6/object/_iterate"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -11029,8 +9305,6 @@ System.register("npm:es5-ext@0.10.6/object/for-each", ["npm:es5-ext@0.10.6/objec
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/object/assign/shim", ["npm:es5-ext@0.10.6/object/keys/index", "npm:es5-ext@0.10.6/object/valid-value"], true, function(require, exports, module) {
   var global = System.global,
@@ -11066,8 +9340,6 @@ System.register("npm:es5-ext@0.10.6/object/assign/shim", ["npm:es5-ext@0.10.6/ob
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/string/#/contains", ["npm:es5-ext@0.10.6/string/#/contains/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -11076,8 +9348,6 @@ System.register("npm:es5-ext@0.10.6/string/#/contains", ["npm:es5-ext@0.10.6/str
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es6-symbol@2.0.1/polyfill", ["npm:d@0.1.1", "npm:es6-symbol@2.0.1/validate-symbol"], true, function(require, exports, module) {
   var global = System.global,
@@ -11173,8 +9443,6 @@ System.register("npm:es6-symbol@2.0.1/polyfill", ["npm:d@0.1.1", "npm:es6-symbol
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/ext/async", ["npm:es5-ext@0.10.6/array/from", "npm:es5-ext@0.10.6/object/mixin", "npm:es5-ext@0.10.6/function/_define-length", "npm:next-tick@0.2.2", "npm:memoizee@0.3.8/lib/registered-extensions", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
@@ -11331,8 +9599,6 @@ System.register("npm:memoizee@0.3.8/ext/async", ["npm:es5-ext@0.10.6/array/from"
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/ext/max-age", ["npm:es5-ext@0.10.6/array/from", "npm:es5-ext@0.10.6/function/noop", "npm:es5-ext@0.10.6/object/for-each", "npm:timers-ext@0.1.0/valid-timeout", "npm:memoizee@0.3.8/lib/registered-extensions"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -11417,8 +9683,6 @@ System.register("npm:memoizee@0.3.8/ext/max-age", ["npm:es5-ext@0.10.6/array/fro
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/ext/max", ["npm:es5-ext@0.10.6/number/to-pos-integer", "npm:lru-queue@0.1.0", "npm:memoizee@0.3.8/lib/registered-extensions"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -11450,673 +9714,57 @@ System.register("npm:memoizee@0.3.8/ext/max", ["npm:es5-ext@0.10.6/number/to-pos
   return module.exports;
 });
 
-
-
-System.register("lib/webgl/program", ["lib/webgl/shader"], function (_export) {
-    var GLShader, _applyConstructor, _toConsumableArray, _classCallCheck, GL, enums, GLProgram;
-
-    return {
-        setters: [function (_libWebglShader) {
-            GLShader = _libWebglShader["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _applyConstructor = function (Constructor, args) { var instance = Object.create(Constructor.prototype); var result = Constructor.apply(instance, args); return result != null && (typeof result == "object" || typeof result == "function") ? result : instance; };
-
-            _toConsumableArray = function (arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            GL = WebGLRenderingContext;
-
-            // Taken from the WebGl spec:
-            // http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14
-            enums = {
-                35664: "FLOAT_VEC2",
-                35665: "FLOAT_VEC3",
-                35666: "FLOAT_VEC4",
-                35667: "INT_VEC2",
-                35668: "INT_VEC3",
-                35669: "INT_VEC4",
-                35670: "BOOL",
-                35671: "BOOL_VEC2",
-                35672: "BOOL_VEC3",
-                35673: "BOOL_VEC4",
-                35674: "FLOAT_MAT2",
-                35675: "FLOAT_MAT3",
-                35676: "FLOAT_MAT4",
-                35678: "SAMPLER_2D",
-                35680: "SAMPLER_CUBE",
-                5120: "BYTE",
-                5121: "UNSIGNED_BYTE",
-                5122: "SHORT",
-                5123: "UNSIGNED_SHORT",
-                5124: "INT",
-                5125: "UNSIGNED_INT",
-                5126: "FLOAT"
-            };
-
-            /**
-             * Wraps a WebGL Shader program
-             */
-
-            GLProgram = (function () {
-                function GLProgram(gl) {
-                    for (var _len = arguments.length, shaders = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-                        shaders[_key - 1] = arguments[_key];
-                    }
-
-                    _classCallCheck(this, GLProgram);
-
-                    this.gl = gl;
-
-                    this.handle = gl.createProgram();
-                    this.vertexShader = shaders.filter(function (shader) {
-                        return shader.type === GL.VERTEX_SHADER;
-                    })[0] || null;
-                    this.fragmentShader = shaders.filter(function (shader) {
-                        return shader.type === GL.FRAGMENT_SHADER;
-                    })[0] || null;
-
-                    this._attribLocationCache = new Map();
-                    this._uniformLocationCache = new Map();
-
-                    if ([this.vertexShader, this.fragmentShader].some(function (shader) {
-                        return shader === null;
-                    })) {
-                        throw "You need to supply both a vertex and a fragment shader!";
-                    }
-
-                    gl.attachShader(this.handle, this.vertexShader.handle);
-                    gl.attachShader(this.handle, this.fragmentShader.handle);
-                    gl.linkProgram(this.handle);
-
-                    var info = this.getInfoLog();
-                    if (info !== "") {
-                        console.error(info);
-                    }
-                }
-
-                GLProgram.prototype.use = function use() {
-                    this.gl.useProgram(this.handle);
-                };
-
-                GLProgram.prototype.getUniformLocation = function getUniformLocation(location) {
-                    var value = this._uniformLocationCache.get(location);
-                    if (value === undefined) {
-                        value = this.gl.getUniformLocation(this.handle, location);
-                        if (value === null) console.error("Couldn't get uniform location: " + location);
-                        this._uniformLocationCache.set(location, value);
-                    }
-                    return value;
-                };
-
-                GLProgram.prototype.getAttribLocation = function getAttribLocation(location) {
-                    var value = this._attribLocationCache.get(location);
-                    if (value === undefined) {
-                        value = this.gl.getAttribLocation(this.handle, location);
-                        if (value === null) console.error("Couldn't get attribute location: " + location);
-                        this._attribLocationCache.set(location, value);
-                    }
-                    return value;
-                };
-
-                GLProgram.prototype.getInfoLog = function getInfoLog() {
-                    return this.gl.getProgramInfoLog(this.handle);
-                };
-
-                GLProgram.prototype.getActiveUniforms = function getActiveUniforms() {
-                    var uniforms = [];
-
-                    for (var i = 0; i < this.gl.getProgramParameter(this.handle, GL.ACTIVE_UNIFORMS); ++i) {
-                        var uniform = this.gl.getActiveUniform(this.handle, i);
-                        uniform.typeName = enums[uniform.type];
-                        uniform.value = this.gl.getUniform(this.handle, this.gl.getUniformLocation(this.handle, uniform.name));
-                        uniforms.push(uniform);
-                    }
-
-                    return uniforms;
-                };
-
-                GLProgram.prototype.getActiveAttributes = function getActiveAttributes() {
-                    var attributes = [];
-
-                    for (var i = 0; i < this.gl.getProgramParameter(this.handle, GL.ACTIVE_ATTRIBUTES); ++i) {
-                        var attribute = this.gl.getActiveAttrib(this.handle, i);
-                        attribute.typeName = enums[attribute.type];
-                        attributes.push(attribute);
-                    }
-                    return attributes;
-                };
-
-                GLProgram.fromShaderPromises = function fromShaderPromises(gl) {
-                    for (var _len = arguments.length, shaderPromises = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-                        shaderPromises[_key - 1] = arguments[_key];
-                    }
-
-                    return Promise.all(shaderPromises).then(function (shaders) {
-                        return _applyConstructor(GLProgram, [gl].concat(_toConsumableArray(shaders)));
-                    });
-                };
-
-                GLProgram.fromShaderFiles = function fromShaderFiles(gl) {
-                    for (var _len = arguments.length, shaderFilenames = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-                        shaderFilenames[_key - 1] = arguments[_key];
-                    }
-
-                    return GLProgram.fromShaderPromises(gl, shaderFilenames.map(function (filename) {
-                        return GLShader.fromFile(gl, filename);
-                    }));
-                };
-
-                GLProgram.prototype.setUniform = function setUniform(location, value) {
-                    this.gl.uniform1f(this.getUniformLocation(location), value);
-                };
-
-                GLProgram.prototype.setUniformInt = function setUniformInt(location, value) {
-                    this.gl.uniform1i(this.getUniformLocation(location), value);
-                };
-
-                GLProgram.prototype.setUniformVector = function setUniformVector(location, vector) {
-                    var uniformLocation = this.getUniformLocation(location);
-                    switch (vector.length) {
-                        case 1:
-                            this.gl.uniform1fv(uniformLocation, vector);break;
-                        case 2:
-                            this.gl.uniform2fv(uniformLocation, vector);break;
-                        case 3:
-                            this.gl.uniform3fv(uniformLocation, vector);break;
-                        case 4:
-                            this.gl.uniform4fv(uniformLocation, vector);
-                    }
-                };
-
-                GLProgram.prototype.setUniformIntVector = function setUniformIntVector(location, vector) {
-                    var uniformLocation = this.getUniformLocation(location);
-                    switch (vector.length) {
-                        case 1:
-                            this.gl.uniform1iv(uniformLocation, vector);break;
-                        case 2:
-                            this.gl.uniform2iv(uniformLocation, vector);break;
-                        case 3:
-                            this.gl.uniform3iv(uniformLocation, vector);break;
-                        case 4:
-                            this.gl.uniform4iv(uniformLocation, vector);
-                    }
-                };
-
-                GLProgram.prototype.setUniformMatrix = function setUniformMatrix(location, matrix) {
-                    var transpose = arguments[2] === undefined ? false : arguments[2];
-
-                    var uniformLocation = this.getUniformLocation(location);
-                    switch (matrix.length) {
-                        case 4:
-                            this.gl.uniformMatrix2fv(uniformLocation, transpose, matrix);break;
-                        case 9:
-                            this.gl.uniformMatrix3fv(uniformLocation, transpose, matrix);break;
-                        case 16:
-                            this.gl.uniformMatrix4fv(uniformLocation, transpose, matrix);
-                    }
-                };
-
-                return GLProgram;
-            })();
-
-            _export("default", GLProgram);
-        }
-    };
+System.register("npm:babel-runtime@5.1.2/core-js/array/from", ["npm:core-js@0.8.2/library/fn/array/from"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/array/from"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/texture/common", ["lib/extra/ajax", "lib/workers/tga"], function (_export) {
-    var getArrayBuffer, tgaWorker, isPowerOf2;
 
-    _export("getImage", getImage);
-
-    function getImage(filename) {
-        var format = arguments[1] === undefined ? filename.split(".").pop() : arguments[1];
-        return (function () {
-            return (function () {
-                switch (format) {
-                    case "tga":
-                        return getTgaImage(filename);
-                    default:
-                        return getNativeImage(filename);
-                }
-            })().then(function (image) {
-                var width = image.width;
-                var height = image.height;
-
-                if (width !== height || width > 1024 || !isPowerOf2(width) || !isPowerOf2(height)) {
-                    var canvas0 = document.createElement("canvas");
-                    canvas0.width = width;
-                    canvas0.height = height;
-                    canvas0.getContext("2d").putImageData(image, 0, 0);
-
-                    var canvas = document.createElement("canvas");
-                    var size = Math.pow(2, Math.min(10, Math.ceil(Math.log(Math.max(width, height)) / Math.log(2))));
-                    canvas.width = size;
-                    canvas.height = size;
-                    var ctx = canvas.getContext("2d");
-                    ctx.drawImage(canvas0, 0, 0, size, size);
-                    image = ctx.getImageData(0, 0, size, size);
-                }
-
-                return image;
-            });
-        })();
-    }
-
-    // Try using the browser's built-in image support to download an image.
-    function getNativeImage(filename) {
-        return new Promise(function (resolve, reject) {
-            var img = document.createElement("img");
-
-            var onLoad = function () {
-                // Convert image element to ImageData by drawing into a canvas and then extracting the content
-                var canvas = document.createElement("canvas");
-                canvas.width = img.width;
-                canvas.height = img.height;
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
-                var imageData = ctx.getImageData(0, 0, img.width, img.height);
-                removeListeners();
-                resolve(imageData);
-            };
-
-            var onError = function (error) {
-                reject(error);
-                removeListeners();
-            };
-
-            var removeListeners = function () {
-                img.removeEventListener("load", onLoad);
-                img.removeEventListener("error", onError);
-            };
-
-            img.addEventListener("error", onError, false);
-            img.addEventListener("load", onLoad, false);
-
-            // Trigger download by setting the source
-            img.src = filename;
-        });
-    }
-
-    // Use the TGA library to download the image as a binary file and parse it.
-    function getTgaImage(filename) {
-        return getArrayBuffer(filename).then(function (tgaBuffer) {
-            return tgaWorker.run(tgaBuffer, { transfers: [tgaBuffer] });
-        }).then(function (_ref) {
-            var buffer = _ref.buffer;
-            var width = _ref.width;
-            var height = _ref.height;
-
-            var array = new Uint8ClampedArray(buffer);
-
-            var image = undefined;
-            try {
-                image = new ImageData(array, width, height);
-            } catch (e) {
-                var canvas = document.createElement("canvas");
-                canvas.height = height;
-                canvas.width = width;
-                image = canvas.getContext("2d").createImageData(width, height);
-                image.data = array;
-            }
-
-            return image;
-        });
-    }
-    return {
-        setters: [function (_libExtraAjax) {
-            getArrayBuffer = _libExtraAjax.getArrayBuffer;
-        }, function (_libWorkersTga) {
-            tgaWorker = _libWorkersTga.workerpool;
-        }],
-        execute: function () {
-            "use strict";
-
-            isPowerOf2 = function (x) {
-                return x != 0 && !(x & x - 1);
-            };
-        }
-    };
+System.register("npm:core-js@0.8.2/library/fn/object/assign", ["npm:core-js@0.8.2/library/modules/es6.object.assign", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.object.assign");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Object.assign;
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/extra/helpers", ["lib/scene/model", "lib/scene/group", "lib/camera/perspective-camera", "lib/geometry/geometry", "lib/material/phong", "lib/material/skybox", "lib/texture/texture2d", "lib/texture/cubemap", "lib/geometry/shapes"], function (_export) {
-    var Model, Group, PerspectiveCamera, Geometry, PhongMaterial, SkyboxMaterial, Texture2D, CubeMap, Plane, Cube, _toConsumableArray, _applyConstructor;
 
-    _export("skybox", skybox);
-
-    _export("terrain", terrain);
-
-    _export("cube", cube);
-
-    _export("plane", plane);
-
-    _export("camera", camera);
-
-    _export("pointlight", pointlight);
-
-    _export("spotlight", spotlight);
-
-    _export("geometry", geometry);
-
-    _export("texture2d", texture2d);
-
-    _export("cubemap", cubemap);
-
-    _export("phong", phong);
-
-    _export("model", model);
-
-    _export("group", group);
-
-    function skybox() {
-        for (var _len = arguments.length, urls = Array(_len), _key = 0; _key < _len; _key++) {
-            urls[_key] = arguments[_key];
-        }
-
-        var materialPromise = CubeMap.fromFiles.apply(CubeMap, urls).then(function (cubemap) {
-            return new SkyboxMaterial(cubemap);
-        });
-        return model("skybox", {}, cube(), materialPromise);
-    }
-
-    function terrain(url) {
-        return Texture2D.fromFile(url).then(function (heightmap) {
-            return new Plane({ heightmap: heightmap });
-        }).then(function (geometry) {
-            return geometry.generateNormals();
-        });
-    }
-
-    function cube() {
-        return new Cube();
-    }
-
-    function plane() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _applyConstructor(Plane, args);
-    }
-
-    function camera() {
-        var options = arguments[0] === undefined ? {} : arguments[0];
-
-        return new PerspectiveCamera(options);
-    }
-
-    function pointlight() {
-        var options = arguments[0] === undefined ? {} : arguments[0];
-
-        return new PointLight(options);
-    }
-
-    function spotlight() {
-        var options = arguments[0] === undefined ? {} : arguments[0];
-
-        return new SpotLight(options);
-    }
-
-    function geometry(url) {
-        return Geometry.fromFile(url);
-    }
-
-    function texture2d(url) {
-        return Texture2D.fromFile(url);
-    }
-
-    function cubemap() {
-        for (var _len = arguments.length, urls = Array(_len), _key = 0; _key < _len; _key++) {
-            urls[_key] = arguments[_key];
-        }
-
-        return CubeMap.fromFiles.apply(CubeMap, urls);
-    }
-
-    function phong() {
-        var options = arguments[0] === undefined ? {} : arguments[0];
-
-        // Transform the values to promises, wait for all to finish, put back into an object, and create the material.
-        return Promise.all(Object.keys(options).map(function (key) {
-            return Promise.resolve(options[key]).then(function (value) {
-                return (function () {
-                    var _ref = {};
-                    _ref[key] = value;
-                    return _ref;
-                })();
-            });
-        })).then(function (pairs) {
-            return Object.assign.apply(Object, [{}].concat(_toConsumableArray(pairs)));
-        }).then(function (options) {
-            return new PhongMaterial(options);
-        });
-    }
-
-    function model() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _applyConstructor(Model, args);
-    }
-
-    function group() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _applyConstructor(Group, args);
-    }
-
-    return {
-        setters: [function (_libSceneModel) {
-            Model = _libSceneModel["default"];
-        }, function (_libSceneGroup) {
-            Group = _libSceneGroup["default"];
-        }, function (_libCameraPerspectiveCamera) {
-            PerspectiveCamera = _libCameraPerspectiveCamera["default"];
-        }, function (_libGeometryGeometry) {
-            Geometry = _libGeometryGeometry["default"];
-        }, function (_libMaterialPhong) {
-            PhongMaterial = _libMaterialPhong["default"];
-        }, function (_libMaterialSkybox) {
-            SkyboxMaterial = _libMaterialSkybox["default"];
-        }, function (_libTextureTexture2d) {
-            Texture2D = _libTextureTexture2d["default"];
-        }, function (_libTextureCubemap) {
-            CubeMap = _libTextureCubemap["default"];
-        }, function (_libGeometryShapes) {
-            Plane = _libGeometryShapes.Plane;
-            Cube = _libGeometryShapes.Cube;
-        }],
-        execute: function () {
-            "use strict";
-
-            _toConsumableArray = function (arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } };
-
-            _applyConstructor = function (Constructor, args) { var instance = Object.create(Constructor.prototype); var result = Constructor.apply(instance, args); return result != null && (typeof result == "object" || typeof result == "function") ? result : instance; };
-        }
-    };
+System.register("npm:core-js@0.8.2/library/modules/es6.string.iterator", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.string-at", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.iter"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var set = require("npm:core-js@0.8.2/library/modules/$").set,
+      at = require("npm:core-js@0.8.2/library/modules/$.string-at")(true),
+      ITER = require("npm:core-js@0.8.2/library/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+      step = $iter.step;
+  $iter.std(String, 'String', function(iterated) {
+    set(this, ITER, {
+      o: String(iterated),
+      i: 0
+    });
+  }, function() {
+    var iter = this[ITER],
+        O = iter.o,
+        index = iter.i,
+        point;
+    if (index >= O.length)
+      return step(1);
+    point = at.call(O, index);
+    iter.i += point.length;
+    return step(0, point);
+  });
+  global.define = __define;
+  return module.exports;
 });
-System.register("lib/control/mouseview", ["github:baconjs/bacon.js@0.7.53", "github:toji/gl-matrix@master"], function (_export) {
-    var Bacon, glm, _slicedToArray, _classCallCheck, vec3, mat4, quat, equals, MouseViewController;
 
-    return {
-        setters: [function (_githubBaconjsBaconJs0753) {
-            Bacon = _githubBaconjsBaconJs0753["default"];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _slicedToArray = function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) { _arr.push(_step.value); if (i && _arr.length === i) break; } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-            mat4 = glm.mat4;
-            quat = glm.quat;
-
-            equals = function (a) {
-                return function (b) {
-                    return a === b;
-                };
-            };
-
-            MouseViewController = (function () {
-                function MouseViewController(target, canvas) {
-                    var _this = this;
-
-                    var getHeight = arguments[2] === undefined ? function () {
-                        return 0;
-                    } : arguments[2];
-
-                    _classCallCheck(this, MouseViewController);
-
-                    this.target = target;
-
-                    this.yaw = 0;
-                    this.pitch = 0;
-                    this.roll = 0;
-
-                    this.forward = 0;
-                    this.sideways = 0;
-                    this.turn = 0;
-
-                    this.getHeight = getHeight;
-
-                    var _map = ["keydown", "keyup"].map(function (e) {
-                        return Bacon.fromEventTarget(document.body, e).map(function (e) {
-                            return e.keyCode;
-                        });
-                    });
-
-                    var _map2 = _slicedToArray(_map, 2);
-
-                    var onKeyDown = _map2[0];
-                    var onKeyUp = _map2[1];
-
-                    // Creates an observable Bacon.Property from a keyCode
-                    var fromKeypress = function (keyCode) {
-                        return Bacon.mergeAll(onKeyDown.filter(equals(keyCode)).map(function () {
-                            return true;
-                        }), onKeyUp.filter(equals(keyCode)).map(function () {
-                            return false;
-                        })).skipDuplicates().toProperty(false);
-                    };
-
-                    var _WASDQE$split$map$map = "WASDQE".split("").map(function (char) {
-                        return char.charCodeAt(0);
-                    }).map(fromKeypress);
-
-                    var _WASDQE$split$map$map2 = _slicedToArray(_WASDQE$split$map$map, 6);
-
-                    var up = _WASDQE$split$map$map2[0];
-                    var left = _WASDQE$split$map$map2[1];
-                    var down = _WASDQE$split$map$map2[2];
-                    var right = _WASDQE$split$map$map2[3];
-                    var ccw = _WASDQE$split$map$map2[4];
-                    var cw = _WASDQE$split$map$map2[5];
-
-                    var _map3 = [[right, left], [down, up], [ccw, cw]].map(function (_ref) {
-                        var _ref2 = _slicedToArray(_ref, 2);
-
-                        var positive = _ref2[0];
-                        var negative = _ref2[1];
-                        return Bacon.combineWith(function (a, b) {
-                            return a + b;
-                        }, positive.map(function (b) {
-                            return +b;
-                        }), negative.map(function (b) {
-                            return -b;
-                        }));
-                    });
-
-                    var _map32 = _slicedToArray(_map3, 3);
-
-                    var x = _map32[0];
-                    var y = _map32[1];
-                    var z = _map32[2];
-
-                    x.onValue(function (val) {
-                        _this.sideways = val;
-                    });
-                    y.onValue(function (val) {
-                        _this.forward = val;
-                    });
-                    z.onValue(function (val) {
-                        _this.turn = val;
-                    });
-
-                    onKeyDown.filter(equals("F".charCodeAt(0))).onValue(function (key) {
-                        if (canvas.requestFullscreen) {
-                            canvas.requestFullscreen();
-                        } else if (canvas.msRequestFullscreen) {
-                            canvas.msRequestFullscreen();
-                        } else if (canvas.mozRequestFullScreen) {
-                            canvas.mozRequestFullScreen();
-                        } else if (canvas.webkitRequestFullscreen) {
-                            canvas.webkitRequestFullscreen();
-                        }
-                    });
-
-                    canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
-
-                    canvas.addEventListener("click", function () {
-                        canvas.requestPointerLock();
-                    }, false);
-
-                    var sensitivity = 0.1;
-
-                    var that = this;
-                    function savePosition(e) {
-                        var movementX = e.movementX !== undefined ? e.movementX : e.mozMovementX;
-                        var movementY = e.movementY !== undefined ? e.movementY : e.mozMovementY;
-
-                        that.pitch = Math.max(-90, Math.min(90, that.pitch + sensitivity * movementY));
-                        that.yaw += sensitivity * movementX;
-                        that.yaw = that.yaw % 360;
-                    }
-
-                    function lockChangeAlert() {
-                        if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
-                            console.log("The pointer lock status is now locked");
-                            document.addEventListener("mousemove", savePosition, false);
-                        } else {
-                            console.log("The pointer lock status is now unlocked");
-                            document.removeEventListener("mousemove", savePosition, false);
-                        }
-                    }
-
-                    document.addEventListener("pointerlockchange", lockChangeAlert, false);
-                    document.addEventListener("mozpointerlockchange", lockChangeAlert, false);
-
-                    target.on("tick", this.tick.bind(this));
-                }
-
-                MouseViewController.prototype.tick = function tick(dt) {
-                    var target = this.target;
-
-                    target.lookForward();
-                    target.rotateY(-this.yaw);
-                    target.translateRelatively(vec3.fromValues(dt / 200 * this.sideways, 0, dt / 200 * this.forward));
-                    target.rotateX(-this.pitch);
-                    target.rotateZ(-this.roll);
-
-                    // TODO: less ugly
-                    //this.target.position[1] = this.getHeight(this.target);
-                };
-
-                return MouseViewController;
-            })();
-
-            _export("default", MouseViewController);
-        }
-    };
-});
 System.register("github:jspm/nodelibs-process@0.1.1", ["github:jspm/nodelibs-process@0.1.1/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -12126,7 +9774,26 @@ System.register("github:jspm/nodelibs-process@0.1.1", ["github:jspm/nodelibs-pro
   return module.exports;
 });
 
+System.register("npm:core-js@0.8.2/library/fn/symbol", ["npm:core-js@0.8.2/library/fn/symbol/index"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:core-js@0.8.2/library/fn/symbol/index");
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:babel-runtime@5.1.2/core-js/map", ["npm:core-js@0.8.2/library/fn/map"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/map"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/number/to-pos-integer", ["npm:es5-ext@0.10.6/number/to-integer"], true, function(require, exports, module) {
   var global = System.global,
@@ -12142,8 +9809,6 @@ System.register("npm:es5-ext@0.10.6/number/to-pos-integer", ["npm:es5-ext@0.10.6
   return module.exports;
 });
 
-
-
 System.register("npm:es5-ext@0.10.6/object/assign/index", ["npm:es5-ext@0.10.6/object/assign/is-implemented", "npm:es5-ext@0.10.6/object/assign/shim"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -12153,8 +9818,6 @@ System.register("npm:es5-ext@0.10.6/object/assign/index", ["npm:es5-ext@0.10.6/o
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:d@0.1.1/index", ["npm:es5-ext@0.10.6/object/assign", "npm:es5-ext@0.10.6/object/normalize-options", "npm:es5-ext@0.10.6/object/is-callable", "npm:es5-ext@0.10.6/string/#/contains"], true, function(require, exports, module) {
   var global = System.global,
@@ -12238,8 +9901,6 @@ System.register("npm:d@0.1.1/index", ["npm:es5-ext@0.10.6/object/assign", "npm:e
   return module.exports;
 });
 
-
-
 System.register("npm:es6-symbol@2.0.1/index", ["npm:es6-symbol@2.0.1/is-implemented", "npm:es6-symbol@2.0.1/polyfill"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -12250,85 +9911,129 @@ System.register("npm:es6-symbol@2.0.1/index", ["npm:es6-symbol@2.0.1/is-implemen
   return module.exports;
 });
 
-
-
-System.register("lib/texture/texture2d", ["lib/texture/common"], function (_export) {
-    var getImage, _prototypeProperties, _classCallCheck, Texture2D;
-
-    return {
-        setters: [function (_libTextureCommon) {
-            getImage = _libTextureCommon.getImage;
-        }],
-        execute: function () {
-            "use strict";
-
-            _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            Texture2D = (function () {
-                function Texture2D(imageData) {
-                    _classCallCheck(this, Texture2D);
-
-                    this.imageData = imageData;
-                }
-
-                Texture2D.fromFile = function fromFile(filename, format) {
-                    return getImage(filename, format).then(function (imageData) {
-                        return new Texture2D(imageData);
-                    });
-                };
-
-                _prototypeProperties(Texture2D, null, {
-                    width: {
-                        get: function () {
-                            return this.imageData.width;
-                        },
-                        configurable: true
-                    },
-                    height: {
-                        get: function () {
-                            return this.imageData.height;
-                        },
-                        configurable: true
-                    }
-                });
-
-                return Texture2D;
-            })();
-
-            _export("default", Texture2D);
-        }
-    };
+System.register("npm:babel-runtime@5.1.2/core-js/object/assign", ["npm:core-js@0.8.2/library/fn/object/assign"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/object/assign"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
 });
-System.register("npm:es5-ext@0.10.6/object/normalize-options", ["github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+
+System.register("npm:core-js@0.8.2/library/fn/weak-map", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.weak-map", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.weak-map");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.WeakMap;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.8.2/library/modules/$.task", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx", "npm:core-js@0.8.2/library/modules/$.cof", "npm:core-js@0.8.2/library/modules/$.invoke", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var forEach = Array.prototype.forEach,
-        create = Object.create;
-    var process = function(src, obj) {
-      var key;
-      for (key in src)
-        obj[key] = src[key];
-    };
-    module.exports = function(options) {
-      var result = create(null);
-      forEach.call(arguments, function(options) {
-        if (options == null)
-          return ;
-        process(Object(options), result);
-      });
-      return result;
+    var $ = require("npm:core-js@0.8.2/library/modules/$"),
+        ctx = require("npm:core-js@0.8.2/library/modules/$.ctx"),
+        cof = require("npm:core-js@0.8.2/library/modules/$.cof"),
+        invoke = require("npm:core-js@0.8.2/library/modules/$.invoke"),
+        global = $.g,
+        isFunction = $.isFunction,
+        html = $.html,
+        document = global.document,
+        process = global.process,
+        setTask = global.setImmediate,
+        clearTask = global.clearImmediate,
+        postMessage = global.postMessage,
+        addEventListener = global.addEventListener,
+        MessageChannel = global.MessageChannel,
+        counter = 0,
+        queue = {},
+        ONREADYSTATECHANGE = 'onreadystatechange',
+        defer,
+        channel,
+        port;
+    function run() {
+      var id = +this;
+      if ($.has(queue, id)) {
+        var fn = queue[id];
+        delete queue[id];
+        fn();
+      }
+    }
+    function listner(event) {
+      run.call(event.data);
+    }
+    if (!isFunction(setTask) || !isFunction(clearTask)) {
+      setTask = function(fn) {
+        var args = [],
+            i = 1;
+        while (arguments.length > i)
+          args.push(arguments[i++]);
+        queue[++counter] = function() {
+          invoke(isFunction(fn) ? fn : Function(fn), args);
+        };
+        defer(counter);
+        return counter;
+      };
+      clearTask = function(id) {
+        delete queue[id];
+      };
+      if (cof(process) == 'process') {
+        defer = function(id) {
+          process.nextTick(ctx(run, id, 1));
+        };
+      } else if (addEventListener && isFunction(postMessage) && !global.importScripts) {
+        defer = function(id) {
+          postMessage(id, '*');
+        };
+        addEventListener('message', listner, false);
+      } else if (isFunction(MessageChannel)) {
+        channel = new MessageChannel;
+        port = channel.port2;
+        channel.port1.onmessage = listner;
+        defer = ctx(port.postMessage, port, 1);
+      } else if (document && ONREADYSTATECHANGE in document.createElement('script')) {
+        defer = function(id) {
+          html.appendChild(document.createElement('script'))[ONREADYSTATECHANGE] = function() {
+            html.removeChild(this);
+            run.call(id);
+          };
+        };
+      } else {
+        defer = function(id) {
+          setTimeout(ctx(run, id, 1), 0);
+        };
+      }
+    }
+    module.exports = {
+      set: setTask,
+      clear: clearTask
     };
   })(require("github:jspm/nodelibs-process@0.1.1"));
   global.define = __define;
   return module.exports;
 });
 
-
+System.register("npm:babel-runtime@5.1.2/core-js/symbol", ["npm:core-js@0.8.2/library/fn/symbol"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/symbol"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:memoizee@0.3.8/lib/resolve-length", ["npm:es5-ext@0.10.6/number/to-pos-integer"], true, function(require, exports, module) {
   var global = System.global,
@@ -12353,8 +10058,6 @@ System.register("npm:memoizee@0.3.8/lib/resolve-length", ["npm:es5-ext@0.10.6/nu
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es5-ext@0.10.6/error/custom", ["npm:es5-ext@0.10.6/object/assign/index"], true, function(require, exports, module) {
   var global = System.global,
@@ -12386,8 +10089,6 @@ System.register("npm:es5-ext@0.10.6/error/custom", ["npm:es5-ext@0.10.6/object/a
   return module.exports;
 });
 
-
-
 System.register("npm:d@0.1.1", ["npm:d@0.1.1/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -12396,8 +10097,6 @@ System.register("npm:d@0.1.1", ["npm:d@0.1.1/index"], true, function(require, ex
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:es6-symbol@2.0.1", ["npm:es6-symbol@2.0.1/index"], true, function(require, exports, module) {
   var global = System.global,
@@ -12408,678 +10107,618 @@ System.register("npm:es6-symbol@2.0.1", ["npm:es6-symbol@2.0.1/index"], true, fu
   return module.exports;
 });
 
-
-
-System.register("lib/material/phong", ["github:toji/gl-matrix@master", "npm:memoizee@0.3.8", "lib/material/base", "lib/texture/texture2d", "lib/extra/functional", "lib/webgl/program", "lib/webgl/shader", "lib/material/shaders/phong.vert.dot!lib/plugins/dot", "lib/material/shaders/phong.frag.dot!lib/plugins/dot"], function (_export) {
-    var glm, memoize, Material, MaterialRenderer, Texture2D, construct, delegate, GLProgram, GLShader, vertexTemplate, fragmentTemplate, _prototypeProperties, _inherits, _classCallCheck, vec3, vec4, mat3, mat4, GL, PhongMaterial, PhongRenderer, ColorStrategy, StaticColorStrategy, TextureColorStrategy, TextureAtlas, Region;
-
-    return {
-        setters: [function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster["default"];
-        }, function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }, function (_libMaterialBase) {
-            Material = _libMaterialBase.Material;
-            MaterialRenderer = _libMaterialBase.MaterialRenderer;
-        }, function (_libTextureTexture2d) {
-            Texture2D = _libTextureTexture2d["default"];
-        }, function (_libExtraFunctional) {
-            construct = _libExtraFunctional.construct;
-            delegate = _libExtraFunctional.delegate;
-        }, function (_libWebglProgram) {
-            GLProgram = _libWebglProgram["default"];
-        }, function (_libWebglShader) {
-            GLShader = _libWebglShader["default"];
-        }, function (_libMaterialShadersPhongVertDotLibPluginsDot) {
-            vertexTemplate = _libMaterialShadersPhongVertDotLibPluginsDot["default"];
-        }, function (_libMaterialShadersPhongFragDotLibPluginsDot) {
-            fragmentTemplate = _libMaterialShadersPhongFragDotLibPluginsDot["default"];
-        }],
-        execute: function () {
-            "use strict";
-
-            _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-            vec3 = glm.vec3;
-            vec4 = glm.vec4;
-            mat3 = glm.mat3;
-            mat4 = glm.mat4;
-            GL = WebGLRenderingContext;
-
-            /**
-             * A material defining the properties used for Phong shading.
-             */
-
-            PhongMaterial = (function (Material) {
-                // ambient: vec3|Texture2D;
-                // diffuse: vec3|Texture2D;
-                // specular: vec3|Texture2D;
-
-                function PhongMaterial() {
-                    var _ref = arguments[0] === undefined ? {} : arguments[0];
-
-                    var _ref$shininess = _ref.shininess;
-                    var shininess = _ref$shininess === undefined ? 40 : _ref$shininess;
-                    var _ref$ambient = _ref.ambient;
-                    var ambient = _ref$ambient === undefined ? 0 : _ref$ambient;
-                    var _ref$diffuse = _ref.diffuse;
-                    var diffuse = _ref$diffuse === undefined ? 0.5 : _ref$diffuse;
-                    var _ref$specular = _ref.specular;
-                    var specular = _ref$specular === undefined ? diffuse : _ref$specular;
-
-                    _classCallCheck(this, PhongMaterial);
-
-                    Material.call(this);
-                    this.shininess = shininess;
-                    this.ambient = ambient;
-                    this.diffuse = diffuse;
-                    this.specular = specular;
-
-                    // Object.seal(this);
-                }
-
-                _inherits(PhongMaterial, Material);
-
-                /**
-                 * Returns a renderer bound to this material instance.
-                 * Should always produce the same instance for each WebGL rendering context and material.
-                 */
-
-                PhongMaterial.prototype.getRenderer = function getRenderer(gl) {
-                    return PhongRenderer.create(this, gl);
-                };
-
-                PhongMaterial.getSourceType = function getSourceType(source) {
-                    switch (source.constructor) {
-                        case Number:case Array:case Float32Array:
-                            return "static";
-                        case Texture2D:
-                            return "texture";
-                        default:
-                            console.error("Incompatible material source color type");
-                    }
-                };
-
-                _prototypeProperties(PhongMaterial, null, {
-                    config: {
-                        get: function () {
-                            return {
-                                ambient: PhongMaterial.getSourceType(this.ambient),
-                                diffuse: PhongMaterial.getSourceType(this.diffuse),
-                                specular: PhongMaterial.getSourceType(this.specular)
-                            };
-                        },
-                        configurable: true
-                    }
-                });
-
-                return PhongMaterial;
-            })(Material);
-
-            _export("default", PhongMaterial);
-
-            /**
-             * Interface for material renderers. Bound to a specific material and WebGL rendering context.
-             * @abstract
-             */
-
-            PhongRenderer = (function (MaterialRenderer) {
-                function PhongRenderer(material, gl) {
-                    this.locations = null;
-
-                    _classCallCheck(this, PhongRenderer);
-
-                    MaterialRenderer.call(this, material, PhongRenderer.createProgram(gl, JSON.stringify(material.config), material.config));
-
-                    this.ambientStrategy = ColorStrategy.select("ambient", material.ambient, this.program);
-                    this.diffuseStrategy = ColorStrategy.select("diffuse", material.diffuse, this.program);
-                    this.specularStrategy = ColorStrategy.select("specular", material.specular, this.program);
-                }
-
-                _inherits(PhongRenderer, MaterialRenderer);
-
-                PhongRenderer.create = memoize(construct(PhongRenderer), { length: 2 });
-                PhongRenderer.createProgram = memoize(function (gl, configString, config) {
-                    return new GLProgram(gl, new GLShader(gl, vertexTemplate(config), GL.VERTEX_SHADER), new GLShader(gl, fragmentTemplate(config), GL.FRAGMENT_SHADER));
-                }, { length: 2 });
-
-                /**
-                 * Runs once for each geometry using this material.
-                 * Should be used to bind geometry buffers to program attributes, and cache uniform locations.
-                 */
-
-                PhongRenderer.prototype.didInitGeometry = function didInitGeometry(_ref) {
-                    var vertexBuffer = _ref.vertexBuffer;
-                    var normalBuffer = _ref.normalBuffer;
-                    var texcoordBuffer = _ref.texcoordBuffer;
-
-                    vertexBuffer.setAttribLocation("vertex", this.program);
-                    normalBuffer.setAttribLocation("normal", this.program);
-
-                    this.locations = Object.freeze({
-                        mvpMatrix: this.program.getUniformLocation("mvpMatrix"),
-                        modelMatrix: this.program.getUniformLocation("modelMatrix"),
-                        normalMatrix: this.program.getUniformLocation("normalMatrix"),
-                        viewPos: this.program.getUniformLocation("viewPos"),
-                        shininess: this.program.getUniformLocation("material.shininess")
-                    });
-
-                    this.ambientStrategy.init(texcoordBuffer);
-                    this.diffuseStrategy.init(texcoordBuffer);
-                    this.specularStrategy.init(texcoordBuffer);
-                };
-
-                /**
-                 * Runs once before drawing the models using the material.
-                 * Should be used to set material uniforms independent of model drawn.
-                 */
-
-                PhongRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {
-                    var gl = this.program.gl;
-                    var locations = this.locations;
-
-                    for (var i = 0, len = lightRenderers.length; i < len; ++i) {
-                        lightRenderers[i].render(this.program);
-                    }
-
-                    gl.uniform3fv(locations.viewPos, camera.worldPosition);
-                    gl.uniform1f(locations.shininess, this.material.shininess);
-
-                    this.ambientStrategy.update();
-                    this.diffuseStrategy.update();
-                    this.specularStrategy.update();
-                };
-
-                /**
-                 * Runs before drawing each model using the material.
-                 * Should be used to set material uniforms dependent on model drawn.
-                 */
-
-                PhongRenderer.prototype.draw = function draw(camera, model) {
-                    var gl = this.program.gl;
-                    var locations = this.locations;
-
-                    gl.uniformMatrix4fv(locations.mvpMatrix, false, camera.calculateMvpMatrix(model));
-                    gl.uniformMatrix4fv(locations.modelMatrix, false, model.worldTransform);
-                    gl.uniformMatrix3fv(locations.normalMatrix, false, model.normalMatrix);
-                };
-
-                return PhongRenderer;
-            })(MaterialRenderer);
-
-            /**
-             * @abstract
-             */
-
-            ColorStrategy = (function () {
-                function ColorStrategy(target, source, program) {
-                    this.locations = {};
-
-                    _classCallCheck(this, ColorStrategy);
-
-                    this.target = target;
-                    this.source = source;
-                    this.program = program;
-                }
-
-                ColorStrategy.prototype.init = function init(texcoordBuffer) {};
-
-                ColorStrategy.prototype.update = function update() {};
-
-                ColorStrategy.select = delegate(function (_, source) {
-                    switch (PhongMaterial.getSourceType(source)) {
-                        case "static":
-                            return StaticColorStrategy.create;
-                        case "texture":
-                            return TextureColorStrategy.create;
-                    }
-                });
-                return ColorStrategy;
-            })();
-
-            StaticColorStrategy = (function (ColorStrategy) {
-                function StaticColorStrategy(target, source, program) {
-                    _classCallCheck(this, StaticColorStrategy);
-
-                    ColorStrategy.call(this, target, source, program);
-                    this.color = typeof source === "number" ? vec3.fromValues(source, source, source) : vec3.clone(source);
-                }
-
-                _inherits(StaticColorStrategy, ColorStrategy);
-
-                StaticColorStrategy.create = memoize(construct(StaticColorStrategy), { length: 3 });
-
-                StaticColorStrategy.prototype.init = function init(texcoordBuffer) {
-                    this.locations.target = this.program.getUniformLocation("material." + this.target);
-                };
-
-                StaticColorStrategy.prototype.update = function update() {
-                    this.program.gl.uniform3fv(this.locations.target, this.color);
-                };
-
-                return StaticColorStrategy;
-            })(ColorStrategy);
-
-            TextureColorStrategy = (function (ColorStrategy) {
-                function TextureColorStrategy(target, source, program) {
-                    _classCallCheck(this, TextureColorStrategy);
-
-                    ColorStrategy.call(this, target, source, program);
-
-                    var _TextureColorStrategy$getConfig = TextureColorStrategy.getConfig(program.gl);
-
-                    var unit = _TextureColorStrategy$getConfig.unit;
-                    var handle = _TextureColorStrategy$getConfig.handle;
-                    var insert = _TextureColorStrategy$getConfig.insert;
-
-                    this.unit = unit;
-                    this.handle = handle;
-                    insert(this);
-                }
-
-                _inherits(TextureColorStrategy, ColorStrategy);
-
-                TextureColorStrategy.getConfig = memoize(function (gl) {
-                    var atlas = new TextureAtlas();
-                    var strategiesUsingImage = new Map(); //Map<ImageData, Set<TextureColorStrategy>>
-                    var unit = MaterialRenderer.allocateTextureUnit(gl);
-                    var handle = gl.createTexture();
-
-                    var context2d = undefined;
-
-                    var resetCanvas = function () {
-                        var canvas = document.createElement("canvas");
-                        var size = Math.pow(2, atlas.size);
-                        canvas.height = size;
-                        canvas.width = size;
-                        context2d = canvas.getContext("2d");
-                    };
-
-                    resetCanvas();
-
-                    var updateTexcoordBounds = function (region) {
-                        var size = Math.pow(2, atlas.size);
-                        var bounds = vec4.fromValues(region.left / size, (region.top + region.innerHeight) / size, region.innerWidth / size, -(region.innerHeight / size));
-                        for (var _iterator = strategiesUsingImage.get(region.image), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                            var _ref;
-
-                            if (_isArray) {
-                                if (_i >= _iterator.length) break;
-                                _ref = _iterator[_i++];
-                            } else {
-                                _i = _iterator.next();
-                                if (_i.done) break;
-                                _ref = _i.value;
-                            }
-
-                            var strategy = _ref;
-
-                            strategy.texcoordBounds = bounds;
-                        }
-                    };
-
-                    return {
-                        unit: unit, handle: handle,
-
-                        insert: function insert(strategy) {
-                            var texture = strategy.source;
-
-                            var strategies = strategiesUsingImage.get(texture.imageData);
-                            if (strategies === undefined) {
-                                strategies = new Set();
-                                strategiesUsingImage.set(texture.imageData, strategies);
-                            }
-                            strategies.add(strategy);
-
-                            gl.activeTexture(GL.TEXTURE0 + unit);
-                            gl.bindTexture(GL.TEXTURE_2D, handle);
-
-                            var changedRegions = atlas.insert(texture.imageData);
-
-                            if (changedRegions.length === 1 && changedRegions[0].outerWidth < Math.pow(2, atlas.size)) {
-                                // Partial update
-                                var _region = changedRegions[0];
-
-                                updateTexcoordBounds(_region);
-
-                                context2d.putImageData(_region.image, _region.left, _region.top);
-
-                                gl.texSubImage2D(GL.TEXTURE_2D, 0, _region.left, _region.top, GL.RGBA, GL.UNSIGNED_BYTE, _region.image);
-                                gl.generateMipmap(GL.TEXTURE_2D);
-                            } else {
-                                // Full update
-                                resetCanvas();
-
-                                for (var _iterator = changedRegions, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                                    var _ref;
-
-                                    if (_isArray) {
-                                        if (_i >= _iterator.length) break;
-                                        _ref = _iterator[_i++];
-                                    } else {
-                                        _i = _iterator.next();
-                                        if (_i.done) break;
-                                        _ref = _i.value;
-                                    }
-
-                                    var _region2 = _ref;
-
-                                    updateTexcoordBounds(_region2);
-                                    context2d.putImageData(_region2.image, _region2.left, _region2.top);
-                                }
-
-                                gl.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, context2d.canvas);
-                                gl.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
-                                gl.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
-                                gl.generateMipmap(GL.TEXTURE_2D);
-                            }
-                        }
-                    };
-                });
-                TextureColorStrategy.create = memoize(construct(TextureColorStrategy), { length: 3 });
-
-                TextureColorStrategy.prototype.init = function init(texcoordBuffer) {
-                    texcoordBuffer.setAttribLocation("texcoord", this.program);
-
-                    this.locations.sampler = this.program.getUniformLocation("" + this.target + "Sampler");
-                    this.locations.bounds = this.program.getUniformLocation("" + this.target + "TexcoordBounds");
-                };
-
-                TextureColorStrategy.prototype.update = function update() {
-                    var gl = this.program.gl;
-                    gl.uniform1i(this.locations.sampler, this.unit);
-                    gl.uniform4fv(this.locations.bounds, this.texcoordBounds);
-
-                    gl.activeTexture(GL.TEXTURE0 + this.unit);
-                    gl.bindTexture(GL.TEXTURE_2D, this.handle);
-                };
-
-                return TextureColorStrategy;
-            })(ColorStrategy);
-
-            /**
-             * A dynamically growing texture atlas.
-             */
-
-            TextureAtlas = (function () {
-                function TextureAtlas() {
-                    this.region = null;
-                    this.size = 0;
-
-                    _classCallCheck(this, TextureAtlas);
-
-                    this.reset();
-                }
-
-                TextureAtlas.prototype.reset = function reset() {
-                    var newSize = arguments[0] === undefined ? this.size : arguments[0];
-
-                    this.size = newSize;
-                    var dim = Math.pow(2, this.size);
-                    this.region = new Region(0, 0, dim, dim);
-                };
-
-                /**
-                 * Insert an image into the atlas. Returns an array of regions that were that changed by the insertion.
-                 */
-
-                TextureAtlas.prototype.insert = function insert(texture) {
-                    var getSize = function (image) {
-                        return Math.max(image.height, image.width);
-                    };
-
-                    // Try insert
-                    var region = this.region.insert(texture);
-                    if (region !== undefined) {
-                        // Insertion successful
-                        return [region];
-                    }
-
-                    var compareWith = function (f) {
-                        return function (a, b) {
-                            return f(a) - f(b);
-                        };
-                    };
-                    var flip = function (f) {
-                        return function (b, a) {
-                            return f(a, b);
-                        };
-                    };
-
-                    // Insertion failed, reset and try insert everything again, sorted
-                    var allImages = new Set(this.region.images());
-                    allImages.add(texture);
-                    var allSortedImages = Array.from(allImages).sort(flip(compareWith(getSize)));
-                    this.reset();
-
-                    var success = undefined,
-                        regions = undefined;
-                    do {
-                        // Try to insert all sorted textures
-                        success = true;
-                        regions = [];
-                        for (var _iterator = allSortedImages, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-                            var _ref;
-
-                            if (_isArray) {
-                                if (_i >= _iterator.length) break;
-                                _ref = _iterator[_i++];
-                            } else {
-                                _i = _iterator.next();
-                                if (_i.done) break;
-                                _ref = _i.value;
-                            }
-
-                            var img = _ref;
-
-                            var subregion = this.region.insert(img);
-                            if (subregion !== undefined) {
-                                // Insertion successful
-                                regions.push(subregion);
-                            } else {
-                                // Insertion failed, enlarge and try all over again
-                                this.reset(this.size + 1);
-                                success = false;
-                                if (!_isArray && _iterator["return"]) _iterator["return"]();
-                                break;
-                            }
-                        }
-                    } while (!success);
-
-                    return regions;
-                };
-
-                return TextureAtlas;
-            })();
-
-            Region = (function () {
-                function Region() {
-                    var left = arguments[0] === undefined ? 0 : arguments[0];
-                    var top = arguments[1] === undefined ? 0 : arguments[1];
-                    var right = arguments[2] === undefined ? 0 : arguments[2];
-                    var bottom = arguments[3] === undefined ? 0 : arguments[3];
-                    this.rightRegion = null;
-                    this.downRegion = null;
-                    this.image /*: { width: number, height: number } */ = null;
-
-                    _classCallCheck(this, Region);
-
-                    this.left = left;
-                    this.top = top;
-                    this.right = right;
-                    this.bottom = bottom;
-                }
-
-                Region.prototype.toString = function toString() {
-                    return "" + this.constructor.name + "(" + this.left + ", " + this.top + ", " + this.right + ", " + this.bottom + ")";
-                };
-
-                Region.prototype.images = regeneratorRuntime.mark(function images() {
-                    var _this = this;
-
-                    var _iterator, _isArray, _i, _ref, _region;
-
-                    return regeneratorRuntime.wrap(function images$(context$2$0) {
-                        while (1) switch (context$2$0.prev = context$2$0.next) {
-                            case 0:
-                                _iterator = _this, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
-
-                            case 1:
-                                if (!_isArray) {
-                                    context$2$0.next = 7;
-                                    break;
-                                }
-
-                                if (!(_i >= _iterator.length)) {
-                                    context$2$0.next = 4;
-                                    break;
-                                }
-
-                                return context$2$0.abrupt("break", 16);
-
-                            case 4:
-                                _ref = _iterator[_i++];
-                                context$2$0.next = 11;
-                                break;
-
-                            case 7:
-                                _i = _iterator.next();
-
-                                if (!_i.done) {
-                                    context$2$0.next = 10;
-                                    break;
-                                }
-
-                                return context$2$0.abrupt("break", 16);
-
-                            case 10:
-                                _ref = _i.value;
-
-                            case 11:
-                                _region = _ref;
-                                context$2$0.next = 14;
-                                return _region.image;
-
-                            case 14:
-                                context$2$0.next = 1;
-                                break;
-
-                            case 16:
-                            case "end":
-                                return context$2$0.stop();
-                        }
-                    }, images, this);
-                });
-
-                /**
-                 * Recursively subdivide into smaller regions.
-                 * Returns the subregion if insertion was successful, otherwise undefined.
-                 */
-
-                Region.prototype.insert = function insert(image /*: { width: number, height: number } */) {
-                    // region is filled, search deeper for sapce
-                    if (this.isFilled) {
-                        return this.downRegion.insert(image) || this.rightRegion.insert(image);
-                    }
-
-                    // doesn't fit
-                    if (image.height > this.outerHeight || image.width > this.outerWidth) {
-                        return undefined;
-                    }
-
-                    // success, store image and split
-                    this.image = image;
-
-                    var dw = this.outerWidth - this.innerWidth; // Horizontal available space
-                    var dh = this.outerHeight - this.innerHeight; // Vertical available space
-
-                    // Split in the direction of most available space
-                    if (dw > dh) {
-                        this.downRegion = new Region(this.left, this.top + this.innerHeight, this.right, this.bottom);
-                        this.rightRegion = new Region(this.left + this.innerWidth, this.top, this.right, this.top + this.innerHeight);
-                    } else {
-                        this.downRegion = new Region(this.left, this.top + this.innerHeight, this.left + this.innerWidth, this.bottom);
-                        this.rightRegion = new Region(this.left + this.innerWidth, this.top, this.right, this.bottom);
-                    }
-
-                    return this;
-                };
-
-                _prototypeProperties(Region, null, {
-                    outerWidth: {
-                        get: function () {
-                            return this.right - this.left;
-                        },
-                        configurable: true
-                    },
-                    outerHeight: {
-                        get: function () {
-                            return this.bottom - this.top;
-                        },
-                        configurable: true
-                    },
-                    innerWidth: {
-                        get: function () {
-                            return this.image.width;
-                        },
-                        configurable: true
-                    },
-                    innerHeight: {
-                        get: function () {
-                            return this.image.height;
-                        },
-                        configurable: true
-                    },
-                    isFilled: {
-                        get: function () {
-                            return this.image !== null;
-                        },
-                        configurable: true
-                    }
-                });
-
-                return Region;
-            })();
-
-            // Iterator
-            Region.prototype[Symbol.iterator] = regeneratorRuntime.mark(function callee$0$0() {
-                var _this = this;
-
-                return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
-                    while (1) switch (context$1$0.prev = context$1$0.next) {
-                        case 0:
-                            if (!_this.isFilled) {
-                                context$1$0.next = 5;
-                                break;
-                            }
-
-                            context$1$0.next = 3;
-                            return _this;
-
-                        case 3:
-                            return context$1$0.delegateYield(_this.downRegion, "t1", 4);
-
-                        case 4:
-                            return context$1$0.delegateYield(_this.rightRegion, "t2", 5);
-
-                        case 5:
-                        case "end":
-                            return context$1$0.stop();
-                    }
-                }, callee$0$0, this);
-            });
-        }
-    };
+System.register("npm:babel-runtime@5.1.2/core-js/weak-map", ["npm:core-js@0.8.2/library/fn/weak-map"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/weak-map"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
 });
 
-// TODO: Use multiple texture atlases
-// 2-power
+System.register("npm:core-js@0.8.2/library/modules/es6.promise", ["npm:core-js@0.8.2/library/modules/$", "npm:core-js@0.8.2/library/modules/$.ctx", "npm:core-js@0.8.2/library/modules/$.cof", "npm:core-js@0.8.2/library/modules/$.def", "npm:core-js@0.8.2/library/modules/$.assert", "npm:core-js@0.8.2/library/modules/$.iter", "npm:core-js@0.8.2/library/modules/$.wks", "npm:core-js@0.8.2/library/modules/$.uid", "npm:core-js@0.8.2/library/modules/$.task", "npm:core-js@0.8.2/library/modules/$.species", "npm:core-js@0.8.2/library/modules/$.iter-detect", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var $ = require("npm:core-js@0.8.2/library/modules/$"),
+        ctx = require("npm:core-js@0.8.2/library/modules/$.ctx"),
+        cof = require("npm:core-js@0.8.2/library/modules/$.cof"),
+        $def = require("npm:core-js@0.8.2/library/modules/$.def"),
+        assert = require("npm:core-js@0.8.2/library/modules/$.assert"),
+        $iter = require("npm:core-js@0.8.2/library/modules/$.iter"),
+        SPECIES = require("npm:core-js@0.8.2/library/modules/$.wks")('species'),
+        RECORD = require("npm:core-js@0.8.2/library/modules/$.uid").safe('record'),
+        forOf = $iter.forOf,
+        PROMISE = 'Promise',
+        global = $.g,
+        process = global.process,
+        asap = process && process.nextTick || require("npm:core-js@0.8.2/library/modules/$.task").set,
+        P = global[PROMISE],
+        Base = P,
+        isFunction = $.isFunction,
+        isObject = $.isObject,
+        assertFunction = assert.fn,
+        assertObject = assert.obj,
+        test;
+    function getConstructor(C) {
+      var S = assertObject(C)[SPECIES];
+      return S != undefined ? S : C;
+    }
+    function isThenable(it) {
+      var then;
+      if (isObject(it))
+        then = it.then;
+      return isFunction(then) ? then : false;
+    }
+    function isUnhandled(promise) {
+      var record = promise[RECORD],
+          chain = record.c,
+          i = 0,
+          react;
+      if (record.h)
+        return false;
+      while (chain.length > i) {
+        react = chain[i++];
+        if (react.fail || !isUnhandled(react.P))
+          return false;
+      }
+      return true;
+    }
+    function notify(record, isReject) {
+      var chain = record.c;
+      if (isReject || chain.length)
+        asap(function() {
+          var promise = record.p,
+              value = record.v,
+              ok = record.s == 1,
+              i = 0;
+          if (isReject && isUnhandled(promise)) {
+            setTimeout(function() {
+              if (isUnhandled(promise)) {
+                if (cof(process) == 'process') {
+                  process.emit('unhandledRejection', value, promise);
+                } else if (global.console && isFunction(console.error)) {
+                  console.error('Unhandled promise rejection', value);
+                }
+              }
+            }, 1e3);
+          } else
+            while (chain.length > i)
+              !function(react) {
+                var cb = ok ? react.ok : react.fail,
+                    ret,
+                    then;
+                try {
+                  if (cb) {
+                    if (!ok)
+                      record.h = true;
+                    ret = cb === true ? value : cb(value);
+                    if (ret === react.P) {
+                      react.rej(TypeError(PROMISE + '-chain cycle'));
+                    } else if (then = isThenable(ret)) {
+                      then.call(ret, react.res, react.rej);
+                    } else
+                      react.res(ret);
+                  } else
+                    react.rej(value);
+                } catch (err) {
+                  react.rej(err);
+                }
+              }(chain[i++]);
+          chain.length = 0;
+        });
+    }
+    function $reject(value) {
+      var record = this;
+      if (record.d)
+        return ;
+      record.d = true;
+      record = record.r || record;
+      record.v = value;
+      record.s = 2;
+      notify(record, true);
+    }
+    function $resolve(value) {
+      var record = this,
+          then,
+          wrapper;
+      if (record.d)
+        return ;
+      record.d = true;
+      record = record.r || record;
+      try {
+        if (then = isThenable(value)) {
+          wrapper = {
+            r: record,
+            d: false
+          };
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } else {
+          record.v = value;
+          record.s = 1;
+          notify(record);
+        }
+      } catch (err) {
+        $reject.call(wrapper || {
+          r: record,
+          d: false
+        }, err);
+      }
+    }
+    if (!(isFunction(P) && isFunction(P.resolve) && P.resolve(test = new P(function() {})) == test)) {
+      P = function Promise(executor) {
+        assertFunction(executor);
+        var record = {
+          p: assert.inst(this, P, PROMISE),
+          c: [],
+          s: 0,
+          d: false,
+          v: undefined,
+          h: false
+        };
+        $.hide(this, RECORD, record);
+        try {
+          executor(ctx($resolve, record, 1), ctx($reject, record, 1));
+        } catch (err) {
+          $reject.call(record, err);
+        }
+      };
+      $.mix(P.prototype, {
+        then: function then(onFulfilled, onRejected) {
+          var S = assertObject(assertObject(this).constructor)[SPECIES];
+          var react = {
+            ok: isFunction(onFulfilled) ? onFulfilled : true,
+            fail: isFunction(onRejected) ? onRejected : false
+          };
+          var promise = react.P = new (S != undefined ? S : P)(function(res, rej) {
+            react.res = assertFunction(res);
+            react.rej = assertFunction(rej);
+          });
+          var record = this[RECORD];
+          record.c.push(react);
+          record.s && notify(record);
+          return promise;
+        },
+        'catch': function(onRejected) {
+          return this.then(undefined, onRejected);
+        }
+      });
+    }
+    $def($def.G + $def.W + $def.F * (P != Base), {Promise: P});
+    cof.set(P, PROMISE);
+    require("npm:core-js@0.8.2/library/modules/$.species")(P);
+    $def($def.S, PROMISE, {
+      reject: function reject(r) {
+        return new (getConstructor(this))(function(res, rej) {
+          rej(r);
+        });
+      },
+      resolve: function resolve(x) {
+        return isObject(x) && RECORD in x && $.getProto(x) === this.prototype ? x : new (getConstructor(this))(function(res) {
+          res(x);
+        });
+      }
+    });
+    $def($def.S + $def.F * !require("npm:core-js@0.8.2/library/modules/$.iter-detect")(function(iter) {
+      P.all(iter)['catch'](function() {});
+    }), PROMISE, {
+      all: function all(iterable) {
+        var C = getConstructor(this),
+            values = [];
+        return new C(function(res, rej) {
+          forOf(iterable, false, values.push, values);
+          var remaining = values.length,
+              results = Array(remaining);
+          if (remaining)
+            $.each.call(values, function(promise, index) {
+              C.resolve(promise).then(function(value) {
+                results[index] = value;
+                --remaining || res(results);
+              }, rej);
+            });
+          else
+            res(results);
+        });
+      },
+      race: function race(iterable) {
+        var C = getConstructor(this);
+        return new C(function(res, rej) {
+          forOf(iterable, false, function(promise) {
+            C.resolve(promise).then(res, rej);
+          });
+        });
+      }
+    });
+  })(require("github:jspm/nodelibs-process@0.1.1"));
+  global.define = __define;
+  return module.exports;
+});
 
-// The corners of the outer rect
+System.register("npm:babel-runtime@5.1.2/regenerator/runtime", ["npm:babel-runtime@5.1.2/core-js/symbol", "npm:babel-runtime@5.1.2/core-js/symbol/iterator", "npm:babel-runtime@5.1.2/core-js/promise"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  var _Symbol = require("npm:babel-runtime@5.1.2/core-js/symbol")["default"];
+  var _Symbol$iterator = require("npm:babel-runtime@5.1.2/core-js/symbol/iterator")["default"];
+  var _Promise = require("npm:babel-runtime@5.1.2/core-js/promise")["default"];
+  !(function(global) {
+    "use strict";
+    var hasOwn = Object.prototype.hasOwnProperty;
+    var undefined;
+    var iteratorSymbol = typeof _Symbol === "function" && _Symbol$iterator || "@@iterator";
+    var inModule = typeof module === "object";
+    var runtime = global.regeneratorRuntime;
+    if (runtime) {
+      if (inModule) {
+        module.exports = runtime;
+      }
+      return ;
+    }
+    runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+    function wrap(innerFn, outerFn, self, tryLocsList) {
+      return new Generator(innerFn, outerFn, self || null, tryLocsList || []);
+    }
+    runtime.wrap = wrap;
+    function tryCatch(fn, obj, arg) {
+      try {
+        return {
+          type: "normal",
+          arg: fn.call(obj, arg)
+        };
+      } catch (err) {
+        return {
+          type: "throw",
+          arg: err
+        };
+      }
+    }
+    var GenStateSuspendedStart = "suspendedStart";
+    var GenStateSuspendedYield = "suspendedYield";
+    var GenStateExecuting = "executing";
+    var GenStateCompleted = "completed";
+    var ContinueSentinel = {};
+    function GeneratorFunction() {}
+    function GeneratorFunctionPrototype() {}
+    var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
+    GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+    GeneratorFunctionPrototype.constructor = GeneratorFunction;
+    GeneratorFunction.displayName = "GeneratorFunction";
+    runtime.isGeneratorFunction = function(genFun) {
+      var ctor = typeof genFun === "function" && genFun.constructor;
+      return ctor ? ctor === GeneratorFunction || (ctor.displayName || ctor.name) === "GeneratorFunction" : false;
+    };
+    runtime.mark = function(genFun) {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      genFun.prototype = Object.create(Gp);
+      return genFun;
+    };
+    runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+      return new _Promise(function(resolve, reject) {
+        var generator = wrap(innerFn, outerFn, self, tryLocsList);
+        var callNext = step.bind(generator.next);
+        var callThrow = step.bind(generator["throw"]);
+        function step(arg) {
+          var record = tryCatch(this, null, arg);
+          if (record.type === "throw") {
+            reject(record.arg);
+            return ;
+          }
+          var info = record.arg;
+          if (info.done) {
+            resolve(info.value);
+          } else {
+            Promise.resolve(info.value).then(callNext, callThrow);
+          }
+        }
+        callNext();
+      });
+    };
+    function Generator(innerFn, outerFn, self, tryLocsList) {
+      var generator = outerFn ? Object.create(outerFn.prototype) : this;
+      var context = new Context(tryLocsList);
+      var state = GenStateSuspendedStart;
+      function invoke(method, arg) {
+        if (state === GenStateExecuting) {
+          throw new Error("Generator is already running");
+        }
+        if (state === GenStateCompleted) {
+          return doneResult();
+        }
+        while (true) {
+          var delegate = context.delegate;
+          if (delegate) {
+            var record = tryCatch(delegate.iterator[method], delegate.iterator, arg);
+            if (record.type === "throw") {
+              context.delegate = null;
+              method = "throw";
+              arg = record.arg;
+              continue;
+            }
+            method = "next";
+            arg = undefined;
+            var info = record.arg;
+            if (info.done) {
+              context[delegate.resultName] = info.value;
+              context.next = delegate.nextLoc;
+            } else {
+              state = GenStateSuspendedYield;
+              return info;
+            }
+            context.delegate = null;
+          }
+          if (method === "next") {
+            if (state === GenStateSuspendedStart && typeof arg !== "undefined") {
+              throw new TypeError("attempt to send " + JSON.stringify(arg) + " to newborn generator");
+            }
+            if (state === GenStateSuspendedYield) {
+              context.sent = arg;
+            } else {
+              delete context.sent;
+            }
+          } else if (method === "throw") {
+            if (state === GenStateSuspendedStart) {
+              state = GenStateCompleted;
+              throw arg;
+            }
+            if (context.dispatchException(arg)) {
+              method = "next";
+              arg = undefined;
+            }
+          } else if (method === "return") {
+            context.abrupt("return", arg);
+          }
+          state = GenStateExecuting;
+          var record = tryCatch(innerFn, self, context);
+          if (record.type === "normal") {
+            state = context.done ? GenStateCompleted : GenStateSuspendedYield;
+            var info = {
+              value: record.arg,
+              done: context.done
+            };
+            if (record.arg === ContinueSentinel) {
+              if (context.delegate && method === "next") {
+                arg = undefined;
+              }
+            } else {
+              return info;
+            }
+          } else if (record.type === "throw") {
+            state = GenStateCompleted;
+            if (method === "next") {
+              context.dispatchException(record.arg);
+            } else {
+              arg = record.arg;
+            }
+          }
+        }
+      }
+      generator.next = invoke.bind(generator, "next");
+      generator["throw"] = invoke.bind(generator, "throw");
+      generator["return"] = invoke.bind(generator, "return");
+      return generator;
+    }
+    Gp[iteratorSymbol] = function() {
+      return this;
+    };
+    Gp.toString = function() {
+      return "[object Generator]";
+    };
+    function pushTryEntry(locs) {
+      var entry = {tryLoc: locs[0]};
+      if (1 in locs) {
+        entry.catchLoc = locs[1];
+      }
+      if (2 in locs) {
+        entry.finallyLoc = locs[2];
+        entry.afterLoc = locs[3];
+      }
+      this.tryEntries.push(entry);
+    }
+    function resetTryEntry(entry) {
+      var record = entry.completion || {};
+      record.type = "normal";
+      delete record.arg;
+      entry.completion = record;
+    }
+    function Context(tryLocsList) {
+      this.tryEntries = [{tryLoc: "root"}];
+      tryLocsList.forEach(pushTryEntry, this);
+      this.reset();
+    }
+    runtime.keys = function(object) {
+      var keys = [];
+      for (var key in object) {
+        keys.push(key);
+      }
+      keys.reverse();
+      return function next() {
+        while (keys.length) {
+          var key = keys.pop();
+          if (key in object) {
+            next.value = key;
+            next.done = false;
+            return next;
+          }
+        }
+        next.done = true;
+        return next;
+      };
+    };
+    function values(iterable) {
+      if (iterable) {
+        var iteratorMethod = iterable[iteratorSymbol];
+        if (iteratorMethod) {
+          return iteratorMethod.call(iterable);
+        }
+        if (typeof iterable.next === "function") {
+          return iterable;
+        }
+        if (!isNaN(iterable.length)) {
+          var i = -1,
+              next = function next() {
+                while (++i < iterable.length) {
+                  if (hasOwn.call(iterable, i)) {
+                    next.value = iterable[i];
+                    next.done = false;
+                    return next;
+                  }
+                }
+                next.value = undefined;
+                next.done = true;
+                return next;
+              };
+          return next.next = next;
+        }
+      }
+      return {next: doneResult};
+    }
+    runtime.values = values;
+    function doneResult() {
+      return {
+        value: undefined,
+        done: true
+      };
+    }
+    Context.prototype = {
+      constructor: Context,
+      reset: function reset() {
+        this.prev = 0;
+        this.next = 0;
+        this.sent = undefined;
+        this.done = false;
+        this.delegate = null;
+        this.tryEntries.forEach(resetTryEntry);
+        for (var tempIndex = 0,
+            tempName; hasOwn.call(this, tempName = "t" + tempIndex) || tempIndex < 20; ++tempIndex) {
+          this[tempName] = null;
+        }
+      },
+      stop: function stop() {
+        this.done = true;
+        var rootEntry = this.tryEntries[0];
+        var rootRecord = rootEntry.completion;
+        if (rootRecord.type === "throw") {
+          throw rootRecord.arg;
+        }
+        return this.rval;
+      },
+      dispatchException: function dispatchException(exception) {
+        if (this.done) {
+          throw exception;
+        }
+        var context = this;
+        function handle(loc, caught) {
+          record.type = "throw";
+          record.arg = exception;
+          context.next = loc;
+          return !!caught;
+        }
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          var record = entry.completion;
+          if (entry.tryLoc === "root") {
+            return handle("end");
+          }
+          if (entry.tryLoc <= this.prev) {
+            var hasCatch = hasOwn.call(entry, "catchLoc");
+            var hasFinally = hasOwn.call(entry, "finallyLoc");
+            if (hasCatch && hasFinally) {
+              if (this.prev < entry.catchLoc) {
+                return handle(entry.catchLoc, true);
+              } else if (this.prev < entry.finallyLoc) {
+                return handle(entry.finallyLoc);
+              }
+            } else if (hasCatch) {
+              if (this.prev < entry.catchLoc) {
+                return handle(entry.catchLoc, true);
+              }
+            } else if (hasFinally) {
+              if (this.prev < entry.finallyLoc) {
+                return handle(entry.finallyLoc);
+              }
+            } else {
+              throw new Error("try statement without catch or finally");
+            }
+          }
+        }
+      },
+      abrupt: function abrupt(type, arg) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+            var finallyEntry = entry;
+            break;
+          }
+        }
+        if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg < finallyEntry.finallyLoc) {
+          finallyEntry = null;
+        }
+        var record = finallyEntry ? finallyEntry.completion : {};
+        record.type = type;
+        record.arg = arg;
+        if (finallyEntry) {
+          this.next = finallyEntry.finallyLoc;
+        } else {
+          this.complete(record);
+        }
+        return ContinueSentinel;
+      },
+      complete: function complete(record, afterLoc) {
+        if (record.type === "throw") {
+          throw record.arg;
+        }
+        if (record.type === "break" || record.type === "continue") {
+          this.next = record.arg;
+        } else if (record.type === "return") {
+          this.rval = record.arg;
+          this.next = "end";
+        } else if (record.type === "normal" && afterLoc) {
+          this.next = afterLoc;
+        }
+        return ContinueSentinel;
+      },
+      finish: function finish(finallyLoc) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.finallyLoc === finallyLoc) {
+            return this.complete(entry.completion, entry.afterLoc);
+          }
+        }
+      },
+      "catch": function _catch(tryLoc) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.tryLoc === tryLoc) {
+            var record = entry.completion;
+            if (record.type === "throw") {
+              var thrown = record.arg;
+              resetTryEntry(entry);
+            }
+            return thrown;
+          }
+        }
+        throw new Error("illegal catch attempt");
+      },
+      delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+        this.delegate = {
+          iterator: values(iterable),
+          resultName: resultName,
+          nextLoc: nextLoc
+        };
+        return ContinueSentinel;
+      }
+    };
+  })(typeof global === "object" ? global : typeof window === "object" ? window : undefined);
+  global.define = __define;
+  return module.exports;
+});
+
 System.register("npm:es5-ext@0.10.6/array/from/shim", ["npm:es6-symbol@2.0.1", "npm:es5-ext@0.10.6/function/is-arguments", "npm:es5-ext@0.10.6/function/is-function", "npm:es5-ext@0.10.6/number/to-pos-integer", "npm:es5-ext@0.10.6/object/valid-callable", "npm:es5-ext@0.10.6/object/valid-value", "npm:es5-ext@0.10.6/string/is-string"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -13204,7 +10843,40 @@ System.register("npm:es5-ext@0.10.6/array/from/shim", ["npm:es6-symbol@2.0.1", "
   return module.exports;
 });
 
+System.register("npm:core-js@0.8.2/library/fn/promise", ["npm:core-js@0.8.2/library/modules/es6.string.iterator", "npm:core-js@0.8.2/library/modules/web.dom.iterable", "npm:core-js@0.8.2/library/modules/es6.promise", "npm:core-js@0.8.2/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.8.2/library/modules/es6.string.iterator");
+  require("npm:core-js@0.8.2/library/modules/web.dom.iterable");
+  require("npm:core-js@0.8.2/library/modules/es6.promise");
+  module.exports = require("npm:core-js@0.8.2/library/modules/$").core.Promise;
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:babel-runtime@5.1.2/regenerator/index", ["npm:babel-runtime@5.1.2/regenerator/runtime"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var g = typeof global === "object" ? global : typeof window === "object" ? window : this;
+  var hasOwn = Object.prototype.hasOwnProperty;
+  var hadRuntime = hasOwn.call(g, "regeneratorRuntime");
+  var oldRuntime = hadRuntime && g.regeneratorRuntime;
+  delete g.regeneratorRuntime;
+  module.exports = require("npm:babel-runtime@5.1.2/regenerator/runtime");
+  if (hadRuntime) {
+    g.regeneratorRuntime = oldRuntime;
+  } else {
+    delete g.regeneratorRuntime;
+  }
+  module.exports = {
+    "default": module.exports,
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/array/from/index", ["npm:es5-ext@0.10.6/array/from/is-implemented", "npm:es5-ext@0.10.6/array/from/shim"], true, function(require, exports, module) {
   var global = System.global,
@@ -13216,7 +10888,26 @@ System.register("npm:es5-ext@0.10.6/array/from/index", ["npm:es5-ext@0.10.6/arra
   return module.exports;
 });
 
+System.register("npm:babel-runtime@5.1.2/core-js/promise", ["npm:core-js@0.8.2/library/fn/promise"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = {
+    "default": require("npm:core-js@0.8.2/library/fn/promise"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
 
+System.register("npm:babel-runtime@5.1.2/regenerator", ["npm:babel-runtime@5.1.2/regenerator/index"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = require("npm:babel-runtime@5.1.2/regenerator/index");
+  global.define = __define;
+  return module.exports;
+});
 
 System.register("npm:es5-ext@0.10.6/array/to-array", ["npm:es5-ext@0.10.6/array/from/index"], true, function(require, exports, module) {
   var global = System.global,
@@ -13231,8 +10922,6 @@ System.register("npm:es5-ext@0.10.6/array/to-array", ["npm:es5-ext@0.10.6/array/
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/lib/resolve-resolve", ["npm:es5-ext@0.10.6/array/to-array", "npm:es5-ext@0.10.6/object/valid-callable"], true, function(require, exports, module) {
   var global = System.global,
@@ -13259,8 +10948,6 @@ System.register("npm:memoizee@0.3.8/lib/resolve-resolve", ["npm:es5-ext@0.10.6/a
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/lib/configure-map", ["npm:es5-ext@0.10.6/error/custom", "npm:es5-ext@0.10.6/function/_define-length", "npm:d@0.1.1", "npm:event-emitter@0.3.3", "npm:memoizee@0.3.8/lib/resolve-resolve", "npm:memoizee@0.3.8/lib/resolve-normalize"], true, function(require, exports, module) {
   var global = System.global,
@@ -13466,8 +11153,6 @@ System.register("npm:memoizee@0.3.8/lib/configure-map", ["npm:es5-ext@0.10.6/err
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8/plain", ["npm:es5-ext@0.10.6/object/valid-callable", "npm:es5-ext@0.10.6/object/for-each", "npm:memoizee@0.3.8/lib/registered-extensions", "npm:memoizee@0.3.8/lib/configure-map", "npm:memoizee@0.3.8/lib/resolve-length"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -13501,8 +11186,6 @@ System.register("npm:memoizee@0.3.8/plain", ["npm:es5-ext@0.10.6/object/valid-ca
   global.define = __define;
   return module.exports;
 });
-
-
 
 System.register("npm:memoizee@0.3.8/index", ["npm:es5-ext@0.10.6/object/normalize-options", "npm:memoizee@0.3.8/lib/resolve-length", "npm:memoizee@0.3.8/plain", "npm:memoizee@0.3.8/normalizers/primitive", "npm:memoizee@0.3.8/normalizers/get-primitive-fixed", "npm:memoizee@0.3.8/normalizers/get", "npm:memoizee@0.3.8/normalizers/get-1", "npm:memoizee@0.3.8/normalizers/get-fixed", "npm:memoizee@0.3.8/ext/async", "npm:memoizee@0.3.8/ext/dispose", "npm:memoizee@0.3.8/ext/max-age", "npm:memoizee@0.3.8/ext/max", "npm:memoizee@0.3.8/ext/ref-counter"], true, function(require, exports, module) {
   var global = System.global,
@@ -13550,8 +11233,6 @@ System.register("npm:memoizee@0.3.8/index", ["npm:es5-ext@0.10.6/object/normaliz
   return module.exports;
 });
 
-
-
 System.register("npm:memoizee@0.3.8", ["npm:memoizee@0.3.8/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
@@ -13561,18 +11242,4862 @@ System.register("npm:memoizee@0.3.8", ["npm:memoizee@0.3.8/index"], true, functi
   return module.exports;
 });
 
-
-
-System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffer", "lib/webgl/program", "lib/extra/functional", "lib/extra/ajax", "lib/workers/wavefront", "lib/workers/normal-vectors"], function (_export) {
-    var memoize, GLBuffer, GLProgram, construct, getArrayBuffer, wavefrontWorker, normalsWorker, _classCallCheck, GL, Geometry, GeometryRenderer;
+System.register("lib/webgl/buffer", ["npm:babel-runtime@5.1.2/helpers/class-call-check"], function (_export) {
+    var _classCallCheck, GL, GLBuffer;
 
     return {
-        setters: [function (_npmMemoizee038) {
-            memoize = _npmMemoizee038["default"];
-        }, function (_libWebglBuffer) {
-            GLBuffer = _libWebglBuffer["default"];
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck["default"];
+        }],
+        execute: function () {
+            "use strict";
+
+            GL = WebGLRenderingContext;
+
+            GLBuffer = (function () {
+                function GLBuffer(gl, data, vao) {
+                    var _ref = arguments[3] === undefined ? {} : arguments[3];
+
+                    var _ref$mode = _ref.mode;
+                    var mode = _ref$mode === undefined ? GL.STATIC_DRAW : _ref$mode;
+                    var _ref$size = _ref.size;
+                    var size = _ref$size === undefined ? 3 : _ref$size;
+                    var _ref$bufferType = _ref.bufferType;
+                    var bufferType = _ref$bufferType === undefined ? GL.ARRAY_BUFFER : _ref$bufferType;
+                    var _ref$dataType = _ref.dataType;
+                    var dataType = _ref$dataType === undefined ? GL.FLOAT : _ref$dataType;
+
+                    _classCallCheck(this, GLBuffer);
+
+                    this.gl = gl;
+                    this.vaoExtension = gl.getExtension("OES_vertex_array_object");
+                    if (this.vaoExtension === undefined) {
+                        throw "Your browser's implementation of WebGL does not support Vertex Array Objects! Too bad!";
+                    }
+
+                    // The vertex array object the vbo belongs to
+                    this.vao = vao;
+
+                    this.size = size;
+                    this.mode = mode;
+                    this.bufferType = bufferType;
+                    this.dataType = dataType;
+
+                    // The underlying VBO handle
+                    this.vbo = gl.createBuffer();
+
+                    this.data = null;
+
+                    this.updateData(data);
+                }
+
+                /**
+                 * Execute a function inside the VAO state, with this buffer bound.
+                 * @param {Function} fn
+                 * @private
+                 */
+
+                GLBuffer.prototype._executeBound = function _executeBound(fn) {
+                    this.vaoExtension.bindVertexArrayOES(this.vao);
+
+                    this.gl.bindBuffer(this.bufferType, this.vbo);
+                    fn();
+
+                    this.vaoExtension.bindVertexArrayOES(null);
+                };
+
+                /**
+                 * Updates the objects bound data and uploads it to the GPU.
+                 */
+
+                GLBuffer.prototype.updateData = function updateData(data) {
+                    var _this = this;
+
+                    // The currently bound underlying typed array
+                    this.data = data;
+
+                    this._executeBound(function () {
+                        _this.gl.bufferData(_this.bufferType, _this.data, _this.mode);
+                    });
+                };
+
+                GLBuffer.prototype.updateSubData = function updateSubData(subData, offset) {
+                    var _this2 = this;
+
+                    this.data.set(subData, offset);
+
+                    this._executeBound(function () {
+                        _this2.gl.bufferSubData(_this2.bufferType, subData, _this2.mode);
+                    });
+                };
+
+                /**
+                 * Bind this buffer to an attribute location in a shader program.
+                 */
+
+                GLBuffer.prototype.setAttribLocation = function setAttribLocation(location, program) {
+                    var _this3 = this;
+
+                    if (program.gl !== this.gl) {
+                        console.error("Couldn't set attribute location: the program's WebGL context is not the same as the buffer's!");
+                    }
+
+                    var loc = program.getAttribLocation(location);
+                    if (loc === -1) {
+                        console.error("Couldn't bind buffer to location: \"" + location + "\"");
+                    }
+
+                    this._executeBound(function () {
+                        _this3.gl.vertexAttribPointer(loc, _this3.size, _this3.dataType, false, 0, 0);
+                        _this3.gl.enableVertexAttribArray(loc);
+                    });
+                };
+
+                GLBuffer.prototype.destroy = function destroy() {
+                    var _this4 = this;
+
+                    this._executeBound(function () {
+                        _this4.gl.deleteBuffer(_this4.vbo);
+                    });
+                };
+
+                return GLBuffer;
+            })();
+
+            _export("default", GLBuffer);
+        }
+    };
+});
+System.register('lib/extra/ajax', ['npm:babel-runtime@5.1.2/core-js/promise'], function (_export) {
+    var _Promise;
+
+    function getString(url) {
+        return ajax(url);
+    }
+
+    function getJson(url) {
+        return ajax(url, { responseType: 'json' });
+    }
+
+    function getArrayBuffer(url) {
+        return ajax(url, { responseType: 'arraybuffer' });
+    }
+
+    function ajax(url) {
+        var _ref = arguments[1] === undefined ? {} : arguments[1];
+
+        var _ref$responseType = _ref.responseType;
+        var responseType = _ref$responseType === undefined ? 'text' : _ref$responseType;
+
+        var xhr = new XMLHttpRequest();
+        return new _Promise(function (resolve, reject) {
+            xhr.open('GET', url);
+            xhr.responseType = responseType;
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    resolve(xhr.response);
+                } else {
+                    reject(new Error(xhr.statusText));
+                }
+            };
+            xhr.onerror = function () {
+                reject(new Error('Network Error'));
+            };
+            xhr.send();
+        });
+    }
+
+    return {
+        setters: [function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            _export('getString', getString);
+
+            _export('getJson', getJson);
+
+            _export('getArrayBuffer', getArrayBuffer);
+
+            _export('ajax', ajax);
+        }
+    };
+});
+System.register("lib/extra/functional", ["npm:babel-runtime@5.1.2/helpers/bind"], function (_export) {
+  var _bind, construct, delegate;
+
+  return {
+    setters: [function (_npmBabelRuntime512HelpersBind) {
+      _bind = _npmBabelRuntime512HelpersBind["default"];
+    }],
+    execute: function () {
+      /**
+       * Takes a type and returns a function that constructs a new object of that type.
+       */
+      "use strict";
+
+      construct = function construct(Type) {
+        return function () {
+          for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+
+          return new (_bind.apply(Type, [null].concat(args)))();
+        };
+      };
+
+      _export("construct", construct);
+
+      /**
+       *
+       */
+
+      delegate = function delegate(fn) {
+        return function () {
+          for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            args[_key2] = arguments[_key2];
+          }
+
+          return fn.apply(undefined, args).apply(undefined, args);
+        };
+      };
+
+      _export("delegate", delegate);
+    }
+  };
+});
+System.register('lib/workers/worker-pool', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/map', 'npm:babel-runtime@5.1.2/core-js/promise', 'npm:babel-runtime@5.1.2/core-js/get-iterator', 'npm:babel-runtime@5.1.2/core-js/object/keys'], function (_export) {
+    var _classCallCheck, _Map, _Promise, _getIterator, _Object$keys, workerCount, taskCount, WorkerPool;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsMap) {
+            _Map = _npmBabelRuntime512CoreJsMap['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectKeys) {
+            _Object$keys = _npmBabelRuntime512CoreJsObjectKeys['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            workerCount = 0;
+            taskCount = 0;
+
+            /**
+             * A wrapper around Web Workers;
+             * Passes messages to the first available worker, or creates a new one.
+             * Kills workers not used for a certain time.
+             */
+
+            WorkerPool = (function () {
+                function WorkerPool(sourceURL) {
+                    var _ref3 = arguments[1] === undefined ? {} : arguments[1];
+
+                    var _ref3$poolSize = _ref3.poolSize;
+                    var poolSize = _ref3$poolSize === undefined ? 2 : _ref3$poolSize;
+                    var _ref3$spawnLazily = _ref3.spawnLazily;
+                    var spawnLazily = _ref3$spawnLazily === undefined ? true : _ref3$spawnLazily;
+                    var _ref3$timeout = _ref3.timeout;
+                    var timeout = _ref3$timeout === undefined ? 5 : _ref3$timeout;
+
+                    _classCallCheck(this, WorkerPool);
+
+                    this._workerState = new _Map();
+                    this._timeout = timeout;
+                    this._sourceURL = sourceURL;
+
+                    this.poolSize = poolSize;
+
+                    this._completers = new _Map();
+                    this._taskQueue = [];
+
+                    if (!spawnLazily) {
+                        for (var i = 0; i < poolSize; ++i) {
+                            this.spawnWorker();
+                        }
+                    }
+                }
+
+                WorkerPool.prototype._grabWork = function _grabWork(worker) {
+                    var state = this._workerState.get(worker);
+                    window.clearTimeout(state.timeout);
+                    state.ready = false;
+
+                    var _taskQueue$shift = this._taskQueue.shift();
+
+                    var id = _taskQueue$shift.id;
+                    var message = _taskQueue$shift.message;
+                    var transfers = _taskQueue$shift.transfers;
+
+                    //console.log(`Started work #${id} on worker #${state.id}`);
+                    worker.postMessage({ id: id, message: message }, transfers);
+                };
+
+                WorkerPool.prototype.spawnWorker = function spawnWorker() {
+                    var _this = this;
+
+                    // If we are below the pool size limit
+                    if (this._workerState.size < this.poolSize) {
+                        var _ret = (function () {
+                            var worker = new Worker(_this._sourceURL);
+                            var that = _this;
+
+                            var onMessage = function onMessage(e) {
+                                var _e$data = e.data;
+                                var id = _e$data.id;
+                                var message = _e$data.message;
+
+                                var state = that._workerState.get(worker);
+
+                                var _that$_completers$get = that._completers.get(id);
+
+                                var resolve = _that$_completers$get.resolve;
+                                var reject = _that$_completers$get.reject;
+
+                                resolve(message);
+                                that._completers['delete'](id);
+                                state.ready = true;
+                                state.timeout = createTimeout();
+                                if (that._taskQueue.length !== 0) {
+                                    that._grabWork(worker);
+                                }
+                            };
+
+                            var createTimeout = function createTimeout() {
+                                return window.setTimeout(function () {
+                                    that._workerState['delete'](worker);
+                                    worker.removeEventListener('message', onMessage, false);
+                                    worker.terminate();
+                                }, 1000 * that._timeout);
+                            };
+
+                            worker.addEventListener('message', onMessage, false);
+
+                            _this._workerState.set(worker, {
+                                ready: true,
+                                timeout: createTimeout(),
+                                id: ++workerCount
+                            });
+
+                            return {
+                                v: worker
+                            };
+                        })();
+
+                        if (typeof _ret === 'object') {
+                            return _ret.v;
+                        }
+                    }
+                };
+
+                /**
+                 * Schedule work to run in the pool.
+                 * Each worker is passed a message of the form { id, message }, and must respond similarly.
+                 * The promise return the sent by the worker.
+                 */
+
+                WorkerPool.prototype.run = function run(message) {
+                    var _this2 = this;
+
+                    var _ref4 = arguments[1] === undefined ? {} : arguments[1];
+
+                    var transfers = _ref4.transfers;
+
+                    var id = ++taskCount;
+                    return new _Promise(function (resolve, reject) {
+                        _this2._completers.set(id, { resolve: resolve, reject: reject });
+                        _this2._taskQueue.push({ id: id, message: message, transfers: transfers });
+
+                        var worker = undefined;
+
+                        // Find an available worker
+                        for (var _iterator = _this2._workerState.entries(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                            var _ref;
+
+                            if (_isArray) {
+                                if (_i >= _iterator.length) break;
+                                _ref = _iterator[_i++];
+                            } else {
+                                _i = _iterator.next();
+                                if (_i.done) break;
+                                _ref = _i.value;
+                            }
+
+                            var w = _ref[0];
+                            var state = _ref[1];
+
+                            if (state.ready) {
+                                worker = w;
+                                break;
+                            }
+                        }
+
+                        // ...or spawn a new one if none is found
+                        if (worker === undefined) {
+                            worker = _this2.spawnWorker();
+                        }
+
+                        // It may still be undefined if pool is full, in which case work will start as soon as one finishes
+                        if (worker !== undefined) {
+                            _this2._grabWork(worker);
+                        }
+                    });
+                };
+
+                /**
+                 * Creates a WorkerPool by stringifying a function taking a resolve callback.
+                 */
+
+                WorkerPool.fromFunction = function fromFunction(fn) {
+                    var dependencies = arguments[1] === undefined ? [] : arguments[1];
+                    var options = arguments[2] === undefined ? {} : arguments[2];
+
+                    var variables = {
+                        location: window.location
+                    };
+
+                    // Magic, magic, magic
+                    for (var i = 0; i < dependencies.length; ++i) {
+                        switch (typeof dependencies[i]) {
+                            case 'function':
+                                dependencies[i] = dependencies[i].toString();
+                                break;
+                            case 'object':
+                                for (var _iterator2 = _Object$keys(dependencies[i]), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
+                                    var _ref2;
+
+                                    if (_isArray2) {
+                                        if (_i2 >= _iterator2.length) break;
+                                        _ref2 = _iterator2[_i2++];
+                                    } else {
+                                        _i2 = _iterator2.next();
+                                        if (_i2.done) break;
+                                        _ref2 = _i2.value;
+                                    }
+
+                                    var key = _ref2;
+
+                                    variables[key] = dependencies[i][key];
+                                }}
+                    }
+
+                    // Hogwarts next
+                    var magic = _Object$keys(variables).map(function (key) {
+                        return 'var ' + key + ' = ' + JSON.stringify(variables[key]) + ';';
+                    });
+
+                    // TODO: rejection handler
+                    var worker = 'self.onmessage = function(event) {\n                (' + fn.toString() + ')(event.data.message, function resolve(message, transfers) {\n                    self.postMessage({ id: event.data.id, message: message }, transfers);\n                });\n            };';
+
+                    var blob = new Blob([[].concat(magic, dependencies, [worker]).join(';\n')], { type: 'application/javascript' });
+                    var url = window.URL.createObjectURL(blob);
+                    return new WorkerPool(url, options);
+                };
+
+                return WorkerPool;
+            })();
+
+            _export('default', WorkerPool);
+        }
+    };
+});
+System.register('lib/extra/errors', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, UnimplementedMethodError;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            UnimplementedMethodError = (function (_Error) {
+                function UnimplementedMethodError() {
+                    var message = arguments[0] === undefined ? 'Method not implemented!' : arguments[0];
+
+                    _classCallCheck(this, UnimplementedMethodError);
+
+                    _Error.call(this, message);
+                }
+
+                _inherits(UnimplementedMethodError, _Error);
+
+                _createClass(UnimplementedMethodError, [{
+                    key: 'name',
+                    get: function () {
+                        return 'UnimplementedMethod';
+                    }
+                }]);
+
+                return UnimplementedMethodError;
+            })(Error);
+
+            _export('UnimplementedMethodError', UnimplementedMethodError);
+        }
+    };
+});
+System.register('lib/light/base', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/weak-map', 'lib/scene/base', 'npm:memoizee@0.3.8', 'github:toji/gl-matrix@master'], function (_export) {
+    var _inherits, _classCallCheck, _WeakMap, Scene, memoize, glm, Light, lightCounts, LightRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime512CoreJsWeakMap['default'];
+        }, function (_libSceneBase) {
+            Scene = _libSceneBase['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            /**
+             * @abstract
+             */
+
+            Light = (function (_Scene) {
+                function Light(name, RendererType) {
+                    var _this = this;
+
+                    var options = arguments[2] === undefined ? {} : arguments[2];
+
+                    _classCallCheck(this, Light);
+
+                    _Scene.call(this, name, options);
+
+                    var _options$diffuse = options.diffuse;
+                    var diffuse = _options$diffuse === undefined ? glm.vec3.fromValues(1, 1, 1) : _options$diffuse;
+                    var _options$specular = options.specular;
+                    var specular = _options$specular === undefined ? diffuse : _options$specular;
+
+                    this.diffuse = diffuse;
+                    this.specular = specular;
+
+                    this.getRenderer = memoize(function (gl) {
+                        return new RendererType(_this, gl);
+                    });
+                }
+
+                _inherits(Light, _Scene);
+
+                return Light;
+            })(Scene);
+
+            _export('Light', Light);
+
+            lightCounts = new _WeakMap();
+
+            /**
+             * @abstract
+             */
+
+            LightRenderer = (function () {
+                function LightRenderer(light, gl) {
+                    _classCallCheck(this, LightRenderer);
+
+                    this.light = light;
+                    this.gl = gl;
+                    this.id = LightRenderer.allocateLight(light.constructor);
+
+                    // Each instance has a local reference to a
+                    this.getLocations = memoize(this.getLocations.bind(this));
+                }
+
+                LightRenderer.allocateLight = function allocateLight(LightType) {
+                    var count = lightCounts.get(LightType) || 0;
+                    lightCounts.set(LightType, count + 1);
+                    return count;
+                };
+
+                LightRenderer.prototype.getLocations = function getLocations(program) {};
+
+                LightRenderer.prototype.render = function render() {};
+
+                return LightRenderer;
+            })();
+
+            _export('LightRenderer', LightRenderer);
+        }
+    };
+});
+System.register('lib/scene/group', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/bind', 'npm:babel-runtime@5.1.2/core-js/get-iterator', 'npm:babel-runtime@5.1.2/core-js/symbol/iterator', 'npm:babel-runtime@5.1.2/regenerator', 'lib/scene/base'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, _bind, _getIterator, _Symbol$iterator, _regeneratorRuntime, Scene, Group;
+
+    function group() {
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return new (_bind.apply(Group, [null].concat(args)))();
+    }
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersBind) {
+            _bind = _npmBabelRuntime512HelpersBind['default'];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime512CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime512CoreJsSymbolIterator['default'];
+        }, function (_npmBabelRuntime512Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime512Regenerator['default'];
+        }, function (_libSceneBase) {
+            Scene = _libSceneBase['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            _export('group', group);
+
+            /** The "<div>" of the scene graph. Manages a set of subnodes. */
+
+            Group = (function (_Scene) {
+                function Group(name) {
+                    var options = arguments[1] === undefined ? {} : arguments[1];
+                    var children = arguments[2] === undefined ? [] : arguments[2];
+
+                    _classCallCheck(this, Group);
+
+                    _Scene.call(this, name, options);
+
+                    this.__initializeProperties();
+
+                    for (var _iterator = children, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                        var _ref;
+
+                        if (_isArray) {
+                            if (_i >= _iterator.length) break;
+                            _ref = _iterator[_i++];
+                        } else {
+                            _i = _iterator.next();
+                            if (_i.done) break;
+                            _ref = _i.value;
+                        }
+
+                        var child = _ref;
+
+                        this.add(child);
+                    }
+                }
+
+                _inherits(Group, _Scene);
+
+                Group.prototype.forEach = function forEach(cb) {
+                    cb(this);
+                    // Depth-first iteration
+                    var children = this.children;
+                    for (var i = 0, len = children.length; i < len; ++i) {
+                        children[i].forEach(cb);
+                    }
+                    /*
+                    for (let child: Scene of this.children) {
+                         child.forEach(cb);
+                    }*/
+                };
+
+                Group.prototype.recalculate = function recalculate(deltaTime) {
+                    _Scene.prototype.recalculate.call(this, deltaTime);
+                    var children = this.children;
+                    for (var i = 0, len = children.length; i < len; ++i) {
+                        children[i].recalculate(deltaTime);
+                    }
+                    /*
+                    for (let child: Scene of this.children) {
+                        child.recalculate(deltaTime);
+                    }*/
+                };
+
+                Group.prototype.add = function add(node) {
+                    node.parent = this;
+                    this.children.push(node);
+                    this.trigger('didAddNode', { bubble: true }, node);
+                };
+
+                Group.prototype.remove = function remove(node) {
+                    node.parent = null;
+                    //this.children.slice(node);
+                    this.trigger('didRemoveNode', { bubble: true }, node);
+                };
+
+                Group.prototype.__initializeProperties = function __initializeProperties() {
+                    this.children = [];
+                };
+
+                _createClass(Group, [{
+                    key: 'children',
+                    value: undefined,
+                    enumerable: true
+                }]);
+
+                return Group;
+            })(Scene);
+
+            _export('default', Group);
+
+            Group.prototype[_Symbol$iterator] = _regeneratorRuntime.mark(function callee$0$0() {
+                var _iterator2, _isArray2, _i2, _ref2, child;
+
+                return _regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
+                    while (1) switch (context$1$0.prev = context$1$0.next) {
+                        case 0:
+                            context$1$0.next = 2;
+                            return this;
+
+                        case 2:
+                            _iterator2 = this.children, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);
+
+                        case 3:
+                            if (!_isArray2) {
+                                context$1$0.next = 9;
+                                break;
+                            }
+
+                            if (!(_i2 >= _iterator2.length)) {
+                                context$1$0.next = 6;
+                                break;
+                            }
+
+                            return context$1$0.abrupt('break', 17);
+
+                        case 6:
+                            _ref2 = _iterator2[_i2++];
+                            context$1$0.next = 13;
+                            break;
+
+                        case 9:
+                            _i2 = _iterator2.next();
+
+                            if (!_i2.done) {
+                                context$1$0.next = 12;
+                                break;
+                            }
+
+                            return context$1$0.abrupt('break', 17);
+
+                        case 12:
+                            _ref2 = _i2.value;
+
+                        case 13:
+                            child = _ref2;
+                            return context$1$0.delegateYield(child, 't3', 15);
+
+                        case 15:
+                            context$1$0.next = 3;
+                            break;
+
+                        case 17:
+                        case 'end':
+                            return context$1$0.stop();
+                    }
+                }, callee$0$0, this);
+            });
+        }
+    };
+});
+System.register('lib/camera/base', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'github:toji/gl-matrix@master', 'lib/scene/base'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, glm, Scene, mat4, Camera;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_libSceneBase) {
+            Scene = _libSceneBase['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            mat4 = glm.mat4;
+
+            /**
+             * @abstract
+             */
+
+            Camera = (function (_Scene) {
+                function Camera() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, Camera);
+
+                    _Scene.call(this, 'camera', options);
+                    this.mvpMatrix = mat4.create();
+                    this.projectionMatrix = mat4.create();
+                    this.viewMatrix = mat4.create();
+                    this.cameraMatrix = mat4.create();
+                }
+
+                _inherits(Camera, _Scene);
+
+                Camera.prototype.recalculate = function recalculate() {
+                    _Scene.prototype.recalculate.call(this);
+                    mat4.invert(this.viewMatrix, this.worldTransform);
+                    mat4.multiply(this.cameraMatrix, this.projectionMatrix, this.viewMatrix);
+                };
+
+                Camera.prototype.calculateMvpMatrix = function calculateMvpMatrix(model) {
+                    return mat4.multiply(this.mvpMatrix, this.cameraMatrix, model.worldTransform);
+                };
+
+                // TODO: implement bounds checking
+
+                Camera.prototype.canSee = function canSee(model) {
+                    return true;
+                };
+
+                _createClass(Camera, [{
+                    key: 'mvpMatrix',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'projectionMatrix',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'viewMatrix',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'cameraMatrix',
+                    value: undefined,
+                    enumerable: true
+                }]);
+
+                return Camera;
+            })(Scene);
+
+            _export('default', Camera);
+        }
+    };
+});
+System.register('lib/texture/cubemap', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/bind', 'npm:babel-runtime@5.1.2/core-js/promise', 'lib/texture/common'], function (_export) {
+    var _classCallCheck, _bind, _Promise, getImage, CubeMap;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersBind) {
+            _bind = _npmBabelRuntime512HelpersBind['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_libTextureCommon) {
+            getImage = _libTextureCommon.getImage;
+        }],
+        execute: function () {
+            'use strict';
+
+            CubeMap = (function () {
+                function CubeMap(right, left, top, bottom, front, back) {
+                    _classCallCheck(this, CubeMap);
+
+                    this.right = right;this.left = left;
+                    this.top = top;this.bottom = bottom;
+                    this.front = front;this.back = back;
+                }
+
+                CubeMap.fromFiles = function fromFiles(right, left, top, bottom, front, back, format) {
+                    return Promise.all([right, left, top, bottom, front, back].map(function (filename) {
+                        return getImage(filename, format);
+                    })).then(function (images) {
+                        return new (_bind.apply(CubeMap, [null].concat(images)))();
+                    });
+                };
+
+                return CubeMap;
+            })();
+
+            _export('default', CubeMap);
+        }
+    };
+});
+System.register('lib/geometry/shapes', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/create-class', 'lib/geometry/geometry', 'github:toji/gl-matrix@master'], function (_export) {
+    var _inherits, _classCallCheck, _createClass, Geometry, glm, vec3, mat4, vec3buf, mat4buf, Cube, Plane;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_libGeometryGeometry) {
+            Geometry = _libGeometryGeometry['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+            mat4 = glm.mat4;
+            vec3buf = vec3.create();
+            mat4buf = mat4.create();
+
+            /**
+             * A cube of size 1x1x1
+             */
+
+            Cube = (function (_Geometry) {
+                function Cube() {
+                    _classCallCheck(this, Cube);
+
+                    var points = [1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1];
+                    _Geometry.call(this, {
+                        vertices: points.map(function (n) {
+                            return 0.5 * n;
+                        }),
+                        normals: points.map(function (n) {
+                            return Math.sqrt(3) / 3 * n;
+                        }),
+                        texcoords: [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1],
+                        indices: [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 1, 9, 8, 9, 10, 11, 12, 13, 11, 13, 14, 15, 16, 2, 15, 2, 17, 15, 18, 19, 15, 19, 10]
+                    });
+                }
+
+                _inherits(Cube, _Geometry);
+
+                return Cube;
+            })(Geometry);
+
+            _export('Cube', Cube);
+
+            /**
+             * A plane of size 1x1 in the xz-plane, facing up.
+             * If a texture map is used, no normals are generated, use generateNormals() manually.
+             */
+
+            Plane = (function (_Geometry2) {
+                function Plane() {
+                    var _ref = arguments[0] === undefined ? {} : arguments[0];
+
+                    var _ref$size = _ref.size;
+                    var size = _ref$size === undefined ? 8 : _ref$size;
+                    var _ref$heightmap = _ref.heightmap;
+                    var heightmap = _ref$heightmap === undefined ? null : _ref$heightmap;
+
+                    _classCallCheck(this, Plane);
+
+                    var data = null;
+                    var width = undefined,
+                        height = undefined;
+
+                    if (heightmap === null) {
+                        width = size;
+                        height = size;
+                    } else {
+                        width = heightmap.width;
+                        height = heightmap.height;
+                        data = heightmap.imageData.data;
+                    }
+
+                    var vertexCount = width * height;
+                    var triangleCount = (width - 1) * height * 2;
+
+                    var vertices = new Float32Array(3 * vertexCount);
+                    var texcoords = new Float32Array(2 * vertexCount);
+                    var indices = new Uint16Array(3 * triangleCount);
+
+                    var x = undefined,
+                        z = undefined,
+                        offset = undefined;
+
+                    for (x = 0; x < width; ++x) {
+                        for (z = 0; z < height; ++z) {
+                            offset = x + z * width;
+
+                            // Vertex array. You need to scale this properly
+                            vertices[3 * offset + 0] = x / (width - 1) - 0.5;
+                            vertices[3 * offset + 1] = data !== null ? data[4 * offset] / 255 : 0; // Sample R-value in texture
+                            vertices[3 * offset + 2] = z / (height - 1) - 0.5;
+
+                            // Texture coordinates. You may want to scale them.
+                            texcoords[2 * offset + 0] = x / width;
+                            texcoords[2 * offset + 1] = 1 - z / height;
+                        }
+                    }
+
+                    for (x = 0; x < width - 1; ++x) {
+                        for (z = 0; z < height - 1; ++z) {
+                            offset = 6 * (x + z * (width - 1));
+
+                            // Triangle 1
+                            indices[offset + 0] = x + z * width;
+                            indices[offset + 1] = x + (z + 1) * width;
+                            indices[offset + 2] = x + 1 + z * width;
+
+                            // Triangle 2
+                            indices[offset + 3] = x + 1 + z * width;
+                            indices[offset + 4] = x + (z + 1) * width;
+                            indices[offset + 5] = x + 1 + (z + 1) * width;
+                        }
+                    }
+
+                    _Geometry2.call(this, { vertices: vertices, texcoords: texcoords, indices: indices });
+
+                    this.heightmap = heightmap;
+                }
+
+                _inherits(Plane, _Geometry2);
+
+                // UGLY, ugly piece of S**T
+
+                Plane.prototype.getHeightAtWorldPosition = function getHeightAtWorldPosition(camera, model) {
+                    var _this = this;
+
+                    var localPosition = vec3.transformMat4(vec3buf, camera.worldPosition, mat4.invert(mat4buf, model.worldTransform));
+
+                    if (this.heightmap === null) {
+                        localPosition[1] = 0;
+                    } else {
+                        (function () {
+
+                            var clamp = function clamp(x, min, max) {
+                                return Math.min(Math.max(x, min), max);
+                            };
+
+                            var width = _this.heightmap.imageData.width;
+                            var height = _this.heightmap.imageData.height;
+
+                            var x = clamp(width * (localPosition[0] + 0.5), 0, width - 1);
+                            var z = clamp(height * (localPosition[2] + 0.5), 0, height - 1);
+
+                            var x_left = Math.floor(x);
+                            var x_right = Math.ceil(x);
+                            var z_top = Math.floor(z);
+                            var z_down = Math.ceil(z);
+
+                            var sample = function sample(x, z) {
+                                return _this.heightmap.imageData.data[4 * (x + z * width)] / 256;
+                            };
+
+                            var lerp = function lerp(a, b, t) {
+                                return a + t * (b - a);
+                            };
+
+                            localPosition[1] = lerp(sample(x_left, z_top), sample(x_right, z_top), x % 1);
+                        })();
+                    }
+
+                    var worldPosition = vec3.transformMat4(vec3buf, localPosition, model.worldTransform);
+
+                    return worldPosition[1];
+
+                    /*
+                    const cameraSpacePosition = vec3.transformMat4(vec3.create(), worldPosition, mat4.invert(mat4.create(), camera.worldTransform));
+                     return cameraSpacePosition[1];
+                    */
+                };
+
+                _createClass(Plane, [{
+                    key: 'heightmap',
+                    enumerable: true
+                }]);
+
+                return Plane;
+            })(Geometry);
+
+            _export('Plane', Plane);
+        }
+    };
+});
+System.register('lib/light/directional-light', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/object/freeze', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8', 'lib/extra/functional', 'lib/light/base'], function (_export) {
+    var _inherits, _classCallCheck, _Object$freeze, glm, memoize, construct, Light, LightRenderer, ensureVector, DirectionalLight, DirectionalLightRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime512CoreJsObjectFreeze['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }, function (_libExtraFunctional) {
+            construct = _libExtraFunctional.construct;
+        }, function (_libLightBase) {
+            Light = _libLightBase.Light;
+            LightRenderer = _libLightBase.LightRenderer;
+        }],
+        execute: function () {
+            'use strict';
+
+            ensureVector = function ensureVector(value) {
+                return typeof value === 'number' ? glm.vec3.fromValues(value, value, value) : glm.vec3.clone(value);
+            };
+
+            DirectionalLight = (function (_Light) {
+                function DirectionalLight() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, DirectionalLight);
+
+                    _Light.call(this, 'directional-light', DirectionalLightRenderer, options);
+                    //Object.seal(this);
+                }
+
+                _inherits(DirectionalLight, _Light);
+
+                return DirectionalLight;
+            })(Light);
+
+            _export('default', DirectionalLight);
+
+            DirectionalLightRenderer = (function (_LightRenderer) {
+                function DirectionalLightRenderer(light, gl) {
+                    _classCallCheck(this, DirectionalLightRenderer);
+
+                    _LightRenderer.call(this, light, gl);
+                    //Object.freeze(this);
+                }
+
+                _inherits(DirectionalLightRenderer, _LightRenderer);
+
+                DirectionalLightRenderer.prototype.getLocations = function getLocations(program) {
+                    return _Object$freeze({
+                        enabled: program.getUniformLocation('directionalLights[' + this.id + '].enabled'),
+                        direction: program.getUniformLocation('directionalLights[' + this.id + '].direction'),
+                        diffuse: program.getUniformLocation('directionalLights[' + this.id + '].diffuse'),
+                        specular: program.getUniformLocation('directionalLights[' + this.id + '].specular')
+                    });
+                };
+
+                DirectionalLightRenderer.prototype.render = function render(program) {
+                    var gl = this.gl;
+                    var light = this.light;
+                    var locations = this.getLocations(program);
+
+                    gl.uniform1i(locations.enabled, true);
+                    gl.uniform3fv(locations.direction, light.direction); // Only local direction used
+                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
+                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
+                };
+
+                return DirectionalLightRenderer;
+            })(LightRenderer);
+        }
+    };
+});
+System.register('lib/light/pointlight', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/object/freeze', 'lib/extra/functional', 'lib/light/base', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8'], function (_export) {
+    var _inherits, _classCallCheck, _Object$freeze, construct, Light, LightRenderer, glm, memoize, vec3, buf, ensureVector, PointLight, PointLightRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime512CoreJsObjectFreeze['default'];
+        }, function (_libExtraFunctional) {
+            construct = _libExtraFunctional.construct;
+        }, function (_libLightBase) {
+            Light = _libLightBase.Light;
+            LightRenderer = _libLightBase.LightRenderer;
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+            buf = vec3.create();
+
+            ensureVector = function ensureVector(value) {
+                return typeof value === 'number' ? vec3.set(buf, value, value, value) : vec3.copy(buf, value);
+            };
+
+            PointLight = (function (_Light) {
+                function PointLight() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, PointLight);
+
+                    _Light.call(this, 'pointlight', PointLightRenderer, options);
+
+                    var _options$constant = options.constant;
+                    var constant = _options$constant === undefined ? 1 : _options$constant;
+                    var _options$linear = options.linear;
+                    var linear = _options$linear === undefined ? 0.7 : _options$linear;
+                    var _options$quadratic = options.quadratic;
+                    var quadratic = _options$quadratic === undefined ? 1.8 : _options$quadratic;
+
+                    this.constant = constant;
+                    this.linear = linear;
+                    this.quadratic = quadratic;
+
+                    //Object.seal(this);
+                }
+
+                _inherits(PointLight, _Light);
+
+                return PointLight;
+            })(Light);
+
+            _export('default', PointLight);
+
+            PointLightRenderer = (function (_LightRenderer) {
+                function PointLightRenderer(light, gl) {
+                    _classCallCheck(this, PointLightRenderer);
+
+                    _LightRenderer.call(this, light, gl);
+                    //Object.freeze(this);
+                }
+
+                _inherits(PointLightRenderer, _LightRenderer);
+
+                PointLightRenderer.prototype.getLocations = function getLocations(program) {
+                    return _Object$freeze({
+                        enabled: program.getUniformLocation('pointLights[' + this.id + '].enabled'),
+                        position: program.getUniformLocation('pointLights[' + this.id + '].position'),
+                        diffuse: program.getUniformLocation('pointLights[' + this.id + '].diffuse'),
+                        specular: program.getUniformLocation('pointLights[' + this.id + '].specular'),
+                        constant: program.getUniformLocation('pointLights[' + this.id + '].constant'),
+                        linear: program.getUniformLocation('pointLights[' + this.id + '].linear'),
+                        quadratic: program.getUniformLocation('pointLights[' + this.id + '].quadratic')
+                    });
+                };
+
+                PointLightRenderer.prototype.render = function render(program) {
+                    var gl = this.gl;
+                    var light = this.light;
+                    var locations = this.getLocations(program);
+
+                    gl.uniform1i(locations.enabled, true);
+                    gl.uniform3fv(locations.position, light.worldPosition);
+                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
+                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
+
+                    gl.uniform1f(locations.constant, light.constant);
+                    gl.uniform1f(locations.linear, light.linear);
+                    gl.uniform1f(locations.quadratic, light.quadratic);
+                };
+
+                return PointLightRenderer;
+            })(LightRenderer);
+        }
+    };
+});
+System.register('lib/light/spotlight', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/object/freeze', 'lib/extra/functional', 'lib/light/base', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8'], function (_export) {
+    var _inherits, _classCallCheck, _Object$freeze, construct, Light, LightRenderer, glm, memoize, vec3, ensureVector, deg2rad, SpotLight, SpotLightRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime512CoreJsObjectFreeze['default'];
+        }, function (_libExtraFunctional) {
+            construct = _libExtraFunctional.construct;
+        }, function (_libLightBase) {
+            Light = _libLightBase.Light;
+            LightRenderer = _libLightBase.LightRenderer;
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+
+            ensureVector = function ensureVector(value) {
+                return typeof value === 'number' ? vec3.fromValues(value, value, value) : vec3.clone(value);
+            };
+
+            deg2rad = Math.PI / 180;
+
+            SpotLight = (function (_Light) {
+                function SpotLight() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, SpotLight);
+
+                    _Light.call(this, 'spotlight', SpotLightRenderer, options);
+
+                    var _options$constant = options.constant;
+                    var constant = _options$constant === undefined ? 1 : _options$constant;
+                    var _options$linear = options.linear;
+                    var linear = _options$linear === undefined ? 0.7 : _options$linear;
+                    var _options$quadratic = options.quadratic;
+                    var quadratic = _options$quadratic === undefined ? 1.8 : _options$quadratic;
+                    var _options$cutoff = options.cutoff;
+                    var cutoff = _options$cutoff === undefined ? 40 : _options$cutoff;
+                    var _options$outerCutoff = options.outerCutoff;
+                    var outerCutoff = _options$outerCutoff === undefined ? 35 : _options$outerCutoff;
+
+                    this.constant = constant;
+                    this.linear = linear;
+                    this.quadratic = quadratic;
+                    this.cutoff = cutoff;
+                    this.outerCutoff = outerCutoff;
+
+                    //Object.seal(this);
+                }
+
+                _inherits(SpotLight, _Light);
+
+                return SpotLight;
+            })(Light);
+
+            _export('default', SpotLight);
+
+            SpotLightRenderer = (function (_LightRenderer) {
+                function SpotLightRenderer(light, gl) {
+                    _classCallCheck(this, SpotLightRenderer);
+
+                    _LightRenderer.call(this, light, gl);
+                    //Object.freeze(this);
+                }
+
+                _inherits(SpotLightRenderer, _LightRenderer);
+
+                SpotLightRenderer.prototype.getLocations = function getLocations(program) {
+                    return _Object$freeze({
+                        enabled: program.getUniformLocation('spotLights[' + this.id + '].enabled'),
+                        position: program.getUniformLocation('spotLights[' + this.id + '].position'),
+                        direction: program.getUniformLocation('spotLights[' + this.id + '].direction'),
+                        diffuse: program.getUniformLocation('spotLights[' + this.id + '].diffuse'),
+                        specular: program.getUniformLocation('spotLights[' + this.id + '].specular'),
+                        constant: program.getUniformLocation('spotLights[' + this.id + '].constant'),
+                        linear: program.getUniformLocation('spotLights[' + this.id + '].linear'),
+                        quadratic: program.getUniformLocation('spotLights[' + this.id + '].quadratic'),
+                        cutoff: program.getUniformLocation('spotLights[' + this.id + '].cutoff'),
+                        outerCutoff: program.getUniformLocation('spotLights[' + this.id + '].outerCutoff')
+                    });
+                };
+
+                SpotLightRenderer.prototype.render = function render(program) {
+                    var gl = this.gl;
+                    var light = this.light;
+                    var locations = this.getLocations(program);
+
+                    gl.uniform1i(locations.enabled, true);
+                    gl.uniform3fv(locations.position, light.worldPosition);
+                    gl.uniform3fv(locations.direction, light.worldDirection);
+
+                    gl.uniform3fv(locations.diffuse, ensureVector(light.diffuse));
+                    gl.uniform3fv(locations.specular, ensureVector(light.specular));
+
+                    gl.uniform1f(locations.constant, light.constant);
+                    gl.uniform1f(locations.linear, light.linear);
+                    gl.uniform1f(locations.quadratic, light.quadratic);
+
+                    gl.uniform1f(locations.cutoff, light.cutoff * deg2rad);
+                    gl.uniform1f(locations.outerCutoff, light.outerCutoff * deg2rad);
+                };
+
+                return SpotLightRenderer;
+            })(LightRenderer);
+        }
+    };
+});
+System.register('lib/camera/orthographic-camera', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@master'], function (_export) {
+    var _inherits, _classCallCheck, Camera, glm, OrthographicCamera;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_libCameraBase) {
+            Camera = _libCameraBase['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            OrthographicCamera = (function (_Camera) {
+                function OrthographicCamera() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, OrthographicCamera);
+
+                    _Camera.call(this, options);
+                    var _options$left = options.left;
+                    var left = _options$left === undefined ? -1 : _options$left;
+                    var _options$right = options.right;
+                    var right = _options$right === undefined ? 1 : _options$right;
+                    var _options$bottom = options.bottom;
+                    var bottom = _options$bottom === undefined ? -1 : _options$bottom;
+                    var _options$top = options.top;
+                    var top = _options$top === undefined ? 1 : _options$top;
+                    var _options$near = options.near;
+                    var near = _options$near === undefined ? 0.1 : _options$near;
+                    var _options$far = options.far;
+                    var far = _options$far === undefined ? 1000 : _options$far;
+
+                    this.left = left;
+                    this.right = right;
+                    this.bottom = bottom;
+                    this.top = top;
+                    this.near = near;
+                    this.far = far;
+                }
+
+                _inherits(OrthographicCamera, _Camera);
+
+                OrthographicCamera.prototype.recalculate = function recalculate() {
+                    glm.mat4.ortho(this.projectionMatrix, this.left, this.right, this.bottom, this.top, this.near, this.far);
+                    _Camera.prototype.recalculate.call(this);
+                };
+
+                return OrthographicCamera;
+            })(Camera);
+
+            _export('default', OrthographicCamera);
+        }
+    };
+});
+System.register('lib/webgl/shader', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/promise', 'lib/extra/ajax'], function (_export) {
+    var _classCallCheck, _Promise, getString, GL, GLShader;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_libExtraAjax) {
+            getString = _libExtraAjax.getString;
+        }],
+        execute: function () {
+            'use strict';
+
+            GL = WebGLRenderingContext;
+
+            GLShader = (function () {
+                function GLShader(gl, source, type) {
+                    _classCallCheck(this, GLShader);
+
+                    this.gl = gl;
+                    this.type = type;
+                    this.handle = gl.createShader(type);
+
+                    gl.shaderSource(this.handle, source);
+                    gl.compileShader(this.handle);
+
+                    var info = this.getInfoLog();
+                    if (info !== '') {
+                        console.error(info);
+                    }
+                }
+
+                GLShader.prototype.getInfoLog = function getInfoLog() {
+                    return this.gl.getShaderInfoLog(this.handle);
+                };
+
+                GLShader.prototype.getSource = function getSource() {
+                    return this.gl.getShaderSource(this.handle);
+                };
+
+                GLShader.prototype.getTranslatedSource = function getTranslatedSource() {
+                    return this.gl.getExtension('WEBGL_debug_shaders').getTranslatedShaderSource(this.handle);
+                };
+
+                GLShader.fromFile = function fromFile(gl, filename) {
+                    var type = ({ vert: GL.VERTEX_SHADER, frag: GL.FRAGMENT_SHADER })[filename.split('.').pop()];
+                    return getString(filename).then(function (source) {
+                        return new GLShader(gl, source, type);
+                    });
+                };
+
+                return GLShader;
+            })();
+
+            _export('default', GLShader);
+        }
+    };
+});
+System.register('lib/workers/wavefront', ['lib/workers/worker-pool'], function (_export) {
+    var WorkerPool, workerpool;
+
+    function wavefrontWorker(stringBuffer, resolve) {
+
+        var timerName = 'Parsing OBJ file';
+
+        console.time(timerName);
+
+        var packed = { v: [], vt: [], vn: [], i: [] };
+
+        var array = new Uint8Array(stringBuffer),
+            char,
+            c1,
+            c2,
+            c3,
+            offset,
+            row = [],
+            len = array.length,
+            i = 0;
+
+        var times = [];
+
+        // Iterate UTF-8 byte stream, to convert to JavaScript UTF-16 characters
+        while (i < len) {
+
+            c1 = array[i++];
+            switch (c1 >> 4) {
+                case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
+                    // 0xxxxxxx
+                    char = c1;
+                    break;
+
+                case 12:case 13:
+                    // 110x xxxx   10xx xxxx
+                    c2 = array[i++];
+                    char = (c1 & 31) << 6 | c2 & 63;
+                    break;
+
+                case 14:
+                    // 1110 xxxx  10xx xxxx  10xx xxxx
+                    c2 = array[i++];
+                    c3 = array[i++];
+                    char = (c1 & 15) << 12 | (c2 & 63) << 6 | (c3 & 63) << 0;
+                    break;
+            }
+
+            // If new line, create string and process
+            if (char === 10) {
+
+                var line = String.fromCharCode.apply(undefined, row).trim().split(/\s+/);
+
+                var type = line[0],
+                    data = line.slice(1);
+
+                switch (type) {
+                    case 'v':
+                    case 'vn':
+                    case 'vt':
+                        Array.prototype.push.apply(packed[type], data.map(parseFloat));
+                        break;
+
+                    case 'f':
+
+                        var indices = data.map(function (tuple) {
+                            return tuple.split('/').map(function (n, i) {
+                                n = parseInt(n);
+                                return n < 0 ? n + packed[['v', 'vt', 'vn'][i]].length : n - 1;
+                            });
+                        });
+
+                        // Repeat points to form a triangle
+                        if (indices.length < 3) {
+                            for (var j = indices.length; j <= 3; ++j) {
+                                indices[j] = indices[indices.length - 1];
+                            }
+                        }
+
+                        for (var j = 1, len2 = indices.length; j < len2 - 1; ++j) {
+                            packed.i.push(indices[0], indices[j], indices[j + 1]);
+                        }
+                }
+
+                row = [];
+            } else {
+                row.push(char);
+            }
+        }
+
+        var uniqueIndices = {},
+            counter = 0,
+            unpackedUniqueIndices = [],
+            unpackedVertexIndices = [],
+            unpackedTexcoordIndices = [],
+            unpackedNormalIndices = [];
+
+        // Compute new, unique indices.
+        for (i = 0, len = packed.i.length; i < len; i += 3) {
+            for (var j = 0; j < 3; ++j) {
+                var ids = packed.i[i + j],
+                    v_id = ids[0],
+                    vt_id = ids[1],
+                    vn_id = ids[2],
+                    key = ids.join(':'),
+                    index = uniqueIndices[key];
+
+                if (index === undefined) {
+                    index = uniqueIndices[key] = counter++;
+                    unpackedVertexIndices.push(v_id);
+
+                    if (vt_id !== undefined) unpackedTexcoordIndices.push(vt_id);
+                    if (vn_id !== undefined) unpackedNormalIndices.push(vn_id);
+                }
+
+                unpackedUniqueIndices.push(index);
+            }
+        }
+
+        // The typed arrays to return.
+        var indices = new Uint16Array(unpackedUniqueIndices),
+            vertices = new Float32Array(3 * unpackedVertexIndices.length),
+            normals = new Float32Array(3 * unpackedNormalIndices.length),
+            texcoords = new Float32Array(2 * unpackedTexcoordIndices.length);
+
+        for (i = 0, len = unpackedVertexIndices.length; i < len; ++i) {
+            offset = 3 * i;
+
+            var v_offset = 3 * unpackedVertexIndices[i];
+
+            vertices[offset] = packed.v[v_offset];
+            vertices[offset + 1] = packed.v[v_offset + 1];
+            vertices[offset + 2] = packed.v[v_offset + 2];
+        }
+
+        for (i = 0, len = unpackedNormalIndices.length; i < len; ++i) {
+            offset = 3 * i;
+
+            var vn_offset = 3 * unpackedNormalIndices[i];
+
+            normals[offset] = packed.vn[vn_offset];
+            normals[offset + 1] = packed.vn[vn_offset + 1];
+            normals[offset + 2] = packed.vn[vn_offset + 2];
+        }
+
+        for (i = 0, len = unpackedTexcoordIndices.length; i < len; ++i) {
+            offset = 2 * i;
+
+            var vt_offset = 2 * unpackedTexcoordIndices[i];
+
+            texcoords[offset] = packed.vt[vt_offset];
+            texcoords[offset + 1] = packed.vt[vt_offset + 1];
+        }
+
+        console.timeEnd(timerName);
+
+        resolve({
+            indices: indices,
+            vertices: vertices,
+            normals: normals,
+            texcoords: texcoords
+        }, [indices.buffer, vertices.buffer, normals.buffer, texcoords.buffer]);
+    }
+
+    return {
+        setters: [function (_libWorkersWorkerPool) {
+            WorkerPool = _libWorkersWorkerPool['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            workerpool = WorkerPool.fromFunction(wavefrontWorker);
+
+            _export('workerpool', workerpool);
+        }
+    };
+});
+System.register('lib/workers/normal-vectors', ['lib/workers/worker-pool', 'github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
+    var WorkerPool, vec3Module, workerpool;
+
+    function normalVectorWorker(data, resolve) {
+
+        console.time('Calculating normals');
+
+        var vertices = data.vertices,
+            indices = data.indices;
+
+        var normals = new Float32Array(vertices.length);
+
+        // Array to store adjacent triangle offsets for each vertex.
+        // :: Vertex -> [Triangle]
+        var adjacentTriangles = new Array(vertices.length / 3);
+
+        // Packed normals for each triangle.
+        // :: Triangle -> Normal
+        var triangleNormals = new Float32Array(indices.length);
+
+        // Pre-allocate triangle arrays for each vertex.
+        for (var i = 0, len = adjacentTriangles.length; i < len; ++i) {
+            adjacentTriangles[i] = [];
+        }
+
+        // Calculate adjacent triangles
+        for (var offset = 0, len = indices.length; offset < len; offset += 3) {
+
+            // Fetch id:s for vertices in triangle
+            var v0_id = indices[offset],
+                v1_id = indices[offset + 1],
+                v2_id = indices[offset + 2];
+
+            var v0_offset = 3 * v0_id,
+                v1_offset = 3 * v1_id,
+                v2_offset = 3 * v2_id;
+
+            // Fetch vertex vectors
+            var v0 = vec3.set(tmp0, vertices[v0_offset], vertices[v0_offset + 1], vertices[v0_offset + 2]),
+                v1 = vec3.set(tmp1, vertices[v1_offset], vertices[v1_offset + 1], vertices[v1_offset + 2]),
+                v2 = vec3.set(tmp2, vertices[v2_offset], vertices[v2_offset + 1], vertices[v2_offset + 2]);
+
+            // Store current triangle offsets for each vertex in triangle.
+            adjacentTriangles[v0_id].push(offset);
+            adjacentTriangles[v1_id].push(offset);
+            adjacentTriangles[v2_id].push(offset);
+
+            // Calculate area-weighted normal vectors by not normalizing the cross product
+            var normal = vec3.cross(tmp0, vec3.subtract(tmp1, v1, v0), vec3.subtract(tmp2, v2, v0));
+
+            // Store the calculated "normal"
+            triangleNormals[offset] = normal[0];
+            triangleNormals[offset + 1] = normal[1];
+            triangleNormals[offset + 2] = normal[2];
+        }
+
+        // Iterate all vertices
+        for (var vertex = 0, _len = adjacentTriangles.length; vertex < _len; ++vertex) {
+
+            var vertexNormal = vec3.set(tmp0, 0, 0, 0);
+            var triangles = adjacentTriangles[vertex];
+
+            // Iterate all adjacent triangles
+            for (var _i = 0, len2 = triangles.length; _i < len2; ++_i) {
+                var triangleOffset = triangles[_i];
+
+                vertexNormal[0] += triangleNormals[triangleOffset];
+                vertexNormal[1] += triangleNormals[triangleOffset + 1];
+                vertexNormal[2] += triangleNormals[triangleOffset + 2];
+            }
+
+            vec3.normalize(vertexNormal, vertexNormal);
+
+            var offset = 3 * vertex;
+
+            // Store calculated normal
+            normals[offset] = vertexNormal[0];
+            normals[offset + 1] = vertexNormal[1];
+            normals[offset + 2] = vertexNormal[2];
+        }
+
+        console.timeEnd('Calculating normals');
+
+        resolve({
+            indices: indices,
+            vertices: vertices,
+            normals: normals
+        }, [indices.buffer, vertices.buffer, normals.buffer]);
+    }
+
+    return {
+        setters: [function (_libWorkersWorkerPool) {
+            WorkerPool = _libWorkersWorkerPool['default'];
+        }, function (_githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002) {
+            vec3Module = _githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            workerpool = WorkerPool.fromFunction(normalVectorWorker, ['var GLMAT_ARRAY_TYPE = Float32Array;', vec3Module, 'var tmp0 = vec3.create(), tmp1 = vec3.create(), tmp2 = vec3.create();']);
+
+            _export('workerpool', workerpool);
+        }
+    };
+});
+System.register('lib/material/base', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/map', 'lib/extra/errors'], function (_export) {
+  var _classCallCheck, _Map, UnimplementedMethodError, GL, textureCounts, Material, MaterialRenderer;
+
+  return {
+    setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+      _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+    }, function (_npmBabelRuntime512CoreJsMap) {
+      _Map = _npmBabelRuntime512CoreJsMap['default'];
+    }, function (_libExtraErrors) {
+      UnimplementedMethodError = _libExtraErrors.UnimplementedMethodError;
+    }],
+    execute: function () {
+      'use strict';
+
+      GL = WebGLRenderingContext;
+
+      // Keeps track of texture counts for each rendering context.
+      textureCounts = new _Map();
+
+      /**
+       * Interface for materials.
+       */
+
+      Material = (function () {
+        function Material() {
+          var priority = arguments[0] === undefined ? 1 : arguments[0];
+
+          _classCallCheck(this, Material);
+
+          // The higher the priority, the earlier geometries using the materials will be drawn in the render loop.
+          // Useful for skyboxes, which needs to be drawn either first or last.
+          this.priority = priority;
+        }
+
+        /**
+         * Returns a renderer bound to this material instance.
+         * Should always produce the same instance for each WebGL rendering context and material.
+         */
+
+        Material.prototype.getRenderer = function getRenderer(gl) {
+          throw new UnimplementedMethodError();
+        };
+
+        return Material;
+      })();
+
+      _export('Material', Material);
+
+      /**
+       * Interface for material renderers. Bound to a specific material and WebGL rendering context.
+       */
+
+      MaterialRenderer = (function () {
+        function MaterialRenderer(material, program) {
+          _classCallCheck(this, MaterialRenderer);
+
+          this.material = material;
+          this.program = program;
+        }
+
+        MaterialRenderer.allocateTextureUnit = function allocateTextureUnit(gl) {
+          var count = textureCounts.get(gl) || 0;
+          textureCounts.set(gl, count + 1);
+          return count;
+        };
+
+        /**
+         * Runs once for each geometry using this material.
+         * Should be used to bind geometry buffers to program attributes, and cache uniforms locations.
+         */
+
+        MaterialRenderer.prototype.didInitGeometry = function didInitGeometry(geometryRenderer) {};
+
+        /**
+         * Runs once per loop before drawing the models using the material.
+         * Should be used to set material uniforms independent of model drawn.
+         */
+
+        MaterialRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {};
+
+        /**
+         * Runs before drawing each model using the material.
+         * Should be used to set material uniforms dependent on model drawn.
+         */
+
+        MaterialRenderer.prototype.draw = function draw(camera, model) {};
+
+        /**
+         * Runs after all models using the bound material have been drawn.
+         * Should be used to clean up modified state.
+         */
+
+        MaterialRenderer.prototype.didDraw = function didDraw() {};
+
+        return MaterialRenderer;
+      })();
+
+      _export('MaterialRenderer', MaterialRenderer);
+    }
+  };
+});
+System.register('lib/workers/tga', ['lib/workers/worker-pool', 'github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
+    var WorkerPool, targaModule, workerpool;
+
+    function TGAworker(tgaBuffer, resolve) {
+        var tga = new TGA();
+        tga.load(new Uint8Array(tgaBuffer));
+        var imageData = tga.getImageData();
+        var buffer = imageData.data.buffer;
+        resolve({
+            buffer: buffer,
+            height: imageData.height,
+            width: imageData.width
+        }, [buffer]);
+    }
+
+    return {
+        setters: [function (_libWorkersWorkerPool) {
+            WorkerPool = _libWorkersWorkerPool['default'];
+        }, function (_githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002) {
+            targaModule = _githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            workerpool = WorkerPool.fromFunction(TGAworker, [targaModule]);
+
+            _export('workerpool', workerpool);
+        }
+    };
+});
+System.register('lib/camera/perspective-camera', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@master'], function (_export) {
+    var _inherits, _classCallCheck, Camera, glm, deg2rad, PerspectiveCamera;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_libCameraBase) {
+            Camera = _libCameraBase['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            deg2rad = Math.PI / 180;
+
+            PerspectiveCamera = (function (_Camera) {
+                function PerspectiveCamera() {
+                    var options = arguments[0] === undefined ? {} : arguments[0];
+
+                    _classCallCheck(this, PerspectiveCamera);
+
+                    _Camera.call(this, options);
+                    var _options$fov = options.fov;
+                    var fov = _options$fov === undefined ? 60 : _options$fov;
+                    var _options$aspect = options.aspect;
+                    var aspect = _options$aspect === undefined ? 4 / 3 : _options$aspect;
+                    var _options$near = options.near;
+                    var near = _options$near === undefined ? 0.1 : _options$near;
+                    var _options$far = options.far;
+                    var far = _options$far === undefined ? 100 : _options$far;
+
+                    this.fov = fov;
+                    this.aspect = aspect;
+                    this.near = near;
+                    this.far = far;
+                }
+
+                _inherits(PerspectiveCamera, _Camera);
+
+                PerspectiveCamera.prototype.recalculate = function recalculate() {
+                    glm.mat4.perspective(this.projectionMatrix, this.fov * deg2rad, this.aspect, this.near, this.far);
+                    _Camera.prototype.recalculate.call(this);
+                };
+
+                return PerspectiveCamera;
+            })(Camera);
+
+            _export('default', PerspectiveCamera);
+        }
+    };
+});
+System.register('lib/material/skybox', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:memoizee@0.3.8', 'github:toji/gl-matrix@master', 'lib/material/base', 'lib/texture/cubemap', 'lib/extra/functional', 'lib/webgl/program', 'lib/webgl/shader', 'lib/material/shaders/skybox.vert!github:systemjs/plugin-text@0.0.2', 'lib/material/shaders/skybox.frag!github:systemjs/plugin-text@0.0.2'], function (_export) {
+    var _inherits, _classCallCheck, _createClass, memoize, glm, Material, MaterialRenderer, CubeMap, construct, GLProgram, GLShader, vertexShader, fragmentShader, mat4, GL, SkyboxMaterial, SkyboxRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_libMaterialBase) {
+            Material = _libMaterialBase.Material;
+            MaterialRenderer = _libMaterialBase.MaterialRenderer;
+        }, function (_libTextureCubemap) {
+            CubeMap = _libTextureCubemap['default'];
+        }, function (_libExtraFunctional) {
+            construct = _libExtraFunctional.construct;
         }, function (_libWebglProgram) {
-            GLProgram = _libWebglProgram["default"];
+            GLProgram = _libWebglProgram['default'];
+        }, function (_libWebglShader) {
+            GLShader = _libWebglShader['default'];
+        }, function (_libMaterialShadersSkyboxVertGithubSystemjsPluginText002) {
+            vertexShader = _libMaterialShadersSkyboxVertGithubSystemjsPluginText002['default'];
+        }, function (_libMaterialShadersSkyboxFragGithubSystemjsPluginText002) {
+            fragmentShader = _libMaterialShadersSkyboxFragGithubSystemjsPluginText002['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            mat4 = glm.mat4;
+            GL = WebGLRenderingContext;
+
+            SkyboxMaterial = (function (_Material) {
+                function SkyboxMaterial(cubemap) {
+                    _classCallCheck(this, SkyboxMaterial);
+
+                    _Material.call(this, Infinity);
+                    this.cubemap = cubemap;
+                }
+
+                _inherits(SkyboxMaterial, _Material);
+
+                /**
+                 * Returns a renderer bound to this material instance.
+                 * Should always produce the same instance for each WebGL rendering context and material.
+                 */
+
+                SkyboxMaterial.prototype.getRenderer = function getRenderer(gl) {
+                    return SkyboxRenderer.create(this, gl);
+                };
+
+                return SkyboxMaterial;
+            })(Material);
+
+            _export('default', SkyboxMaterial);
+
+            SkyboxRenderer = (function (_MaterialRenderer) {
+                function SkyboxRenderer(material, gl) {
+                    _classCallCheck(this, SkyboxRenderer);
+
+                    _MaterialRenderer.call(this, material, SkyboxRenderer.createProgram(gl));
+
+                    this.locations = {};
+                    this.cameraMatrix = mat4.create();
+                    this.unit = MaterialRenderer.allocateTextureUnit(gl);
+                    this.handle = gl.createTexture();
+
+                    gl.activeTexture(GL.TEXTURE0 + this.unit);
+                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, this.handle);
+
+                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
+                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
+                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE); //Prevents s-coordinate wrapping (repeating).
+                    gl.texParameteri(GL.TEXTURE_CUBE_MAP, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE); //Prevents t-coordinate wrapping (repeating).
+
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.right);
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.left);
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.top);
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.bottom);
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.back);
+                    gl.texImage2D(GL.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, material.cubemap.front);
+
+                    gl.generateMipmap(GL.TEXTURE_CUBE_MAP);
+
+                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, null);
+                }
+
+                _inherits(SkyboxRenderer, _MaterialRenderer);
+
+                /**
+                 * Runs once for each geometry using this material.
+                 * Should be used to bind geometry buffers to program attributes, and cache uniforms locations.
+                 */
+
+                SkyboxRenderer.prototype.didInitGeometry = function didInitGeometry(geometryBuffer) {
+                    var program = this.program;
+                    var locations = this.locations;
+
+                    locations.sampler = program.getUniformLocation('skybox');
+                    locations.cameraMatrix = program.getUniformLocation('cameraMatrix');
+
+                    geometryBuffer.vertexBuffer.setAttribLocation('vertex', program);
+                };
+
+                /**
+                 * Runs once per loop before drawing the models using the material.
+                 * Should be used to set material uniforms independent of model drawn.
+                 */
+
+                SkyboxRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {
+                    var gl = this.program.gl;
+                    gl.depthMask(false);
+                    gl.disable(GL.CULL_FACE);
+                    gl.uniform1i(this.locations.sampler, this.unit);
+
+                    gl.activeTexture(GL.TEXTURE0 + this.unit);
+                    gl.bindTexture(GL.TEXTURE_CUBE_MAP, this.handle);
+                };
+
+                /**
+                 * Runs before drawing each model using the material.
+                 * Should be used to set material uniforms dependent on model drawn.
+                 */
+
+                SkyboxRenderer.prototype.draw = function draw(camera, model) {
+                    var gl = this.program.gl;
+                    var cameraMatrix = this.cameraMatrix;
+
+                    mat4.copy(cameraMatrix, camera.viewMatrix);
+
+                    cameraMatrix[12] = 0;
+                    cameraMatrix[13] = 0;
+                    cameraMatrix[14] = 0;
+
+                    mat4.multiply(cameraMatrix, camera.projectionMatrix, cameraMatrix);
+
+                    gl.uniformMatrix4fv(this.locations.cameraMatrix, false, cameraMatrix);
+                };
+
+                /**
+                 * Runs after all models using the bound material have been drawn.
+                 * Should be used to clean up modified state.
+                 */
+
+                SkyboxRenderer.prototype.didDraw = function didDraw() {
+                    var gl = this.program.gl;
+                    gl.depthMask(true);
+                    gl.enable(GL.CULL_FACE);
+                };
+
+                _createClass(SkyboxRenderer, [{
+                    key: 'locations',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'cameraMatrix',
+                    value: undefined,
+                    enumerable: true
+                }], [{
+                    key: 'create',
+                    value: memoize(construct(SkyboxRenderer), { length: 2 }),
+                    enumerable: true
+                }, {
+                    key: 'createProgram',
+                    value: memoize(function (gl) {
+                        return new GLProgram(gl, new GLShader(gl, vertexShader, GL.VERTEX_SHADER), new GLShader(gl, fragmentShader, GL.FRAGMENT_SHADER));
+                    }),
+                    enumerable: true
+                }]);
+
+                return SkyboxRenderer;
+            })(MaterialRenderer);
+        }
+    };
+});
+System.register('lib/webgl/program', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/bind', 'npm:babel-runtime@5.1.2/core-js/map', 'npm:babel-runtime@5.1.2/core-js/promise', 'lib/webgl/shader'], function (_export) {
+    var _classCallCheck, _bind, _Map, _Promise, GLShader, GL, enums, GLProgram;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersBind) {
+            _bind = _npmBabelRuntime512HelpersBind['default'];
+        }, function (_npmBabelRuntime512CoreJsMap) {
+            _Map = _npmBabelRuntime512CoreJsMap['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_libWebglShader) {
+            GLShader = _libWebglShader['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            GL = WebGLRenderingContext;
+
+            // Taken from the WebGl spec:
+            // http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14
+            enums = {
+                35664: 'FLOAT_VEC2',
+                35665: 'FLOAT_VEC3',
+                35666: 'FLOAT_VEC4',
+                35667: 'INT_VEC2',
+                35668: 'INT_VEC3',
+                35669: 'INT_VEC4',
+                35670: 'BOOL',
+                35671: 'BOOL_VEC2',
+                35672: 'BOOL_VEC3',
+                35673: 'BOOL_VEC4',
+                35674: 'FLOAT_MAT2',
+                35675: 'FLOAT_MAT3',
+                35676: 'FLOAT_MAT4',
+                35678: 'SAMPLER_2D',
+                35680: 'SAMPLER_CUBE',
+                5120: 'BYTE',
+                5121: 'UNSIGNED_BYTE',
+                5122: 'SHORT',
+                5123: 'UNSIGNED_SHORT',
+                5124: 'INT',
+                5125: 'UNSIGNED_INT',
+                5126: 'FLOAT'
+            };
+
+            /**
+             * Wraps a WebGL Shader program
+             */
+
+            GLProgram = (function () {
+                function GLProgram(gl) {
+                    for (var _len = arguments.length, shaders = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+                        shaders[_key - 1] = arguments[_key];
+                    }
+
+                    _classCallCheck(this, GLProgram);
+
+                    this.gl = gl;
+
+                    this.handle = gl.createProgram();
+                    this.vertexShader = shaders.filter(function (shader) {
+                        return shader.type === GL.VERTEX_SHADER;
+                    })[0] || null;
+                    this.fragmentShader = shaders.filter(function (shader) {
+                        return shader.type === GL.FRAGMENT_SHADER;
+                    })[0] || null;
+
+                    this._attribLocationCache = new _Map();
+                    this._uniformLocationCache = new _Map();
+
+                    if ([this.vertexShader, this.fragmentShader].some(function (shader) {
+                        return shader === null;
+                    })) {
+                        throw 'You need to supply both a vertex and a fragment shader!';
+                    }
+
+                    gl.attachShader(this.handle, this.vertexShader.handle);
+                    gl.attachShader(this.handle, this.fragmentShader.handle);
+                    gl.linkProgram(this.handle);
+
+                    var info = this.getInfoLog();
+                    if (info !== '') {
+                        console.error(info);
+                    }
+                }
+
+                GLProgram.prototype.use = function use() {
+                    this.gl.useProgram(this.handle);
+                };
+
+                GLProgram.prototype.getUniformLocation = function getUniformLocation(location) {
+                    var value = this._uniformLocationCache.get(location);
+                    if (value === undefined) {
+                        value = this.gl.getUniformLocation(this.handle, location);
+                        if (value === null) console.error('Couldn\'t get uniform location: ' + location);
+                        this._uniformLocationCache.set(location, value);
+                    }
+                    return value;
+                };
+
+                GLProgram.prototype.getAttribLocation = function getAttribLocation(location) {
+                    var value = this._attribLocationCache.get(location);
+                    if (value === undefined) {
+                        value = this.gl.getAttribLocation(this.handle, location);
+                        if (value === null) console.error('Couldn\'t get attribute location: ' + location);
+                        this._attribLocationCache.set(location, value);
+                    }
+                    return value;
+                };
+
+                GLProgram.prototype.getInfoLog = function getInfoLog() {
+                    return this.gl.getProgramInfoLog(this.handle);
+                };
+
+                GLProgram.prototype.getActiveUniforms = function getActiveUniforms() {
+                    var uniforms = [];
+
+                    for (var i = 0; i < this.gl.getProgramParameter(this.handle, GL.ACTIVE_UNIFORMS); ++i) {
+                        var uniform = this.gl.getActiveUniform(this.handle, i);
+                        uniform.typeName = enums[uniform.type];
+                        uniform.value = this.gl.getUniform(this.handle, this.gl.getUniformLocation(this.handle, uniform.name));
+                        uniforms.push(uniform);
+                    }
+
+                    return uniforms;
+                };
+
+                GLProgram.prototype.getActiveAttributes = function getActiveAttributes() {
+                    var attributes = [];
+
+                    for (var i = 0; i < this.gl.getProgramParameter(this.handle, GL.ACTIVE_ATTRIBUTES); ++i) {
+                        var attribute = this.gl.getActiveAttrib(this.handle, i);
+                        attribute.typeName = enums[attribute.type];
+                        attributes.push(attribute);
+                    }
+                    return attributes;
+                };
+
+                GLProgram.fromShaderPromises = function fromShaderPromises(gl) {
+                    for (var _len2 = arguments.length, shaderPromises = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+                        shaderPromises[_key2 - 1] = arguments[_key2];
+                    }
+
+                    return Promise.all(shaderPromises).then(function (shaders) {
+                        return new (_bind.apply(GLProgram, [null].concat([gl], shaders)))();
+                    });
+                };
+
+                GLProgram.fromShaderFiles = function fromShaderFiles(gl) {
+                    for (var _len3 = arguments.length, shaderFilenames = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+                        shaderFilenames[_key3 - 1] = arguments[_key3];
+                    }
+
+                    return GLProgram.fromShaderPromises(gl, shaderFilenames.map(function (filename) {
+                        return GLShader.fromFile(gl, filename);
+                    }));
+                };
+
+                GLProgram.prototype.setUniform = function setUniform(location, value) {
+                    this.gl.uniform1f(this.getUniformLocation(location), value);
+                };
+
+                GLProgram.prototype.setUniformInt = function setUniformInt(location, value) {
+                    this.gl.uniform1i(this.getUniformLocation(location), value);
+                };
+
+                GLProgram.prototype.setUniformVector = function setUniformVector(location, vector) {
+                    var uniformLocation = this.getUniformLocation(location);
+                    switch (vector.length) {
+                        case 1:
+                            this.gl.uniform1fv(uniformLocation, vector);break;
+                        case 2:
+                            this.gl.uniform2fv(uniformLocation, vector);break;
+                        case 3:
+                            this.gl.uniform3fv(uniformLocation, vector);break;
+                        case 4:
+                            this.gl.uniform4fv(uniformLocation, vector);
+                    }
+                };
+
+                GLProgram.prototype.setUniformIntVector = function setUniformIntVector(location, vector) {
+                    var uniformLocation = this.getUniformLocation(location);
+                    switch (vector.length) {
+                        case 1:
+                            this.gl.uniform1iv(uniformLocation, vector);break;
+                        case 2:
+                            this.gl.uniform2iv(uniformLocation, vector);break;
+                        case 3:
+                            this.gl.uniform3iv(uniformLocation, vector);break;
+                        case 4:
+                            this.gl.uniform4iv(uniformLocation, vector);
+                    }
+                };
+
+                GLProgram.prototype.setUniformMatrix = function setUniformMatrix(location, matrix) {
+                    var transpose = arguments[2] === undefined ? false : arguments[2];
+
+                    var uniformLocation = this.getUniformLocation(location);
+                    switch (matrix.length) {
+                        case 4:
+                            this.gl.uniformMatrix2fv(uniformLocation, transpose, matrix);break;
+                        case 9:
+                            this.gl.uniformMatrix3fv(uniformLocation, transpose, matrix);break;
+                        case 16:
+                            this.gl.uniformMatrix4fv(uniformLocation, transpose, matrix);
+                    }
+                };
+
+                return GLProgram;
+            })();
+
+            _export('default', GLProgram);
+        }
+    };
+});
+System.register('lib/texture/common', ['npm:babel-runtime@5.1.2/core-js/promise', 'lib/extra/ajax', 'lib/workers/tga'], function (_export) {
+    var _Promise, getArrayBuffer, tgaWorker, isPowerOf2;
+
+    function getImage(filename) {
+        var format = arguments[1] === undefined ? filename.split('.').pop() : arguments[1];
+        return (function () {
+            return (function () {
+                switch (format) {
+                    case 'tga':
+                        return getTgaImage(filename);
+                    default:
+                        return getNativeImage(filename);
+                }
+            })().then(function (image) {
+                var width = image.width;
+                var height = image.height;
+
+                if (width !== height || width > 1024 || !isPowerOf2(width) || !isPowerOf2(height)) {
+                    var canvas0 = document.createElement('canvas');
+                    canvas0.width = width;
+                    canvas0.height = height;
+                    canvas0.getContext('2d').putImageData(image, 0, 0);
+
+                    var canvas = document.createElement('canvas');
+                    var size = Math.pow(2, Math.min(10, Math.ceil(Math.log(Math.max(width, height)) / Math.log(2))));
+                    canvas.width = size;
+                    canvas.height = size;
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(canvas0, 0, 0, size, size);
+                    image = ctx.getImageData(0, 0, size, size);
+                }
+
+                return image;
+            });
+        })();
+    }
+
+    // Try using the browser's built-in image support to download an image.
+    function getNativeImage(filename) {
+        return new _Promise(function (resolve, reject) {
+            var img = document.createElement('img');
+
+            var onLoad = function onLoad() {
+                // Convert image element to ImageData by drawing into a canvas and then extracting the content
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                var imageData = ctx.getImageData(0, 0, img.width, img.height);
+                removeListeners();
+                resolve(imageData);
+            };
+
+            var onError = function onError(error) {
+                reject(error);
+                removeListeners();
+            };
+
+            var removeListeners = function removeListeners() {
+                img.removeEventListener('load', onLoad);
+                img.removeEventListener('error', onError);
+            };
+
+            img.addEventListener('error', onError, false);
+            img.addEventListener('load', onLoad, false);
+
+            // Trigger download by setting the source
+            img.src = filename;
+        });
+    }
+
+    // Use the TGA library to download the image as a binary file and parse it.
+    function getTgaImage(filename) {
+        return getArrayBuffer(filename).then(function (tgaBuffer) {
+            return tgaWorker.run(tgaBuffer, { transfers: [tgaBuffer] });
+        }).then(function (_ref) {
+            var buffer = _ref.buffer;
+            var width = _ref.width;
+            var height = _ref.height;
+
+            var array = new Uint8ClampedArray(buffer);
+
+            var image = undefined;
+            try {
+                image = new ImageData(array, width, height);
+            } catch (e) {
+                var canvas = document.createElement('canvas');
+                canvas.height = height;
+                canvas.width = width;
+                image = canvas.getContext('2d').createImageData(width, height);
+                image.data = array;
+            }
+
+            return image;
+        });
+    }
+    return {
+        setters: [function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_libExtraAjax) {
+            getArrayBuffer = _libExtraAjax.getArrayBuffer;
+        }, function (_libWorkersTga) {
+            tgaWorker = _libWorkersTga.workerpool;
+        }],
+        execute: function () {
+            'use strict';
+
+            _export('getImage', getImage);
+
+            isPowerOf2 = function isPowerOf2(x) {
+                return x != 0 && !(x & x - 1);
+            };
+        }
+    };
+});
+System.register('lib/control/mouseview', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'github:baconjs/bacon.js@0.7.53', 'github:toji/gl-matrix@master'], function (_export) {
+    var _classCallCheck, Bacon, glm, vec3, mat4, quat, equals, MouseViewController;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_githubBaconjsBaconJs0753) {
+            Bacon = _githubBaconjsBaconJs0753['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+            mat4 = glm.mat4;
+            quat = glm.quat;
+
+            equals = function equals(a) {
+                return function (b) {
+                    return a === b;
+                };
+            };
+
+            MouseViewController = (function () {
+                function MouseViewController(target, canvas) {
+                    var _this = this;
+
+                    var getHeight = arguments[2] === undefined ? function () {
+                        return 0;
+                    } : arguments[2];
+
+                    _classCallCheck(this, MouseViewController);
+
+                    this.target = target;
+
+                    this.yaw = 0;
+                    this.pitch = 0;
+                    this.roll = 0;
+
+                    this.forward = 0;
+                    this.sideways = 0;
+                    this.turn = 0;
+
+                    this.getHeight = getHeight;
+
+                    var _map = ['keydown', 'keyup'].map(function (e) {
+                        return Bacon.fromEventTarget(document.body, e).map(function (e) {
+                            return e.keyCode;
+                        });
+                    });
+
+                    var onKeyDown = _map[0];
+                    var onKeyUp = _map[1];
+
+                    // Creates an observable Bacon.Property from a keyCode
+                    var fromKeypress = function fromKeypress(keyCode) {
+                        return Bacon.mergeAll(onKeyDown.filter(equals(keyCode)).map(function () {
+                            return true;
+                        }), onKeyUp.filter(equals(keyCode)).map(function () {
+                            return false;
+                        })).skipDuplicates().toProperty(false);
+                    };
+
+                    var _WASDQE$split$map$map = 'WASDQE'.split('').map(function (char) {
+                        return char.charCodeAt(0);
+                    }).map(fromKeypress);
+
+                    var up = _WASDQE$split$map$map[0];
+                    var left = _WASDQE$split$map$map[1];
+                    var down = _WASDQE$split$map$map[2];
+                    var right = _WASDQE$split$map$map[3];
+                    var ccw = _WASDQE$split$map$map[4];
+                    var cw = _WASDQE$split$map$map[5];
+
+                    var _map2 = [[right, left], [down, up], [ccw, cw]].map(function (_ref) {
+                        var positive = _ref[0];
+                        var negative = _ref[1];
+                        return Bacon.combineWith(function (a, b) {
+                            return a + b;
+                        }, positive.map(function (b) {
+                            return +b;
+                        }), negative.map(function (b) {
+                            return -b;
+                        }));
+                    });
+
+                    var x = _map2[0];
+                    var y = _map2[1];
+                    var z = _map2[2];
+
+                    x.onValue(function (val) {
+                        _this.sideways = val;
+                    });
+                    y.onValue(function (val) {
+                        _this.forward = val;
+                    });
+                    z.onValue(function (val) {
+                        _this.turn = val;
+                    });
+
+                    onKeyDown.filter(equals('F'.charCodeAt(0))).onValue(function (key) {
+                        if (canvas.requestFullscreen) {
+                            canvas.requestFullscreen();
+                        } else if (canvas.msRequestFullscreen) {
+                            canvas.msRequestFullscreen();
+                        } else if (canvas.mozRequestFullScreen) {
+                            canvas.mozRequestFullScreen();
+                        } else if (canvas.webkitRequestFullscreen) {
+                            canvas.webkitRequestFullscreen();
+                        }
+                    });
+
+                    canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+
+                    canvas.addEventListener('click', function () {
+                        canvas.requestPointerLock();
+                    }, false);
+
+                    var sensitivity = 0.1;
+
+                    var that = this;
+                    function savePosition(e) {
+                        var movementX = e.movementX !== undefined ? e.movementX : e.mozMovementX;
+                        var movementY = e.movementY !== undefined ? e.movementY : e.mozMovementY;
+
+                        that.pitch = Math.max(-90, Math.min(90, that.pitch + sensitivity * movementY));
+                        that.yaw += sensitivity * movementX;
+                        that.yaw = that.yaw % 360;
+                    }
+
+                    function lockChangeAlert() {
+                        if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
+                            console.log('The pointer lock status is now locked');
+                            document.addEventListener('mousemove', savePosition, false);
+                        } else {
+                            console.log('The pointer lock status is now unlocked');
+                            document.removeEventListener('mousemove', savePosition, false);
+                        }
+                    }
+
+                    document.addEventListener('pointerlockchange', lockChangeAlert, false);
+                    document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+
+                    target.on('tick', this.tick.bind(this));
+                }
+
+                MouseViewController.prototype.tick = function tick(dt) {
+                    var target = this.target;
+
+                    target.lookForward();
+                    target.rotateY(-this.yaw);
+                    target.translateRelatively(vec3.fromValues(dt / 200 * this.sideways, 0, dt / 200 * this.forward));
+                    target.rotateX(-this.pitch);
+                    target.rotateZ(-this.roll);
+
+                    // TODO: less ugly
+                    //this.target.position[1] = this.getHeight(this.target);
+                };
+
+                return MouseViewController;
+            })();
+
+            _export('default', MouseViewController);
+        }
+    };
+});
+System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.1.2/core-js/object/keys'], function (_export) {
+  var _Object$keys, log, error, glValidEnumContexts, glEnums, enumStringToValue;
+
+  /**
+   * Initializes this module. Safe to call more than once.
+   * @param {!WebGLRenderingContext} ctx A WebGL context. If
+   *    you have more than one context it doesn't matter which one
+   *    you pass in, it is only used to pull out constants.
+   */
+  function init(ctx) {
+    if (glEnums == null) {
+      glEnums = {};
+      enumStringToValue = {};
+      for (var propertyName in ctx) {
+        if (typeof ctx[propertyName] == 'number') {
+          glEnums[ctx[propertyName]] = propertyName;
+          enumStringToValue[propertyName] = ctx[propertyName];
+        }
+      }
+    }
+  }
+
+  /**
+   * Checks the utils have been initialized.
+   */
+  function checkInit() {
+    if (glEnums == null) {
+      throw 'WebGLDebugUtils.init(ctx) not called';
+    }
+  }
+
+  /**
+   * Returns true or false if value matches any WebGL enum
+   * @param {*} value Value to check if it might be an enum.
+   * @return {boolean} True if value matches one of the WebGL defined enums
+   */
+  function mightBeEnum(value) {
+    checkInit();
+    return glEnums[value] !== undefined;
+  }
+
+  /**
+   * Gets an string version of an WebGL enum.
+   *
+   * Example:
+   *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
+   *
+   * @param {number} value Value to return an enum for
+   * @return {string} The string version of the enum.
+   */
+  function glEnumToString(value) {
+    checkInit();
+    var name = glEnums[value];
+    return name !== undefined ? 'gl.' + name : '/*UNKNOWN WebGL ENUM*/ 0x' + value.toString(16) + '';
+  }
+
+  /**
+   * Returns the string version of a WebGL argument.
+   * Attempts to convert enum arguments to strings.
+   * @param {string} functionName the name of the WebGL function.
+   * @param {number} numArgs the number of arguments passed to the function.
+   * @param {number} argumentIndx the index of the argument.
+   * @param {*} value The value of the argument.
+   * @return {string} The value as a string.
+   */
+  function glFunctionArgToString(functionName, numArgs, argumentIndex, value) {
+    var funcInfo = glValidEnumContexts[functionName];
+    if (funcInfo !== undefined) {
+      var funcInfo = funcInfo[numArgs];
+      if (funcInfo !== undefined) {
+        if (funcInfo[argumentIndex]) {
+          if (typeof funcInfo[argumentIndex] === 'object' && funcInfo[argumentIndex].enumBitwiseOr !== undefined) {
+            var enums = funcInfo[argumentIndex].enumBitwiseOr;
+            var orResult = 0;
+            var orEnums = [];
+            for (var i = 0; i < enums.length; ++i) {
+              var enumValue = enumStringToValue[enums[i]];
+              if ((value & enumValue) !== 0) {
+                orResult |= enumValue;
+                orEnums.push(glEnumToString(enumValue));
+              }
+            }
+            if (orResult === value) {
+              return orEnums.join(' | ');
+            } else {
+              return glEnumToString(value);
+            }
+          } else {
+            return glEnumToString(value);
+          }
+        }
+      }
+    }
+    if (value === null) {
+      return 'null';
+    } else if (value === undefined) {
+      return 'undefined';
+    } else {
+      return value.toString();
+    }
+  }
+
+  /**
+   * Converts the arguments of a WebGL function to a string.
+   * Attempts to convert enum arguments to strings.
+   *
+   * @param {string} functionName the name of the WebGL function.
+   * @param {number} args The arguments.
+   * @return {string} The arguments as a string.
+   */
+  function glFunctionArgsToString(functionName, args) {
+    // apparently we can't do args.join(",");
+    var argStr = '';
+    var numArgs = args.length;
+    for (var ii = 0; ii < numArgs; ++ii) {
+      argStr += (ii == 0 ? '' : ', ') + glFunctionArgToString(functionName, numArgs, ii, args[ii]);
+    }
+    return argStr;
+  }
+
+  function makePropertyWrapper(wrapper, original, propertyName) {
+    //log("wrap prop: " + propertyName);
+    wrapper.__defineGetter__(propertyName, function () {
+      return original[propertyName];
+    });
+    // TODO(gmane): this needs to handle properties that take more than
+    // one value?
+    wrapper.__defineSetter__(propertyName, function (value) {
+      //log("set: " + propertyName);
+      original[propertyName] = value;
+    });
+  }
+
+  // Makes a function that calls a function on another object.
+  function makeFunctionWrapper(original, functionName) {
+    //log("wrap fn: " + functionName);
+    var f = original[functionName];
+    return function () {
+      //log("call: " + functionName);
+      var result = f.apply(original, arguments);
+      return result;
+    };
+  }
+
+  /**
+   * Given a WebGL context returns a wrapped context that calls
+   * gl.getError after every command and calls a function if the
+   * result is not gl.NO_ERROR.
+   *
+   * @param {!WebGLRenderingContext} ctx The webgl context to
+   *        wrap.
+   * @param {!function(err, funcName, args): void} opt_onErrorFunc
+   *        The function to call when gl.getError returns an
+   *        error. If not specified the default function calls
+   *        console.log with a message.
+   * @param {!function(funcName, args): void} opt_onFunc The
+   *        function to call when each webgl function is called.
+   *        You can use this to log all calls for example.
+   * @param {!WebGLRenderingContext} opt_err_ctx The webgl context
+   *        to call getError on if different than ctx.
+   */
+  function makeDebugContext(ctx, opt_onErrorFunc, opt_onFunc, opt_err_ctx) {
+    opt_err_ctx = opt_err_ctx || ctx;
+    init(ctx);
+    opt_onErrorFunc = opt_onErrorFunc || function (err, functionName, args) {
+      // apparently we can't do args.join(",");
+      var argStr = '';
+      var numArgs = args.length;
+      for (var ii = 0; ii < numArgs; ++ii) {
+        argStr += (ii == 0 ? '' : ', ') + glFunctionArgToString(functionName, numArgs, ii, args[ii]);
+      }
+      error('WebGL error ' + glEnumToString(err) + ' in ' + functionName + '(' + argStr + ')');
+    };
+
+    // Holds booleans for each GL error so after we get the error ourselves
+    // we can still return it to the client app.
+    var glErrorShadow = {};
+
+    // Makes a function that calls a WebGL function and then calls getError.
+    function makeErrorWrapper(ctx, functionName) {
+      return function () {
+        if (opt_onFunc) {
+          opt_onFunc(functionName, arguments);
+        }
+        var result = ctx[functionName].apply(ctx, arguments);
+        var err = opt_err_ctx.getError();
+        if (err != 0) {
+          glErrorShadow[err] = true;
+          opt_onErrorFunc(err, functionName, arguments);
+        }
+        return result;
+      };
+    }
+
+    // Make a an object that has a copy of every property of the WebGL context
+    // but wraps all functions.
+    var wrapper = {};
+    for (var propertyName in ctx) {
+      if (typeof ctx[propertyName] == 'function') {
+        if (propertyName != 'getExtension') {
+          wrapper[propertyName] = makeErrorWrapper(ctx, propertyName);
+        } else {
+          var wrapped = makeErrorWrapper(ctx, propertyName);
+          wrapper[propertyName] = function () {
+            var result = wrapped.apply(ctx, arguments);
+            return makeDebugContext(result, opt_onErrorFunc, opt_onFunc, opt_err_ctx);
+          };
+        }
+      } else {
+        makePropertyWrapper(wrapper, ctx, propertyName);
+      }
+    }
+
+    // Override the getError function with one that returns our saved results.
+    wrapper.getError = function () {
+      for (var err in glErrorShadow) {
+        if (glErrorShadow.hasOwnProperty(err)) {
+          if (glErrorShadow[err]) {
+            glErrorShadow[err] = false;
+            return err;
+          }
+        }
+      }
+      return ctx.NO_ERROR;
+    };
+
+    return wrapper;
+  }
+
+  function resetToInitialState(ctx) {
+    var numAttribs = ctx.getParameter(ctx.MAX_VERTEX_ATTRIBS);
+    var tmp = ctx.createBuffer();
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, tmp);
+    for (var ii = 0; ii < numAttribs; ++ii) {
+      ctx.disableVertexAttribArray(ii);
+      ctx.vertexAttribPointer(ii, 4, ctx.FLOAT, false, 0, 0);
+      ctx.vertexAttrib1f(ii, 0);
+    }
+    ctx.deleteBuffer(tmp);
+
+    var numTextureUnits = ctx.getParameter(ctx.MAX_TEXTURE_IMAGE_UNITS);
+    for (var ii = 0; ii < numTextureUnits; ++ii) {
+      ctx.activeTexture(ctx.TEXTURE0 + ii);
+      ctx.bindTexture(ctx.TEXTURE_CUBE_MAP, null);
+      ctx.bindTexture(ctx.TEXTURE_2D, null);
+    }
+
+    ctx.activeTexture(ctx.TEXTURE0);
+    ctx.useProgram(null);
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, null);
+    ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, null);
+    ctx.bindFramebuffer(ctx.FRAMEBUFFER, null);
+    ctx.bindRenderbuffer(ctx.RENDERBUFFER, null);
+    ctx.disable(ctx.BLEND);
+    ctx.disable(ctx.CULL_FACE);
+    ctx.disable(ctx.DEPTH_TEST);
+    ctx.disable(ctx.DITHER);
+    ctx.disable(ctx.SCISSOR_TEST);
+    ctx.blendColor(0, 0, 0, 0);
+    ctx.blendEquation(ctx.FUNC_ADD);
+    ctx.blendFunc(ctx.ONE, ctx.ZERO);
+    ctx.clearColor(0, 0, 0, 0);
+    ctx.clearDepth(1);
+    ctx.clearStencil(-1);
+    ctx.colorMask(true, true, true, true);
+    ctx.cullFace(ctx.BACK);
+    ctx.depthFunc(ctx.LESS);
+    ctx.depthMask(true);
+    ctx.depthRange(0, 1);
+    ctx.frontFace(ctx.CCW);
+    ctx.hint(ctx.GENERATE_MIPMAP_HINT, ctx.DONT_CARE);
+    ctx.lineWidth(1);
+    ctx.pixelStorei(ctx.PACK_ALIGNMENT, 4);
+    ctx.pixelStorei(ctx.UNPACK_ALIGNMENT, 4);
+    ctx.pixelStorei(ctx.UNPACK_FLIP_Y_WEBGL, false);
+    ctx.pixelStorei(ctx.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    // TODO: Delete this IF.
+    if (ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL) {
+      ctx.pixelStorei(ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL, ctx.BROWSER_DEFAULT_WEBGL);
+    }
+    ctx.polygonOffset(0, 0);
+    ctx.sampleCoverage(1, false);
+    ctx.scissor(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.stencilFunc(ctx.ALWAYS, 0, 4294967295);
+    ctx.stencilMask(4294967295);
+    ctx.stencilOp(ctx.KEEP, ctx.KEEP, ctx.KEEP);
+    ctx.viewport(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.clear(ctx.COLOR_BUFFER_BIT | ctx.DEPTH_BUFFER_BIT | ctx.STENCIL_BUFFER_BIT);
+
+    // TODO: This should NOT be needed but Firefox fails with 'hint'
+    while (ctx.getError());
+  }
+
+  function makeLostContextSimulatingCanvas(canvas) {
+    var unwrappedContext_;
+    var wrappedContext_;
+    var onLost_ = [];
+    var onRestored_ = [];
+    var wrappedContext_ = {};
+    var contextId_ = 1;
+    var contextLost_ = false;
+    var resourceId_ = 0;
+    var resourceDb_ = [];
+    var numCallsToLoseContext_ = 0;
+    var numCalls_ = 0;
+    var canRestore_ = false;
+    var restoreTimeout_ = 0;
+
+    // Holds booleans for each GL error so can simulate errors.
+    var glErrorShadow_ = {};
+
+    canvas.getContext = (function (f) {
+      return function () {
+        var ctx = f.apply(canvas, arguments);
+        // Did we get a context and is it a WebGL context?
+        if (ctx instanceof WebGLRenderingContext) {
+          if (ctx != unwrappedContext_) {
+            if (unwrappedContext_) {
+              throw 'got different context';
+            }
+            unwrappedContext_ = ctx;
+            wrappedContext_ = makeLostContextSimulatingContext(unwrappedContext_);
+          }
+          return wrappedContext_;
+        }
+        return ctx;
+      };
+    })(canvas.getContext);
+
+    function wrapEvent(listener) {
+      if (typeof listener == 'function') {
+        return listener;
+      } else {
+        return function (info) {
+          listener.handleEvent(info);
+        };
+      }
+    }
+
+    var addOnContextLostListener = function addOnContextLostListener(listener) {
+      onLost_.push(wrapEvent(listener));
+    };
+
+    var addOnContextRestoredListener = function addOnContextRestoredListener(listener) {
+      onRestored_.push(wrapEvent(listener));
+    };
+
+    function wrapAddEventListener(canvas) {
+      var f = canvas.addEventListener;
+      canvas.addEventListener = function (type, listener, bubble) {
+        switch (type) {
+          case 'webglcontextlost':
+            addOnContextLostListener(listener);
+            break;
+          case 'webglcontextrestored':
+            addOnContextRestoredListener(listener);
+            break;
+          default:
+            f.apply(canvas, arguments);
+        }
+      };
+    }
+
+    wrapAddEventListener(canvas);
+
+    canvas.loseContext = function () {
+      if (!contextLost_) {
+        contextLost_ = true;
+        numCallsToLoseContext_ = 0;
+        ++contextId_;
+        while (unwrappedContext_.getError());
+        clearErrors();
+        glErrorShadow_[unwrappedContext_.CONTEXT_LOST_WEBGL] = true;
+        var event = makeWebGLContextEvent('context lost');
+        var callbacks = onLost_.slice();
+        setTimeout(function () {
+          //log("numCallbacks:" + callbacks.length);
+          for (var ii = 0; ii < callbacks.length; ++ii) {
+            //log("calling callback:" + ii);
+            callbacks[ii](event);
+          }
+          if (restoreTimeout_ >= 0) {
+            setTimeout(function () {
+              canvas.restoreContext();
+            }, restoreTimeout_);
+          }
+        }, 0);
+      }
+    };
+
+    canvas.restoreContext = function () {
+      if (contextLost_) {
+        if (onRestored_.length) {
+          setTimeout(function () {
+            if (!canRestore_) {
+              throw 'can not restore. webglcontestlost listener did not call event.preventDefault';
+            }
+            freeResources();
+            resetToInitialState(unwrappedContext_);
+            contextLost_ = false;
+            numCalls_ = 0;
+            canRestore_ = false;
+            var callbacks = onRestored_.slice();
+            var event = makeWebGLContextEvent('context restored');
+            for (var ii = 0; ii < callbacks.length; ++ii) {
+              callbacks[ii](event);
+            }
+          }, 0);
+        }
+      }
+    };
+
+    canvas.loseContextInNCalls = function (numCalls) {
+      if (contextLost_) {
+        throw 'You can not ask a lost contet to be lost';
+      }
+      numCallsToLoseContext_ = numCalls_ + numCalls;
+    };
+
+    canvas.getNumCalls = function () {
+      return numCalls_;
+    };
+
+    canvas.setRestoreTimeout = function (timeout) {
+      restoreTimeout_ = timeout;
+    };
+
+    function isWebGLObject(obj) {
+      //return false;
+      return obj instanceof WebGLBuffer || obj instanceof WebGLFramebuffer || obj instanceof WebGLProgram || obj instanceof WebGLRenderbuffer || obj instanceof WebGLShader || obj instanceof WebGLTexture;
+    }
+
+    function checkResources(args) {
+      for (var ii = 0; ii < args.length; ++ii) {
+        var arg = args[ii];
+        if (isWebGLObject(arg)) {
+          return arg.__webglDebugContextLostId__ == contextId_;
+        }
+      }
+      return true;
+    }
+
+    function clearErrors() {
+      var k = _Object$keys(glErrorShadow_);
+      for (var ii = 0; ii < k.length; ++ii) {
+        delete glErrorShadow_[k];
+      }
+    }
+
+    function loseContextIfTime() {
+      ++numCalls_;
+      if (!contextLost_) {
+        if (numCallsToLoseContext_ == numCalls_) {
+          canvas.loseContext();
+        }
+      }
+    }
+
+    // Makes a function that simulates WebGL when out of context.
+    function makeLostContextFunctionWrapper(ctx, functionName) {
+      var f = ctx[functionName];
+      return function () {
+        // log("calling:" + functionName);
+        // Only call the functions if the context is not lost.
+        loseContextIfTime();
+        if (!contextLost_) {
+          //if (!checkResources(arguments)) {
+          //  glErrorShadow_[wrappedContext_.INVALID_OPERATION] = true;
+          //  return;
+          //}
+          var result = f.apply(ctx, arguments);
+          return result;
+        }
+      };
+    }
+
+    function freeResources() {
+      for (var ii = 0; ii < resourceDb_.length; ++ii) {
+        var resource = resourceDb_[ii];
+        if (resource instanceof WebGLBuffer) {
+          unwrappedContext_.deleteBuffer(resource);
+        } else if (resource instanceof WebGLFramebuffer) {
+          unwrappedContext_.deleteFramebuffer(resource);
+        } else if (resource instanceof WebGLProgram) {
+          unwrappedContext_.deleteProgram(resource);
+        } else if (resource instanceof WebGLRenderbuffer) {
+          unwrappedContext_.deleteRenderbuffer(resource);
+        } else if (resource instanceof WebGLShader) {
+          unwrappedContext_.deleteShader(resource);
+        } else if (resource instanceof WebGLTexture) {
+          unwrappedContext_.deleteTexture(resource);
+        }
+      }
+    }
+
+    function makeWebGLContextEvent(statusMessage) {
+      return {
+        statusMessage: statusMessage,
+        preventDefault: function preventDefault() {
+          canRestore_ = true;
+        }
+      };
+    }
+
+    return canvas;
+
+    function makeLostContextSimulatingContext(ctx) {
+      // copy all functions and properties to wrapper
+      for (var propertyName in ctx) {
+        if (typeof ctx[propertyName] == 'function') {
+          wrappedContext_[propertyName] = makeLostContextFunctionWrapper(ctx, propertyName);
+        } else {
+          makePropertyWrapper(wrappedContext_, ctx, propertyName);
+        }
+      }
+
+      // Wrap a few functions specially.
+      wrappedContext_.getError = function () {
+        loseContextIfTime();
+        if (!contextLost_) {
+          var err;
+          while (err = unwrappedContext_.getError()) {
+            glErrorShadow_[err] = true;
+          }
+        }
+        for (var err in glErrorShadow_) {
+          if (glErrorShadow_[err]) {
+            delete glErrorShadow_[err];
+            return err;
+          }
+        }
+        return wrappedContext_.NO_ERROR;
+      };
+
+      var creationFunctions = ['createBuffer', 'createFramebuffer', 'createProgram', 'createRenderbuffer', 'createShader', 'createTexture'];
+      for (var ii = 0; ii < creationFunctions.length; ++ii) {
+        var functionName = creationFunctions[ii];
+        wrappedContext_[functionName] = (function (f) {
+          return function () {
+            loseContextIfTime();
+            if (contextLost_) {
+              return null;
+            }
+            var obj = f.apply(ctx, arguments);
+            obj.__webglDebugContextLostId__ = contextId_;
+            resourceDb_.push(obj);
+            return obj;
+          };
+        })(ctx[functionName]);
+      }
+
+      var functionsThatShouldReturnNull = ['getActiveAttrib', 'getActiveUniform', 'getBufferParameter', 'getContextAttributes', 'getAttachedShaders', 'getFramebufferAttachmentParameter', 'getParameter', 'getProgramParameter', 'getProgramInfoLog', 'getRenderbufferParameter', 'getShaderParameter', 'getShaderInfoLog', 'getShaderSource', 'getTexParameter', 'getUniform', 'getUniformLocation', 'getVertexAttrib'];
+      for (var ii = 0; ii < functionsThatShouldReturnNull.length; ++ii) {
+        var functionName = functionsThatShouldReturnNull[ii];
+        wrappedContext_[functionName] = (function (f) {
+          return function () {
+            loseContextIfTime();
+            if (contextLost_) {
+              return null;
+            }
+            return f.apply(ctx, arguments);
+          };
+        })(wrappedContext_[functionName]);
+      }
+
+      var isFunctions = ['isBuffer', 'isEnabled', 'isFramebuffer', 'isProgram', 'isRenderbuffer', 'isShader', 'isTexture'];
+      for (var ii = 0; ii < isFunctions.length; ++ii) {
+        var functionName = isFunctions[ii];
+        wrappedContext_[functionName] = (function (f) {
+          return function () {
+            loseContextIfTime();
+            if (contextLost_) {
+              return false;
+            }
+            return f.apply(ctx, arguments);
+          };
+        })(wrappedContext_[functionName]);
+      }
+
+      wrappedContext_.checkFramebufferStatus = (function (f) {
+        return function () {
+          loseContextIfTime();
+          if (contextLost_) {
+            return wrappedContext_.FRAMEBUFFER_UNSUPPORTED;
+          }
+          return f.apply(ctx, arguments);
+        };
+      })(wrappedContext_.checkFramebufferStatus);
+
+      wrappedContext_.getAttribLocation = (function (f) {
+        return function () {
+          loseContextIfTime();
+          if (contextLost_) {
+            return -1;
+          }
+          return f.apply(ctx, arguments);
+        };
+      })(wrappedContext_.getAttribLocation);
+
+      wrappedContext_.getVertexAttribOffset = (function (f) {
+        return function () {
+          loseContextIfTime();
+          if (contextLost_) {
+            return 0;
+          }
+          return f.apply(ctx, arguments);
+        };
+      })(wrappedContext_.getVertexAttribOffset);
+
+      wrappedContext_.isContextLost = function () {
+        return contextLost_;
+      };
+
+      return wrappedContext_;
+    }
+  }
+
+  return {
+    setters: [function (_npmBabelRuntime512CoreJsObjectKeys) {
+      _Object$keys = _npmBabelRuntime512CoreJsObjectKeys['default'];
+    }],
+    execute: function () {
+      /*
+      ** Copyright (c) 2012 The Khronos Group Inc.
+      **
+      ** Permission is hereby granted, free of charge, to any person obtaining a
+      ** copy of this software and/or associated documentation files (the
+      ** "Materials"), to deal in the Materials without restriction, including
+      ** without limitation the rights to use, copy, modify, merge, publish,
+      ** distribute, sublicense, and/or sell copies of the Materials, and to
+      ** permit persons to whom the Materials are furnished to do so, subject to
+      ** the following conditions:
+      **
+      ** The above copyright notice and this permission notice shall be included
+      ** in all copies or substantial portions of the Materials.
+      **
+      ** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+      ** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+      ** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      ** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+      ** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+      ** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+      ** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+      */
+
+      // Various functions for helping debug WebGL apps.
+
+      /**
+       * Wrapped logging function.
+       * @param {string} msg Message to log.
+       */
+      'use strict';
+
+      log = function log(msg) {
+        if (window.console && window.console.log) {
+          window.console.log(msg);
+        }
+      };
+
+      /**
+       * Wrapped error logging function.
+       * @param {string} msg Message to log.
+       */
+
+      error = function error(msg) {
+        if (window.console && window.console.error) {
+          window.console.error(msg);
+        } else {
+          log(msg);
+        }
+      };
+
+      /**
+       * Which arguments are enums based on the number of arguments to the function.
+       * So
+       *    'texImage2D': {
+       *       9: { 0:true, 2:true, 6:true, 7:true },
+       *       6: { 0:true, 2:true, 3:true, 4:true },
+       *    },
+       *
+       * means if there are 9 arguments then 6 and 7 are enums, if there are 6
+       * arguments 3 and 4 are enums
+       *
+       * @type {!Object.<number, !Object.<number, string>}
+       */
+      glValidEnumContexts = {
+        // Generic setters and getters
+
+        enable: { 1: { 0: true } },
+        disable: { 1: { 0: true } },
+        getParameter: { 1: { 0: true } },
+
+        // Rendering
+
+        drawArrays: { 3: { 0: true } },
+        drawElements: { 4: { 0: true, 2: true } },
+
+        // Shaders
+
+        createShader: { 1: { 0: true } },
+        getShaderParameter: { 2: { 1: true } },
+        getProgramParameter: { 2: { 1: true } },
+        getShaderPrecisionFormat: { 2: { 0: true, 1: true } },
+
+        // Vertex attributes
+
+        getVertexAttrib: { 2: { 1: true } },
+        vertexAttribPointer: { 6: { 2: true } },
+
+        // Textures
+
+        bindTexture: { 2: { 0: true } },
+        activeTexture: { 1: { 0: true } },
+        getTexParameter: { 2: { 0: true, 1: true } },
+        texParameterf: { 3: { 0: true, 1: true } },
+        texParameteri: { 3: { 0: true, 1: true, 2: true } },
+        texImage2D: {
+          9: { 0: true, 2: true, 6: true, 7: true },
+          6: { 0: true, 2: true, 3: true, 4: true }
+        },
+        texSubImage2D: {
+          9: { 0: true, 6: true, 7: true },
+          7: { 0: true, 4: true, 5: true }
+        },
+        copyTexImage2D: { 8: { 0: true, 2: true } },
+        copyTexSubImage2D: { 8: { 0: true } },
+        generateMipmap: { 1: { 0: true } },
+        compressedTexImage2D: { 7: { 0: true, 2: true } },
+        compressedTexSubImage2D: { 8: { 0: true, 6: true } },
+
+        // Buffer objects
+
+        bindBuffer: { 2: { 0: true } },
+        bufferData: { 3: { 0: true, 2: true } },
+        bufferSubData: { 3: { 0: true } },
+        getBufferParameter: { 2: { 0: true, 1: true } },
+
+        // Renderbuffers and framebuffers
+
+        pixelStorei: { 2: { 0: true, 1: true } },
+        readPixels: { 7: { 4: true, 5: true } },
+        bindRenderbuffer: { 2: { 0: true } },
+        bindFramebuffer: { 2: { 0: true } },
+        checkFramebufferStatus: { 1: { 0: true } },
+        framebufferRenderbuffer: { 4: { 0: true, 1: true, 2: true } },
+        framebufferTexture2D: { 5: { 0: true, 1: true, 2: true } },
+        getFramebufferAttachmentParameter: { 3: { 0: true, 1: true, 2: true } },
+        getRenderbufferParameter: { 2: { 0: true, 1: true } },
+        renderbufferStorage: { 4: { 0: true, 1: true } },
+
+        // Frame buffer operations (clear, blend, depth test, stencil)
+
+        clear: { 1: { 0: { enumBitwiseOr: ['COLOR_BUFFER_BIT', 'DEPTH_BUFFER_BIT', 'STENCIL_BUFFER_BIT'] } } },
+        depthFunc: { 1: { 0: true } },
+        blendFunc: { 2: { 0: true, 1: true } },
+        blendFuncSeparate: { 4: { 0: true, 1: true, 2: true, 3: true } },
+        blendEquation: { 1: { 0: true } },
+        blendEquationSeparate: { 2: { 0: true, 1: true } },
+        stencilFunc: { 3: { 0: true } },
+        stencilFuncSeparate: { 4: { 0: true, 1: true } },
+        stencilMaskSeparate: { 2: { 0: true } },
+        stencilOp: { 3: { 0: true, 1: true, 2: true } },
+        stencilOpSeparate: { 4: { 0: true, 1: true, 2: true, 3: true } },
+
+        // Culling
+
+        cullFace: { 1: { 0: true } },
+        frontFace: { 1: { 0: true } },
+
+        // ANGLE_instanced_arrays extension
+
+        drawArraysInstancedANGLE: { 4: { 0: true } },
+        drawElementsInstancedANGLE: { 5: { 0: true, 2: true } },
+
+        // EXT_blend_minmax extension
+
+        blendEquationEXT: { 1: { 0: true } }
+      };
+
+      /**
+       * Map of numbers to names.
+       * @type {Object}
+       */
+      glEnums = null;
+
+      /**
+       * Map of names to numbers.
+       * @type {Object}
+       */
+      enumStringToValue = null;
+      ;
+      _export('default', {
+        /**
+         * Initializes this module. Safe to call more than once.
+         * @param {!WebGLRenderingContext} ctx A WebGL context. If
+         *    you have more than one context it doesn't matter which one
+         *    you pass in, it is only used to pull out constants.
+         */
+        init: init,
+
+        /**
+         * Returns true or false if value matches any WebGL enum
+         * @param {*} value Value to check if it might be an enum.
+         * @return {boolean} True if value matches one of the WebGL defined enums
+         */
+        mightBeEnum: mightBeEnum,
+
+        /**
+         * Gets an string version of an WebGL enum.
+         *
+         * Example:
+         *   WebGLDebugUtil.init(ctx);
+         *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
+         *
+         * @param {number} value Value to return an enum for
+         * @return {string} The string version of the enum.
+         */
+        glEnumToString: glEnumToString,
+
+        /**
+         * Converts the argument of a WebGL function to a string.
+         * Attempts to convert enum arguments to strings.
+         *
+         * Example:
+         *   WebGLDebugUtil.init(ctx);
+         *   var str = WebGLDebugUtil.glFunctionArgToString('bindTexture', 2, 0, gl.TEXTURE_2D);
+         *
+         * would return 'TEXTURE_2D'
+         *
+         * @param {string} functionName the name of the WebGL function.
+         * @param {number} numArgs The number of arguments
+         * @param {number} argumentIndx the index of the argument.
+         * @param {*} value The value of the argument.
+         * @return {string} The value as a string.
+         */
+        glFunctionArgToString: glFunctionArgToString,
+
+        /**
+         * Converts the arguments of a WebGL function to a string.
+         * Attempts to convert enum arguments to strings.
+         *
+         * @param {string} functionName the name of the WebGL function.
+         * @param {number} args The arguments.
+         * @return {string} The arguments as a string.
+         */
+        glFunctionArgsToString: glFunctionArgsToString,
+
+        /**
+         * Given a WebGL context returns a wrapped context that calls
+         * gl.getError after every command and calls a function if the
+         * result is not NO_ERROR.
+         *
+         * You can supply your own function if you want. For example, if you'd like
+         * an exception thrown on any GL error you could do this
+         *
+         *    function throwOnGLError(err, funcName, args) {
+         *      throw WebGLDebugUtils.glEnumToString(err) +
+         *            " was caused by call to " + funcName;
+         *    };
+         *
+         *    ctx = WebGLDebugUtils.makeDebugContext(
+         *        canvas.getContext("webgl"), throwOnGLError);
+         *
+         * @param {!WebGLRenderingContext} ctx The webgl context to wrap.
+         * @param {!function(err, funcName, args): void} opt_onErrorFunc The function
+         *     to call when gl.getError returns an error. If not specified the default
+         *     function calls console.log with a message.
+         * @param {!function(funcName, args): void} opt_onFunc The
+         *     function to call when each webgl function is called. You
+         *     can use this to log all calls for example.
+         */
+        makeDebugContext: makeDebugContext,
+
+        /**
+         * Given a canvas element returns a wrapped canvas element that will
+         * simulate lost context. The canvas returned adds the following functions.
+         *
+         * loseContext:
+         *   simulates a lost context event.
+         *
+         * restoreContext:
+         *   simulates the context being restored.
+         *
+         * lostContextInNCalls:
+         *   loses the context after N gl calls.
+         *
+         * getNumCalls:
+         *   tells you how many gl calls there have been so far.
+         *
+         * setRestoreTimeout:
+         *   sets the number of milliseconds until the context is restored
+         *   after it has been lost. Defaults to 0. Pass -1 to prevent
+         *   automatic restoring.
+         *
+         * @param {!Canvas} canvas The canvas element to wrap.
+         */
+        makeLostContextSimulatingCanvas: makeLostContextSimulatingCanvas,
+
+        /**
+         * Resets a context to the initial state.
+         * @param {!WebGLRenderingContext} ctx The webgl context to
+         *     reset.
+         */
+        resetToInitialState: resetToInitialState
+      });
+    }
+  };
+});
+System.register('lib/texture/texture2d', ['npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/promise', 'lib/texture/common'], function (_export) {
+    var _createClass, _classCallCheck, _Promise, getImage, Texture2D;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_libTextureCommon) {
+            getImage = _libTextureCommon.getImage;
+        }],
+        execute: function () {
+            'use strict';
+
+            Texture2D = (function () {
+                function Texture2D(imageData) {
+                    _classCallCheck(this, Texture2D);
+
+                    this.imageData = imageData;
+                }
+
+                Texture2D.fromFile = function fromFile(filename, format) {
+                    return getImage(filename, format).then(function (imageData) {
+                        return new Texture2D(imageData);
+                    });
+                };
+
+                _createClass(Texture2D, [{
+                    key: 'width',
+                    get: function () {
+                        return this.imageData.width;
+                    }
+                }, {
+                    key: 'height',
+                    get: function () {
+                        return this.imageData.height;
+                    }
+                }]);
+
+                return Texture2D;
+            })();
+
+            _export('default', Texture2D);
+        }
+    };
+});
+System.register("lib/extra/event-aggregator", ["npm:babel-runtime@5.1.2/helpers/create-class", "npm:babel-runtime@5.1.2/helpers/class-call-check", "npm:babel-runtime@5.1.2/core-js/map", "npm:babel-runtime@5.1.2/core-js/set", "npm:babel-runtime@5.1.2/core-js/get-iterator", "npm:babel-runtime@5.1.2/core-js/weak-map"], function (_export) {
+    var _createClass, _classCallCheck, _Map, _Set, _getIterator, _WeakMap, debug, EventAggregator;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass["default"];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck["default"];
+        }, function (_npmBabelRuntime512CoreJsMap) {
+            _Map = _npmBabelRuntime512CoreJsMap["default"];
+        }, function (_npmBabelRuntime512CoreJsSet) {
+            _Set = _npmBabelRuntime512CoreJsSet["default"];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator["default"];
+        }, function (_npmBabelRuntime512CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime512CoreJsWeakMap["default"];
+        }],
+        execute: function () {
+            "use strict";
+
+            debug = false;
+
+            EventAggregator = (function () {
+                function EventAggregator() {
+                    var bubbleTarget = arguments[0] === undefined ? null : arguments[0];
+
+                    _classCallCheck(this, EventAggregator);
+
+                    EventAggregator.privates.set(this, { callbacks: new _Map(), buffers: new _Map(), bubbleTarget: bubbleTarget });
+                }
+
+                EventAggregator.prototype.on = function on(event) {
+                    var callback = arguments[1] === undefined ? null : arguments[1];
+
+                    if (!this._callbacks.has(event)) this._callbacks.set(event, new _Set());
+
+                    if (debug) console.log("" + this.constructor.name + " bound handler to: " + event);
+
+                    // Add callback
+                    this._callbacks.get(event).add(callback);
+
+                    var buffer = this._buffers.get(event);
+                    if (buffer !== undefined) {
+                        for (var _iterator = buffer, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                            var _ref;
+
+                            if (_isArray) {
+                                if (_i >= _iterator.length) break;
+                                _ref = _iterator[_i++];
+                            } else {
+                                _i = _iterator.next();
+                                if (_i.done) break;
+                                _ref = _i.value;
+                            }
+
+                            var args = _ref.args;
+                            var options = _ref.options;
+
+                            this.trigger.apply(this, [event, optinos].concat(args));
+                            if (debug) console.log("" + this.constructor.name + " (" + options.target.constructor.name + ") released: " + event);
+                        }
+                        this._buffers["delete"](event);
+                    }
+                };
+
+                EventAggregator.prototype.off = function off(event) {
+                    var callback = arguments[1] === undefined ? null : arguments[1];
+
+                    if (this._callbacks.has(event)) {
+                        if (callback === null) this._callbacks["delete"](event);
+
+                        this._callbacks.get(event)["delete"](callback);
+
+                        if (this._callbacks.get(event).size === 0) this._callbacks["delete"](event);
+                    }
+                };
+
+                EventAggregator.prototype.once = function once(event, callback) {
+                    var _this = this;
+
+                    var cb = (function (_cb) {
+                        function cb(_x) {
+                            return _cb.apply(this, arguments);
+                        }
+
+                        cb.toString = function () {
+                            return _cb.toString();
+                        };
+
+                        return cb;
+                    })(function () {
+                        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                            args[_key] = arguments[_key];
+                        }
+
+                        callback.apply(undefined, args);
+                        _this.off(event, cb);
+                    });
+                    this.on(event, cb);
+                };
+
+                EventAggregator.prototype.trigger = function trigger(event) {
+                    for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+                        args[_key2 - 2] = arguments[_key2];
+                    }
+
+                    var options = arguments[1] === undefined ? {} : arguments[1];
+                    var _options$bubble = options.bubble;
+                    var bubble = _options$bubble === undefined ? false : _options$bubble;
+                    var _options$buffer = options.buffer;
+                    var buffer = _options$buffer === undefined ? false : _options$buffer;
+                    var _options$sync = options.sync;
+                    var sync = _options$sync === undefined ? false : _options$sync;
+                    var _options$target = options.target;
+                    var target = _options$target === undefined ? this : _options$target;
+                    var _options$delay = options.delay;
+                    var delay = _options$delay === undefined ? 0 : _options$delay;
+
+                    if (this._callbacks.has(event)) {
+                        if (sync) {
+                            for (var _iterator2 = this._callbacks.get(event), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
+                                var _ref2;
+
+                                if (_isArray2) {
+                                    if (_i2 >= _iterator2.length) break;
+                                    _ref2 = _iterator2[_i2++];
+                                } else {
+                                    _i2 = _iterator2.next();
+                                    if (_i2.done) break;
+                                    _ref2 = _i2.value;
+                                }
+
+                                var handler = _ref2;
+
+                                handler.apply(undefined, args.concat([target]));
+                            }
+                        } else {
+                            var _loop = function () {
+                                if (_isArray3) {
+                                    if (_i3 >= _iterator3.length) return "break";
+                                    _ref3 = _iterator3[_i3++];
+                                } else {
+                                    _i3 = _iterator3.next();
+                                    if (_i3.done) return "break";
+                                    _ref3 = _i3.value;
+                                }
+
+                                var handler = _ref3;
+
+                                window.setTimeout(function () {
+                                    return handler.apply(undefined, args.concat([target]));
+                                }, delay);
+                            };
+
+                            for (var _iterator3 = this._callbacks.get(event), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _getIterator(_iterator3);;) {
+                                var _ref3;
+
+                                var _ret = _loop();
+
+                                if (_ret === "break") break;
+                            }
+                        }
+                    } else if (bubble && EventAggregator.privates.get(this).bubbleTarget !== null) {
+                        var _EventAggregator$privates$get$bubbleTarget;
+
+                        (_EventAggregator$privates$get$bubbleTarget = EventAggregator.privates.get(this).bubbleTarget).trigger.apply(_EventAggregator$privates$get$bubbleTarget, [event, options].concat(args));
+                    } else if (buffer) {
+                        if (!this._buffers.has(event)) this._buffers.set(event, []);
+                        this._buffers.get(event).push({ args: args, options: options });
+                    }
+                };
+
+                _createClass(EventAggregator, [{
+                    key: "_callbacks",
+                    get: function () {
+                        return EventAggregator.privates.get(this).callbacks || (EventAggregator.privates.get(this).callbacks = new _Map());
+                    }
+                }, {
+                    key: "_buffers",
+                    get: function () {
+                        return EventAggregator.privates.get(this).buffers || (EventAggregator.privates.get(this).buffers = new _Map());
+                    }
+                }]);
+
+                return EventAggregator;
+            })();
+
+            _export("default", EventAggregator);
+
+            EventAggregator.privates = new _WeakMap();
+        }
+    };
+});
+System.register('lib/material/phong', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/object/freeze', 'npm:babel-runtime@5.1.2/core-js/map', 'npm:babel-runtime@5.1.2/core-js/get-iterator', 'npm:babel-runtime@5.1.2/core-js/set', 'npm:babel-runtime@5.1.2/core-js/array/from', 'npm:babel-runtime@5.1.2/core-js/symbol/iterator', 'npm:babel-runtime@5.1.2/regenerator', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8', 'lib/material/base', 'lib/texture/texture2d', 'lib/extra/functional', 'lib/webgl/program', 'lib/webgl/shader', 'lib/material/shaders/phong.vert.dot!lib/plugins/dot', 'lib/material/shaders/phong.frag.dot!lib/plugins/dot'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, _Object$freeze, _Map, _getIterator, _Set, _Array$from, _Symbol$iterator, _regeneratorRuntime, glm, memoize, Material, MaterialRenderer, Texture2D, construct, delegate, GLProgram, GLShader, vertexTemplate, fragmentTemplate, vec3, vec4, mat3, mat4, GL, PhongMaterial, PhongRenderer, ColorStrategy, StaticColorStrategy, TextureColorStrategy, TextureAtlas, Region;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime512CoreJsObjectFreeze['default'];
+        }, function (_npmBabelRuntime512CoreJsMap) {
+            _Map = _npmBabelRuntime512CoreJsMap['default'];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime512CoreJsSet) {
+            _Set = _npmBabelRuntime512CoreJsSet['default'];
+        }, function (_npmBabelRuntime512CoreJsArrayFrom) {
+            _Array$from = _npmBabelRuntime512CoreJsArrayFrom['default'];
+        }, function (_npmBabelRuntime512CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime512CoreJsSymbolIterator['default'];
+        }, function (_npmBabelRuntime512Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime512Regenerator['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }, function (_libMaterialBase) {
+            Material = _libMaterialBase.Material;
+            MaterialRenderer = _libMaterialBase.MaterialRenderer;
+        }, function (_libTextureTexture2d) {
+            Texture2D = _libTextureTexture2d['default'];
+        }, function (_libExtraFunctional) {
+            construct = _libExtraFunctional.construct;
+            delegate = _libExtraFunctional.delegate;
+        }, function (_libWebglProgram) {
+            GLProgram = _libWebglProgram['default'];
+        }, function (_libWebglShader) {
+            GLShader = _libWebglShader['default'];
+        }, function (_libMaterialShadersPhongVertDotLibPluginsDot) {
+            vertexTemplate = _libMaterialShadersPhongVertDotLibPluginsDot['default'];
+        }, function (_libMaterialShadersPhongFragDotLibPluginsDot) {
+            fragmentTemplate = _libMaterialShadersPhongFragDotLibPluginsDot['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+            vec4 = glm.vec4;
+            mat3 = glm.mat3;
+            mat4 = glm.mat4;
+            GL = WebGLRenderingContext;
+
+            /**
+             * A material defining the properties used for Phong shading.
+             */
+
+            PhongMaterial = (function (_Material) {
+                function PhongMaterial() {
+                    var _ref5 = arguments[0] === undefined ? {} : arguments[0];
+
+                    var _ref5$shininess = _ref5.shininess;
+                    var shininess = _ref5$shininess === undefined ? 40 : _ref5$shininess;
+                    var _ref5$ambient = _ref5.ambient;
+                    var ambient = _ref5$ambient === undefined ? 0 : _ref5$ambient;
+                    var _ref5$diffuse = _ref5.diffuse;
+                    var diffuse = _ref5$diffuse === undefined ? 0.5 : _ref5$diffuse;
+                    var _ref5$specular = _ref5.specular;
+                    var specular = _ref5$specular === undefined ? diffuse : _ref5$specular;
+
+                    _classCallCheck(this, PhongMaterial);
+
+                    _Material.call(this);
+                    this.shininess = shininess;
+                    this.ambient = ambient;
+                    this.diffuse = diffuse;
+                    this.specular = specular;
+
+                    // Object.seal(this);
+                }
+
+                _inherits(PhongMaterial, _Material);
+
+                /**
+                 * Returns a renderer bound to this material instance.
+                 * Should always produce the same instance for each WebGL rendering context and material.
+                 */
+
+                PhongMaterial.prototype.getRenderer = function getRenderer(gl) {
+                    return PhongRenderer.create(this, gl);
+                };
+
+                PhongMaterial.getSourceType = function getSourceType(source) {
+                    switch (source.constructor) {
+                        case Number:case Array:case Float32Array:
+                            return 'static';
+                        case Texture2D:
+                            return 'texture';
+                        default:
+                            console.error('Incompatible material source color type');
+                    }
+                };
+
+                _createClass(PhongMaterial, [{
+                    key: 'config',
+                    get: function () {
+                        return {
+                            ambient: PhongMaterial.getSourceType(this.ambient),
+                            diffuse: PhongMaterial.getSourceType(this.diffuse),
+                            specular: PhongMaterial.getSourceType(this.specular)
+                        };
+                    }
+                }]);
+
+                return PhongMaterial;
+            })(Material);
+
+            _export('default', PhongMaterial);
+
+            /**
+             * Interface for material renderers. Bound to a specific material and WebGL rendering context.
+             * @abstract
+             */
+
+            PhongRenderer = (function (_MaterialRenderer) {
+                function PhongRenderer(material, gl) {
+                    _classCallCheck(this, PhongRenderer);
+
+                    _MaterialRenderer.call(this, material, PhongRenderer.createProgram(gl, JSON.stringify(material.config), material.config));
+
+                    this.locations = null;
+                    this.ambientStrategy = ColorStrategy.select('ambient', material.ambient, this.program);
+                    this.diffuseStrategy = ColorStrategy.select('diffuse', material.diffuse, this.program);
+                    this.specularStrategy = ColorStrategy.select('specular', material.specular, this.program);
+                }
+
+                _inherits(PhongRenderer, _MaterialRenderer);
+
+                /**
+                 * Runs once for each geometry using this material.
+                 * Should be used to bind geometry buffers to program attributes, and cache uniform locations.
+                 */
+
+                PhongRenderer.prototype.didInitGeometry = function didInitGeometry(_ref6) {
+                    var vertexBuffer = _ref6.vertexBuffer;
+                    var normalBuffer = _ref6.normalBuffer;
+                    var texcoordBuffer = _ref6.texcoordBuffer;
+
+                    vertexBuffer.setAttribLocation('vertex', this.program);
+                    normalBuffer.setAttribLocation('normal', this.program);
+
+                    this.locations = _Object$freeze({
+                        mvpMatrix: this.program.getUniformLocation('mvpMatrix'),
+                        modelMatrix: this.program.getUniformLocation('modelMatrix'),
+                        normalMatrix: this.program.getUniformLocation('normalMatrix'),
+                        viewPos: this.program.getUniformLocation('viewPos'),
+                        shininess: this.program.getUniformLocation('material.shininess')
+                    });
+
+                    this.ambientStrategy.init(texcoordBuffer);
+                    this.diffuseStrategy.init(texcoordBuffer);
+                    this.specularStrategy.init(texcoordBuffer);
+                };
+
+                /**
+                 * Runs once before drawing the models using the material.
+                 * Should be used to set material uniforms independent of model drawn.
+                 */
+
+                PhongRenderer.prototype.willDraw = function willDraw(camera, lightRenderers) {
+                    var gl = this.program.gl;
+                    var locations = this.locations;
+
+                    for (var i = 0, len = lightRenderers.length; i < len; ++i) {
+                        lightRenderers[i].render(this.program);
+                    }
+
+                    gl.uniform3fv(locations.viewPos, camera.worldPosition);
+                    gl.uniform1f(locations.shininess, this.material.shininess);
+
+                    this.ambientStrategy.update();
+                    this.diffuseStrategy.update();
+                    this.specularStrategy.update();
+                };
+
+                /**
+                 * Runs before drawing each model using the material.
+                 * Should be used to set material uniforms dependent on model drawn.
+                 */
+
+                PhongRenderer.prototype.draw = function draw(camera, model) {
+                    var gl = this.program.gl;
+                    var locations = this.locations;
+
+                    gl.uniformMatrix4fv(locations.mvpMatrix, false, camera.calculateMvpMatrix(model));
+                    gl.uniformMatrix4fv(locations.modelMatrix, false, model.worldTransform);
+                    gl.uniformMatrix3fv(locations.normalMatrix, false, model.normalMatrix);
+                };
+
+                _createClass(PhongRenderer, null, [{
+                    key: 'create',
+                    value: memoize(construct(PhongRenderer), { length: 2 }),
+                    enumerable: true
+                }, {
+                    key: 'createProgram',
+                    value: memoize(function (gl, configString, config) {
+                        return new GLProgram(gl, new GLShader(gl, vertexTemplate(config), GL.VERTEX_SHADER), new GLShader(gl, fragmentTemplate(config), GL.FRAGMENT_SHADER));
+                    }, { length: 2 }),
+                    enumerable: true
+                }]);
+
+                return PhongRenderer;
+            })(MaterialRenderer);
+
+            /**
+             * @abstract
+             */
+
+            ColorStrategy = (function () {
+                function ColorStrategy(target, source, program) {
+                    _classCallCheck(this, ColorStrategy);
+
+                    this.locations = {};
+
+                    this.target = target;
+                    this.source = source;
+                    this.program = program;
+                }
+
+                ColorStrategy.prototype.init = function init(texcoordBuffer) {};
+
+                ColorStrategy.prototype.update = function update() {};
+
+                _createClass(ColorStrategy, [{
+                    key: 'locations',
+                    value: undefined,
+                    enumerable: true
+                }], [{
+                    key: 'select',
+                    value: delegate(function (_, source) {
+                        switch (PhongMaterial.getSourceType(source)) {
+                            case 'static':
+                                return StaticColorStrategy.create;
+                            case 'texture':
+                                return TextureColorStrategy.create;
+                        }
+                    }),
+                    enumerable: true
+                }]);
+
+                return ColorStrategy;
+            })();
+
+            StaticColorStrategy = (function (_ColorStrategy) {
+                function StaticColorStrategy(target, source, program) {
+                    _classCallCheck(this, StaticColorStrategy);
+
+                    _ColorStrategy.call(this, target, source, program);
+                    this.color = typeof source === 'number' ? vec3.fromValues(source, source, source) : vec3.clone(source);
+                }
+
+                _inherits(StaticColorStrategy, _ColorStrategy);
+
+                StaticColorStrategy.prototype.init = function init(texcoordBuffer) {
+                    this.locations.target = this.program.getUniformLocation('material.' + this.target);
+                };
+
+                StaticColorStrategy.prototype.update = function update() {
+                    this.program.gl.uniform3fv(this.locations.target, this.color);
+                };
+
+                _createClass(StaticColorStrategy, null, [{
+                    key: 'create',
+                    value: memoize(construct(StaticColorStrategy), { length: 3 }),
+                    enumerable: true
+                }]);
+
+                return StaticColorStrategy;
+            })(ColorStrategy);
+
+            TextureColorStrategy = (function (_ColorStrategy2) {
+                function TextureColorStrategy(target, source, program) {
+                    _classCallCheck(this, TextureColorStrategy);
+
+                    _ColorStrategy2.call(this, target, source, program);
+
+                    var _TextureColorStrategy$getConfig = TextureColorStrategy.getConfig(program.gl);
+
+                    var unit = _TextureColorStrategy$getConfig.unit;
+                    var handle = _TextureColorStrategy$getConfig.handle;
+                    var insert = _TextureColorStrategy$getConfig.insert;
+
+                    this.unit = unit;
+                    this.handle = handle;
+                    insert(this);
+                }
+
+                _inherits(TextureColorStrategy, _ColorStrategy2);
+
+                TextureColorStrategy.prototype.init = function init(texcoordBuffer) {
+                    texcoordBuffer.setAttribLocation('texcoord', this.program);
+
+                    this.locations.sampler = this.program.getUniformLocation('' + this.target + 'Sampler');
+                    this.locations.bounds = this.program.getUniformLocation('' + this.target + 'TexcoordBounds');
+                };
+
+                TextureColorStrategy.prototype.update = function update() {
+                    var gl = this.program.gl;
+                    gl.uniform1i(this.locations.sampler, this.unit);
+                    gl.uniform4fv(this.locations.bounds, this.texcoordBounds);
+
+                    gl.activeTexture(GL.TEXTURE0 + this.unit);
+                    gl.bindTexture(GL.TEXTURE_2D, this.handle);
+                };
+
+                _createClass(TextureColorStrategy, null, [{
+                    key: 'getConfig',
+
+                    // TODO: Use multiple texture atlases
+                    value: memoize(function (gl) {
+                        var atlas = new TextureAtlas();
+                        var strategiesUsingImage = new _Map(); //Map<ImageData, Set<TextureColorStrategy>>
+                        var unit = MaterialRenderer.allocateTextureUnit(gl);
+                        var handle = gl.createTexture();
+
+                        var context2d = undefined;
+
+                        var resetCanvas = function resetCanvas() {
+                            var canvas = document.createElement('canvas');
+                            var size = Math.pow(2, atlas.size);
+                            canvas.height = size;
+                            canvas.width = size;
+                            context2d = canvas.getContext('2d');
+                        };
+
+                        resetCanvas();
+
+                        var updateTexcoordBounds = function updateTexcoordBounds(region) {
+                            var size = Math.pow(2, atlas.size);
+                            var bounds = vec4.fromValues(region.left / size, (region.top + region.innerHeight) / size, region.innerWidth / size, -(region.innerHeight / size));
+                            for (var _iterator = strategiesUsingImage.get(region.image), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                                var _ref;
+
+                                if (_isArray) {
+                                    if (_i >= _iterator.length) break;
+                                    _ref = _iterator[_i++];
+                                } else {
+                                    _i = _iterator.next();
+                                    if (_i.done) break;
+                                    _ref = _i.value;
+                                }
+
+                                var strategy = _ref;
+
+                                strategy.texcoordBounds = bounds;
+                            }
+                        };
+
+                        return {
+                            unit: unit, handle: handle,
+
+                            insert: function insert(strategy) {
+                                var texture = strategy.source;
+
+                                var strategies = strategiesUsingImage.get(texture.imageData);
+                                if (strategies === undefined) {
+                                    strategies = new _Set();
+                                    strategiesUsingImage.set(texture.imageData, strategies);
+                                }
+                                strategies.add(strategy);
+
+                                gl.activeTexture(GL.TEXTURE0 + unit);
+                                gl.bindTexture(GL.TEXTURE_2D, handle);
+
+                                var changedRegions = atlas.insert(texture.imageData);
+
+                                if (changedRegions.length === 1 && changedRegions[0].outerWidth < Math.pow(2, atlas.size)) {
+                                    // Partial update
+                                    var _region = changedRegions[0];
+
+                                    updateTexcoordBounds(_region);
+
+                                    context2d.putImageData(_region.image, _region.left, _region.top);
+
+                                    gl.texSubImage2D(GL.TEXTURE_2D, 0, _region.left, _region.top, GL.RGBA, GL.UNSIGNED_BYTE, _region.image);
+                                    gl.generateMipmap(GL.TEXTURE_2D);
+                                } else {
+                                    // Full update
+                                    resetCanvas();
+
+                                    for (var _iterator2 = changedRegions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
+                                        var _ref2;
+
+                                        if (_isArray2) {
+                                            if (_i2 >= _iterator2.length) break;
+                                            _ref2 = _iterator2[_i2++];
+                                        } else {
+                                            _i2 = _iterator2.next();
+                                            if (_i2.done) break;
+                                            _ref2 = _i2.value;
+                                        }
+
+                                        var _region2 = _ref2;
+
+                                        updateTexcoordBounds(_region2);
+                                        context2d.putImageData(_region2.image, _region2.left, _region2.top);
+                                    }
+
+                                    gl.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, context2d.canvas);
+                                    gl.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);
+                                    gl.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR);
+                                    gl.generateMipmap(GL.TEXTURE_2D);
+                                }
+                            }
+                        };
+                    }),
+                    enumerable: true
+                }, {
+                    key: 'create',
+                    value: memoize(construct(TextureColorStrategy), { length: 3 }),
+                    enumerable: true
+                }]);
+
+                return TextureColorStrategy;
+            })(ColorStrategy);
+
+            /**
+             * A dynamically growing texture atlas.
+             */
+
+            TextureAtlas = (function () {
+                function TextureAtlas() {
+                    _classCallCheck(this, TextureAtlas);
+
+                    this.size = 0;
+                    this.region = null;
+
+                    this.reset();
+                }
+
+                TextureAtlas.prototype.reset = function reset() {
+                    var newSize = arguments[0] === undefined ? this.size : arguments[0];
+
+                    this.size = newSize;
+                    var dim = Math.pow(2, this.size);
+                    this.region = new Region(0, 0, dim, dim);
+                };
+
+                /**
+                 * Insert an image into the atlas. Returns an array of regions that were that changed by the insertion.
+                 */
+
+                TextureAtlas.prototype.insert = function insert(texture) {
+                    var getSize = function getSize(image) {
+                        return Math.max(image.height, image.width);
+                    };
+
+                    // Try insert
+                    var region = this.region.insert(texture);
+                    if (region !== undefined) {
+                        // Insertion successful
+                        return [region];
+                    }
+
+                    var compareWith = function compareWith(f) {
+                        return function (a, b) {
+                            return f(a) - f(b);
+                        };
+                    };
+                    var flip = function flip(f) {
+                        return function (b, a) {
+                            return f(a, b);
+                        };
+                    };
+
+                    // Insertion failed, reset and try insert everything again, sorted
+                    var allImages = new _Set(this.region.images());
+                    allImages.add(texture);
+                    var allSortedImages = _Array$from(allImages).sort(flip(compareWith(getSize)));
+                    this.reset();
+
+                    var success = undefined,
+                        regions = undefined;
+                    do {
+                        // Try to insert all sorted textures
+                        success = true;
+                        regions = [];
+                        for (var _iterator3 = allSortedImages, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _getIterator(_iterator3);;) {
+                            var _ref3;
+
+                            if (_isArray3) {
+                                if (_i3 >= _iterator3.length) break;
+                                _ref3 = _iterator3[_i3++];
+                            } else {
+                                _i3 = _iterator3.next();
+                                if (_i3.done) break;
+                                _ref3 = _i3.value;
+                            }
+
+                            var img = _ref3;
+
+                            var subregion = this.region.insert(img);
+                            if (subregion !== undefined) {
+                                // Insertion successful
+                                regions.push(subregion);
+                            } else {
+                                // Insertion failed, enlarge and try all over again
+                                this.reset(this.size + 1);
+                                success = false;
+                                break;
+                            }
+                        }
+                    } while (!success);
+
+                    return regions;
+                };
+
+                _createClass(TextureAtlas, [{
+                    key: 'size',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'region',
+                    // 2-power
+                    value: undefined,
+                    enumerable: true
+                }]);
+
+                return TextureAtlas;
+            })();
+
+            Region = (function () {
+                function Region() {
+                    var left = arguments[0] === undefined ? 0 : arguments[0];
+                    var top = arguments[1] === undefined ? 0 : arguments[1];
+                    var right = arguments[2] === undefined ? 0 : arguments[2];
+                    var bottom = arguments[3] === undefined ? 0 : arguments[3];
+
+                    _classCallCheck(this, Region);
+
+                    this.left = left;
+                    this.top = top;
+                    this.right = right;
+                    this.bottom = bottom;
+
+                    this.image = null;
+
+                    this.downRegion = null;
+                    this.rightRegion = null;
+                }
+
+                Region.prototype.toString = function toString() {
+                    return '' + this.constructor.name + '(' + this.left + ', ' + this.top + ', ' + this.right + ', ' + this.bottom + ')';
+                };
+
+                Region.prototype.images = _regeneratorRuntime.mark(function images() {
+                    var _iterator4, _isArray4, _i4, _ref4, _region3;
+
+                    return _regeneratorRuntime.wrap(function images$(context$2$0) {
+                        while (1) switch (context$2$0.prev = context$2$0.next) {
+                            case 0:
+                                _iterator4 = this, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _getIterator(_iterator4);
+
+                            case 1:
+                                if (!_isArray4) {
+                                    context$2$0.next = 7;
+                                    break;
+                                }
+
+                                if (!(_i4 >= _iterator4.length)) {
+                                    context$2$0.next = 4;
+                                    break;
+                                }
+
+                                return context$2$0.abrupt('break', 16);
+
+                            case 4:
+                                _ref4 = _iterator4[_i4++];
+                                context$2$0.next = 11;
+                                break;
+
+                            case 7:
+                                _i4 = _iterator4.next();
+
+                                if (!_i4.done) {
+                                    context$2$0.next = 10;
+                                    break;
+                                }
+
+                                return context$2$0.abrupt('break', 16);
+
+                            case 10:
+                                _ref4 = _i4.value;
+
+                            case 11:
+                                _region3 = _ref4;
+                                context$2$0.next = 14;
+                                return _region3.image;
+
+                            case 14:
+                                context$2$0.next = 1;
+                                break;
+
+                            case 16:
+                            case 'end':
+                                return context$2$0.stop();
+                        }
+                    }, images, this);
+                });
+
+                /**
+                 * Recursively subdivide into smaller regions.
+                 * Returns the subregion if insertion was successful, otherwise undefined.
+                 */
+
+                Region.prototype.insert = function insert(image /*: { width: number, height: number } */) {
+                    // region is filled, search deeper for sapce
+                    if (this.isFilled) {
+                        return this.downRegion.insert(image) || this.rightRegion.insert(image);
+                    }
+
+                    // doesn't fit
+                    if (image.height > this.outerHeight || image.width > this.outerWidth) {
+                        return undefined;
+                    }
+
+                    // success, store image and split
+                    this.image = image;
+
+                    var dw = this.outerWidth - this.innerWidth; // Horizontal available space
+                    var dh = this.outerHeight - this.innerHeight; // Vertical available space
+
+                    // Split in the direction of most available space
+                    if (dw > dh) {
+                        this.downRegion = new Region(this.left, this.top + this.innerHeight, this.right, this.bottom);
+                        this.rightRegion = new Region(this.left + this.innerWidth, this.top, this.right, this.top + this.innerHeight);
+                    } else {
+                        this.downRegion = new Region(this.left, this.top + this.innerHeight, this.left + this.innerWidth, this.bottom);
+                        this.rightRegion = new Region(this.left + this.innerWidth, this.top, this.right, this.bottom);
+                    }
+
+                    return this;
+                };
+
+                _createClass(Region, [{
+                    key: 'outerWidth',
+                    get: function () {
+                        return this.right - this.left;
+                    }
+                }, {
+                    key: 'outerHeight',
+                    get: function () {
+                        return this.bottom - this.top;
+                    }
+                }, {
+                    key: 'innerWidth',
+                    get: function () {
+                        return this.image.width;
+                    }
+                }, {
+                    key: 'innerHeight',
+                    get: function () {
+                        return this.image.height;
+                    }
+                }, {
+                    key: 'isFilled',
+                    get: function () {
+                        return this.image !== null;
+                    }
+                }]);
+
+                return Region;
+            })();
+
+            // Iterator
+            Region.prototype[_Symbol$iterator] = _regeneratorRuntime.mark(function callee$0$0() {
+                return _regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
+                    while (1) switch (context$1$0.prev = context$1$0.next) {
+                        case 0:
+                            if (!this.isFilled) {
+                                context$1$0.next = 5;
+                                break;
+                            }
+
+                            context$1$0.next = 3;
+                            return this;
+
+                        case 3:
+                            return context$1$0.delegateYield(this.downRegion, 't4', 4);
+
+                        case 4:
+                            return context$1$0.delegateYield(this.rightRegion, 't5', 5);
+
+                        case 5:
+                        case 'end':
+                            return context$1$0.stop();
+                    }
+                }, callee$0$0, this);
+            });
+        }
+    };
+});
+System.register('lib/extra/helpers', ['npm:babel-runtime@5.1.2/helpers/bind', 'npm:babel-runtime@5.1.2/core-js/promise', 'npm:babel-runtime@5.1.2/core-js/object/keys', 'npm:babel-runtime@5.1.2/core-js/object/assign', 'lib/scene/model', 'lib/scene/group', 'lib/camera/perspective-camera', 'lib/geometry/geometry', 'lib/material/phong', 'lib/material/skybox', 'lib/texture/texture2d', 'lib/texture/cubemap', 'lib/geometry/shapes'], function (_export) {
+    var _bind, _Promise, _Object$keys, _Object$assign, Model, Group, PerspectiveCamera, Geometry, PhongMaterial, SkyboxMaterial, Texture2D, CubeMap, Plane, Cube;
+
+    function skybox() {
+        for (var _len = arguments.length, urls = Array(_len), _key = 0; _key < _len; _key++) {
+            urls[_key] = arguments[_key];
+        }
+
+        var materialPromise = CubeMap.fromFiles.apply(CubeMap, urls).then(function (cubemap) {
+            return new SkyboxMaterial(cubemap);
+        });
+        return model('skybox', {}, cube(), materialPromise);
+    }
+
+    function terrain(url) {
+        return Texture2D.fromFile(url).then(function (heightmap) {
+            return new Plane({ heightmap: heightmap });
+        }).then(function (geometry) {
+            return geometry.generateNormals();
+        });
+    }
+
+    function cube() {
+        return new Cube();
+    }
+
+    function plane() {
+        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            args[_key2] = arguments[_key2];
+        }
+
+        return new (_bind.apply(Plane, [null].concat(args)))();
+    }
+
+    function camera() {
+        var options = arguments[0] === undefined ? {} : arguments[0];
+
+        return new PerspectiveCamera(options);
+    }
+
+    function pointlight() {
+        var options = arguments[0] === undefined ? {} : arguments[0];
+
+        return new PointLight(options);
+    }
+
+    function spotlight() {
+        var options = arguments[0] === undefined ? {} : arguments[0];
+
+        return new SpotLight(options);
+    }
+
+    function geometry(url) {
+        return Geometry.fromFile(url);
+    }
+
+    function texture2d(url) {
+        return Texture2D.fromFile(url);
+    }
+
+    function cubemap() {
+        for (var _len3 = arguments.length, urls = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+            urls[_key3] = arguments[_key3];
+        }
+
+        return CubeMap.fromFiles.apply(CubeMap, urls);
+    }
+
+    function phong() {
+        var options = arguments[0] === undefined ? {} : arguments[0];
+
+        // Transform the values to promises, wait for all to finish, put back into an object, and create the material.
+        return Promise.all(_Object$keys(options).map(function (key) {
+            return Promise.resolve(options[key]).then(function (value) {
+                var _ref;
+
+                return (_ref = {}, _ref[key] = value, _ref);
+            });
+        })).then(function (pairs) {
+            return _Object$assign.apply(Object, [{}].concat(pairs));
+        }).then(function (options) {
+            return new PhongMaterial(options);
+        });
+    }
+
+    function model() {
+        for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+            args[_key4] = arguments[_key4];
+        }
+
+        return new (_bind.apply(Model, [null].concat(args)))();
+    }
+
+    function group() {
+        for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+            args[_key5] = arguments[_key5];
+        }
+
+        return new (_bind.apply(Group, [null].concat(args)))();
+    }
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersBind) {
+            _bind = _npmBabelRuntime512HelpersBind['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectKeys) {
+            _Object$keys = _npmBabelRuntime512CoreJsObjectKeys['default'];
+        }, function (_npmBabelRuntime512CoreJsObjectAssign) {
+            _Object$assign = _npmBabelRuntime512CoreJsObjectAssign['default'];
+        }, function (_libSceneModel) {
+            Model = _libSceneModel['default'];
+        }, function (_libSceneGroup) {
+            Group = _libSceneGroup['default'];
+        }, function (_libCameraPerspectiveCamera) {
+            PerspectiveCamera = _libCameraPerspectiveCamera['default'];
+        }, function (_libGeometryGeometry) {
+            Geometry = _libGeometryGeometry['default'];
+        }, function (_libMaterialPhong) {
+            PhongMaterial = _libMaterialPhong['default'];
+        }, function (_libMaterialSkybox) {
+            SkyboxMaterial = _libMaterialSkybox['default'];
+        }, function (_libTextureTexture2d) {
+            Texture2D = _libTextureTexture2d['default'];
+        }, function (_libTextureCubemap) {
+            CubeMap = _libTextureCubemap['default'];
+        }, function (_libGeometryShapes) {
+            Plane = _libGeometryShapes.Plane;
+            Cube = _libGeometryShapes.Cube;
+        }],
+        execute: function () {
+            'use strict';
+
+            _export('skybox', skybox);
+
+            _export('terrain', terrain);
+
+            _export('cube', cube);
+
+            _export('plane', plane);
+
+            _export('camera', camera);
+
+            _export('pointlight', pointlight);
+
+            _export('spotlight', spotlight);
+
+            _export('geometry', geometry);
+
+            _export('texture2d', texture2d);
+
+            _export('cubemap', cubemap);
+
+            _export('phong', phong);
+
+            _export('model', model);
+
+            _export('group', group);
+        }
+    };
+});
+System.register('lib/scene/base', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/get-iterator', 'npm:babel-runtime@5.1.2/core-js/symbol/iterator', 'npm:babel-runtime@5.1.2/regenerator', 'github:toji/gl-matrix@master', 'lib/extra/event-aggregator'], function (_export) {
+    var _inherits, _classCallCheck, _getIterator, _Symbol$iterator, _regeneratorRuntime, glm, EventAggregator, vec3, mat3, mat4, quat, deg2rad, forward, tmp, Scene;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime512CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime512CoreJsSymbolIterator['default'];
+        }, function (_npmBabelRuntime512Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime512Regenerator['default'];
+        }, function (_githubTojiGlMatrixMaster) {
+            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_libExtraEventAggregator) {
+            EventAggregator = _libExtraEventAggregator['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            vec3 = glm.vec3;
+            mat3 = glm.mat3;
+            mat4 = glm.mat4;
+            quat = glm.quat;
+            deg2rad = Math.PI / 180;
+            forward = vec3.fromValues(0, 0, -1);
+            tmp = vec3.create();
+
+            Scene = (function (_EventAggregator) {
+                function Scene(name) {
+                    var _ref2 = arguments[1] === undefined ? {} : arguments[1];
+
+                    var _ref2$parent = _ref2.parent;
+                    var parent = _ref2$parent === undefined ? null : _ref2$parent;
+                    var _ref2$position = _ref2.position;
+                    var position = _ref2$position === undefined ? [0, 0, 0] : _ref2$position;
+                    var _ref2$rotateX = _ref2.rotateX;
+                    var rotateX = _ref2$rotateX === undefined ? 0 : _ref2$rotateX;
+                    var _ref2$rotateY = _ref2.rotateY;
+                    var rotateY = _ref2$rotateY === undefined ? 0 : _ref2$rotateY;
+                    var _ref2$rotateZ = _ref2.rotateZ;
+                    var rotateZ = _ref2$rotateZ === undefined ? 0 : _ref2$rotateZ;
+                    var _ref2$scale = _ref2.scale;
+                    var scale = _ref2$scale === undefined ? 1 : _ref2$scale;
+
+                    _classCallCheck(this, Scene);
+
+                    _EventAggregator.call(this, parent);
+
+                    this.name = name;
+                    this.parent = parent;
+
+                    this.orientation = quat.create();
+                    this.position = vec3.create();
+                    this.scale = vec3.fromValues(1, 1, 1);
+
+                    this.localTransform = mat4.create();
+                    this.worldTransform = mat4.create();
+
+                    this.direction = vec3.create();
+                    this.normalMatrix = mat3.create();
+                    this.worldDirection = vec3.create();
+                    this.worldPosition = vec3.create();
+
+                    // Order is important here
+                    this.resize(scale);
+                    this.rotateX(rotateX); // pitch
+                    this.rotateZ(rotateZ); // roll
+                    this.rotateY(rotateY); // yaw
+                    this.translate(position);
+                }
+
+                _inherits(Scene, _EventAggregator);
+
+                Scene.prototype.toString = function toString() {
+                    return '' + this.constructor.name + '@' + this.name;
+                };
+
+                // TODO: more complex stuff
+
+                Scene.prototype.query = function query(name) {
+                    for (var _iterator = this, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                        var _ref;
+
+                        if (_isArray) {
+                            if (_i >= _iterator.length) break;
+                            _ref = _iterator[_i++];
+                        } else {
+                            _i = _iterator.next();
+                            if (_i.done) break;
+                            _ref = _i.value;
+                        }
+
+                        var node = _ref;
+
+                        if (node.name === name) {
+                            return node;
+                        }
+                    }
+                };
+
+                Scene.prototype.forEach = function forEach(cb) {
+                    cb(this);
+                };
+
+                Scene.prototype.recalculate = function recalculate() {
+                    vec3.transformQuat(this.direction, forward, this.orientation);
+                    mat4.fromRotationTranslation(this.localTransform, this.orientation, this.position);
+                    mat4.scale(this.localTransform, this.localTransform, this.scale);
+
+                    if (this.parent !== null) {
+                        mat4.multiply(this.worldTransform, this.parent.worldTransform, this.localTransform);
+                        vec3.transformMat3(this.worldDirection, this.direction, this.parent.normalMatrix);
+                        vec3.transformMat4(this.worldPosition, this.position, this.parent.worldTransform);
+                    } else {
+                        mat4.copy(this.worldTransform, this.localTransform);
+                        vec3.copy(this.worldDirection, this.direction);
+                        vec3.copy(this.worldPosition, this.position);
+                    }
+
+                    mat3.normalFromMat4(this.normalMatrix, this.worldTransform);
+                };
+
+                Scene.prototype.resize = function resize(amount) {
+                    if (typeof amount === 'number') {
+                        vec3.scale(this.scale, this.scale, amount);
+                    } else {
+                        vec3.multiply(this.scale, this.scale, amount);
+                    }
+                };
+
+                Scene.prototype.rotateX = function rotateX(deg) {
+                    quat.rotateX(this.orientation, this.orientation, deg * deg2rad);
+                };
+
+                Scene.prototype.rotateY = function rotateY(deg) {
+                    quat.rotateY(this.orientation, this.orientation, deg * deg2rad);
+                };
+
+                Scene.prototype.rotateZ = function rotateZ(deg) {
+                    quat.rotateZ(this.orientation, this.orientation, deg * deg2rad);
+                };
+
+                Scene.prototype.lookForward = function lookForward() {
+                    quat.identity(this.orientation);
+                };
+
+                Scene.prototype.translate = function translate(v) {
+                    vec3.add(this.position, this.position, v);
+                };
+
+                Scene.prototype.translateRelatively = function translateRelatively(v) {
+                    vec3.add(this.position, this.position, vec3.transformQuat(tmp, v, this.orientation));
+                };
+
+                Scene.prototype.getEulerAngles = function getEulerAngles() {
+                    var q = this.orientation;
+
+                    var roll = Math.atan2(2 * (q[0] * q[1] + q[2] * q[3]), 1 - 2 * (q[1] * q[1] + q[2] * q[2]));
+                    var pitch = Math.asin(2 * (q[0] * q[2] - q[3] * q[1]));
+                    var yaw = Math.atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] * q[2] + q[3] * q[3]));
+
+                    return { roll: roll, pitch: pitch, yaw: yaw };
+                };
+
+                return Scene;
+            })(EventAggregator);
+
+            _export('default', Scene);
+
+            Scene.prototype[_Symbol$iterator] = _regeneratorRuntime.mark(function callee$0$0() {
+                return _regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
+                    while (1) switch (context$1$0.prev = context$1$0.next) {
+                        case 0:
+                            context$1$0.next = 2;
+                            return this;
+
+                        case 2:
+                        case 'end':
+                            return context$1$0.stop();
+                    }
+                }, callee$0$0, this);
+            });
+        }
+    };
+});
+System.register('lib/geometry/geometry', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/core-js/promise', 'npm:memoizee@0.3.8', 'lib/webgl/buffer', 'lib/webgl/program', 'lib/extra/functional', 'lib/extra/ajax', 'lib/workers/wavefront', 'lib/workers/normal-vectors'], function (_export) {
+    var _classCallCheck, _createClass, _Promise, memoize, GLBuffer, GLProgram, construct, getArrayBuffer, wavefrontWorker, normalsWorker, GL, Geometry, GeometryRenderer;
+
+    return {
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_npmMemoizee038) {
+            memoize = _npmMemoizee038['default'];
+        }, function (_libWebglBuffer) {
+            GLBuffer = _libWebglBuffer['default'];
+        }, function (_libWebglProgram) {
+            GLProgram = _libWebglProgram['default'];
         }, function (_libExtraFunctional) {
             construct = _libExtraFunctional.construct;
         }, function (_libExtraAjax) {
@@ -13583,9 +16108,7 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
             normalsWorker = _libWorkersNormalVectors.workerpool;
         }],
         execute: function () {
-            "use strict";
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+            'use strict';
 
             GL = WebGLRenderingContext;
 
@@ -13605,7 +16128,7 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
 
                     _classCallCheck(this, Geometry);
 
-                    var ensureType = function (array, Type) {
+                    var ensureType = function ensureType(array, Type) {
                         return array instanceof Type ? array : new Type(array);
                     };
                     this.vertices = ensureType(vertices, Float32Array);
@@ -13615,9 +16138,9 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                 }
 
                 Geometry.fromFile = function fromFile(filename) {
-                    var extension = filename.split(".").pop();
+                    var extension = filename.split('.').pop();
                     switch (extension) {
-                        case "obj":
+                        case 'obj':
                             return getArrayBuffer(filename).then(function (stringBuffer) {
                                 return wavefrontWorker.run(stringBuffer, { transfers: [stringBuffer] });
                             }).then(function (data) {
@@ -13627,7 +16150,7 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                             });
 
                         default:
-                            throw new Error("Unsupported geometry file extension: \"." + extension + "\"");
+                            throw new Error('Unsupported geometry file extension: ".' + extension + '"');
                     }
                 };
 
@@ -13639,10 +16162,10 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                 Geometry.prototype.generateNormals = function generateNormals() {
                     var _this = this;
 
-                    return normalsWorker.run({ vertices: this.vertices, indices: this.indices }, { transfers: [this.vertices.buffer, this.indices.buffer] }).then(function (_ref) {
-                        var vertices = _ref.vertices;
-                        var indices = _ref.indices;
-                        var normals = _ref.normals;
+                    return normalsWorker.run({ vertices: this.vertices, indices: this.indices }, { transfers: [this.vertices.buffer, this.indices.buffer] }).then(function (_ref2) {
+                        var vertices = _ref2.vertices;
+                        var indices = _ref2.indices;
+                        var normals = _ref2.normals;
 
                         _this.vertices = vertices;
                         _this.indices = indices;
@@ -13658,21 +16181,22 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                 return Geometry;
             })();
 
-            _export("default", Geometry);
+            _export('default', Geometry);
 
             /**
              * Handles the drawing of a geometry for a specific WebGL context.
              * Binds buffers on creation, and draws elements when calling "draw()".
              * Does not bind shader program attributes, needs to be done in material renderer.
              */
-            GeometryRenderer = _export("GeometryRenderer", (function () {
+
+            GeometryRenderer = (function () {
                 function GeometryRenderer(geometry, gl) {
                     _classCallCheck(this, GeometryRenderer);
 
                     this.gl = gl;
                     this.geometry = geometry;
 
-                    this.vaoExtension = gl.getExtension("OES_vertex_array_object");
+                    this.vaoExtension = gl.getExtension('OES_vertex_array_object');
                     this.vao = this.vaoExtension.createVertexArrayOES();
 
                     this.vertexBuffer = new GLBuffer(gl, geometry.vertices, this.vao);
@@ -13683,8 +16207,6 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                     // Object.freeze(this);
                 }
 
-                GeometryRenderer.create = memoize(construct(GeometryRenderer), { length: 2 });
-
                 // Draws the geometry
 
                 GeometryRenderer.prototype.draw = function draw() {
@@ -13694,48 +16216,57 @@ System.register("lib/geometry/geometry", ["npm:memoizee@0.3.8", "lib/webgl/buffe
                     ext.bindVertexArrayOES(null);
                 };
 
+                _createClass(GeometryRenderer, null, [{
+                    key: 'create',
+                    value: memoize(construct(GeometryRenderer), { length: 2 }),
+                    enumerable: true
+                }]);
+
                 return GeometryRenderer;
-            })());
+            })();
+
+            _export('GeometryRenderer', GeometryRenderer);
         }
     };
 });
-
-// The geometry the renderer belongs to
-System.register("lib/scene/model", ["lib/scene/base", "lib/geometry/geometry", "lib/material/base", "lib/material/phong"], function (_export) {
-    var Scene, Geometry, Material, PhongMaterial, _inherits, _classCallCheck, Model;
+System.register('lib/scene/model', ['npm:babel-runtime@5.1.2/helpers/inherits', 'npm:babel-runtime@5.1.2/helpers/create-class', 'npm:babel-runtime@5.1.2/helpers/class-call-check', 'lib/scene/base', 'lib/geometry/geometry', 'lib/material/base', 'lib/material/phong'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, Scene, Geometry, Material, PhongMaterial, Model;
 
     return {
-        setters: [function (_libSceneBase) {
-            Scene = _libSceneBase["default"];
+        setters: [function (_npmBabelRuntime512HelpersInherits) {
+            _inherits = _npmBabelRuntime512HelpersInherits['default'];
+        }, function (_npmBabelRuntime512HelpersCreateClass) {
+            _createClass = _npmBabelRuntime512HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_libSceneBase) {
+            Scene = _libSceneBase['default'];
         }, function (_libGeometryGeometry) {
-            Geometry = _libGeometryGeometry["default"];
+            Geometry = _libGeometryGeometry['default'];
         }, function (_libMaterialBase) {
             Material = _libMaterialBase.Material;
         }, function (_libMaterialPhong) {
-            PhongMaterial = _libMaterialPhong["default"];
+            PhongMaterial = _libMaterialPhong['default'];
         }],
         execute: function () {
-            "use strict";
-
-            _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+            'use strict';
 
             /**
              * A node that represents a drawable entity.
              */
 
-            Model = (function (Scene) {
+            Model = (function (_Scene) {
                 function Model(name, options, geometry /*: Geometry|Promise<Geometry>*/) {
                     var _this = this;
 
                     var material /*: Material|Promise<Material>*/ = arguments[3] === undefined ? new PhongMaterial() : arguments[3];
-                    this.material = null;
-                    this.geometry = null;
 
                     _classCallCheck(this, Model);
 
-                    Scene.call(this, name, options);
+                    _Scene.call(this, name, options);
+
+                    this.__initializeProperties();
+
                     if (geometry instanceof Geometry) this.geometry = geometry;
                     if (material instanceof Material) this.material = material;
                     this.onGeometryLoaded = Promise.resolve(geometry).then(function (geometry) {
@@ -13746,29 +16277,44 @@ System.register("lib/scene/model", ["lib/scene/base", "lib/geometry/geometry", "
                     });
                 }
 
-                _inherits(Model, Scene);
+                _inherits(Model, _Scene);
+
+                Model.prototype.__initializeProperties = function __initializeProperties() {
+                    this.geometry = null;
+                    this.material = null;
+                };
+
+                _createClass(Model, [{
+                    key: 'geometry',
+                    value: undefined,
+                    enumerable: true
+                }, {
+                    key: 'material',
+                    value: undefined,
+                    enumerable: true
+                }]);
 
                 return Model;
             })(Scene);
 
-            _export("default", Model);
+            _export('default', Model);
         }
     };
 });
-System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "lib/light/base"], function (_export) {
-    var WebGLDebugUtils, Model, Light, _slicedToArray, _classCallCheck, GL, Renderer;
+System.register('lib/renderer', ['npm:babel-runtime@5.1.2/helpers/class-call-check', 'npm:babel-runtime@5.1.2/core-js/weak-map', 'npm:babel-runtime@5.1.2/core-js/weak-set', 'npm:babel-runtime@5.1.2/core-js/promise', 'npm:babel-runtime@5.1.2/core-js/get-iterator', 'lib/extra/webgl-debug', 'github:mrdoob/stats.js@master', 'lib/scene/model', 'lib/light/base'], function (_export) {
+    var _classCallCheck, _WeakMap, _WeakSet, _Promise, _getIterator, WebGLDebugUtils, Stats, Model, Light, GL, Renderer;
 
-    function binarySearch(_x, _x2, _x3, _x4, _x5) {
+    function binarySearch(_x5, _x6, _x7, _x8, _x9) {
         var _again = true;
 
         _function: while (_again) {
-            _again = false;
-            var element = _x,
-                array = _x2,
-                comparator = _x3,
-                start = _x4,
-                end = _x5;
             pivot = undefined;
+            _again = false;
+            var element = _x5,
+                array = _x6,
+                comparator = _x7,
+                start = _x8,
+                end = _x9;
 
             start = start || 0;
             end = end || array.length;
@@ -13779,19 +16325,19 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                 return array[pivot] > element ? pivot - 1 : pivot;
             }
             if (comparator(array[pivot], element) < 0) {
-                _x = element;
-                _x2 = array;
-                _x3 = comparator;
-                _x4 = pivot;
-                _x5 = end;
+                _x5 = element;
+                _x6 = array;
+                _x7 = comparator;
+                _x8 = pivot;
+                _x9 = end;
                 _again = true;
                 continue _function;
             } else {
-                _x = element;
-                _x2 = array;
-                _x3 = comparator;
-                _x4 = start;
-                _x5 = pivot;
+                _x5 = element;
+                _x6 = array;
+                _x7 = comparator;
+                _x8 = start;
+                _x9 = pivot;
                 _again = true;
                 continue _function;
             }
@@ -13804,11 +16350,11 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
     }
 
     function makeDebug(context) {
-        return WebGLDebugUtils.makeDebugContext(context, function (err, funcName, args) {
-            console.error("" + WebGLDebugUtils.glEnumToString(err) + " was caused by call to: " + funcName);
+        return WebGLDebugUtils.makeDebugContext(context, function (err, funcName) {
+            console.error('' + WebGLDebugUtils.glEnumToString(err) + ' was caused by call to: ' + funcName);
         }, function (functionName, args) {
-            console.log("gl." + functionName + "(" + WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ")");
-            for (var _iterator = args, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+            console.log('gl.' + functionName + '(' + WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ')');
+            for (var _iterator = args, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
                 var _ref;
 
                 if (_isArray) {
@@ -13822,67 +16368,94 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
 
                 var arg = _ref;
 
-                if (arg === undefined) console.error("undefined passed to gl." + functionName + "(" + WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ")");
+                if (arg === undefined) console.error('undefined passed to gl.' + functionName + '(' + WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ')');
             }
         });
     }
     return {
-        setters: [function (_libExtraWebglDebug) {
-            WebGLDebugUtils = _libExtraWebglDebug["default"];
+        setters: [function (_npmBabelRuntime512HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime512HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime512CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime512CoreJsWeakMap['default'];
+        }, function (_npmBabelRuntime512CoreJsWeakSet) {
+            _WeakSet = _npmBabelRuntime512CoreJsWeakSet['default'];
+        }, function (_npmBabelRuntime512CoreJsPromise) {
+            _Promise = _npmBabelRuntime512CoreJsPromise['default'];
+        }, function (_npmBabelRuntime512CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime512CoreJsGetIterator['default'];
+        }, function (_libExtraWebglDebug) {
+            WebGLDebugUtils = _libExtraWebglDebug['default'];
+        }, function (_githubMrdoobStatsJsMaster) {
+            Stats = _githubMrdoobStatsJsMaster['default'];
         }, function (_libSceneModel) {
-            Model = _libSceneModel["default"];
+            Model = _libSceneModel['default'];
         }, function (_libLightBase) {
             Light = _libLightBase.Light;
         }],
         execute: function () {
-            "use strict";
-
-            _slicedToArray = function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) { _arr.push(_step.value); if (i && _arr.length === i) break; } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } };
-
-            _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+            'use strict';
 
             GL = WebGLRenderingContext;
 
-            /**
-             *
-             */
-
             Renderer = (function () {
                 function Renderer(scene, camera, canvas) {
-                    var _this = this;
+                    var _this2 = this;
 
-                    var _ref = arguments[3] === undefined ? {} : arguments[3];
+                    var _ref2 = arguments[3] === undefined ? {} : arguments[3];
 
-                    var _ref$debug = _ref.debug;
-                    var debug = _ref$debug === undefined ? false : _ref$debug;
-                    this._lightRenderers = [];
-                    this._materialRenderers = new WeakMap();
-                    this._geometryRenderers = new WeakMap();
-                    this._materialsUsingGeometry = new WeakMap();
-                    this._modelsBeingProcessed = new WeakMap();
-                    this._activeModels = [];
+                    var _ref2$debug = _ref2.debug;
+                    var debug = _ref2$debug === undefined ? false : _ref2$debug;
+                    var _ref2$showFPS = _ref2.showFPS;
+                    var showFPS = _ref2$showFPS === undefined ? false : _ref2$showFPS;
 
                     _classCallCheck(this, Renderer);
 
                     this.scene = scene;
                     this.camera = camera;
 
+                    // Stores the active models in a flat native array sorted by (GLProgram, Material) for performance.
+                    this._activeModels = [];
+
+                    // Stores promises for models being processed
+                    this._modelsBeingProcessed = new _WeakMap();
+
+                    // Stores materials used by geometries, to check if
+                    this._materialsUsingGeometry = new _WeakMap();
+
+                    // Stores renderers for models for faster access than `model.whatever.getRenderer(this.gl)`
+                    this._geometryRenderers = new _WeakMap();
+                    this._materialRenderers = new _WeakMap();
+
+                    // The light renderers in the scene
+                    this._lightRenderers = [];
+
                     canvas.width = canvas.clientWidth;
                     canvas.height = canvas.clientHeight;
 
-                    var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+                    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
                     if (gl === undefined) {
-                        throw "Your browser does not seem to support WebGL! Too bad!";
+                        throw 'Your browser does not seem to support WebGL! Too bad!';
                     }
 
                     if (debug) {
                         gl = makeDebug(gl);
                     }
 
+                    if (showFPS) {
+                        var stats = new Stats();
+                        stats.setMode(0);
+                        stats.domElement.style.position = 'absolute';
+                        stats.domElement.style.left = '0px';
+                        stats.domElement.style.top = '0px';
+                        document.body.appendChild(stats.domElement);
+
+                        this._stats = stats;
+                    }
+
                     camera.aspect = canvas.clientWidth / canvas.clientHeight;
 
-                    window.addEventListener("resize", function () {
+                    window.addEventListener('resize', function () {
                         canvas.width = canvas.clientWidth;
                         canvas.height = canvas.clientHeight;
                         gl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
@@ -13891,16 +16464,26 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
 
                     this.gl = gl;
 
-                    var firstBy = function (f) {
+                    var firstBy = (function (_firstBy) {
+                        function firstBy(_x) {
+                            return _firstBy.apply(this, arguments);
+                        }
+
+                        firstBy.toString = function () {
+                            return _firstBy.toString();
+                        };
+
+                        return firstBy;
+                    })(function (f) {
                         f.thenBy = function (g) {
                             return firstBy(function (a, b) {
                                 return f(a, b) || g(a, b);
                             });
                         };
                         return f;
-                    };
+                    });
 
-                    var comparing = function (f) {
+                    var comparing = function comparing(f) {
                         var cmp = arguments[1] === undefined ? function (a, b) {
                             return b - a;
                         } : arguments[1];
@@ -13909,16 +16492,16 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                         };
                     };
 
-                    var compareObjects = function (a, b) {
+                    var compareObjects = function compareObjects(a, b) {
                         return a === b ? 0 : -1;
                     };
 
                     this._modelComparator = firstBy(comparing(function (model) {
-                        return _this._materialRenderers.get(model).material.priority;
+                        return _this2._materialRenderers.get(model).material.priority;
                     }), function (a, b) {
                         return a - b;
                     }).thenBy(comparing(function (model) {
-                        return _this._materialRenderers.get(model).program;
+                        return _this2._materialRenderers.get(model).program;
                     }, compareObjects)).thenBy(comparing(function (model) {
                         return model.material;
                     }, compareObjects));
@@ -13926,7 +16509,7 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                     var processNode = this._processNode.bind(this);
 
                     this.scene.forEach(processNode);
-                    scene.on("didAddNode", processNode);
+                    scene.on('didAddNode', processNode);
 
                     gl.clearColor(0, 0, 0, 1);
                     gl.enable(GL.DEPTH_TEST);
@@ -13939,15 +16522,15 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                  */
 
                 Renderer.prototype.start = function start() {
-                    var _this = this;
+                    var _this3 = this;
 
                     var lastTime = arguments[0] === undefined ? 0 : arguments[0];
 
                     this.isRunning = true;
                     window.requestAnimationFrame(function (elapsedTime) {
-                        if (_this.isRunning) {
-                            _this.render(elapsedTime - lastTime, elapsedTime);
-                            _this.start(elapsedTime);
+                        if (_this3.isRunning) {
+                            _this3.render(elapsedTime - lastTime, elapsedTime);
+                            _this3.start(elapsedTime);
                         }
                     });
                 };
@@ -13973,34 +16556,32 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                  */
 
                 Renderer.prototype._processModel = function _processModel(model) {
-                    var _this = this;
+                    var _this4 = this;
 
                     var process = this._modelsBeingProcessed.get(model);
                     if (process === undefined) {
-                        process = Promise.all([model.onGeometryLoaded, model.onMaterialLoaded]).then(function (_ref) {
-                            var _ref2 = _slicedToArray(_ref, 2);
+                        process = Promise.all([model.onGeometryLoaded, model.onMaterialLoaded]).then(function (_ref3) {
+                            var geometry = _ref3[0];
+                            var material = _ref3[1];
 
-                            var geometry = _ref2[0];
-                            var material = _ref2[1];
+                            var geometryRenderer = geometry.getRenderer(_this4.gl);
+                            var materialRenderer = material.getRenderer(_this4.gl);
 
-                            var geometryRenderer = geometry.getRenderer(_this.gl);
-                            var materialRenderer = material.getRenderer(_this.gl);
+                            _this4._geometryRenderers.set(model, geometryRenderer);
+                            _this4._materialRenderers.set(model, materialRenderer);
 
-                            _this._geometryRenderers.set(model, geometryRenderer);
-                            _this._materialRenderers.set(model, materialRenderer);
-
-                            if (!_this._materialsUsingGeometry.has(geometry)) {
-                                _this._materialsUsingGeometry.set(geometry, new WeakSet());
+                            if (!_this4._materialsUsingGeometry.has(geometry)) {
+                                _this4._materialsUsingGeometry.set(geometry, new _WeakSet());
                             }
 
                             // If no geometry uses the material, run the init method on the material so that locations can be bound.
-                            if (!_this._materialsUsingGeometry.get(geometry).has(material)) {
+                            if (!_this4._materialsUsingGeometry.get(geometry).has(material)) {
                                 materialRenderer.didInitGeometry(geometryRenderer);
-                                _this._materialsUsingGeometry.get(geometry).add(material);
+                                _this4._materialsUsingGeometry.get(geometry).add(material);
                             }
 
-                            if (_this._activeModels.indexOf(model) === -1) {
-                                insertSorted(model, _this._activeModels, _this._modelComparator);
+                            if (_this4._activeModels.indexOf(model) === -1) {
+                                insertSorted(model, _this4._activeModels, _this4._modelComparator);
                                 //this._activeModels.push(model);
                                 //this._activeModels.sort(this._modelComparator);
                             }
@@ -14016,6 +16597,8 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                  */
 
                 Renderer.prototype.render = function render(deltaTime, elapsedTime) {
+                    if (this._stats) this._stats.begin();
+
                     this.gl.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
 
                     var scene = this.scene,
@@ -14027,7 +16610,7 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
 
                     scene.recalculate();
                     scene.forEach(function (node) {
-                        node.trigger("tick", { sync: true }, deltaTime, elapsedTime);
+                        node.trigger('tick', { sync: true }, deltaTime, elapsedTime);
                     });
 
                     var lastProgram = null,
@@ -14059,99 +16642,117 @@ System.register("lib/renderer", ["lib/extra/webgl-debug", "lib/scene/model", "li
                         lastProgram = program;
                         lastMaterialRenderer = materialRenderer;
                     }
+
+                    if (this._stats) this._stats.end();
                 };
 
                 return Renderer;
             })();
 
-            _export("default", Renderer);
+            _export('default', Renderer);
         }
     };
 });
+System.register('lib/tribus', ['lib/renderer', 'lib/extra/helpers', 'lib/scene/base', 'lib/scene/group', 'lib/scene/model', 'lib/control/mouseview', 'lib/light/directional-light', 'lib/light/pointlight', 'lib/light/spotlight', 'lib/camera/perspective-camera', 'lib/camera/orthographic-camera', 'lib/geometry/geometry', 'lib/geometry/shapes', 'lib/texture/common', 'lib/texture/texture2d', 'lib/texture/cubemap', 'lib/material/phong', 'lib/material/skybox', 'lib/webgl/program', 'lib/webgl/shader', 'lib/webgl/buffer'], function (_export) {
+    return {
+        setters: [function (_libRenderer) {
+            _export('Renderer', _libRenderer['default']);
+        }, function (_libExtraHelpers) {
 
-// Stores the active models in a flat native array sorted by (GLProgram, Material) for performance.
+            // "*" doesn't work anymore for bundle-sfx, bug?
 
-// Stores promises for models being processed
+            _export('skybox', _libExtraHelpers.skybox);
 
-// Stores materials used by geometries, to check if
-/*<Material>*/
+            _export('terrain', _libExtraHelpers.terrain);
 
-// Stores renderers for models for faster access than `model.whatever.getRenderer(this.gl)`
+            _export('cube', _libExtraHelpers.cube);
 
-// The light renderers in the scene
-System.register("lib/tribus", ["lib/renderer", "lib/extra/helpers", "lib/scene/base", "lib/scene/group", "lib/scene/model", "lib/control/mouseview", "lib/light/directional-light", "lib/light/pointlight", "lib/light/spotlight", "lib/camera/perspective-camera", "lib/camera/orthographic-camera", "lib/geometry/geometry", "lib/geometry/shapes", "lib/texture/common", "lib/texture/texture2d", "lib/texture/cubemap", "lib/material/phong", "lib/material/skybox", "lib/webgl/program", "lib/webgl/shader", "lib/webgl/buffer"], function (_export) {
-  return {
-    setters: [function (_libRenderer) {
-      /**
-       * tribus.js
-       */
+            _export('plane', _libExtraHelpers.plane);
 
-      _export("Renderer", _libRenderer["default"]);
-    }, function (_libExtraHelpers) {
-      for (var _key in _libExtraHelpers) {
-        _export(_key, _libExtraHelpers[_key]);
-      }
-    }, function (_libSceneBase) {
-      _export("Scene", _libSceneBase["default"]);
-    }, function (_libSceneGroup) {
-      _export("Group", _libSceneGroup["default"]);
-    }, function (_libSceneModel) {
-      _export("Model", _libSceneModel["default"]);
-    }, function (_libControlMouseview) {
-      _export("MouseViewController", _libControlMouseview["default"]);
-    }, function (_libLightDirectionalLight) {
-      _export("DirectionalLight", _libLightDirectionalLight["default"]);
-    }, function (_libLightPointlight) {
-      _export("PointLight", _libLightPointlight["default"]);
-    }, function (_libLightSpotlight) {
-      _export("SpotLight", _libLightSpotlight["default"]);
-    }, function (_libCameraPerspectiveCamera) {
-      _export("PerspectiveCamera", _libCameraPerspectiveCamera["default"]);
-    }, function (_libCameraOrthographicCamera) {
-      _export("OrthographicCamera", _libCameraOrthographicCamera["default"]);
-    }, function (_libGeometryGeometry) {
-      _export("Geometry", _libGeometryGeometry["default"]);
-    }, function (_libGeometryShapes) {
-      for (var _key2 in _libGeometryShapes) {
-        _export(_key2, _libGeometryShapes[_key2]);
-      }
-    }, function (_libTextureCommon) {
-      for (var _key3 in _libTextureCommon) {
-        _export(_key3, _libTextureCommon[_key3]);
-      }
-    }, function (_libTextureTexture2d) {
-      _export("Texture2D", _libTextureTexture2d["default"]);
-    }, function (_libTextureCubemap) {
-      _export("CubeMap", _libTextureCubemap["default"]);
-    }, function (_libMaterialPhong) {
-      _export("PhongMaterial", _libMaterialPhong["default"]);
-    }, function (_libMaterialSkybox) {
-      _export("SkyboxMaterial", _libMaterialSkybox["default"]);
-    }, function (_libWebglProgram) {
-      _export("GLProgram", _libWebglProgram["default"]);
-    }, function (_libWebglShader) {
-      _export("GLShader", _libWebglShader["default"]);
-    }, function (_libWebglBuffer) {
-      _export("GLBuffer", _libWebglBuffer["default"]);
-    }],
-    execute: function () {
-      "use strict";
-    }
-  };
+            _export('camera', _libExtraHelpers.camera);
+
+            _export('pointlight', _libExtraHelpers.pointlight);
+
+            _export('spotlight', _libExtraHelpers.spotlight);
+
+            _export('geometry', _libExtraHelpers.geometry);
+
+            _export('texture2d', _libExtraHelpers.texture2d);
+
+            _export('cubemap', _libExtraHelpers.cubemap);
+
+            _export('phong', _libExtraHelpers.phong);
+
+            _export('model', _libExtraHelpers.model);
+
+            _export('group', _libExtraHelpers.group);
+        }, function (_libSceneBase) {
+            _export('Scene', _libSceneBase['default']);
+        }, function (_libSceneGroup) {
+            _export('Group', _libSceneGroup['default']);
+        }, function (_libSceneModel) {
+            _export('Model', _libSceneModel['default']);
+        }, function (_libControlMouseview) {
+            _export('MouseViewController', _libControlMouseview['default']);
+        }, function (_libLightDirectionalLight) {
+            _export('DirectionalLight', _libLightDirectionalLight['default']);
+        }, function (_libLightPointlight) {
+            _export('PointLight', _libLightPointlight['default']);
+        }, function (_libLightSpotlight) {
+            _export('SpotLight', _libLightSpotlight['default']);
+        }, function (_libCameraPerspectiveCamera) {
+            _export('PerspectiveCamera', _libCameraPerspectiveCamera['default']);
+        }, function (_libCameraOrthographicCamera) {
+            _export('OrthographicCamera', _libCameraOrthographicCamera['default']);
+        }, function (_libGeometryGeometry) {
+            _export('Geometry', _libGeometryGeometry['default']);
+        }, function (_libGeometryShapes) {
+            _export('Cube', _libGeometryShapes.Cube);
+
+            _export('Plane', _libGeometryShapes.Plane);
+        }, function (_libTextureCommon) {
+            _export('getImage', _libTextureCommon.getImage);
+        }, function (_libTextureTexture2d) {
+            _export('Texture2D', _libTextureTexture2d['default']);
+        }, function (_libTextureCubemap) {
+            _export('CubeMap', _libTextureCubemap['default']);
+        }, function (_libMaterialPhong) {
+            _export('PhongMaterial', _libMaterialPhong['default']);
+        }, function (_libMaterialSkybox) {
+            _export('SkyboxMaterial', _libMaterialSkybox['default']);
+        }, function (_libWebglProgram) {
+            _export('GLProgram', _libWebglProgram['default']);
+        }, function (_libWebglShader) {
+            _export('GLShader', _libWebglShader['default']);
+        }, function (_libWebglBuffer) {
+            _export('GLBuffer', _libWebglBuffer['default']);
+        }],
+        execute: function () {
+            /**
+             * tribus.js
+             */
+
+            'use strict';
+        }
+    };
 });
-System.register("lib/extra/globalizer", ["lib/tribus"], function (_export) {
-  var Tribus;
-  return {
-    setters: [function (_libTribus) {
-      Tribus = _libTribus;
-    }],
-    execute: function () {
-      "use strict";
+System.register('lib/extra/exporter', ['lib/tribus'], function (_export) {
+    var Tribus;
+    return {
+        setters: [function (_libTribus) {
+            Tribus = _libTribus;
+        }],
+        execute: function () {
+            'use strict';
 
-      window.Tribus = Tribus;
-    }
-  };
+            // CommonJS exporter
+            if (typeof module !== 'undefined') {
+                module.exports = Tribus;
+            } else {
+                window.Tribus = Tribus;
+            }
+        }
+    };
 });
-// Stores all properties under the "Tribus" global namespace, for use with sfx bundling
 });
 //# sourceMappingURL=tribus.js.map

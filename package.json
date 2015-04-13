@@ -2,23 +2,27 @@
   "name": "tribus",
   "repository": "http://github.com/maxdavidson/tribus",
   "author": "Max Davidson <davidsonmax@gmail.com>",
-  "version": "0.1.0-alpha",
+  "version": "0.2.0",
   "license": "MIT",
   "registry": "jspm",
   "main": "dist/tribus",
   "jspm": {
     "main": "tribus",
     "directories": {
-      "lib": "lib",
-      "packages": "jspm_packages"
+      "lib": "lib"
     },
     "dependencies": {
       "bacon.js": "github:baconjs/bacon.js@^0.7.53",
-      "doT": "npm:dot@^1.0.3",
       "gl-matrix": "github:toji/gl-matrix@master",
       "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
       "memoizee": "npm:memoizee@^0.3.8",
-      "stats.js": "github:mrdoob/stats.js@master",
+      "stats.js": "github:mrdoob/stats.js@master"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.0.12",
+      "babel-runtime": "npm:babel-runtime@^5.0.12",
+      "core-js": "npm:core-js@^0.8.1",
+      "doT": "npm:dot@^1.0.3",
       "text": "github:systemjs/plugin-text@^0.0.2"
     }
   },

@@ -1,12 +1,16 @@
 {
   "jspm": {
     "directories": {
-      "lib": ".",
-      "packages": "jspm_packages"
+      "lib": "."
     },
     "dependencies": {
       "domready": "github:ded/domready@^1.0.7",
       "tribus": "github:maxdavidson/tribus@master"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.0.12",
+      "babel-runtime": "npm:babel-runtime@^5.0.12",
+      "core-js": "npm:core-js@^0.8.1"
     }
   }
 }

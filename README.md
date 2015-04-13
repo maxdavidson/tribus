@@ -37,9 +37,8 @@ Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://ma
 2. Install [JSPM](http://jspm.io): `npm install -g jspm`
 3. Create a new JSPM project: `jspm init`
 4. Install this library: `jspm install github:maxdavidson/tribus`
-5. Configure your JSPM config to use Babel in "experimental" and "playground" mode.
-6. Make sure to include the Babel polyfill (jspm_packages/babel-polyfill.js) in your HTML file.
-7. Import Tribus as an [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) in your code.
+5. Configure your JSPM config to use Babel's optional "es7.classProperties" mode.
+6. Import Tribus as an [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) in your code.
 
 #### With another Node-compatible module loader: (not tested)
 
@@ -48,7 +47,7 @@ Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://ma
 
 #### With pre-compiled library:
 
-1. Include tribus.js (or tribus.min.js) in your HTML file. No polyfill required.
+1. Include tribus.js (or tribus.min.js) in your HTML file.
 2. Access the global Tribus variable in your code.
 
 
