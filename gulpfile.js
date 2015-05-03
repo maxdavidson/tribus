@@ -1,24 +1,35 @@
-var gulp        = require('gulp'),
-    semver      = require('semver'),
-    shell       = require('gulp-shell'),
-    watch       = require('gulp-watch'),
-    bump        = require('gulp-bump'),
-    pkg         = require('./package.json');
+var fs = require('fs');
 
-gulp.task('deploy-master', function() {
-  var newVer = semver.inc(pkg.version, 'patch');
-  return gulp.src(['./package.json'])
-    .pipe(bump({version: newVer}))
-    .pipe(gulp.dest('./'))
-    .on('end', shell.task([
-            'git add --all',
-            'git commit -m "' + newVer + '"', 
-            'git tag -a "' + newVer + '" -m "' + newVer + '"',
-            'git push origin master', 
-            'git push origin --tags'
-           ]));
+var gulp = require('gulp');
+var bump = require('gulp-bump');
+var git = require('gulp-git');
+var shell = require('gulp-shell');
+var watch = require('gulp-watch');
+var argv = require('yargs').argv;
+
+gulp.task('link', function () {
+  watch(['lib/**/*'], shell.task(['jspm link github:maxdavidson/tribus@master -y']));
 });
 
-gulp.task('link', function(cb) {
-  watch(['lib/**/*'], shell.task(['jspm link github:maxdavidson/tribus@master -y']));
+gulp.task('build', shell.task([
+  'jspm bundle-sfx lib/extra/exporter dist/tribus.js',
+  'jspm bundle-sfx lib/extra/exporter dist/tribus.min.js --minify --skip-source-maps'
+]));
+
+gulp.task('bump', function () {
+  var type = argv.major ? 'major' : argv.minor ? 'minor' : 'patch';
+
+  return gulp.src('./package.json')
+    .pipe(bump({ type: type }))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('tag', ['build'], function () {
+  var pkg = JSON.parse(fs.readFileSync('./package.json'));
+  var version = 'v' + pkg.version;
+
+  return gulp.src(['./dist/*', './package.json'])
+    .pipe(git.add())
+    .pipe(git.commit(version))
+    .on('end', git.tag.bind(git, version, version));
 });
