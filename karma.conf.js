@@ -1,68 +1,36 @@
-var pkg = require('./package.json');
+module.exports = function (config) {
+    config.set({
+        basePath: '',
 
-module.exports = function(config) {
-  config.set({
+        frameworks: ['jspm', 'mocha', 'chai'],
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+        jspm: {
+          loadFiles: ['test/**/*.js'],
+          serveFiles: ['lib/**/*']
+        },
 
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jspm', 'mocha', 'chai'],
+        preprocessors: {
+            'test/**/*.js': ['babel']
+        },
 
-    jspm: {
-      // Edit this to your needs
-      loadFiles: ['lib/**/*.js', 'test/**/*.js'],
-      serveFiles: ['lib/**/*.!(js)']
-    },
+        // Options for tests only
+        'babelPreprocessor': {
+            options: {
+                sourceMap: 'inline',
+                modules: 'system',
+                moduleIds: false,
+                optional: ['runtime'],
+                stage: 0
+            }
+        },
 
-    // list of files / patterns to load in the browser
-    files: [
-      'node_modules/regenerator/runtime.js'
-    ],
+        reporters: ['progress'],
 
-    // list of files to exclude
-    exclude: [
-    ],
+        port: 9876,
+        colors: true,
+        logLevel: config.LOG_INFO,
+        autoWatch: true,
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-    },
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
-
-
-    // web server port
-    port: 9876,
-
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-    browserDisconnectTimeout: 10 * 1000, // 10s
-    browserDisconnectTolerance: 2,
-    browserNoActivityTimeout: 2 * 60 * 1000, // 2m
-    captureTimeout: 0,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
-  });
+        browsers: ['Chrome']
+    });
 };
