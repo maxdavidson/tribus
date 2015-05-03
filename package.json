@@ -2,7 +2,7 @@
   "name": "tribus",
   "repository": "http://github.com/maxdavidson/tribus",
   "author": "Max Davidson <davidsonmax@gmail.com>",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "registry": "jspm",
   "main": "dist/tribus",
