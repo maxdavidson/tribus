@@ -1,10 +1,10 @@
 System.config({
   "transpiler": "babel",
   "babelOptions": {
-    "loose": "all",
+    "loose": [],
+    "stage": 0,
     "optional": [
-      "runtime",
-      "es7.classProperties"
+      "runtime"
     ]
   },
   "paths": {
@@ -16,16 +16,16 @@ System.config({
 
 System.config({
   "map": {
-    "babel": "npm:babel-core@5.1.2",
-    "babel-runtime": "npm:babel-runtime@5.1.2",
-    "core-js": "npm:core-js@0.8.2",
-    "domready": "github:ded/domready@1.0.7",
+    "babel": "npm:babel-core@5.4.3",
+    "babel-runtime": "npm:babel-runtime@5.4.3",
+    "core-js": "npm:core-js@0.9.10",
+    "domready": "github:ded/domready@1.0.8",
     "tribus": "github:maxdavidson/tribus@master",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.1.1"
+      "buffer": "npm:buffer@3.2.2"
     },
     "github:jspm/nodelibs-events@0.1.0": {
       "events-browserify": "npm:events-browserify@0.0.1"
@@ -57,9 +57,9 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "github:maxdavidson/tribus@master": {
-      "bacon.js": "github:baconjs/bacon.js@0.7.53",
+      "bacon.js": "github:baconjs/bacon.js@0.7.58",
       "doT": "npm:dot@1.0.3",
-      "gl-matrix": "github:toji/gl-matrix@2.2.1",
+      "gl-matrix": "github:toji/gl-matrix@master",
       "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
       "memoizee": "npm:memoizee@0.3.8",
       "stats.js": "github:mrdoob/stats.js@master",
@@ -68,19 +68,19 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:buffer@3.1.1": {
+    "npm:buffer@3.2.2": {
       "base64-js": "npm:base64-js@0.0.8",
-      "ieee754": "npm:ieee754@1.1.4",
+      "ieee754": "npm:ieee754@1.1.5",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:core-js@0.8.2": {
+    "npm:core-js@0.9.10": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:d@0.1.1": {
-      "es5-ext": "npm:es5-ext@0.10.6"
+      "es5-ext": "npm:es5-ext@0.10.7"
     },
     "npm:dot@1.0.3": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -90,33 +90,29 @@ System.config({
       "querystring": "github:jspm/nodelibs-querystring@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:es5-ext@0.10.6": {
+    "npm:es5-ext@0.10.7": {
       "es6-iterator": "npm:es6-iterator@0.1.3",
       "es6-symbol": "npm:es6-symbol@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:es6-iterator@0.1.3": {
       "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6",
+      "es5-ext": "npm:es5-ext@0.10.7",
       "es6-symbol": "npm:es6-symbol@2.0.1"
-    },
-    "npm:es6-symbol@0.1.1": {
-      "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6"
     },
     "npm:es6-symbol@2.0.1": {
       "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6"
+      "es5-ext": "npm:es5-ext@0.10.7"
     },
-    "npm:es6-weak-map@0.1.2": {
+    "npm:es6-weak-map@0.1.4": {
       "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6",
+      "es5-ext": "npm:es5-ext@0.10.7",
       "es6-iterator": "npm:es6-iterator@0.1.3",
-      "es6-symbol": "npm:es6-symbol@0.1.1"
+      "es6-symbol": "npm:es6-symbol@2.0.1"
     },
     "npm:event-emitter@0.3.3": {
       "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6",
+      "es5-ext": "npm:es5-ext@0.10.7",
       "events": "github:jspm/nodelibs-events@0.1.0"
     },
     "npm:events-browserify@0.0.1": {
@@ -126,12 +122,12 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:lru-queue@0.1.0": {
-      "es5-ext": "npm:es5-ext@0.10.6"
+      "es5-ext": "npm:es5-ext@0.10.7"
     },
     "npm:memoizee@0.3.8": {
       "d": "npm:d@0.1.1",
-      "es5-ext": "npm:es5-ext@0.10.6",
-      "es6-weak-map": "npm:es6-weak-map@0.1.2",
+      "es5-ext": "npm:es5-ext@0.10.7",
+      "es6-weak-map": "npm:es6-weak-map@0.1.4",
       "event-emitter": "npm:event-emitter@0.3.3",
       "lru-queue": "npm:lru-queue@0.1.0",
       "next-tick": "npm:next-tick@0.2.2",
@@ -168,7 +164,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:timers-ext@0.1.0": {
-      "es5-ext": "npm:es5-ext@0.10.6",
+      "es5-ext": "npm:es5-ext@0.10.7",
       "next-tick": "npm:next-tick@0.2.2"
     },
     "npm:url@0.10.3": {

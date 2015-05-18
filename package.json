@@ -2,7 +2,7 @@
   "name": "tribus",
   "repository": "http://github.com/maxdavidson/tribus",
   "author": "Max Davidson <davidsonmax@gmail.com>",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "registry": "jspm",
   "main": "dist/tribus",
@@ -12,35 +12,36 @@
       "lib": "lib"
     },
     "dependencies": {
-      "bacon.js": "github:baconjs/bacon.js@^0.7.53",
+      "bacon.js": "github:baconjs/bacon.js@^0.7.58",
+      "doT": "npm:dot@^1.0.3",
       "gl-matrix": "github:toji/gl-matrix@master",
       "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
       "memoizee": "npm:memoizee@^0.3.8",
-      "stats.js": "github:mrdoob/stats.js@master"
+      "stats.js": "github:mrdoob/stats.js@master",
+      "text": "github:systemjs/plugin-text@^0.0.2"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.1.13",
-      "babel-runtime": "npm:babel-runtime@^5.1.13",
-      "core-js": "npm:core-js@^0.9.4",
-      "doT": "npm:dot@^1.0.3",
-      "text": "github:systemjs/plugin-text@^0.0.2"
+      "babel": "npm:babel-core@^5.4.3",
+      "babel-runtime": "npm:babel-runtime@^5.4.3",
+      "core-js": "npm:core-js@^0.9.10"
     }
   },
   "devDependencies": {
     "chai": "^2.3.0",
     "gulp": "^3.8.11",
     "gulp-bump": "^0.3.0",
-    "gulp-git": "^1.2.1",
+    "gulp-git": "^1.2.3",
     "gulp-shell": "^0.4.1",
     "gulp-watch": "^4.2.4",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^5.1.0",
     "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^0.1.8",
-    "karma-jspm": "^1.1.4",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-jspm": "^1.1.5",
     "karma-mocha": "^0.1.10",
-    "mocha": "^2.2.4",
-    "yargs": "^3.8.0"
+    "karma-mocha-reporter": "^1.0.2",
+    "mocha": "^2.2.5",
+    "yargs": "^3.9.0"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start --single-run --browsers Firefox"

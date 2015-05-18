@@ -9,9 +9,6 @@ const material = new PhongMaterial({
 
 const bunny = new Model('bunny', { position: [0, 0, 0], rotateY: 45, rotateX: 15 }, geometry, material);
 
-bunny.on('tick', dt => {
-    bunny.rotateY(dt * 45 / 1000);
-});
 
 const camera = new PerspectiveCamera({ position: [0, 0, 2] });
 
@@ -26,6 +23,10 @@ function main() {
     document.body.appendChild(canvas);
 
     const renderer = new Renderer(scene, camera, canvas, { showFPS: true });
+
+    renderer.on('tick', dt => {
+        bunny.rotateY(dt * 45 / 1000);
+    });
 
     renderer.start();
 }

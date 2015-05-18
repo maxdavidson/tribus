@@ -4,6 +4,7 @@ System.config({
     "optional": [
       "runtime"
     ],
+    "loose": "all",
     "stage": 0
   },
   "paths": {
@@ -16,10 +17,10 @@ System.config({
 
 System.config({
   "map": {
-    "babel": "npm:babel-core@5.2.6",
-    "babel-runtime": "npm:babel-runtime@5.2.6",
-    "bacon.js": "github:baconjs/bacon.js@0.7.53",
-    "core-js": "npm:core-js@0.9.6",
+    "babel": "npm:babel-core@5.4.3",
+    "babel-runtime": "npm:babel-runtime@5.4.3",
+    "bacon.js": "github:baconjs/bacon.js@0.7.58",
+    "core-js": "npm:core-js@0.9.10",
     "doT": "npm:dot@1.0.3",
     "gl-matrix": "github:toji/gl-matrix@master",
     "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
@@ -30,7 +31,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.1.2"
+      "buffer": "npm:buffer@3.2.2"
     },
     "github:jspm/nodelibs-events@0.1.0": {
       "events-browserify": "npm:events-browserify@0.0.1"
@@ -64,15 +65,18 @@ System.config({
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:buffer@3.1.2": {
+    "npm:buffer@3.2.2": {
       "base64-js": "npm:base64-js@0.0.8",
-      "ieee754": "npm:ieee754@1.1.4",
+      "ieee754": "npm:ieee754@1.1.5",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:core-js@0.8.2": {
+    "npm:core-js@0.9.10": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:core-js@0.9.6": {
+    "npm:core-js@0.9.8": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:core-js@0.9.9": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:core-util-is@1.0.1": {

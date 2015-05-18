@@ -6,7 +6,7 @@ module.exports = function (config) {
 
         jspm: {
           loadFiles: ['test/**/*.js'],
-          serveFiles: ['lib/**/*']
+          serveFiles: ['{test,lib}/**/*']
         },
 
         preprocessors: {
@@ -24,12 +24,12 @@ module.exports = function (config) {
             }
         },
 
-        reporters: ['progress'],
+        reporters: ['mocha'],
 
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: true,
+        autoWatch: false,
 
         browsers: ['Chrome']
     });

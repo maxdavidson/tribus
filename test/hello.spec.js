@@ -1,4 +1,4 @@
-import {Renderer} from '../lib/tribus';
+import {mat4} from 'gl-matrix';
 
 describe('Hello', function() {
     it('returns world', function() {

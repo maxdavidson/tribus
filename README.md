@@ -10,24 +10,36 @@ tribus.js
 > 3. A tribe.
 > 4. The mob, the lower classes.
 
-WebGL 3D engine and scene graph, built in ES6+ on top of [Babel](https://babeljs.io) using the [JSPM module loader](http://jspm.io).
+A WebGL 3D library, built in ES6+ on top of [Babel](https://babeljs.io) using the [JSPM package manages](http://jspm.io).
 
-Should work in all web browsers that support WebGL and the OES_vertex_array_object extension.
+Should work in most web browsers that support WebGL. (Experimental IE11/Edge support)
 
 Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://maxdavidson.github.io/tribus/windmill/)
 
 
 ### Features
 
-- Dynamic scene graph with group, model, light and camera nodes.
-- Supports importing external geometry through .OBJ files.
-- Supports texture mapping for browser native image formats + TGA. 
-- Dynamically growing texture atlas for 2D textures. 
-- Automatic computation of missing vertex normals.
-- Dynamic lighting (point lights, spot lights and directional lights).
-- Built-in Phong shading and skybox materials.
-- Create custom materials with custom shaders.
-- True parallel resource processing using pooled web workers and transferred buffers for minimal overhead. 
+Scene graph
+- Group, model, light and camera nodes.
+- Batched recomputations through dirty checking.
+- Frustum culling using plane coherency and plane masking in an AABB hierarchy.
+- Bitfield-based graph diffing.
+
+Dynamic lighting
+- Point lights, spot lights and directional lights.
+
+Materials 
+- Phong shading material built-in, with multitexturing and automatic texture atlas creation.
+- Custom materials can be made for custom shaders.
+- The renderer's model drawing order minimizes shader program switches.
+
+File formats
+- Import external geometry .obj files with automatic computation of missing vertex normals.
+- Import 2D textures or cube maps in any browser native image format + TGA.
+ 
+Parallel processing
+- Heavy tasks are run in parallel, off the main thread.
+- Uses pooled WebWorkers and transferred ArrayBuffers for minimal overhead. 
 
 ### Usage
 
@@ -37,7 +49,7 @@ Demos: [Bunny](http://maxdavidson.github.io/tribus/bunny/), [Windmill](http://ma
 2. Install [JSPM](http://jspm.io): `npm install -g jspm`
 3. Create a new JSPM project: `jspm init`
 4. Install this library: `jspm install github:maxdavidson/tribus`
-5. Configure your JSPM config to use Babel's optional "es7.classProperties" mode.
+5. Configure your JSPM config to use Babel, with either its stage 0 mode, or just enable the "es7.classProperties" and "es7.objectRestSpread" transformers. Tribus also works in Babel's loose mode.
 6. Import Tribus as an [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) in your code.
 
 #### With another Node-compatible module loader: (not tested)
@@ -68,10 +80,6 @@ const material = new PhongMaterial({
 
 const bunny = new Model('bunny', { position: [0, 0, 0], rotateY: 45, rotateX: 15 }, geometry, material);
 
-bunny.on('tick', dt => {
-    bunny.rotateY(dt * 45 / 1000);
-});
-
 const camera = new PerspectiveCamera({ position: [0, 0, 2] });
 
 const light = new PointLight({ position: [0, 2, 2], diffuse: [0, 1, 1] });
@@ -85,6 +93,10 @@ function main() {
     document.body.appendChild(canvas);
 
     const renderer = new Renderer(scene, camera, canvas);
+    
+    renderer.on('tick', dt => {
+        bunny.rotateY(dt * 45 / 1000);
+    });
 
     renderer.start();
 }
@@ -107,10 +119,6 @@ var material = new Tribus.PhongMaterial({
 
 var bunny = new Tribus.Model('bunny', { position: [0, 0, 0], rotateY: 45, rotateX: 15 }, geometry, material);
 
-bunny.on('tick', function (dt) {
-    bunny.rotateY(dt * 45 / 1000);
-});
-
 var camera = new Tribus.PerspectiveCamera({ position: [0, 0, 2] });
 
 var light = new Tribus.PointLight({ position: [0, 2, 2], diffuse: [0, 1, 1] });
@@ -125,6 +133,10 @@ function main() {
     
     var renderer = new Tribus.Renderer(scene, camera, canvas);
     
+    renderer.on('tick', function (dt) {
+        bunny.rotateY(dt * 45 / 1000);
+    });
+    
     renderer.start();
 }
 
@@ -134,10 +146,3 @@ if (document.body) {
     window.addEventListener('DOMContentLoaded', main);
 }
 ```
-
-### TODO:
-- Proper documentation
-- Tests
-- More examples
-- More features (simpler animation, physics engine integration)
-- Bugfixes
