@@ -10,7 +10,7 @@ tribus.js
 > 3. A tribe.
 > 4. The mob, the lower classes.
 
-A WebGL 3D library, built in ES6+ on top of [Babel](https://babeljs.io) using the [JSPM package manages](http://jspm.io).
+A WebGL 3D library, built in ES6+ on top of [Babel](https://babeljs.io) using the [JSPM package manager](http://jspm.io).
 
 Should work in most web browsers that support WebGL. (Experimental IE11/Edge support)
 
