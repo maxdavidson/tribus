@@ -16,9 +16,9 @@ System.config({
 
 System.config({
   "map": {
-    "babel": "npm:babel-core@5.4.3",
-    "babel-runtime": "npm:babel-runtime@5.4.3",
-    "core-js": "npm:core-js@0.9.10",
+    "babel": "npm:babel-core@5.4.7",
+    "babel-runtime": "npm:babel-runtime@5.4.7",
+    "core-js": "npm:core-js@0.9.12",
     "domready": "github:ded/domready@1.0.8",
     "tribus": "github:maxdavidson/tribus@master",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -57,9 +57,9 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "github:maxdavidson/tribus@master": {
-      "bacon.js": "github:baconjs/bacon.js@0.7.58",
+      "bacon.js": "github:baconjs/bacon.js@0.7.59",
       "doT": "npm:dot@1.0.3",
-      "gl-matrix": "github:toji/gl-matrix@master",
+      "gl-matrix": "github:toji/gl-matrix@2.2.1",
       "jsTGALoader": "github:maxdavidson/jsTGALoader@master",
       "memoizee": "npm:memoizee@0.3.8",
       "stats.js": "github:mrdoob/stats.js@master",
@@ -73,8 +73,10 @@ System.config({
       "ieee754": "npm:ieee754@1.1.5",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:core-js@0.9.10": {
-      "process": "github:jspm/nodelibs-process@0.1.1"
+    "npm:core-js@0.9.12": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.1",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:core-util-is@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"

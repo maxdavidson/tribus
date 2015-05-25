@@ -8,9 +8,9 @@
       "tribus": "github:maxdavidson/tribus@master"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.4.3",
-      "babel-runtime": "npm:babel-runtime@^5.4.3",
-      "core-js": "npm:core-js@^0.9.10"
+      "babel": "npm:babel-core@^5.4.7",
+      "babel-runtime": "npm:babel-runtime@^5.4.7",
+      "core-js": "npm:core-js@^0.9.12"
     }
   }
 }

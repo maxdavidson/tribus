@@ -89,9 +89,7 @@ describe('Atlas', () => {
         expect(atlas.regions[1].outerHeight).to.equal(1 << 11);
     });
 
-    it('tries it again', () => {
-        debugger;
-
+    it('tries a more complicated corner case', () => {
         atlas = new Atlas({ initialSize: 8, maxSize: 8 });
 
         const imageA = { width: 256, height: 256 };

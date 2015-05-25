@@ -1,5 +1,6 @@
 tribus.js
 =========
+[![Build Status](https://travis-ci.org/maxdavidson/tribus.svg)](https://travis-ci.org/maxdavidson/tribus)
 
 > tribus f (genitive tribūs); fourth declension
 >

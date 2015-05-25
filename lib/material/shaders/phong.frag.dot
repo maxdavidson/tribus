@@ -80,37 +80,57 @@ varying vec3 worldNormal;
 
 uniform vec3 viewPos;
 
+{{? it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture' }}
+varying vec2 lerpTexcoords;
+{{?}}
+
 {{? it.ambient === 'texture' }}
 uniform sampler2D ambientSampler;
-varying vec2 ambientTexcoord;
+uniform vec4 ambientTexcoordBounds;
 {{?}}
 
 {{? it.diffuse === 'texture' }}
 uniform sampler2D diffuseSampler;
-varying vec2 diffuseTexcoord;
+uniform vec4 diffuseTexcoordBounds;
 {{?}}
 
 {{? it.specular === 'texture' }}
 uniform sampler2D specularSampler;
-varying vec2 specularTexcoord;
+uniform vec4 specularTexcoordBounds;
 {{?}}
 
 {{? it.MAX_DIRECTIONAL_LIGHTS }}
-    uniform DirectionalLight directionalLights[{{= it.MAX_DIRECTIONAL_LIGHTS }}];
+uniform DirectionalLight directionalLights[{{= it.MAX_DIRECTIONAL_LIGHTS }}];
 {{?}}
 
 {{? it.MAX_POINT_LIGHTS }}
-    uniform PointLight pointLights[{{= it.MAX_POINT_LIGHTS }}];
+uniform PointLight pointLights[{{= it.MAX_POINT_LIGHTS }}];
 {{?}}
 
 {{? it.MAX_SPOT_LIGHTS }}
-    uniform SpotLight spotLights[{{= it.MAX_SPOT_LIGHTS }}];
+uniform SpotLight spotLights[{{= it.MAX_SPOT_LIGHTS }}];
 {{?}}
 
 uniform Material material;
 uniform vec3 environmentAmbient;
 
 void main() {
+
+    {{? it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture' }}
+    vec2 fixedLerpTexcoords = fract(lerpTexcoords);
+    {{?}}
+
+    {{? it.ambient === 'texture' }}
+    vec2 ambientTexcoord = ambientTexcoordBounds.xy + fixedLerpTexcoords * ambientTexcoordBounds.zw;
+    {{?}}
+
+    {{? it.diffuse === 'texture' }}
+    vec2 diffuseTexcoord = diffuseTexcoordBounds.xy + fixedLerpTexcoords * diffuseTexcoordBounds.zw;
+    {{?}}
+
+    {{? it.specular === 'texture' }}
+    vec2 specularTexcoord = specularTexcoordBounds.xy + fixedLerpTexcoords * specularTexcoordBounds.zw;
+    {{?}}
 
     vec3 worldNormal2 = normalize(worldNormal);
 
@@ -119,27 +139,27 @@ void main() {
     vec3 color = environmentAmbient + {{# def.materialAmbient }};
 
     {{? it.MAX_DIRECTIONAL_LIGHTS }}
-        for (int i = 0; i < {{= it.MAX_DIRECTIONAL_LIGHTS }}; ++i) {
-            DirectionalLight light = directionalLights[i];
-            {{# def.calcDirectionalLight }}
-            color += shade;
-        }
+    for (int i = 0; i < {{= it.MAX_DIRECTIONAL_LIGHTS }}; ++i) {
+        DirectionalLight light = directionalLights[i];
+        {{# def.calcDirectionalLight }}
+        color += shade;
+    }
     {{?}}
 
     {{? it.MAX_POINT_LIGHTS }}
-        for (int i = 0; i < {{= it.MAX_POINT_LIGHTS }}; ++i) {
-            PointLight light = pointLights[i];
-            {{# def.calcPointLight }}
-            color += shade;
-        }
+    for (int i = 0; i < {{= it.MAX_POINT_LIGHTS }}; ++i) {
+        PointLight light = pointLights[i];
+        {{# def.calcPointLight }}
+        color += shade;
+    }
     {{?}}
 
     {{? it.MAX_SPOT_LIGHTS }}
-        for (int i = 0; i < {{= it.MAX_SPOT_LIGHTS }}; ++i) {
-            SpotLight light = spotLights[i];
-            {{# def.calcSpotLight }}
-            color += shade;
-        }
+    for (int i = 0; i < {{= it.MAX_SPOT_LIGHTS }}; ++i) {
+        SpotLight light = spotLights[i];
+        {{# def.calcSpotLight }}
+        color += shade;
+    }
     {{?}}
 
     gl_FragColor = vec4(color, 1.0);

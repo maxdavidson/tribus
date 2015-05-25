@@ -360,7 +360,7 @@
 
 (['lib/extra/exporter'], function(System) {
 
-System.register("npm:core-js@0.9.10/library/modules/$.fw", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.fw", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -373,7 +373,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.fw", [], true, function(re
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/helpers/class-call-check", [], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/helpers/class-call-check", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -388,7 +388,21 @@ System.register("npm:babel-runtime@5.4.3/helpers/class-call-check", [], true, fu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.uid", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.shared", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      SHARED = '__core-js_shared__',
+      store = $.g[SHARED] || $.hide($.g, SHARED, {})[SHARED];
+  module.exports = function(key) {
+    return store[key] || (store[key] = {});
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.12/library/modules/$.uid", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -396,26 +410,26 @@ System.register("npm:core-js@0.9.10/library/modules/$.uid", ["npm:core-js@0.9.10
   function uid(key) {
     return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++sid + Math.random()).toString(36));
   }
-  uid.safe = require("npm:core-js@0.9.10/library/modules/$").g.Symbol || uid;
+  uid.safe = require("npm:core-js@0.9.12/library/modules/$").g.Symbol || uid;
   module.exports = uid;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.redef", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.redef", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").hide;
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").hide;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.string-at", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.string-at", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   module.exports = function(TO_STRING) {
     return function(that, pos) {
       var s = String($.assertDefined(that)),
@@ -433,11 +447,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.string-at", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.assert", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.assert", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   function assert(condition, msg1, msg2) {
     if (!condition)
       throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -463,11 +477,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.assert", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.def", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.def", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
       global = $.g,
       core = $.core,
       isFunction = $.isFunction;
@@ -521,12 +535,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.def", ["npm:core-js@0.9.10
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.unscope", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.unscope", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      UNSCOPABLES = require("npm:core-js@0.9.10/library/modules/$.wks")('unscopables');
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      UNSCOPABLES = require("npm:core-js@0.9.12/library/modules/$.wks")('unscopables');
   if ($.FW && !(UNSCOPABLES in []))
     $.hide(Array.prototype, UNSCOPABLES, {});
   module.exports = function(key) {
@@ -537,11 +551,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.unscope", ["npm:core-js@0.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.ctx", ["npm:core-js@0.9.10/library/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.ctx", ["npm:core-js@0.9.12/library/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var assertFunction = require("npm:core-js@0.9.10/library/modules/$.assert").fn;
+  var assertFunction = require("npm:core-js@0.9.12/library/modules/$.assert").fn;
   module.exports = function(fn, that, length) {
     assertFunction(fn);
     if (~length && that === undefined)
@@ -568,11 +582,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.ctx", ["npm:core-js@0.9.10
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.iter-call", ["npm:core-js@0.9.10/library/modules/$.assert"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.iter-call", ["npm:core-js@0.9.12/library/modules/$.assert"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var assertObject = require("npm:core-js@0.9.10/library/modules/$.assert").obj;
+  var assertObject = require("npm:core-js@0.9.12/library/modules/$.assert").obj;
   function close(iterator) {
     var ret = iterator['return'];
     if (ret !== undefined)
@@ -592,12 +606,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.iter-call", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.set-proto", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.ctx"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.set-proto", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.ctx"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      assert = require("npm:core-js@0.9.10/library/modules/$.assert");
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      assert = require("npm:core-js@0.9.12/library/modules/$.assert");
   function check(O, proto) {
     assert.obj(O);
     assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
@@ -605,7 +619,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.set-proto", ["npm:core-js@
   module.exports = {
     set: Object.setPrototypeOf || ('__proto__' in {} ? function(buggy, set) {
       try {
-        set = require("npm:core-js@0.9.10/library/modules/$.ctx")(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+        set = require("npm:core-js@0.9.12/library/modules/$.ctx")(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
         set({}, []);
       } catch (e) {
         buggy = true;
@@ -625,12 +639,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.set-proto", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.species", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.species", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      SPECIES = require("npm:core-js@0.9.10/library/modules/$.wks")('species');
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      SPECIES = require("npm:core-js@0.9.12/library/modules/$.wks")('species');
   module.exports = function(C) {
     if ($.DESC && !(SPECIES in C))
       $.setDesc(C, SPECIES, {
@@ -642,7 +656,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.species", ["npm:core-js@0.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.invoke", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.invoke", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -668,11 +682,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.invoke", [], true, functio
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.dom-create", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.dom-create", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
       document = $.g.document,
       isObject = $.isObject,
       is = isObject(document) && isObject(document.createElement);
@@ -744,11 +758,11 @@ System.register("npm:process@0.10.1/browser", [], true, function(require, export
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.mix", ["npm:core-js@0.9.10/library/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.mix", ["npm:core-js@0.9.12/library/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $redef = require("npm:core-js@0.9.10/library/modules/$.redef");
+  var $redef = require("npm:core-js@0.9.12/library/modules/$.redef");
   module.exports = function(target, src) {
     for (var key in src)
       $redef(target, key, src[key]);
@@ -758,11 +772,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.mix", ["npm:core-js@0.9.10
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.iter-detect", ["npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.iter-detect", ["npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var SYMBOL_ITERATOR = require("npm:core-js@0.9.10/library/modules/$.wks")('iterator'),
+  var SYMBOL_ITERATOR = require("npm:core-js@0.9.12/library/modules/$.wks")('iterator'),
       SAFE_CLOSING = false;
   try {
     var riter = [7][SYMBOL_ITERATOR]();
@@ -794,12 +808,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.iter-detect", ["npm:core-j
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.array-methods", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.ctx"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.array-methods", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.ctx"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      ctx = require("npm:core-js@0.9.10/library/modules/$.ctx");
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      ctx = require("npm:core-js@0.9.12/library/modules/$.ctx");
   module.exports = function(TYPE) {
     var IS_MAP = TYPE == 1,
         IS_FILTER = TYPE == 2,
@@ -845,17 +859,17 @@ System.register("npm:core-js@0.9.10/library/modules/$.array-methods", ["npm:core
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.collection", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.for-of", "npm:core-js@0.9.10/library/modules/$.species", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.redef", "npm:core-js@0.9.10/library/modules/$.mix", "npm:core-js@0.9.10/library/modules/$.iter-detect", "npm:core-js@0.9.10/library/modules/$.cof"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.collection", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.for-of", "npm:core-js@0.9.12/library/modules/$.species", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.redef", "npm:core-js@0.9.12/library/modules/$.mix", "npm:core-js@0.9.12/library/modules/$.iter-detect", "npm:core-js@0.9.12/library/modules/$.cof"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-      BUGGY = require("npm:core-js@0.9.10/library/modules/$.iter").BUGGY,
-      forOf = require("npm:core-js@0.9.10/library/modules/$.for-of"),
-      species = require("npm:core-js@0.9.10/library/modules/$.species"),
-      assertInstance = require("npm:core-js@0.9.10/library/modules/$.assert").inst;
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+      BUGGY = require("npm:core-js@0.9.12/library/modules/$.iter").BUGGY,
+      forOf = require("npm:core-js@0.9.12/library/modules/$.for-of"),
+      species = require("npm:core-js@0.9.12/library/modules/$.species"),
+      assertInstance = require("npm:core-js@0.9.12/library/modules/$.assert").inst;
   module.exports = function(NAME, methods, common, IS_MAP, IS_WEAK) {
     var Base = $.g[NAME],
         C = Base,
@@ -865,7 +879,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection", ["npm:core-js
     function fixMethod(KEY, CHAIN) {
       if ($.FW) {
         var method = proto[KEY];
-        require("npm:core-js@0.9.10/library/modules/$.redef")(proto, KEY, function(a, b) {
+        require("npm:core-js@0.9.12/library/modules/$.redef")(proto, KEY, function(a, b) {
           var result = method.call(this, a === 0 ? 0 : a, b);
           return CHAIN ? this : result;
         });
@@ -873,12 +887,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection", ["npm:core-js
     }
     if (!$.isFunction(C) || !(IS_WEAK || !BUGGY && proto.forEach && proto.entries)) {
       C = common.getConstructor(NAME, IS_MAP, ADDER);
-      require("npm:core-js@0.9.10/library/modules/$.mix")(C.prototype, methods);
+      require("npm:core-js@0.9.12/library/modules/$.mix")(C.prototype, methods);
     } else {
       var inst = new C,
           chain = inst[ADDER](IS_WEAK ? {} : -0, 1),
           buggyZero;
-      if (!require("npm:core-js@0.9.10/library/modules/$.iter-detect")(function(iter) {
+      if (!require("npm:core-js@0.9.12/library/modules/$.iter-detect")(function(iter) {
         new C(iter);
       })) {
         C = function() {
@@ -904,7 +918,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection", ["npm:core-js
       if (buggyZero || chain !== inst)
         fixMethod(ADDER, true);
     }
-    require("npm:core-js@0.9.10/library/modules/$.cof").set(C, NAME);
+    require("npm:core-js@0.9.12/library/modules/$.cof").set(C, NAME);
     O[NAME] = C;
     $def($def.G + $def.W + $def.F * (C != Base), O);
     species(C);
@@ -917,27 +931,27 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/core.iter-helpers", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.iter"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  var core = require("npm:core-js@0.9.10/library/modules/$").core,
-      $iter = require("npm:core-js@0.9.10/library/modules/$.iter");
-  core.isIterable = $iter.is;
-  core.getIterator = $iter.get;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:core-js@0.9.10/library/modules/es6.weak-set", ["npm:core-js@0.9.10/library/modules/$.collection-weak", "npm:core-js@0.9.10/library/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.weak-set", ["npm:core-js@0.9.12/library/modules/$.collection-weak", "npm:core-js@0.9.12/library/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var weak = require("npm:core-js@0.9.10/library/modules/$.collection-weak");
-  require("npm:core-js@0.9.10/library/modules/$.collection")('WeakSet', {add: function add(value) {
+  var weak = require("npm:core-js@0.9.12/library/modules/$.collection-weak");
+  require("npm:core-js@0.9.12/library/modules/$.collection")('WeakSet', {add: function add(value) {
       return weak.def(this, value, true);
     }}, weak, false, true);
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.12/library/modules/core.iter-helpers", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.iter"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var core = require("npm:core-js@0.9.12/library/modules/$").core,
+      $iter = require("npm:core-js@0.9.12/library/modules/$.iter");
+  core.isIterable = $iter.is;
+  core.getIterator = $iter.get;
   global.define = __define;
   return module.exports;
 });
@@ -950,7 +964,7 @@ function define(){};  define.amd = {};
   if (typeof(exports) === 'undefined') {
     if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
       shim.exports = {};
-      System.register("github:toji/gl-matrix@master/dist/gl-matrix", [], false, function() {
+      System.register("github:toji/gl-matrix@2.2.1/dist/gl-matrix", [], false, function() {
         return shim.exports;
       });
     } else {
@@ -1080,11 +1094,6 @@ function define(){};  define.amd = {};
     vec2.negate = function(out, a) {
       out[0] = -a[0];
       out[1] = -a[1];
-      return out;
-    };
-    vec2.inverse = function(out, a) {
-      out[0] = 1.0 / a[0];
-      out[1] = 1.0 / a[1];
       return out;
     };
     vec2.normalize = function(out, a) {
@@ -1301,12 +1310,6 @@ function define(){};  define.amd = {};
       out[2] = -a[2];
       return out;
     };
-    vec3.inverse = function(out, a) {
-      out[0] = 1.0 / a[0];
-      out[1] = 1.0 / a[1];
-      out[2] = 1.0 / a[2];
-      return out;
-    };
     vec3.normalize = function(out, a) {
       var x = a[0],
           y = a[1],
@@ -1357,12 +1360,10 @@ function define(){};  define.amd = {};
     vec3.transformMat4 = function(out, a, m) {
       var x = a[0],
           y = a[1],
-          z = a[2],
-          w = m[3] * x + m[7] * y + m[11] * z + m[15];
-      w = w || 1.0;
-      out[0] = (m[0] * x + m[4] * y + m[8] * z + m[12]) / w;
-      out[1] = (m[1] * x + m[5] * y + m[9] * z + m[13]) / w;
-      out[2] = (m[2] * x + m[6] * y + m[10] * z + m[14]) / w;
+          z = a[2];
+      out[0] = m[0] * x + m[4] * y + m[8] * z + m[12];
+      out[1] = m[1] * x + m[5] * y + m[9] * z + m[13];
+      out[2] = m[2] * x + m[6] * y + m[10] * z + m[14];
       return out;
     };
     vec3.transformMat3 = function(out, a, m) {
@@ -1461,18 +1462,6 @@ function define(){};  define.amd = {};
         return a;
       };
     })();
-    vec3.angle = function(a, b) {
-      var tempA = vec3.fromValues(a[0], a[1], a[2]);
-      var tempB = vec3.fromValues(b[0], b[1], b[2]);
-      vec3.normalize(tempA, tempA);
-      vec3.normalize(tempB, tempB);
-      var cosine = vec3.dot(tempA, tempB);
-      if (cosine > 1.0) {
-        return 0;
-      } else {
-        return Math.acos(cosine);
-      }
-    };
     vec3.str = function(a) {
       return 'vec3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ')';
     };
@@ -1615,13 +1604,6 @@ function define(){};  define.amd = {};
       out[1] = -a[1];
       out[2] = -a[2];
       out[3] = -a[3];
-      return out;
-    };
-    vec4.inverse = function(out, a) {
-      out[0] = 1.0 / a[0];
-      out[1] = 1.0 / a[1];
-      out[2] = 1.0 / a[2];
-      out[3] = 1.0 / a[3];
       return out;
     };
     vec4.normalize = function(out, a) {
@@ -3090,7 +3072,7 @@ function define(){};  define.amd = {};
       return 'mat4(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ', ' + a[4] + ', ' + a[5] + ', ' + a[6] + ', ' + a[7] + ', ' + a[8] + ', ' + a[9] + ', ' + a[10] + ', ' + a[11] + ', ' + a[12] + ', ' + a[13] + ', ' + a[14] + ', ' + a[15] + ')';
     };
     mat4.frob = function(a) {
-      return (Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + Math.pow(a[6], 2) + Math.pow(a[7], 2) + Math.pow(a[8], 2) + Math.pow(a[9], 2) + Math.pow(a[10], 2) + Math.pow(a[11], 2) + Math.pow(a[12], 2) + Math.pow(a[13], 2) + Math.pow(a[14], 2) + Math.pow(a[15], 2)));
+      return (Math.sqrt(Math.pow(a[0], 2) + Math.pow(a[1], 2) + Math.pow(a[2], 2) + Math.pow(a[3], 2) + Math.pow(a[4], 2) + Math.pow(a[5], 2) + Math.pow(a[6], 2) + Math.pow(a[6], 2) + Math.pow(a[7], 2) + Math.pow(a[8], 2) + Math.pow(a[9], 2) + Math.pow(a[10], 2) + Math.pow(a[11], 2) + Math.pow(a[12], 2) + Math.pow(a[13], 2) + Math.pow(a[14], 2) + Math.pow(a[15], 2)));
     };
     if (typeof(exports) !== 'undefined') {
       exports.mat4 = mat4;
@@ -3236,7 +3218,7 @@ function define(){};  define.amd = {};
       out[0] = x;
       out[1] = y;
       out[2] = z;
-      out[3] = Math.sqrt(Math.abs(1.0 - x * x - y * y - z * z));
+      out[3] = -Math.sqrt(Math.abs(1.0 - x * x - y * y - z * z));
       return out;
     };
     quat.dot = vec4.dot;
@@ -3310,9 +3292,9 @@ function define(){};  define.amd = {};
         fRoot = Math.sqrt(fTrace + 1.0);
         out[3] = 0.5 * fRoot;
         fRoot = 0.5 / fRoot;
-        out[0] = (m[5] - m[7]) * fRoot;
-        out[1] = (m[6] - m[2]) * fRoot;
-        out[2] = (m[1] - m[3]) * fRoot;
+        out[0] = (m[7] - m[5]) * fRoot;
+        out[1] = (m[2] - m[6]) * fRoot;
+        out[2] = (m[3] - m[1]) * fRoot;
       } else {
         var i = 0;
         if (m[4] > m[0])
@@ -3324,7 +3306,7 @@ function define(){};  define.amd = {};
         fRoot = Math.sqrt(m[i * 3 + i] - m[j * 3 + j] - m[k * 3 + k] + 1.0);
         out[i] = 0.5 * fRoot;
         fRoot = 0.5 / fRoot;
-        out[3] = (m[j * 3 + k] - m[k * 3 + j]) * fRoot;
+        out[3] = (m[k * 3 + j] - m[j * 3 + k]) * fRoot;
         out[j] = (m[j * 3 + i] + m[i * 3 + j]) * fRoot;
         out[k] = (m[k * 3 + i] + m[i * 3 + k]) * fRoot;
       }
@@ -3340,12 +3322,12 @@ function define(){};  define.amd = {};
   })(shim.exports);
 })(this);
 })();
-System.register("npm:core-js@0.9.10/library/modules/es6.object.statics-accept-primitives", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      $def = require("npm:core-js@0.9.10/library/modules/$.def"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      $def = require("npm:core-js@0.9.12/library/modules/$.def"),
       isObject = $.isObject,
       toObject = $.toObject;
   $.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' + 'getOwnPropertyDescriptor,getPrototypeOf,keys,getOwnPropertyNames').split(','), function(KEY, ID) {
@@ -3384,11 +3366,11 @@ System.register("npm:core-js@0.9.10/library/modules/es6.object.statics-accept-pr
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/object/define-property", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/object/define-property", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   module.exports = function defineProperty(it, key, desc) {
     return $.setDesc(it, key, desc);
   };
@@ -3396,22 +3378,22 @@ System.register("npm:core-js@0.9.10/library/fn/object/define-property", ["npm:co
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.ctx", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.for-of", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.mix", "npm:core-js@0.9.10/library/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.collection-strong", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.ctx", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.for-of", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.mix", "npm:core-js@0.9.12/library/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      ctx = require("npm:core-js@0.9.10/library/modules/$.ctx"),
-      safe = require("npm:core-js@0.9.10/library/modules/$.uid").safe,
-      assert = require("npm:core-js@0.9.10/library/modules/$.assert"),
-      forOf = require("npm:core-js@0.9.10/library/modules/$.for-of"),
-      step = require("npm:core-js@0.9.10/library/modules/$.iter").step,
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      ctx = require("npm:core-js@0.9.12/library/modules/$.ctx"),
+      safe = require("npm:core-js@0.9.12/library/modules/$.uid").safe,
+      assert = require("npm:core-js@0.9.12/library/modules/$.assert"),
+      forOf = require("npm:core-js@0.9.12/library/modules/$.for-of"),
+      step = require("npm:core-js@0.9.12/library/modules/$.iter").step,
       has = $.has,
       set = $.set,
       isObject = $.isObject,
       hide = $.hide,
-      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      isExtensible = Object.isExtensible || isObject,
       ID = safe('id'),
       O1 = safe('O1'),
       LAST = safe('last'),
@@ -3421,10 +3403,10 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:
       id = 0;
   function fastKey(it, create) {
     if (!isObject(it))
-      return (typeof it == 'string' ? 'S' : 'P') + it;
-    if (isFrozen(it))
-      return 'F';
+      return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
     if (!has(it, ID)) {
+      if (!isExtensible(it))
+        return 'F';
       if (!create)
         return 'E';
       hide(it, ID, ++id);
@@ -3434,7 +3416,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:
   function getEntry(that, key) {
     var index = fastKey(key),
         entry;
-    if (index != 'F')
+    if (index !== 'F')
       return that[O1][index];
     for (entry = that[FIRST]; entry; entry = entry.n) {
       if (entry.k == key)
@@ -3453,7 +3435,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:
         if (iterable != undefined)
           forOf(iterable, IS_MAP, that[ADDER], that);
       }
-      require("npm:core-js@0.9.10/library/modules/$.mix")(C.prototype, {
+      require("npm:core-js@0.9.12/library/modules/$.mix")(C.prototype, {
         clear: function clear() {
           for (var that = this,
               data = that[O1],
@@ -3525,14 +3507,14 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:
         if (prev)
           prev.n = entry;
         that[SIZE]++;
-        if (index != 'F')
+        if (index !== 'F')
           that[O1][index] = entry;
       }
       return that;
     },
     getEntry: getEntry,
     setIter: function(C, NAME, IS_MAP) {
-      require("npm:core-js@0.9.10/library/modules/$.iter-define")(C, NAME, function(iterated, kind) {
+      require("npm:core-js@0.9.12/library/modules/$.iter-define")(C, NAME, function(iterated, kind) {
         set(this, ITER, {
           o: iterated,
           k: kind
@@ -3559,12 +3541,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-strong", ["npm:
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.collection-to-json", ["npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.for-of"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.collection-to-json", ["npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.for-of"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-      forOf = require("npm:core-js@0.9.10/library/modules/$.for-of");
+  var $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+      forOf = require("npm:core-js@0.9.12/library/modules/$.for-of");
   module.exports = function(NAME) {
     $def($def.P, NAME, {toJSON: function toJSON() {
         var arr = [];
@@ -3576,24 +3558,24 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-to-json", ["npm
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.set", ["npm:core-js@0.9.10/library/modules/$.collection-strong", "npm:core-js@0.9.10/library/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.set", ["npm:core-js@0.9.12/library/modules/$.collection-strong", "npm:core-js@0.9.12/library/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var strong = require("npm:core-js@0.9.10/library/modules/$.collection-strong");
-  require("npm:core-js@0.9.10/library/modules/$.collection")('Set', {add: function add(value) {
+  var strong = require("npm:core-js@0.9.12/library/modules/$.collection-strong");
+  require("npm:core-js@0.9.12/library/modules/$.collection")('Set', {add: function add(value) {
       return strong.def(this, value = value === 0 ? 0 : value, value);
     }}, strong);
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es7.set.to-json", ["npm:core-js@0.9.10/library/modules/$.collection-to-json"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es7.set.to-json", ["npm:core-js@0.9.12/library/modules/$.collection-to-json"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/$.collection-to-json")('Set');
+  require("npm:core-js@0.9.12/library/modules/$.collection-to-json")('Set');
   global.define = __define;
   return module.exports;
 });
@@ -3711,22 +3693,22 @@ System.register("github:mrdoob/stats.js@master/src/Stats", [], true, function(re
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/symbol/iterator", ["npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/symbol/iterator", ["npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$.wks")('iterator');
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$.wks")('iterator');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.keyof", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.keyof", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   module.exports = function(object, el) {
     var O = $.toObject(object),
         keys = $.getKeys(O),
@@ -3741,11 +3723,11 @@ System.register("npm:core-js@0.9.10/library/modules/$.keyof", ["npm:core-js@0.9.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.enum-keys", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.enum-keys", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   module.exports = function(it) {
     var keys = $.getKeys(it),
         getDesc = $.getDesc,
@@ -3761,16 +3743,16 @@ System.register("npm:core-js@0.9.10/library/modules/$.enum-keys", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.array.from", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.ctx", "npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.iter-call", "npm:core-js@0.9.10/library/modules/$.iter-detect"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.array.from", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.ctx", "npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.iter-call", "npm:core-js@0.9.12/library/modules/$.iter-detect"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      ctx = require("npm:core-js@0.9.10/library/modules/$.ctx"),
-      $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-      $iter = require("npm:core-js@0.9.10/library/modules/$.iter"),
-      call = require("npm:core-js@0.9.10/library/modules/$.iter-call");
-  $def($def.S + $def.F * !require("npm:core-js@0.9.10/library/modules/$.iter-detect")(function(iter) {
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      ctx = require("npm:core-js@0.9.12/library/modules/$.ctx"),
+      $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+      $iter = require("npm:core-js@0.9.12/library/modules/$.iter"),
+      call = require("npm:core-js@0.9.12/library/modules/$.iter-call");
+  $def($def.S + $def.F * !require("npm:core-js@0.9.12/library/modules/$.iter-detect")(function(iter) {
     Array.from(iter);
   }), 'Array', {from: function from(arrayLike) {
       var O = Object($.assertDefined(arrayLike)),
@@ -3797,6 +3779,27 @@ System.register("npm:core-js@0.9.10/library/modules/es6.array.from", ["npm:core-
       result.length = index;
       return result;
     }});
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:babel-runtime@5.4.7/helpers/object-without-properties", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  "use strict";
+  exports["default"] = function(obj, keys) {
+    var target = {};
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0)
+        continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i))
+        continue;
+      target[i] = obj[i];
+    }
+    return target;
+  };
+  exports.__esModule = true;
   global.define = __define;
   return module.exports;
 });
@@ -4755,7 +4758,7 @@ System.register("npm:memoizee@0.3.8/ext/ref-counter", ["npm:d@0.1.1", "npm:memoi
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/helpers/bind", [], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/helpers/bind", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -4766,21 +4769,41 @@ System.register("npm:babel-runtime@5.4.3/helpers/bind", [], true, function(requi
   return module.exports;
 });
 
-System.register("github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/object/seal", ["npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = "/* Copyright (c) 2015, Brandon Jones, Colin MacKenzie IV.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE. */\n\n/**\n * @class 3 Dimensional Vector\n * @name vec3\n */\nvar vec3 = {};\n\n/**\n * Creates a new, empty vec3\n *\n * @returns {vec3} a new 3D vector\n */\nvec3.create = function() {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = 0;\n    out[1] = 0;\n    out[2] = 0;\n    return out;\n};\n\n/**\n * Creates a new vec3 initialized with values from an existing vector\n *\n * @param {vec3} a vector to clone\n * @returns {vec3} a new 3D vector\n */\nvec3.clone = function(a) {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = a[0];\n    out[1] = a[1];\n    out[2] = a[2];\n    return out;\n};\n\n/**\n * Creates a new vec3 initialized with the given values\n *\n * @param {Number} x X component\n * @param {Number} y Y component\n * @param {Number} z Z component\n * @returns {vec3} a new 3D vector\n */\nvec3.fromValues = function(x, y, z) {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = x;\n    out[1] = y;\n    out[2] = z;\n    return out;\n};\n\n/**\n * Copy the values from one vec3 to another\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the source vector\n * @returns {vec3} out\n */\nvec3.copy = function(out, a) {\n    out[0] = a[0];\n    out[1] = a[1];\n    out[2] = a[2];\n    return out;\n};\n\n/**\n * Set the components of a vec3 to the given values\n *\n * @param {vec3} out the receiving vector\n * @param {Number} x X component\n * @param {Number} y Y component\n * @param {Number} z Z component\n * @returns {vec3} out\n */\nvec3.set = function(out, x, y, z) {\n    out[0] = x;\n    out[1] = y;\n    out[2] = z;\n    return out;\n};\n\n/**\n * Adds two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.add = function(out, a, b) {\n    out[0] = a[0] + b[0];\n    out[1] = a[1] + b[1];\n    out[2] = a[2] + b[2];\n    return out;\n};\n\n/**\n * Subtracts vector b from vector a\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.subtract = function(out, a, b) {\n    out[0] = a[0] - b[0];\n    out[1] = a[1] - b[1];\n    out[2] = a[2] - b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.subtract}\n * @function\n */\nvec3.sub = vec3.subtract;\n\n/**\n * Multiplies two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.multiply = function(out, a, b) {\n    out[0] = a[0] * b[0];\n    out[1] = a[1] * b[1];\n    out[2] = a[2] * b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.multiply}\n * @function\n */\nvec3.mul = vec3.multiply;\n\n/**\n * Divides two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.divide = function(out, a, b) {\n    out[0] = a[0] / b[0];\n    out[1] = a[1] / b[1];\n    out[2] = a[2] / b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.divide}\n * @function\n */\nvec3.div = vec3.divide;\n\n/**\n * Returns the minimum of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.min = function(out, a, b) {\n    out[0] = Math.min(a[0], b[0]);\n    out[1] = Math.min(a[1], b[1]);\n    out[2] = Math.min(a[2], b[2]);\n    return out;\n};\n\n/**\n * Returns the maximum of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.max = function(out, a, b) {\n    out[0] = Math.max(a[0], b[0]);\n    out[1] = Math.max(a[1], b[1]);\n    out[2] = Math.max(a[2], b[2]);\n    return out;\n};\n\n/**\n * Scales a vec3 by a scalar number\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to scale\n * @param {Number} b amount to scale the vector by\n * @returns {vec3} out\n */\nvec3.scale = function(out, a, b) {\n    out[0] = a[0] * b;\n    out[1] = a[1] * b;\n    out[2] = a[2] * b;\n    return out;\n};\n\n/**\n * Adds two vec3's after scaling the second operand by a scalar value\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {Number} scale the amount to scale b by before adding\n * @returns {vec3} out\n */\nvec3.scaleAndAdd = function(out, a, b, scale) {\n    out[0] = a[0] + (b[0] * scale);\n    out[1] = a[1] + (b[1] * scale);\n    out[2] = a[2] + (b[2] * scale);\n    return out;\n};\n\n/**\n * Calculates the euclidian distance between two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} distance between a and b\n */\nvec3.distance = function(a, b) {\n    var x = b[0] - a[0],\n        y = b[1] - a[1],\n        z = b[2] - a[2];\n    return Math.sqrt(x*x + y*y + z*z);\n};\n\n/**\n * Alias for {@link vec3.distance}\n * @function\n */\nvec3.dist = vec3.distance;\n\n/**\n * Calculates the squared euclidian distance between two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} squared distance between a and b\n */\nvec3.squaredDistance = function(a, b) {\n    var x = b[0] - a[0],\n        y = b[1] - a[1],\n        z = b[2] - a[2];\n    return x*x + y*y + z*z;\n};\n\n/**\n * Alias for {@link vec3.squaredDistance}\n * @function\n */\nvec3.sqrDist = vec3.squaredDistance;\n\n/**\n * Calculates the length of a vec3\n *\n * @param {vec3} a vector to calculate length of\n * @returns {Number} length of a\n */\nvec3.length = function (a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    return Math.sqrt(x*x + y*y + z*z);\n};\n\n/**\n * Alias for {@link vec3.length}\n * @function\n */\nvec3.len = vec3.length;\n\n/**\n * Calculates the squared length of a vec3\n *\n * @param {vec3} a vector to calculate squared length of\n * @returns {Number} squared length of a\n */\nvec3.squaredLength = function (a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    return x*x + y*y + z*z;\n};\n\n/**\n * Alias for {@link vec3.squaredLength}\n * @function\n */\nvec3.sqrLen = vec3.squaredLength;\n\n/**\n * Negates the components of a vec3\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a vector to negate\n * @returns {vec3} out\n */\nvec3.negate = function(out, a) {\n    out[0] = -a[0];\n    out[1] = -a[1];\n    out[2] = -a[2];\n    return out;\n};\n\n/**\n * Returns the inverse of the components of a vec3\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a vector to invert\n * @returns {vec3} out\n */\nvec3.inverse = function(out, a) {\n  out[0] = 1.0 / a[0];\n  out[1] = 1.0 / a[1];\n  out[2] = 1.0 / a[2];\n  return out;\n};\n\n/**\n * Normalize a vec3\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a vector to normalize\n * @returns {vec3} out\n */\nvec3.normalize = function(out, a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    var len = x*x + y*y + z*z;\n    if (len > 0) {\n        //TODO: evaluate use of glm_invsqrt here?\n        len = 1 / Math.sqrt(len);\n        out[0] = a[0] * len;\n        out[1] = a[1] * len;\n        out[2] = a[2] * len;\n    }\n    return out;\n};\n\n/**\n * Calculates the dot product of two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} dot product of a and b\n */\nvec3.dot = function (a, b) {\n    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n};\n\n/**\n * Computes the cross product of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.cross = function(out, a, b) {\n    var ax = a[0], ay = a[1], az = a[2],\n        bx = b[0], by = b[1], bz = b[2];\n\n    out[0] = ay * bz - az * by;\n    out[1] = az * bx - ax * bz;\n    out[2] = ax * by - ay * bx;\n    return out;\n};\n\n/**\n * Performs a linear interpolation between two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {Number} t interpolation amount between the two inputs\n * @returns {vec3} out\n */\nvec3.lerp = function (out, a, b, t) {\n    var ax = a[0],\n        ay = a[1],\n        az = a[2];\n    out[0] = ax + t * (b[0] - ax);\n    out[1] = ay + t * (b[1] - ay);\n    out[2] = az + t * (b[2] - az);\n    return out;\n};\n\n/**\n * Performs a hermite interpolation with two control points\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {vec3} c the third operand\n * @param {vec3} d the fourth operand\n * @param {Number} t interpolation amount between the two inputs\n * @returns {vec3} out\n */\nvec3.hermite = function (out, a, b, c, d, t) {\n  var factorTimes2 = t * t,\n      factor1 = factorTimes2 * (2 * t - 3) + 1,\n      factor2 = factorTimes2 * (t - 2) + t,\n      factor3 = factorTimes2 * (t - 1),\n      factor4 = factorTimes2 * (3 - 2 * t);\n  \n  out[0] = a[0] * factor1 + b[0] * factor2 + c[0] * factor3 + d[0] * factor4;\n  out[1] = a[1] * factor1 + b[1] * factor2 + c[1] * factor3 + d[1] * factor4;\n  out[2] = a[2] * factor1 + b[2] * factor2 + c[2] * factor3 + d[2] * factor4;\n  \n  return out;\n};\n\n/**\n * Performs a bezier interpolation with two control points\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {vec3} c the third operand\n * @param {vec3} d the fourth operand\n * @param {Number} t interpolation amount between the two inputs\n * @returns {vec3} out\n */\nvec3.bezier = function (out, a, b, c, d, t) {\n  var inverseFactor = 1 - t,\n      inverseFactorTimesTwo = inverseFactor * inverseFactor,\n      factorTimes2 = t * t,\n      factor1 = inverseFactorTimesTwo * inverseFactor,\n      factor2 = 3 * t * inverseFactorTimesTwo,\n      factor3 = 3 * factorTimes2 * inverseFactor,\n      factor4 = factorTimes2 * t;\n  \n  out[0] = a[0] * factor1 + b[0] * factor2 + c[0] * factor3 + d[0] * factor4;\n  out[1] = a[1] * factor1 + b[1] * factor2 + c[1] * factor3 + d[1] * factor4;\n  out[2] = a[2] * factor1 + b[2] * factor2 + c[2] * factor3 + d[2] * factor4;\n  \n  return out;\n};\n\n/**\n * Generates a random vector with the given scale\n *\n * @param {vec3} out the receiving vector\n * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned\n * @returns {vec3} out\n */\nvec3.random = function (out, scale) {\n    scale = scale || 1.0;\n\n    var r = GLMAT_RANDOM() * 2.0 * Math.PI;\n    var z = (GLMAT_RANDOM() * 2.0) - 1.0;\n    var zScale = Math.sqrt(1.0-z*z) * scale;\n\n    out[0] = Math.cos(r) * zScale;\n    out[1] = Math.sin(r) * zScale;\n    out[2] = z * scale;\n    return out;\n};\n\n/**\n * Transforms the vec3 with a mat4.\n * 4th vector component is implicitly '1'\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {mat4} m matrix to transform with\n * @returns {vec3} out\n */\nvec3.transformMat4 = function(out, a, m) {\n    var x = a[0], y = a[1], z = a[2],\n        w = m[3] * x + m[7] * y + m[11] * z + m[15];\n    w = w || 1.0;\n    out[0] = (m[0] * x + m[4] * y + m[8] * z + m[12]) / w;\n    out[1] = (m[1] * x + m[5] * y + m[9] * z + m[13]) / w;\n    out[2] = (m[2] * x + m[6] * y + m[10] * z + m[14]) / w;\n    return out;\n};\n\n/**\n * Transforms the vec3 with a mat3.\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {mat4} m the 3x3 matrix to transform with\n * @returns {vec3} out\n */\nvec3.transformMat3 = function(out, a, m) {\n    var x = a[0], y = a[1], z = a[2];\n    out[0] = x * m[0] + y * m[3] + z * m[6];\n    out[1] = x * m[1] + y * m[4] + z * m[7];\n    out[2] = x * m[2] + y * m[5] + z * m[8];\n    return out;\n};\n\n/**\n * Transforms the vec3 with a quat\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {quat} q quaternion to transform with\n * @returns {vec3} out\n */\nvec3.transformQuat = function(out, a, q) {\n    // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations\n\n    var x = a[0], y = a[1], z = a[2],\n        qx = q[0], qy = q[1], qz = q[2], qw = q[3],\n\n        // calculate quat * vec\n        ix = qw * x + qy * z - qz * y,\n        iy = qw * y + qz * x - qx * z,\n        iz = qw * z + qx * y - qy * x,\n        iw = -qx * x - qy * y - qz * z;\n\n    // calculate result * inverse quat\n    out[0] = ix * qw + iw * -qx + iy * -qz - iz * -qy;\n    out[1] = iy * qw + iw * -qy + iz * -qx - ix * -qz;\n    out[2] = iz * qw + iw * -qz + ix * -qy - iy * -qx;\n    return out;\n};\n\n/**\n * Rotate a 3D vector around the x-axis\n * @param {vec3} out The receiving vec3\n * @param {vec3} a The vec3 point to rotate\n * @param {vec3} b The origin of the rotation\n * @param {Number} c The angle of rotation\n * @returns {vec3} out\n */\nvec3.rotateX = function(out, a, b, c){\n   var p = [], r=[];\n\t  //Translate point to the origin\n\t  p[0] = a[0] - b[0];\n\t  p[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n\n\t  //perform rotation\n\t  r[0] = p[0];\n\t  r[1] = p[1]*Math.cos(c) - p[2]*Math.sin(c);\n\t  r[2] = p[1]*Math.sin(c) + p[2]*Math.cos(c);\n\n\t  //translate to correct position\n\t  out[0] = r[0] + b[0];\n\t  out[1] = r[1] + b[1];\n\t  out[2] = r[2] + b[2];\n\n  \treturn out;\n};\n\n/**\n * Rotate a 3D vector around the y-axis\n * @param {vec3} out The receiving vec3\n * @param {vec3} a The vec3 point to rotate\n * @param {vec3} b The origin of the rotation\n * @param {Number} c The angle of rotation\n * @returns {vec3} out\n */\nvec3.rotateY = function(out, a, b, c){\n  \tvar p = [], r=[];\n  \t//Translate point to the origin\n  \tp[0] = a[0] - b[0];\n  \tp[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n  \n  \t//perform rotation\n  \tr[0] = p[2]*Math.sin(c) + p[0]*Math.cos(c);\n  \tr[1] = p[1];\n  \tr[2] = p[2]*Math.cos(c) - p[0]*Math.sin(c);\n  \n  \t//translate to correct position\n  \tout[0] = r[0] + b[0];\n  \tout[1] = r[1] + b[1];\n  \tout[2] = r[2] + b[2];\n  \n  \treturn out;\n};\n\n/**\n * Rotate a 3D vector around the z-axis\n * @param {vec3} out The receiving vec3\n * @param {vec3} a The vec3 point to rotate\n * @param {vec3} b The origin of the rotation\n * @param {Number} c The angle of rotation\n * @returns {vec3} out\n */\nvec3.rotateZ = function(out, a, b, c){\n  \tvar p = [], r=[];\n  \t//Translate point to the origin\n  \tp[0] = a[0] - b[0];\n  \tp[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n  \n  \t//perform rotation\n  \tr[0] = p[0]*Math.cos(c) - p[1]*Math.sin(c);\n  \tr[1] = p[0]*Math.sin(c) + p[1]*Math.cos(c);\n  \tr[2] = p[2];\n  \n  \t//translate to correct position\n  \tout[0] = r[0] + b[0];\n  \tout[1] = r[1] + b[1];\n  \tout[2] = r[2] + b[2];\n  \n  \treturn out;\n};\n\n/**\n * Perform some operation over an array of vec3s.\n *\n * @param {Array} a the array of vectors to iterate over\n * @param {Number} stride Number of elements between the start of each vec3. If 0 assumes tightly packed\n * @param {Number} offset Number of elements to skip at the beginning of the array\n * @param {Number} count Number of vec3s to iterate over. If 0 iterates over entire array\n * @param {Function} fn Function to call for each vector in the array\n * @param {Object} [arg] additional argument to pass to fn\n * @returns {Array} a\n * @function\n */\nvec3.forEach = (function() {\n    var vec = vec3.create();\n\n    return function(a, stride, offset, count, fn, arg) {\n        var i, l;\n        if(!stride) {\n            stride = 3;\n        }\n\n        if(!offset) {\n            offset = 0;\n        }\n        \n        if(count) {\n            l = Math.min((count * stride) + offset, a.length);\n        } else {\n            l = a.length;\n        }\n\n        for(i = offset; i < l; i += stride) {\n            vec[0] = a[i]; vec[1] = a[i+1]; vec[2] = a[i+2];\n            fn(vec, vec, arg);\n            a[i] = vec[0]; a[i+1] = vec[1]; a[i+2] = vec[2];\n        }\n        \n        return a;\n    };\n})();\n\n/**\n * Get the angle between two 3D vectors\n * @param {vec3} a The first operand\n * @param {vec3} b The second operand\n * @returns {Number} The angle in radians\n */\nvec3.angle = function(a, b) {\n   \n    var tempA = vec3.fromValues(a[0], a[1], a[2]);\n    var tempB = vec3.fromValues(b[0], b[1], b[2]);\n \n    vec3.normalize(tempA, tempA);\n    vec3.normalize(tempB, tempB);\n \n    var cosine = vec3.dot(tempA, tempB);\n\n    if(cosine > 1.0){\n        return 0;\n    } else {\n        return Math.acos(cosine);\n    }     \n};\n\n/**\n * Returns a string representation of a vector\n *\n * @param {vec3} vec vector to represent as a string\n * @returns {String} string representation of the vector\n */\nvec3.str = function (a) {\n    return 'vec3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ')';\n};\n\nif(typeof(exports) !== 'undefined') {\n    exports.vec3 = vec3;\n}\n";
+  require("npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Object.seal;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.assign", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.enum-keys"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/object/freeze", ["npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      enumKeys = require("npm:core-js@0.9.10/library/modules/$.enum-keys");
+  require("npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Object.freeze;
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("github:toji/gl-matrix@2.2.1/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2", [], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = "/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright notice, this\n    list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright notice,\n    this list of conditions and the following disclaimer in the documentation \n    and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE \nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */\n\n/**\n * @class 3 Dimensional Vector\n * @name vec3\n */\nvar vec3 = {};\n\n/**\n * Creates a new, empty vec3\n *\n * @returns {vec3} a new 3D vector\n */\nvec3.create = function() {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = 0;\n    out[1] = 0;\n    out[2] = 0;\n    return out;\n};\n\n/**\n * Creates a new vec3 initialized with values from an existing vector\n *\n * @param {vec3} a vector to clone\n * @returns {vec3} a new 3D vector\n */\nvec3.clone = function(a) {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = a[0];\n    out[1] = a[1];\n    out[2] = a[2];\n    return out;\n};\n\n/**\n * Creates a new vec3 initialized with the given values\n *\n * @param {Number} x X component\n * @param {Number} y Y component\n * @param {Number} z Z component\n * @returns {vec3} a new 3D vector\n */\nvec3.fromValues = function(x, y, z) {\n    var out = new GLMAT_ARRAY_TYPE(3);\n    out[0] = x;\n    out[1] = y;\n    out[2] = z;\n    return out;\n};\n\n/**\n * Copy the values from one vec3 to another\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the source vector\n * @returns {vec3} out\n */\nvec3.copy = function(out, a) {\n    out[0] = a[0];\n    out[1] = a[1];\n    out[2] = a[2];\n    return out;\n};\n\n/**\n * Set the components of a vec3 to the given values\n *\n * @param {vec3} out the receiving vector\n * @param {Number} x X component\n * @param {Number} y Y component\n * @param {Number} z Z component\n * @returns {vec3} out\n */\nvec3.set = function(out, x, y, z) {\n    out[0] = x;\n    out[1] = y;\n    out[2] = z;\n    return out;\n};\n\n/**\n * Adds two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.add = function(out, a, b) {\n    out[0] = a[0] + b[0];\n    out[1] = a[1] + b[1];\n    out[2] = a[2] + b[2];\n    return out;\n};\n\n/**\n * Subtracts vector b from vector a\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.subtract = function(out, a, b) {\n    out[0] = a[0] - b[0];\n    out[1] = a[1] - b[1];\n    out[2] = a[2] - b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.subtract}\n * @function\n */\nvec3.sub = vec3.subtract;\n\n/**\n * Multiplies two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.multiply = function(out, a, b) {\n    out[0] = a[0] * b[0];\n    out[1] = a[1] * b[1];\n    out[2] = a[2] * b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.multiply}\n * @function\n */\nvec3.mul = vec3.multiply;\n\n/**\n * Divides two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.divide = function(out, a, b) {\n    out[0] = a[0] / b[0];\n    out[1] = a[1] / b[1];\n    out[2] = a[2] / b[2];\n    return out;\n};\n\n/**\n * Alias for {@link vec3.divide}\n * @function\n */\nvec3.div = vec3.divide;\n\n/**\n * Returns the minimum of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.min = function(out, a, b) {\n    out[0] = Math.min(a[0], b[0]);\n    out[1] = Math.min(a[1], b[1]);\n    out[2] = Math.min(a[2], b[2]);\n    return out;\n};\n\n/**\n * Returns the maximum of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.max = function(out, a, b) {\n    out[0] = Math.max(a[0], b[0]);\n    out[1] = Math.max(a[1], b[1]);\n    out[2] = Math.max(a[2], b[2]);\n    return out;\n};\n\n/**\n * Scales a vec3 by a scalar number\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to scale\n * @param {Number} b amount to scale the vector by\n * @returns {vec3} out\n */\nvec3.scale = function(out, a, b) {\n    out[0] = a[0] * b;\n    out[1] = a[1] * b;\n    out[2] = a[2] * b;\n    return out;\n};\n\n/**\n * Adds two vec3's after scaling the second operand by a scalar value\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {Number} scale the amount to scale b by before adding\n * @returns {vec3} out\n */\nvec3.scaleAndAdd = function(out, a, b, scale) {\n    out[0] = a[0] + (b[0] * scale);\n    out[1] = a[1] + (b[1] * scale);\n    out[2] = a[2] + (b[2] * scale);\n    return out;\n};\n\n/**\n * Calculates the euclidian distance between two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} distance between a and b\n */\nvec3.distance = function(a, b) {\n    var x = b[0] - a[0],\n        y = b[1] - a[1],\n        z = b[2] - a[2];\n    return Math.sqrt(x*x + y*y + z*z);\n};\n\n/**\n * Alias for {@link vec3.distance}\n * @function\n */\nvec3.dist = vec3.distance;\n\n/**\n * Calculates the squared euclidian distance between two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} squared distance between a and b\n */\nvec3.squaredDistance = function(a, b) {\n    var x = b[0] - a[0],\n        y = b[1] - a[1],\n        z = b[2] - a[2];\n    return x*x + y*y + z*z;\n};\n\n/**\n * Alias for {@link vec3.squaredDistance}\n * @function\n */\nvec3.sqrDist = vec3.squaredDistance;\n\n/**\n * Calculates the length of a vec3\n *\n * @param {vec3} a vector to calculate length of\n * @returns {Number} length of a\n */\nvec3.length = function (a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    return Math.sqrt(x*x + y*y + z*z);\n};\n\n/**\n * Alias for {@link vec3.length}\n * @function\n */\nvec3.len = vec3.length;\n\n/**\n * Calculates the squared length of a vec3\n *\n * @param {vec3} a vector to calculate squared length of\n * @returns {Number} squared length of a\n */\nvec3.squaredLength = function (a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    return x*x + y*y + z*z;\n};\n\n/**\n * Alias for {@link vec3.squaredLength}\n * @function\n */\nvec3.sqrLen = vec3.squaredLength;\n\n/**\n * Negates the components of a vec3\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a vector to negate\n * @returns {vec3} out\n */\nvec3.negate = function(out, a) {\n    out[0] = -a[0];\n    out[1] = -a[1];\n    out[2] = -a[2];\n    return out;\n};\n\n/**\n * Normalize a vec3\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a vector to normalize\n * @returns {vec3} out\n */\nvec3.normalize = function(out, a) {\n    var x = a[0],\n        y = a[1],\n        z = a[2];\n    var len = x*x + y*y + z*z;\n    if (len > 0) {\n        //TODO: evaluate use of glm_invsqrt here?\n        len = 1 / Math.sqrt(len);\n        out[0] = a[0] * len;\n        out[1] = a[1] * len;\n        out[2] = a[2] * len;\n    }\n    return out;\n};\n\n/**\n * Calculates the dot product of two vec3's\n *\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {Number} dot product of a and b\n */\nvec3.dot = function (a, b) {\n    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n};\n\n/**\n * Computes the cross product of two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @returns {vec3} out\n */\nvec3.cross = function(out, a, b) {\n    var ax = a[0], ay = a[1], az = a[2],\n        bx = b[0], by = b[1], bz = b[2];\n\n    out[0] = ay * bz - az * by;\n    out[1] = az * bx - ax * bz;\n    out[2] = ax * by - ay * bx;\n    return out;\n};\n\n/**\n * Performs a linear interpolation between two vec3's\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the first operand\n * @param {vec3} b the second operand\n * @param {Number} t interpolation amount between the two inputs\n * @returns {vec3} out\n */\nvec3.lerp = function (out, a, b, t) {\n    var ax = a[0],\n        ay = a[1],\n        az = a[2];\n    out[0] = ax + t * (b[0] - ax);\n    out[1] = ay + t * (b[1] - ay);\n    out[2] = az + t * (b[2] - az);\n    return out;\n};\n\n/**\n * Generates a random vector with the given scale\n *\n * @param {vec3} out the receiving vector\n * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned\n * @returns {vec3} out\n */\nvec3.random = function (out, scale) {\n    scale = scale || 1.0;\n\n    var r = GLMAT_RANDOM() * 2.0 * Math.PI;\n    var z = (GLMAT_RANDOM() * 2.0) - 1.0;\n    var zScale = Math.sqrt(1.0-z*z) * scale;\n\n    out[0] = Math.cos(r) * zScale;\n    out[1] = Math.sin(r) * zScale;\n    out[2] = z * scale;\n    return out;\n};\n\n/**\n * Transforms the vec3 with a mat4.\n * 4th vector component is implicitly '1'\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {mat4} m matrix to transform with\n * @returns {vec3} out\n */\nvec3.transformMat4 = function(out, a, m) {\n    var x = a[0], y = a[1], z = a[2];\n    out[0] = m[0] * x + m[4] * y + m[8] * z + m[12];\n    out[1] = m[1] * x + m[5] * y + m[9] * z + m[13];\n    out[2] = m[2] * x + m[6] * y + m[10] * z + m[14];\n    return out;\n};\n\n/**\n * Transforms the vec3 with a mat3.\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {mat4} m the 3x3 matrix to transform with\n * @returns {vec3} out\n */\nvec3.transformMat3 = function(out, a, m) {\n    var x = a[0], y = a[1], z = a[2];\n    out[0] = x * m[0] + y * m[3] + z * m[6];\n    out[1] = x * m[1] + y * m[4] + z * m[7];\n    out[2] = x * m[2] + y * m[5] + z * m[8];\n    return out;\n};\n\n/**\n * Transforms the vec3 with a quat\n *\n * @param {vec3} out the receiving vector\n * @param {vec3} a the vector to transform\n * @param {quat} q quaternion to transform with\n * @returns {vec3} out\n */\nvec3.transformQuat = function(out, a, q) {\n    // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations\n\n    var x = a[0], y = a[1], z = a[2],\n        qx = q[0], qy = q[1], qz = q[2], qw = q[3],\n\n        // calculate quat * vec\n        ix = qw * x + qy * z - qz * y,\n        iy = qw * y + qz * x - qx * z,\n        iz = qw * z + qx * y - qy * x,\n        iw = -qx * x - qy * y - qz * z;\n\n    // calculate result * inverse quat\n    out[0] = ix * qw + iw * -qx + iy * -qz - iz * -qy;\n    out[1] = iy * qw + iw * -qy + iz * -qx - ix * -qz;\n    out[2] = iz * qw + iw * -qz + ix * -qy - iy * -qx;\n    return out;\n};\n\n/*\n* Rotate a 3D vector around the x-axis\n* @param {vec3} out The receiving vec3\n* @param {vec3} a The vec3 point to rotate\n* @param {vec3} b The origin of the rotation\n* @param {Number} c The angle of rotation\n* @returns {vec3} out\n*/\nvec3.rotateX = function(out, a, b, c){\n   var p = [], r=[];\n\t  //Translate point to the origin\n\t  p[0] = a[0] - b[0];\n\t  p[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n\n\t  //perform rotation\n\t  r[0] = p[0];\n\t  r[1] = p[1]*Math.cos(c) - p[2]*Math.sin(c);\n\t  r[2] = p[1]*Math.sin(c) + p[2]*Math.cos(c);\n\n\t  //translate to correct position\n\t  out[0] = r[0] + b[0];\n\t  out[1] = r[1] + b[1];\n\t  out[2] = r[2] + b[2];\n\n  \treturn out;\n};\n\n/*\n* Rotate a 3D vector around the y-axis\n* @param {vec3} out The receiving vec3\n* @param {vec3} a The vec3 point to rotate\n* @param {vec3} b The origin of the rotation\n* @param {Number} c The angle of rotation\n* @returns {vec3} out\n*/\nvec3.rotateY = function(out, a, b, c){\n  \tvar p = [], r=[];\n  \t//Translate point to the origin\n  \tp[0] = a[0] - b[0];\n  \tp[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n  \n  \t//perform rotation\n  \tr[0] = p[2]*Math.sin(c) + p[0]*Math.cos(c);\n  \tr[1] = p[1];\n  \tr[2] = p[2]*Math.cos(c) - p[0]*Math.sin(c);\n  \n  \t//translate to correct position\n  \tout[0] = r[0] + b[0];\n  \tout[1] = r[1] + b[1];\n  \tout[2] = r[2] + b[2];\n  \n  \treturn out;\n};\n\n/*\n* Rotate a 3D vector around the z-axis\n* @param {vec3} out The receiving vec3\n* @param {vec3} a The vec3 point to rotate\n* @param {vec3} b The origin of the rotation\n* @param {Number} c The angle of rotation\n* @returns {vec3} out\n*/\nvec3.rotateZ = function(out, a, b, c){\n  \tvar p = [], r=[];\n  \t//Translate point to the origin\n  \tp[0] = a[0] - b[0];\n  \tp[1] = a[1] - b[1];\n  \tp[2] = a[2] - b[2];\n  \n  \t//perform rotation\n  \tr[0] = p[0]*Math.cos(c) - p[1]*Math.sin(c);\n  \tr[1] = p[0]*Math.sin(c) + p[1]*Math.cos(c);\n  \tr[2] = p[2];\n  \n  \t//translate to correct position\n  \tout[0] = r[0] + b[0];\n  \tout[1] = r[1] + b[1];\n  \tout[2] = r[2] + b[2];\n  \n  \treturn out;\n};\n\n/**\n * Perform some operation over an array of vec3s.\n *\n * @param {Array} a the array of vectors to iterate over\n * @param {Number} stride Number of elements between the start of each vec3. If 0 assumes tightly packed\n * @param {Number} offset Number of elements to skip at the beginning of the array\n * @param {Number} count Number of vec3s to iterate over. If 0 iterates over entire array\n * @param {Function} fn Function to call for each vector in the array\n * @param {Object} [arg] additional argument to pass to fn\n * @returns {Array} a\n * @function\n */\nvec3.forEach = (function() {\n    var vec = vec3.create();\n\n    return function(a, stride, offset, count, fn, arg) {\n        var i, l;\n        if(!stride) {\n            stride = 3;\n        }\n\n        if(!offset) {\n            offset = 0;\n        }\n        \n        if(count) {\n            l = Math.min((count * stride) + offset, a.length);\n        } else {\n            l = a.length;\n        }\n\n        for(i = offset; i < l; i += stride) {\n            vec[0] = a[i]; vec[1] = a[i+1]; vec[2] = a[i+2];\n            fn(vec, vec, arg);\n            a[i] = vec[0]; a[i+1] = vec[1]; a[i+2] = vec[2];\n        }\n        \n        return a;\n    };\n})();\n\n/**\n * Returns a string representation of a vector\n *\n * @param {vec3} vec vector to represent as a string\n * @returns {String} string representation of the vector\n */\nvec3.str = function (a) {\n    return 'vec3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ')';\n};\n\nif(typeof(exports) !== 'undefined') {\n    exports.vec3 = vec3;\n}\n";
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.12/library/modules/$.assign", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.enum-keys"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      enumKeys = require("npm:core-js@0.9.12/library/modules/$.enum-keys");
   module.exports = Object.assign || function assign(target, source) {
     var T = Object($.assertDefined(target)),
         l = arguments.length,
@@ -4800,12 +4823,12 @@ System.register("npm:core-js@0.9.10/library/modules/$.assign", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.math", ["npm:core-js@0.9.10/library/modules/$.def"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.math", ["npm:core-js@0.9.12/library/modules/$.def"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   var Infinity = 1 / 0,
-      $def = require("npm:core-js@0.9.10/library/modules/$.def"),
+      $def = require("npm:core-js@0.9.12/library/modules/$.def"),
       E = Math.E,
       pow = Math.pow,
       abs = Math.abs,
@@ -4863,21 +4886,21 @@ System.register("npm:core-js@0.9.10/library/modules/es6.math", ["npm:core-js@0.9
     },
     hypot: function hypot(value1, value2) {
       var sum = 0,
-          len1 = arguments.length,
-          len2 = len1,
-          args = Array(len1),
+          i = 0,
+          len = arguments.length,
+          args = Array(len),
           larg = 0,
           arg;
-      while (len1--) {
-        arg = args[len1] = abs(arguments[len1]);
+      while (i < len) {
+        arg = args[i] = abs(arguments[i++]);
         if (arg == Infinity)
           return Infinity;
         if (arg > larg)
           larg = arg;
       }
       larg = larg || 1;
-      while (len2--)
-        sum += pow(args[len2] / larg, 2);
+      while (len--)
+        sum += pow(args[len] / larg, 2);
       return larg * sqrt(sum);
     },
     imul: function imul(x, y) {
@@ -4923,69 +4946,18 @@ System.register("github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/pl
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/object/freeze", ["npm:core-js@0.9.10/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.statics-accept-primitives");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Object.freeze;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:babel-runtime@5.4.3/helpers/object-without-properties", [], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  "use strict";
-  exports["default"] = function(obj, keys) {
-    var target = {};
-    for (var i in obj) {
-      if (keys.indexOf(i) >= 0)
-        continue;
-      if (!Object.prototype.hasOwnProperty.call(obj, i))
-        continue;
-      target[i] = obj[i];
-    }
-    return target;
-  };
-  exports.__esModule = true;
-  global.define = __define;
-  return module.exports;
-});
-
 System.register("lib/material/shaders/phong.vert.dot!lib/plugins/dot", [], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = function anonymous(it) {
-    var out = 'uniform mat4 mvpMatrix;\nuniform mat4 modelMatrix;\nuniform mat3 normalMatrix;\n\nattribute vec3 vertex;\nattribute vec3 normal;\n';
+    var out = 'uniform mat4 mvpMatrix;\nuniform mat4 modelMatrix;\nuniform mat3 normalMatrix;\n\nattribute vec3 vertex;\nattribute vec3 normal;\n\n';
     if (it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture') {
-      out += '\nattribute vec2 texcoord;\n';
+      out += '\nattribute vec2 texcoord;\nvarying vec2 lerpTexcoords;\n';
     }
-    out += '\n\nvarying vec3 worldFragPos;\nvarying vec3 worldNormal;\n\n';
-    if (it.ambient === 'texture') {
-      out += '\nuniform vec4 ambientTexcoordBounds;\nvarying vec2 ambientTexcoord;\n';
-    }
-    out += '\n\n';
-    if (it.diffuse === 'texture') {
-      out += '\nuniform vec4 diffuseTexcoordBounds;\nvarying vec2 diffuseTexcoord;\n';
-    }
-    out += '\n\n';
-    if (it.specular === 'texture') {
-      out += '\nuniform vec4 specularTexcoordBounds;\nvarying vec2 specularTexcoord;\n';
-    }
-    out += '\n\n\nvoid main() {\n\n    worldFragPos = vec3(modelMatrix * vec4(vertex, 1.0));\n    worldNormal = normalize(normalMatrix * normal);\n\n    ';
-    if (it.ambient === 'texture') {
-      out += '\n    ambientTexcoord = ambientTexcoordBounds.xy + texcoord * ambientTexcoordBounds.zw;\n    ';
-    }
-    out += '\n\n    ';
-    if (it.diffuse === 'texture') {
-      out += '\n    diffuseTexcoord = diffuseTexcoordBounds.xy + texcoord * diffuseTexcoordBounds.zw;\n    ';
-    }
-    out += '\n\n    ';
-    if (it.specular === 'texture') {
-      out += '\n    specularTexcoord = specularTexcoordBounds.xy + texcoord * specularTexcoordBounds.zw;\n    ';
+    out += '\n\nvarying vec3 worldFragPos;\nvarying vec3 worldNormal;\n\nvoid main() {\n\n    worldFragPos = vec3(modelMatrix * vec4(vertex, 1.0));\n    worldNormal = normalize(normalMatrix * normal);\n\n    ';
+    if (it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture') {
+      out += '\n    lerpTexcoords = texcoord;\n    ';
     }
     out += '\n\n    gl_Position = mvpMatrix * vec4(vertex, 1.0);\n}\n';
     return out;
@@ -5012,30 +4984,50 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
       out += ' vec3 specular; ';
     }
     out += '\n};\n\n\nvarying vec3 worldFragPos;\nvarying vec3 worldNormal;\n\nuniform vec3 viewPos;\n\n';
+    if (it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture') {
+      out += '\nvarying vec2 lerpTexcoords;\n';
+    }
+    out += '\n\n';
     if (it.ambient === 'texture') {
-      out += '\nuniform sampler2D ambientSampler;\nvarying vec2 ambientTexcoord;\n';
+      out += '\nuniform sampler2D ambientSampler;\nuniform vec4 ambientTexcoordBounds;\n';
     }
     out += '\n\n';
     if (it.diffuse === 'texture') {
-      out += '\nuniform sampler2D diffuseSampler;\nvarying vec2 diffuseTexcoord;\n';
+      out += '\nuniform sampler2D diffuseSampler;\nuniform vec4 diffuseTexcoordBounds;\n';
     }
     out += '\n\n';
     if (it.specular === 'texture') {
-      out += '\nuniform sampler2D specularSampler;\nvarying vec2 specularTexcoord;\n';
+      out += '\nuniform sampler2D specularSampler;\nuniform vec4 specularTexcoordBounds;\n';
     }
     out += '\n\n';
     if (it.MAX_DIRECTIONAL_LIGHTS) {
-      out += '\n    uniform DirectionalLight directionalLights[' + (it.MAX_DIRECTIONAL_LIGHTS) + '];\n';
+      out += '\nuniform DirectionalLight directionalLights[' + (it.MAX_DIRECTIONAL_LIGHTS) + '];\n';
     }
     out += '\n\n';
     if (it.MAX_POINT_LIGHTS) {
-      out += '\n    uniform PointLight pointLights[' + (it.MAX_POINT_LIGHTS) + '];\n';
+      out += '\nuniform PointLight pointLights[' + (it.MAX_POINT_LIGHTS) + '];\n';
     }
     out += '\n\n';
     if (it.MAX_SPOT_LIGHTS) {
-      out += '\n    uniform SpotLight spotLights[' + (it.MAX_SPOT_LIGHTS) + '];\n';
+      out += '\nuniform SpotLight spotLights[' + (it.MAX_SPOT_LIGHTS) + '];\n';
     }
-    out += '\n\nuniform Material material;\nuniform vec3 environmentAmbient;\n\nvoid main() {\n\n    vec3 worldNormal2 = normalize(worldNormal);\n\n    // Direction from fragment to camera\n    vec3 viewDir = normalize(viewPos - worldFragPos);\n    vec3 color = environmentAmbient +  ';
+    out += '\n\nuniform Material material;\nuniform vec3 environmentAmbient;\n\nvoid main() {\n\n    ';
+    if (it.ambient === 'texture' || it.diffuse === 'texture' || it.specular === 'texture') {
+      out += '\n    vec2 fixedLerpTexcoords = fract(lerpTexcoords);\n    ';
+    }
+    out += '\n\n    ';
+    if (it.ambient === 'texture') {
+      out += '\n    vec2 ambientTexcoord = ambientTexcoordBounds.xy + fixedLerpTexcoords * ambientTexcoordBounds.zw;\n    ';
+    }
+    out += '\n\n    ';
+    if (it.diffuse === 'texture') {
+      out += '\n    vec2 diffuseTexcoord = diffuseTexcoordBounds.xy + fixedLerpTexcoords * diffuseTexcoordBounds.zw;\n    ';
+    }
+    out += '\n\n    ';
+    if (it.specular === 'texture') {
+      out += '\n    vec2 specularTexcoord = specularTexcoordBounds.xy + fixedLerpTexcoords * specularTexcoordBounds.zw;\n    ';
+    }
+    out += '\n\n    vec3 worldNormal2 = normalize(worldNormal);\n\n    // Direction from fragment to camera\n    vec3 viewDir = normalize(viewPos - worldFragPos);\n    vec3 color = environmentAmbient +  ';
     if (it.ambient === 'texture') {
       out += ' texture2D(ambientSampler, ambientTexcoord).stp ';
     } else {
@@ -5043,7 +5035,7 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
     }
     out += ' ;\n\n    ';
     if (it.MAX_DIRECTIONAL_LIGHTS) {
-      out += '\n        for (int i = 0; i < ' + (it.MAX_DIRECTIONAL_LIGHTS) + '; ++i) {\n            DirectionalLight light = directionalLights[i];\n            \n    vec3 lightDir = -light.direction;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
+      out += '\n    for (int i = 0; i < ' + (it.MAX_DIRECTIONAL_LIGHTS) + '; ++i) {\n        DirectionalLight light = directionalLights[i];\n        \n    vec3 lightDir = -light.direction;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
       if (it.diffuse === 'texture') {
         out += ' texture2D(diffuseSampler, diffuseTexcoord).stp ';
       } else {
@@ -5061,11 +5053,11 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
       } else {
         out += ' material.specular ';
       }
-      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n            color += shade;\n        }\n    ';
+      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n        color += shade;\n    }\n    ';
     }
     out += '\n\n    ';
     if (it.MAX_POINT_LIGHTS) {
-      out += '\n        for (int i = 0; i < ' + (it.MAX_POINT_LIGHTS) + '; ++i) {\n            PointLight light = pointLights[i];\n            \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
+      out += '\n    for (int i = 0; i < ' + (it.MAX_POINT_LIGHTS) + '; ++i) {\n        PointLight light = pointLights[i];\n        \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
       if (it.diffuse === 'texture') {
         out += ' texture2D(diffuseSampler, diffuseTexcoord).stp ';
       } else {
@@ -5083,11 +5075,11 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
       } else {
         out += ' material.specular ';
       }
-      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n            color += shade;\n        }\n    ';
+      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n        color += shade;\n    }\n    ';
     }
     out += '\n\n    ';
     if (it.MAX_SPOT_LIGHTS) {
-      out += '\n        for (int i = 0; i < ' + (it.MAX_SPOT_LIGHTS) + '; ++i) {\n            SpotLight light = spotLights[i];\n            \n    \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
+      out += '\n    for (int i = 0; i < ' + (it.MAX_SPOT_LIGHTS) + '; ++i) {\n        SpotLight light = spotLights[i];\n        \n    \n    vec3 direction = light.position - worldFragPos;\n    float distance = length(direction);\n\n    vec3 lightDir = direction / distance;\n\n    \n\n    vec3 diffuse = light.diffuse *  ';
       if (it.diffuse === 'texture') {
         out += ' texture2D(diffuseSampler, diffuseTexcoord).stp ';
       } else {
@@ -5105,7 +5097,7 @@ System.register("lib/material/shaders/phong.frag.dot!lib/plugins/dot", [], true,
       } else {
         out += ' material.specular ';
       }
-      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n\n    float theta = dot(lightDir, light.direction);\n    float epsilon = light.cutoff - light.outerCutoff;\n    float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);\n\n    shade *= intensity;\n\n            color += shade;\n        }\n    ';
+      out += '  * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);\n\n    vec3 shade = diffuse + specular;\n\n\n    float attenuation = 1.0 / (light.constant + distance * (light.linear + distance * light.quadratic));\n\n    shade += attenuation;\n\n\n    float theta = dot(lightDir, light.direction);\n    float epsilon = light.cutoff - light.outerCutoff;\n    float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);\n\n    shade *= intensity;\n\n        color += shade;\n    }\n    ';
     }
     out += '\n\n    gl_FragColor = vec4(color, 1.0);\n}\n';
     return out;
@@ -5211,7 +5203,7 @@ function define(){};  define.amd = {};
   Bacon = {toString: function() {
       return "Bacon";
     }};
-  Bacon.version = '0.7.58';
+  Bacon.version = '0.7.59';
   Exception = (typeof global !== "undefined" && global !== null ? global : this).Error;
   nop = function() {};
   latter = function(_, x) {
@@ -7817,6 +7809,16 @@ function define(){};  define.amd = {};
       return this.push(event);
     }));
   };
+  Bacon.Observable.prototype.doError = function() {
+    var f;
+    f = makeFunctionArgs(arguments);
+    return withDescription(this, "doError", f, this.withHandler(function(event) {
+      if (event.isError()) {
+        f(event.error);
+      }
+      return this.push(event);
+    }));
+  };
   Bacon.Observable.prototype.endOnError = function() {
     var args,
         f;
@@ -8437,7 +8439,7 @@ function define(){};  define.amd = {};
     return this.last().firstToPromise(PromiseCtr);
   };
   if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-    System.register("github:baconjs/bacon.js@0.7.58/dist/Bacon", [], false, function(__require, __exports, __module) {
+    System.register("github:baconjs/bacon.js@0.7.59/dist/Bacon", [], false, function(__require, __exports, __module) {
       return (function() {
         return Bacon;
       }).call(this);
@@ -8451,7 +8453,7 @@ function define(){};  define.amd = {};
   }
 }).call(this);
 })();
-System.register("npm:core-js@0.9.10/library/modules/$", ["npm:core-js@0.9.10/library/modules/$.fw"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$", ["npm:core-js@0.9.12/library/modules/$.fw"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
@@ -8503,7 +8505,7 @@ System.register("npm:core-js@0.9.10/library/modules/$", ["npm:core-js@0.9.10/lib
       throw TypeError("Can't call method on  " + it);
     return it;
   }
-  var $ = module.exports = require("npm:core-js@0.9.10/library/modules/$.fw")({
+  var $ = module.exports = require("npm:core-js@0.9.12/library/modules/$.fw")({
     g: global,
     core: core,
     html: global.document && document.documentElement,
@@ -8554,30 +8556,30 @@ System.register("npm:core-js@0.9.10/library/modules/$", ["npm:core-js@0.9.10/lib
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.wks", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.uid"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.wks", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.shared", "npm:core-js@0.9.12/library/modules/$.uid"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var global = require("npm:core-js@0.9.10/library/modules/$").g,
-      store = {};
+  var global = require("npm:core-js@0.9.12/library/modules/$").g,
+      store = require("npm:core-js@0.9.12/library/modules/$.shared")('wks');
   module.exports = function(name) {
-    return store[name] || (store[name] = global.Symbol && global.Symbol[name] || require("npm:core-js@0.9.10/library/modules/$.uid").safe('Symbol.' + name));
+    return store[name] || (store[name] = global.Symbol && global.Symbol[name] || require("npm:core-js@0.9.12/library/modules/$.uid").safe('Symbol.' + name));
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.iter", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.iter", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.wks", "npm:core-js@0.9.12/library/modules/$.shared"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      cof = require("npm:core-js@0.9.10/library/modules/$.cof"),
-      assertObject = require("npm:core-js@0.9.10/library/modules/$.assert").obj,
-      SYMBOL_ITERATOR = require("npm:core-js@0.9.10/library/modules/$.wks")('iterator'),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      cof = require("npm:core-js@0.9.12/library/modules/$.cof"),
+      assertObject = require("npm:core-js@0.9.12/library/modules/$.assert").obj,
+      SYMBOL_ITERATOR = require("npm:core-js@0.9.12/library/modules/$.wks")('iterator'),
       FF_ITERATOR = '@@iterator',
-      Iterators = {},
+      Iterators = require("npm:core-js@0.9.12/library/modules/$.shared")('iterators'),
       IteratorPrototype = {};
   setIterator(IteratorPrototype, $.that);
   function setIterator(O, value) {
@@ -8616,16 +8618,16 @@ System.register("npm:core-js@0.9.10/library/modules/$.iter", ["npm:core-js@0.9.1
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.iter-define", ["npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.redef", "npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.iter-define", ["npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.redef", "npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-      $redef = require("npm:core-js@0.9.10/library/modules/$.redef"),
-      $ = require("npm:core-js@0.9.10/library/modules/$"),
-      cof = require("npm:core-js@0.9.10/library/modules/$.cof"),
-      $iter = require("npm:core-js@0.9.10/library/modules/$.iter"),
-      SYMBOL_ITERATOR = require("npm:core-js@0.9.10/library/modules/$.wks")('iterator'),
+  var $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+      $redef = require("npm:core-js@0.9.12/library/modules/$.redef"),
+      $ = require("npm:core-js@0.9.12/library/modules/$"),
+      cof = require("npm:core-js@0.9.12/library/modules/$.cof"),
+      $iter = require("npm:core-js@0.9.12/library/modules/$.iter"),
+      SYMBOL_ITERATOR = require("npm:core-js@0.9.12/library/modules/$.wks")('iterator'),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
       VALUES = 'values',
@@ -8685,17 +8687,17 @@ System.register("npm:core-js@0.9.10/library/modules/$.iter-define", ["npm:core-j
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.array.iterator", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.unscope", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.array.iterator", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.unscope", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      setUnscope = require("npm:core-js@0.9.10/library/modules/$.unscope"),
-      ITER = require("npm:core-js@0.9.10/library/modules/$.uid").safe('iter'),
-      $iter = require("npm:core-js@0.9.10/library/modules/$.iter"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      setUnscope = require("npm:core-js@0.9.12/library/modules/$.unscope"),
+      ITER = require("npm:core-js@0.9.12/library/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.9.12/library/modules/$.iter"),
       step = $iter.step,
       Iterators = $iter.Iterators;
-  require("npm:core-js@0.9.10/library/modules/$.iter-define")(Array, 'Array', function(iterated, kind) {
+  require("npm:core-js@0.9.12/library/modules/$.iter-define")(Array, 'Array', function(iterated, kind) {
     $.set(this, ITER, {
       o: $.toObject(iterated),
       i: 0,
@@ -8724,13 +8726,13 @@ System.register("npm:core-js@0.9.10/library/modules/es6.array.iterator", ["npm:c
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.for-of", ["npm:core-js@0.9.10/library/modules/$.ctx", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.iter-call"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.for-of", ["npm:core-js@0.9.12/library/modules/$.ctx", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.iter-call"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var ctx = require("npm:core-js@0.9.10/library/modules/$.ctx"),
-      get = require("npm:core-js@0.9.10/library/modules/$.iter").get,
-      call = require("npm:core-js@0.9.10/library/modules/$.iter-call");
+  var ctx = require("npm:core-js@0.9.12/library/modules/$.ctx"),
+      get = require("npm:core-js@0.9.12/library/modules/$.iter").get,
+      call = require("npm:core-js@0.9.12/library/modules/$.iter-call");
   module.exports = function(iterable, entries, fn, that) {
     var iterator = get(iterable),
         f = ctx(fn, that, entries ? 2 : 1),
@@ -8754,24 +8756,24 @@ System.register("npm:process@0.10.1", ["npm:process@0.10.1/browser"], true, func
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.collection-weak", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.for-of", "npm:core-js@0.9.10/library/modules/$.array-methods", "npm:core-js@0.9.10/library/modules/$.mix"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.collection-weak", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.for-of", "npm:core-js@0.9.12/library/modules/$.array-methods", "npm:core-js@0.9.12/library/modules/$.mix"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      safe = require("npm:core-js@0.9.10/library/modules/$.uid").safe,
-      assert = require("npm:core-js@0.9.10/library/modules/$.assert"),
-      forOf = require("npm:core-js@0.9.10/library/modules/$.for-of"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      safe = require("npm:core-js@0.9.12/library/modules/$.uid").safe,
+      assert = require("npm:core-js@0.9.12/library/modules/$.assert"),
+      forOf = require("npm:core-js@0.9.12/library/modules/$.for-of"),
       _has = $.has,
       isObject = $.isObject,
       hide = $.hide,
-      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      isExtensible = Object.isExtensible || isObject,
       id = 0,
       ID = safe('id'),
       WEAK = safe('weak'),
       LEAK = safe('leak'),
-      method = require("npm:core-js@0.9.10/library/modules/$.array-methods"),
+      method = require("npm:core-js@0.9.12/library/modules/$.array-methods"),
       find = method(5),
       findIndex = method(6);
   function findFrozen(store, key) {
@@ -8815,18 +8817,18 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-weak", ["npm:co
         if (iterable != undefined)
           forOf(iterable, IS_MAP, this[ADDER], this);
       }
-      require("npm:core-js@0.9.10/library/modules/$.mix")(C.prototype, {
+      require("npm:core-js@0.9.12/library/modules/$.mix")(C.prototype, {
         'delete': function(key) {
           if (!isObject(key))
             return false;
-          if (isFrozen(key))
+          if (!isExtensible(key))
             return leakStore(this)['delete'](key);
           return _has(key, WEAK) && _has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
         },
         has: function has(key) {
           if (!isObject(key))
             return false;
-          if (isFrozen(key))
+          if (!isExtensible(key))
             return leakStore(this).has(key);
           return _has(key, WEAK) && _has(key[WEAK], this[ID]);
         }
@@ -8834,7 +8836,7 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-weak", ["npm:co
       return C;
     },
     def: function(that, key, value) {
-      if (isFrozen(assert.obj(key))) {
+      if (!isExtensible(assert.obj(key))) {
         leakStore(that).set(key, value);
       } else {
         _has(key, WEAK) || hide(key, WEAK, {});
@@ -8850,67 +8852,67 @@ System.register("npm:core-js@0.9.10/library/modules/$.collection-weak", ["npm:co
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/get-iterator", ["npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/core.iter-helpers", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/weak-set", ["npm:core-js@0.9.12/library/modules/es6.object.to-string", "npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/es6.weak-set", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/core.iter-helpers");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.getIterator;
+  require("npm:core-js@0.9.12/library/modules/es6.object.to-string");
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  require("npm:core-js@0.9.12/library/modules/es6.weak-set");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.WeakSet;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/weak-set", ["npm:core-js@0.9.10/library/modules/es6.object.to-string", "npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/es6.weak-set", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/get-iterator", ["npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/core.iter-helpers", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.to-string");
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  require("npm:core-js@0.9.10/library/modules/es6.weak-set");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.WeakSet;
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/core.iter-helpers");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.getIterator;
   global.define = __define;
   return module.exports;
 });
 
 (function() {
 function define(){};  define.amd = {};
-System.register("github:toji/gl-matrix@master", ["github:toji/gl-matrix@master/dist/gl-matrix"], false, function(__require, __exports, __module) {
+System.register("github:toji/gl-matrix@2.2.1", ["github:toji/gl-matrix@2.2.1/dist/gl-matrix"], false, function(__require, __exports, __module) {
   return (function(main) {
     return main;
-  }).call(this, __require('github:toji/gl-matrix@master/dist/gl-matrix'));
+  }).call(this, __require('github:toji/gl-matrix@2.2.1/dist/gl-matrix'));
 });
 })();
-System.register("npm:core-js@0.9.10/library/fn/object/keys", ["npm:core-js@0.9.10/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/object/keys", ["npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.statics-accept-primitives");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Object.keys;
+  require("npm:core-js@0.9.12/library/modules/es6.object.statics-accept-primitives");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Object.keys;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/object/define-property", ["npm:core-js@0.9.10/library/fn/object/define-property"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/define-property", ["npm:core-js@0.9.12/library/fn/object/define-property"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/object/define-property"),
+    "default": require("npm:core-js@0.9.12/library/fn/object/define-property"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.map", ["npm:core-js@0.9.10/library/modules/$.collection-strong", "npm:core-js@0.9.10/library/modules/$.collection"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.map", ["npm:core-js@0.9.12/library/modules/$.collection-strong", "npm:core-js@0.9.12/library/modules/$.collection"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var strong = require("npm:core-js@0.9.10/library/modules/$.collection-strong");
-  require("npm:core-js@0.9.10/library/modules/$.collection")('Map', {
+  var strong = require("npm:core-js@0.9.12/library/modules/$.collection-strong");
+  require("npm:core-js@0.9.12/library/modules/$.collection")('Map', {
     get: function get(key) {
       var entry = strong.getEntry(this, key);
       return entry && entry.v;
@@ -8923,25 +8925,25 @@ System.register("npm:core-js@0.9.10/library/modules/es6.map", ["npm:core-js@0.9.
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es7.map.to-json", ["npm:core-js@0.9.10/library/modules/$.collection-to-json"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es7.map.to-json", ["npm:core-js@0.9.12/library/modules/$.collection-to-json"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/$.collection-to-json")('Map');
+  require("npm:core-js@0.9.12/library/modules/$.collection-to-json")('Map');
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/set", ["npm:core-js@0.9.10/library/modules/es6.object.to-string", "npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/es6.set", "npm:core-js@0.9.10/library/modules/es7.set.to-json", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/set", ["npm:core-js@0.9.12/library/modules/es6.object.to-string", "npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/es6.set", "npm:core-js@0.9.12/library/modules/es7.set.to-json", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.to-string");
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  require("npm:core-js@0.9.10/library/modules/es6.set");
-  require("npm:core-js@0.9.10/library/modules/es7.set.to-json");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Set;
+  require("npm:core-js@0.9.12/library/modules/es6.object.to-string");
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  require("npm:core-js@0.9.12/library/modules/es6.set");
+  require("npm:core-js@0.9.12/library/modules/es7.set.to-json");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Set;
   global.define = __define;
   return module.exports;
 });
@@ -8955,31 +8957,32 @@ System.register("github:mrdoob/stats.js@master", ["github:mrdoob/stats.js@master
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/symbol/iterator", ["npm:core-js@0.9.10/library/fn/symbol/iterator"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/symbol/iterator", ["npm:core-js@0.9.12/library/fn/symbol/iterator"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/symbol/iterator"),
+    "default": require("npm:core-js@0.9.12/library/fn/symbol/iterator"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.symbol", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.redef", "npm:core-js@0.9.10/library/modules/$.keyof", "npm:core-js@0.9.10/library/modules/$.enum-keys", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.symbol", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.shared", "npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.redef", "npm:core-js@0.9.12/library/modules/$.keyof", "npm:core-js@0.9.12/library/modules/$.enum-keys", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      setTag = require("npm:core-js@0.9.10/library/modules/$.cof").set,
-      uid = require("npm:core-js@0.9.10/library/modules/$.uid"),
-      $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-      $redef = require("npm:core-js@0.9.10/library/modules/$.redef"),
-      keyOf = require("npm:core-js@0.9.10/library/modules/$.keyof"),
-      enumKeys = require("npm:core-js@0.9.10/library/modules/$.enum-keys"),
-      assertObject = require("npm:core-js@0.9.10/library/modules/$.assert").obj,
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      setTag = require("npm:core-js@0.9.12/library/modules/$.cof").set,
+      uid = require("npm:core-js@0.9.12/library/modules/$.uid"),
+      shared = require("npm:core-js@0.9.12/library/modules/$.shared"),
+      $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+      $redef = require("npm:core-js@0.9.12/library/modules/$.redef"),
+      keyOf = require("npm:core-js@0.9.12/library/modules/$.keyof"),
+      enumKeys = require("npm:core-js@0.9.12/library/modules/$.enum-keys"),
+      assertObject = require("npm:core-js@0.9.12/library/modules/$.assert").obj,
       has = $.has,
       $create = $.create,
       getDesc = $.getDesc,
@@ -8992,8 +8995,8 @@ System.register("npm:core-js@0.9.10/library/modules/es6.symbol", ["npm:core-js@0
       TAG = uid('tag'),
       HIDDEN = uid('hidden'),
       _propertyIsEnumerable = {}.propertyIsEnumerable,
-      SymbolRegistry = {},
-      AllSymbols = {},
+      SymbolRegistry = shared('symbol-registry'),
+      AllSymbols = shared('symbols'),
       useNative = $.isFunction($Symbol);
   function wrap(tag) {
     var sym = AllSymbols[tag] = $.set($create($Symbol.prototype), TAG, tag);
@@ -9097,7 +9100,7 @@ System.register("npm:core-js@0.9.10/library/modules/es6.symbol", ["npm:core-js@0
     }
   };
   $.each.call(('hasInstance,isConcatSpreadable,iterator,match,replace,search,' + 'species,split,toPrimitive,toStringTag,unscopables').split(','), function(it) {
-    var sym = require("npm:core-js@0.9.10/library/modules/$.wks")(it);
+    var sym = require("npm:core-js@0.9.12/library/modules/$.wks")(it);
     symbolStatics[it] = useNative ? sym : wrap(sym);
   });
   setter = true;
@@ -9118,13 +9121,13 @@ System.register("npm:core-js@0.9.10/library/modules/es6.symbol", ["npm:core-js@0
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/array/from", ["npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/es6.array.from", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/array/from", ["npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/es6.array.from", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/es6.array.from");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Array.from;
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/es6.array.from");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Array.from;
   global.define = __define;
   return module.exports;
 });
@@ -9438,51 +9441,63 @@ System.register("npm:lru-queue@0.1.0", ["npm:lru-queue@0.1.0/index"], true, func
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.object.assign", ["npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.assign"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  var $def = require("npm:core-js@0.9.10/library/modules/$.def");
-  $def($def.S, 'Object', {assign: require("npm:core-js@0.9.10/library/modules/$.assign")});
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:core-js@0.9.10/library/fn/math/log2", ["npm:core-js@0.9.10/library/modules/es6.math", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
-  var global = System.global,
-      __define = global.define;
-  global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.math");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Math.log2;
-  global.define = __define;
-  return module.exports;
-});
-
-System.register("npm:babel-runtime@5.4.3/core-js/object/freeze", ["npm:core-js@0.9.10/library/fn/object/freeze"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/seal", ["npm:core-js@0.9.12/library/fn/object/seal"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/object/freeze"),
+    "default": require("npm:core-js@0.9.12/library/fn/object/seal"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-(function() {
-function define(){};  define.amd = {};
-System.register("github:baconjs/bacon.js@0.7.58", ["github:baconjs/bacon.js@0.7.58/dist/Bacon"], false, function(__require, __exports, __module) {
-  return (function(main) {
-    return main;
-  }).call(this, __require('github:baconjs/bacon.js@0.7.58/dist/Bacon'));
-});
-})();
-System.register("npm:core-js@0.9.10/library/fn/object/create", ["npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/freeze", ["npm:core-js@0.9.12/library/fn/object/freeze"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$");
+  module.exports = {
+    "default": require("npm:core-js@0.9.12/library/fn/object/freeze"),
+    __esModule: true
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.12/library/modules/es6.object.assign", ["npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.assign"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $def = require("npm:core-js@0.9.12/library/modules/$.def");
+  $def($def.S, 'Object', {assign: require("npm:core-js@0.9.12/library/modules/$.assign")});
+  global.define = __define;
+  return module.exports;
+});
+
+System.register("npm:core-js@0.9.12/library/fn/math/log2", ["npm:core-js@0.9.12/library/modules/es6.math", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  require("npm:core-js@0.9.12/library/modules/es6.math");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Math.log2;
+  global.define = __define;
+  return module.exports;
+});
+
+(function() {
+function define(){};  define.amd = {};
+System.register("github:baconjs/bacon.js@0.7.59", ["github:baconjs/bacon.js@0.7.59/dist/Bacon"], false, function(__require, __exports, __module) {
+  return (function(main) {
+    return main;
+  }).call(this, __require('github:baconjs/bacon.js@0.7.59/dist/Bacon'));
+});
+})();
+System.register("npm:core-js@0.9.12/library/fn/object/create", ["npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
+  var global = System.global,
+      __define = global.define;
+  global.define = undefined;
+  var $ = require("npm:core-js@0.9.12/library/modules/$");
   module.exports = function create(P, D) {
     return $.create(P, D);
   };
@@ -9490,12 +9505,12 @@ System.register("npm:core-js@0.9.10/library/fn/object/create", ["npm:core-js@0.9
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.cof", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.cof", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      TAG = require("npm:core-js@0.9.10/library/modules/$.wks")('toStringTag'),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      TAG = require("npm:core-js@0.9.12/library/modules/$.wks")('toStringTag'),
       toString = {}.toString;
   function cof(it) {
     return toString.call(it).slice(8, -1);
@@ -9514,16 +9529,16 @@ System.register("npm:core-js@0.9.10/library/modules/$.cof", ["npm:core-js@0.9.10
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.string.iterator", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.string-at", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.iter-define"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.string.iterator", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.string-at", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.iter-define"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  var set = require("npm:core-js@0.9.10/library/modules/$").set,
-      $at = require("npm:core-js@0.9.10/library/modules/$.string-at")(true),
-      ITER = require("npm:core-js@0.9.10/library/modules/$.uid").safe('iter'),
-      $iter = require("npm:core-js@0.9.10/library/modules/$.iter"),
+  var set = require("npm:core-js@0.9.12/library/modules/$").set,
+      $at = require("npm:core-js@0.9.12/library/modules/$.string-at")(true),
+      ITER = require("npm:core-js@0.9.12/library/modules/$.uid").safe('iter'),
+      $iter = require("npm:core-js@0.9.12/library/modules/$.iter"),
       step = $iter.step;
-  require("npm:core-js@0.9.10/library/modules/$.iter-define")(String, 'String', function(iterated) {
+  require("npm:core-js@0.9.12/library/modules/$.iter-define")(String, 'String', function(iterated) {
     set(this, ITER, {
       o: String(iterated),
       i: 0
@@ -9543,20 +9558,26 @@ System.register("npm:core-js@0.9.10/library/modules/es6.string.iterator", ["npm:
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/web.dom.iterable", ["npm:core-js@0.9.10/library/modules/es6.array.iterator", "npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.iter", "npm:core-js@0.9.10/library/modules/$.wks"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/web.dom.iterable", ["npm:core-js@0.9.12/library/modules/es6.array.iterator", "npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.iter", "npm:core-js@0.9.12/library/modules/$.wks"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.array.iterator");
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      Iterators = require("npm:core-js@0.9.10/library/modules/$.iter").Iterators,
-      ITERATOR = require("npm:core-js@0.9.10/library/modules/$.wks")('iterator'),
+  require("npm:core-js@0.9.12/library/modules/es6.array.iterator");
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      Iterators = require("npm:core-js@0.9.12/library/modules/$.iter").Iterators,
+      ITERATOR = require("npm:core-js@0.9.12/library/modules/$.wks")('iterator'),
       ArrayValues = Iterators.Array,
-      NodeList = $.g.NodeList;
-  if ($.FW && NodeList && !(ITERATOR in NodeList.prototype)) {
-    $.hide(NodeList.prototype, ITERATOR, ArrayValues);
+      NL = $.g.NodeList,
+      HTC = $.g.HTMLCollection,
+      NLProto = NL && NL.prototype,
+      HTCProto = HTC && HTC.prototype;
+  if ($.FW) {
+    if (NL && !(ITERATOR in NLProto))
+      $.hide(NLProto, ITERATOR, ArrayValues);
+    if (HTC && !(ITERATOR in HTCProto))
+      $.hide(HTCProto, ITERATOR, ArrayValues);
   }
-  Iterators.NodeList = ArrayValues;
+  Iterators.NodeList = Iterators.HTMLCollection = ArrayValues;
   global.define = __define;
   return module.exports;
 });
@@ -9570,24 +9591,24 @@ System.register("github:jspm/nodelibs-process@0.1.1/index", ["npm:process@0.10.1
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.weak-map", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.collection-weak", "npm:core-js@0.9.10/library/modules/$.collection", "npm:core-js@0.9.10/library/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.weak-map", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.collection-weak", "npm:core-js@0.9.12/library/modules/$.collection", "npm:core-js@0.9.12/library/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var $ = require("npm:core-js@0.9.10/library/modules/$"),
-      weak = require("npm:core-js@0.9.10/library/modules/$.collection-weak"),
+  var $ = require("npm:core-js@0.9.12/library/modules/$"),
+      weak = require("npm:core-js@0.9.12/library/modules/$.collection-weak"),
       leakStore = weak.leakStore,
       ID = weak.ID,
       WEAK = weak.WEAK,
       has = $.has,
       isObject = $.isObject,
-      isFrozen = Object.isFrozen || $.core.Object.isFrozen,
+      isExtensible = Object.isExtensible || isObject,
       tmp = {};
-  var WeakMap = require("npm:core-js@0.9.10/library/modules/$.collection")('WeakMap', {
+  var WeakMap = require("npm:core-js@0.9.12/library/modules/$.collection")('WeakMap', {
     get: function get(key) {
       if (isObject(key)) {
-        if (isFrozen(key))
+        if (!isExtensible(key))
           return leakStore(this).get(key);
         if (has(key, WEAK))
           return key[WEAK][this[ID]];
@@ -9599,9 +9620,10 @@ System.register("npm:core-js@0.9.10/library/modules/es6.weak-map", ["npm:core-js
   }, weak, true, true);
   if ($.FW && new WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7) {
     $.each.call(['delete', 'has', 'get', 'set'], function(key) {
-      var method = WeakMap.prototype[key];
-      require("npm:core-js@0.9.10/library/modules/$.redef")(WeakMap.prototype, key, function(a, b) {
-        if (isObject(a) && isFrozen(a)) {
+      var proto = WeakMap.prototype,
+          method = proto[key];
+      require("npm:core-js@0.9.12/library/modules/$.redef")(proto, key, function(a, b) {
+        if (isObject(a) && !isExtensible(a)) {
           var result = leakStore(this)[key](a, b);
           return key == 'set' ? this : result;
         }
@@ -9613,48 +9635,48 @@ System.register("npm:core-js@0.9.10/library/modules/es6.weak-map", ["npm:core-js
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/get-iterator", ["npm:core-js@0.9.10/library/fn/get-iterator"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/weak-set", ["npm:core-js@0.9.12/library/fn/weak-set"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/get-iterator"),
+    "default": require("npm:core-js@0.9.12/library/fn/weak-set"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/weak-set", ["npm:core-js@0.9.10/library/fn/weak-set"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/get-iterator", ["npm:core-js@0.9.12/library/fn/get-iterator"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/weak-set"),
+    "default": require("npm:core-js@0.9.12/library/fn/get-iterator"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/object/keys", ["npm:core-js@0.9.10/library/fn/object/keys"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/keys", ["npm:core-js@0.9.12/library/fn/object/keys"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/object/keys"),
+    "default": require("npm:core-js@0.9.12/library/fn/object/keys"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/helpers/create-class", ["npm:babel-runtime@5.4.3/core-js/object/define-property"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/helpers/create-class", ["npm:babel-runtime@5.4.7/core-js/object/define-property"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _Object$defineProperty = require("npm:babel-runtime@5.4.3/core-js/object/define-property")["default"];
+  var _Object$defineProperty = require("npm:babel-runtime@5.4.7/core-js/object/define-property")["default"];
   exports["default"] = (function() {
     function defineProperties(target, props) {
       for (var i = 0; i < props.length; i++) {
@@ -9679,48 +9701,48 @@ System.register("npm:babel-runtime@5.4.3/helpers/create-class", ["npm:babel-runt
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/map", ["npm:core-js@0.9.10/library/modules/es6.object.to-string", "npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/es6.map", "npm:core-js@0.9.10/library/modules/es7.map.to-json", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/map", ["npm:core-js@0.9.12/library/modules/es6.object.to-string", "npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/es6.map", "npm:core-js@0.9.12/library/modules/es7.map.to-json", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.to-string");
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  require("npm:core-js@0.9.10/library/modules/es6.map");
-  require("npm:core-js@0.9.10/library/modules/es7.map.to-json");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Map;
+  require("npm:core-js@0.9.12/library/modules/es6.object.to-string");
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  require("npm:core-js@0.9.12/library/modules/es6.map");
+  require("npm:core-js@0.9.12/library/modules/es7.map.to-json");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Map;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/set", ["npm:core-js@0.9.10/library/fn/set"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/set", ["npm:core-js@0.9.12/library/fn/set"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/set"),
+    "default": require("npm:core-js@0.9.12/library/fn/set"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/symbol/index", ["npm:core-js@0.9.10/library/modules/es6.symbol", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/symbol/index", ["npm:core-js@0.9.12/library/modules/es6.symbol", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.symbol");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Symbol;
+  require("npm:core-js@0.9.12/library/modules/es6.symbol");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Symbol;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/array/from", ["npm:core-js@0.9.10/library/fn/array/from"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/array/from", ["npm:core-js@0.9.12/library/fn/array/from"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/array/from"),
+    "default": require("npm:core-js@0.9.12/library/fn/array/from"),
     __esModule: true
   };
   global.define = __define;
@@ -10165,50 +10187,50 @@ System.register("npm:memoizee@0.3.8/ext/max", ["npm:es5-ext@0.10.7/number/to-pos
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/object/assign", ["npm:core-js@0.9.10/library/modules/es6.object.assign", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/object/assign", ["npm:core-js@0.9.12/library/modules/es6.object.assign", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.assign");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Object.assign;
+  require("npm:core-js@0.9.12/library/modules/es6.object.assign");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Object.assign;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/math/log2", ["npm:core-js@0.9.10/library/fn/math/log2"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/math/log2", ["npm:core-js@0.9.12/library/fn/math/log2"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/math/log2"),
+    "default": require("npm:core-js@0.9.12/library/fn/math/log2"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/object/create", ["npm:core-js@0.9.10/library/fn/object/create"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/create", ["npm:core-js@0.9.12/library/fn/object/create"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/object/create"),
+    "default": require("npm:core-js@0.9.12/library/fn/object/create"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.object.to-string", ["npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.wks", "npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.redef"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.object.to-string", ["npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.wks", "npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.redef"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   'use strict';
-  var cof = require("npm:core-js@0.9.10/library/modules/$.cof"),
+  var cof = require("npm:core-js@0.9.12/library/modules/$.cof"),
       tmp = {};
-  tmp[require("npm:core-js@0.9.10/library/modules/$.wks")('toStringTag')] = 'z';
-  if (require("npm:core-js@0.9.10/library/modules/$").FW && cof(tmp) != 'z') {
-    require("npm:core-js@0.9.10/library/modules/$.redef")(Object.prototype, 'toString', function toString() {
+  tmp[require("npm:core-js@0.9.12/library/modules/$.wks")('toStringTag')] = 'z';
+  if (require("npm:core-js@0.9.12/library/modules/$").FW && cof(tmp) != 'z') {
+    require("npm:core-js@0.9.12/library/modules/$.redef")(Object.prototype, 'toString', function toString() {
       return '[object ' + cof.classof(this) + ']';
     }, true);
   }
@@ -10225,35 +10247,35 @@ System.register("github:jspm/nodelibs-process@0.1.1", ["github:jspm/nodelibs-pro
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/weak-map", ["npm:core-js@0.9.10/library/modules/es6.object.to-string", "npm:core-js@0.9.10/library/modules/es6.array.iterator", "npm:core-js@0.9.10/library/modules/es6.weak-map", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/weak-map", ["npm:core-js@0.9.12/library/modules/es6.object.to-string", "npm:core-js@0.9.12/library/modules/es6.array.iterator", "npm:core-js@0.9.12/library/modules/es6.weak-map", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.to-string");
-  require("npm:core-js@0.9.10/library/modules/es6.array.iterator");
-  require("npm:core-js@0.9.10/library/modules/es6.weak-map");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.WeakMap;
+  require("npm:core-js@0.9.12/library/modules/es6.object.to-string");
+  require("npm:core-js@0.9.12/library/modules/es6.array.iterator");
+  require("npm:core-js@0.9.12/library/modules/es6.weak-map");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.WeakMap;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/map", ["npm:core-js@0.9.10/library/fn/map"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/map", ["npm:core-js@0.9.12/library/fn/map"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/map"),
+    "default": require("npm:core-js@0.9.12/library/fn/map"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/symbol", ["npm:core-js@0.9.10/library/fn/symbol/index"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/symbol", ["npm:core-js@0.9.12/library/fn/symbol/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("npm:core-js@0.9.10/library/fn/symbol/index");
+  module.exports = require("npm:core-js@0.9.12/library/fn/symbol/index");
   global.define = __define;
   return module.exports;
 });
@@ -10374,24 +10396,24 @@ System.register("npm:es6-symbol@2.0.1/index", ["npm:es6-symbol@2.0.1/is-implemen
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/object/assign", ["npm:core-js@0.9.10/library/fn/object/assign"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/object/assign", ["npm:core-js@0.9.12/library/fn/object/assign"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/object/assign"),
+    "default": require("npm:core-js@0.9.12/library/fn/object/assign"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/helpers/inherits", ["npm:babel-runtime@5.4.3/core-js/object/create"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/helpers/inherits", ["npm:babel-runtime@5.4.7/core-js/object/create"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _Object$create = require("npm:babel-runtime@5.4.3/core-js/object/create")["default"];
+  var _Object$create = require("npm:babel-runtime@5.4.7/core-js/object/create")["default"];
   exports["default"] = function(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -10410,17 +10432,17 @@ System.register("npm:babel-runtime@5.4.3/helpers/inherits", ["npm:babel-runtime@
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/$.task", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.ctx", "npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.invoke", "npm:core-js@0.9.10/library/modules/$.dom-create", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/$.task", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.ctx", "npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.invoke", "npm:core-js@0.9.12/library/modules/$.dom-create", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = require("npm:core-js@0.9.10/library/modules/$"),
-        ctx = require("npm:core-js@0.9.10/library/modules/$.ctx"),
-        cof = require("npm:core-js@0.9.10/library/modules/$.cof"),
-        invoke = require("npm:core-js@0.9.10/library/modules/$.invoke"),
-        cel = require("npm:core-js@0.9.10/library/modules/$.dom-create"),
+    var $ = require("npm:core-js@0.9.12/library/modules/$"),
+        ctx = require("npm:core-js@0.9.12/library/modules/$.ctx"),
+        cof = require("npm:core-js@0.9.12/library/modules/$.cof"),
+        invoke = require("npm:core-js@0.9.12/library/modules/$.invoke"),
+        cel = require("npm:core-js@0.9.12/library/modules/$.dom-create"),
         global = $.g,
         isFunction = $.isFunction,
         html = $.html,
@@ -10498,24 +10520,24 @@ System.register("npm:core-js@0.9.10/library/modules/$.task", ["npm:core-js@0.9.1
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/weak-map", ["npm:core-js@0.9.10/library/fn/weak-map"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/weak-map", ["npm:core-js@0.9.12/library/fn/weak-map"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/weak-map"),
+    "default": require("npm:core-js@0.9.12/library/fn/weak-map"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/symbol", ["npm:core-js@0.9.10/library/fn/symbol"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/symbol", ["npm:core-js@0.9.12/library/fn/symbol"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/symbol"),
+    "default": require("npm:core-js@0.9.12/library/fn/symbol"),
     __esModule: true
   };
   global.define = __define;
@@ -10594,26 +10616,26 @@ System.register("npm:es6-symbol@2.0.1", ["npm:es6-symbol@2.0.1/index"], true, fu
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/modules/es6.promise", ["npm:core-js@0.9.10/library/modules/$", "npm:core-js@0.9.10/library/modules/$.ctx", "npm:core-js@0.9.10/library/modules/$.cof", "npm:core-js@0.9.10/library/modules/$.def", "npm:core-js@0.9.10/library/modules/$.assert", "npm:core-js@0.9.10/library/modules/$.for-of", "npm:core-js@0.9.10/library/modules/$.set-proto", "npm:core-js@0.9.10/library/modules/$.species", "npm:core-js@0.9.10/library/modules/$.wks", "npm:core-js@0.9.10/library/modules/$.uid", "npm:core-js@0.9.10/library/modules/$.task", "npm:core-js@0.9.10/library/modules/$.mix", "npm:core-js@0.9.10/library/modules/$.iter-detect", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/modules/es6.promise", ["npm:core-js@0.9.12/library/modules/$", "npm:core-js@0.9.12/library/modules/$.ctx", "npm:core-js@0.9.12/library/modules/$.cof", "npm:core-js@0.9.12/library/modules/$.def", "npm:core-js@0.9.12/library/modules/$.assert", "npm:core-js@0.9.12/library/modules/$.for-of", "npm:core-js@0.9.12/library/modules/$.set-proto", "npm:core-js@0.9.12/library/modules/$.species", "npm:core-js@0.9.12/library/modules/$.wks", "npm:core-js@0.9.12/library/modules/$.uid", "npm:core-js@0.9.12/library/modules/$.task", "npm:core-js@0.9.12/library/modules/$.mix", "npm:core-js@0.9.12/library/modules/$.iter-detect", "github:jspm/nodelibs-process@0.1.1"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var $ = require("npm:core-js@0.9.10/library/modules/$"),
-        ctx = require("npm:core-js@0.9.10/library/modules/$.ctx"),
-        cof = require("npm:core-js@0.9.10/library/modules/$.cof"),
-        $def = require("npm:core-js@0.9.10/library/modules/$.def"),
-        assert = require("npm:core-js@0.9.10/library/modules/$.assert"),
-        forOf = require("npm:core-js@0.9.10/library/modules/$.for-of"),
-        setProto = require("npm:core-js@0.9.10/library/modules/$.set-proto").set,
-        species = require("npm:core-js@0.9.10/library/modules/$.species"),
-        SPECIES = require("npm:core-js@0.9.10/library/modules/$.wks")('species'),
-        RECORD = require("npm:core-js@0.9.10/library/modules/$.uid").safe('record'),
+    var $ = require("npm:core-js@0.9.12/library/modules/$"),
+        ctx = require("npm:core-js@0.9.12/library/modules/$.ctx"),
+        cof = require("npm:core-js@0.9.12/library/modules/$.cof"),
+        $def = require("npm:core-js@0.9.12/library/modules/$.def"),
+        assert = require("npm:core-js@0.9.12/library/modules/$.assert"),
+        forOf = require("npm:core-js@0.9.12/library/modules/$.for-of"),
+        setProto = require("npm:core-js@0.9.12/library/modules/$.set-proto").set,
+        species = require("npm:core-js@0.9.12/library/modules/$.species"),
+        SPECIES = require("npm:core-js@0.9.12/library/modules/$.wks")('species'),
+        RECORD = require("npm:core-js@0.9.12/library/modules/$.uid").safe('record'),
         PROMISE = 'Promise',
         global = $.g,
         process = global.process,
-        asap = process && process.nextTick || require("npm:core-js@0.9.10/library/modules/$.task").set,
+        asap = process && process.nextTick || require("npm:core-js@0.9.12/library/modules/$.task").set,
         P = global[PROMISE],
         isFunction = $.isFunction,
         isObject = $.isObject,
@@ -10766,7 +10788,7 @@ System.register("npm:core-js@0.9.10/library/modules/es6.promise", ["npm:core-js@
           $reject.call(record, err);
         }
       };
-      require("npm:core-js@0.9.10/library/modules/$.mix")(P.prototype, {
+      require("npm:core-js@0.9.12/library/modules/$.mix")(P.prototype, {
         then: function then(onFulfilled, onRejected) {
           var S = assertObject(assertObject(this).constructor)[SPECIES];
           var react = {
@@ -10805,7 +10827,7 @@ System.register("npm:core-js@0.9.10/library/modules/es6.promise", ["npm:core-js@
         });
       }
     });
-    $def($def.S + $def.F * !(useNative && require("npm:core-js@0.9.10/library/modules/$.iter-detect")(function(iter) {
+    $def($def.S + $def.F * !(useNative && require("npm:core-js@0.9.12/library/modules/$.iter-detect")(function(iter) {
       P.all(iter)['catch'](function() {});
     })), PROMISE, {
       all: function all(iterable) {
@@ -10840,15 +10862,15 @@ System.register("npm:core-js@0.9.10/library/modules/es6.promise", ["npm:core-js@
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/regenerator/runtime", ["npm:babel-runtime@5.4.3/core-js/symbol", "npm:babel-runtime@5.4.3/core-js/symbol/iterator", "npm:babel-runtime@5.4.3/core-js/object/create", "npm:babel-runtime@5.4.3/core-js/promise"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/regenerator/runtime", ["npm:babel-runtime@5.4.7/core-js/symbol", "npm:babel-runtime@5.4.7/core-js/symbol/iterator", "npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/promise"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   "use strict";
-  var _Symbol = require("npm:babel-runtime@5.4.3/core-js/symbol")["default"];
-  var _Symbol$iterator = require("npm:babel-runtime@5.4.3/core-js/symbol/iterator")["default"];
-  var _Object$create = require("npm:babel-runtime@5.4.3/core-js/object/create")["default"];
-  var _Promise = require("npm:babel-runtime@5.4.3/core-js/promise")["default"];
+  var _Symbol = require("npm:babel-runtime@5.4.7/core-js/symbol")["default"];
+  var _Symbol$iterator = require("npm:babel-runtime@5.4.7/core-js/symbol/iterator")["default"];
+  var _Object$create = require("npm:babel-runtime@5.4.7/core-js/object/create")["default"];
+  var _Promise = require("npm:babel-runtime@5.4.7/core-js/promise")["default"];
   !(function(global) {
     "use strict";
     var hasOwn = Object.prototype.hasOwnProperty;
@@ -11197,13 +11219,14 @@ System.register("npm:babel-runtime@5.4.3/regenerator/runtime", ["npm:babel-runti
         } else if (record.type === "normal" && afterLoc) {
           this.next = afterLoc;
         }
-        return ContinueSentinel;
       },
       finish: function finish(finallyLoc) {
         for (var i = this.tryEntries.length - 1; i >= 0; --i) {
           var entry = this.tryEntries[i];
           if (entry.finallyLoc === finallyLoc) {
-            return this.complete(entry.completion, entry.afterLoc);
+            this.complete(entry.completion, entry.afterLoc);
+            resetTryEntry(entry);
+            return ContinueSentinel;
           }
         }
       },
@@ -11359,28 +11382,28 @@ System.register("npm:es5-ext@0.10.7/array/from/shim", ["npm:es6-symbol@2.0.1", "
   return module.exports;
 });
 
-System.register("npm:core-js@0.9.10/library/fn/promise", ["npm:core-js@0.9.10/library/modules/es6.object.to-string", "npm:core-js@0.9.10/library/modules/es6.string.iterator", "npm:core-js@0.9.10/library/modules/web.dom.iterable", "npm:core-js@0.9.10/library/modules/es6.promise", "npm:core-js@0.9.10/library/modules/$"], true, function(require, exports, module) {
+System.register("npm:core-js@0.9.12/library/fn/promise", ["npm:core-js@0.9.12/library/modules/es6.object.to-string", "npm:core-js@0.9.12/library/modules/es6.string.iterator", "npm:core-js@0.9.12/library/modules/web.dom.iterable", "npm:core-js@0.9.12/library/modules/es6.promise", "npm:core-js@0.9.12/library/modules/$"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  require("npm:core-js@0.9.10/library/modules/es6.object.to-string");
-  require("npm:core-js@0.9.10/library/modules/es6.string.iterator");
-  require("npm:core-js@0.9.10/library/modules/web.dom.iterable");
-  require("npm:core-js@0.9.10/library/modules/es6.promise");
-  module.exports = require("npm:core-js@0.9.10/library/modules/$").core.Promise;
+  require("npm:core-js@0.9.12/library/modules/es6.object.to-string");
+  require("npm:core-js@0.9.12/library/modules/es6.string.iterator");
+  require("npm:core-js@0.9.12/library/modules/web.dom.iterable");
+  require("npm:core-js@0.9.12/library/modules/es6.promise");
+  module.exports = require("npm:core-js@0.9.12/library/modules/$").core.Promise;
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/regenerator/index", ["npm:babel-runtime@5.4.3/regenerator/runtime"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/regenerator/index", ["npm:babel-runtime@5.4.7/regenerator/runtime"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   var g = typeof global === "object" ? global : typeof window === "object" ? window : typeof self === "object" ? self : this;
   var hadRuntime = g.regeneratorRuntime && Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
   var oldRuntime = hadRuntime && g.regeneratorRuntime;
-  delete g.regeneratorRuntime;
-  module.exports = require("npm:babel-runtime@5.4.3/regenerator/runtime");
+  g.regeneratorRuntime = undefined;
+  module.exports = require("npm:babel-runtime@5.4.7/regenerator/runtime");
   if (hadRuntime) {
     g.regeneratorRuntime = oldRuntime;
   } else {
@@ -11404,23 +11427,23 @@ System.register("npm:es5-ext@0.10.7/array/from/index", ["npm:es5-ext@0.10.7/arra
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/core-js/promise", ["npm:core-js@0.9.10/library/fn/promise"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/core-js/promise", ["npm:core-js@0.9.12/library/fn/promise"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
   module.exports = {
-    "default": require("npm:core-js@0.9.10/library/fn/promise"),
+    "default": require("npm:core-js@0.9.12/library/fn/promise"),
     __esModule: true
   };
   global.define = __define;
   return module.exports;
 });
 
-System.register("npm:babel-runtime@5.4.3/regenerator", ["npm:babel-runtime@5.4.3/regenerator/index"], true, function(require, exports, module) {
+System.register("npm:babel-runtime@5.4.7/regenerator", ["npm:babel-runtime@5.4.7/regenerator/index"], true, function(require, exports, module) {
   var global = System.global,
       __define = global.define;
   global.define = undefined;
-  module.exports = require("npm:babel-runtime@5.4.3/regenerator/index");
+  module.exports = require("npm:babel-runtime@5.4.7/regenerator/index");
   global.define = __define;
   return module.exports;
 });
@@ -11758,18 +11781,18 @@ System.register("npm:memoizee@0.3.8", ["npm:memoizee@0.3.8/index"], true, functi
   return module.exports;
 });
 
-System.register('lib/camera/perspective-camera', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/camera/perspective-camera', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@2.2.1'], function (_export) {
     var _inherits, _classCallCheck, Camera, glm, deg2rad, PerspectiveCamera;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libCameraBase) {
             Camera = _libCameraBase['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             'use strict';
@@ -11786,7 +11809,7 @@ System.register('lib/camera/perspective-camera', ['npm:babel-runtime@5.4.3/helpe
                     var _options$fov = options.fov;
                     var fov = _options$fov === undefined ? 60 : _options$fov;
                     var _options$aspect = options.aspect;
-                    var aspect = _options$aspect === undefined ? 4 / 3 : _options$aspect;
+                    var aspect = _options$aspect === undefined ? 1.3333333333333333 : _options$aspect;
                     var _options$near = options.near;
                     var near = _options$near === undefined ? 0.1 : _options$near;
                     var _options$far = options.far;
@@ -11830,12 +11853,12 @@ System.register('lib/camera/perspective-camera', ['npm:babel-runtime@5.4.3/helpe
         }
     };
 });
-System.register("lib/webgl/buffer", ["npm:babel-runtime@5.4.3/helpers/class-call-check"], function (_export) {
+System.register("lib/webgl/buffer", ["npm:babel-runtime@5.4.7/helpers/class-call-check"], function (_export) {
     var _classCallCheck, GL, GLBuffer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck["default"];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck["default"];
         }],
         execute: function () {
             "use strict";
@@ -11974,7 +11997,7 @@ System.register("lib/webgl/buffer", ["npm:babel-runtime@5.4.3/helpers/class-call
         }
     };
 });
-System.register('lib/extra/ajax', ['npm:babel-runtime@5.4.3/core-js/promise'], function (_export) {
+System.register('lib/extra/ajax', ['npm:babel-runtime@5.4.7/core-js/promise'], function (_export) {
     var _Promise;
 
     function getString(url) {
@@ -12014,8 +12037,8 @@ System.register('lib/extra/ajax', ['npm:babel-runtime@5.4.3/core-js/promise'], f
     }
 
     return {
-        setters: [function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
+        setters: [function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }],
         execute: function () {
             'use strict';
@@ -12030,12 +12053,12 @@ System.register('lib/extra/ajax', ['npm:babel-runtime@5.4.3/core-js/promise'], f
         }
     };
 });
-System.register("lib/extra/functional", ["npm:babel-runtime@5.4.3/helpers/bind"], function (_export) {
+System.register("lib/extra/functional", ["npm:babel-runtime@5.4.7/helpers/bind"], function (_export) {
   var _bind, construct, delegate;
 
   return {
-    setters: [function (_npmBabelRuntime543HelpersBind) {
-      _bind = _npmBabelRuntime543HelpersBind["default"];
+    setters: [function (_npmBabelRuntime547HelpersBind) {
+      _bind = _npmBabelRuntime547HelpersBind["default"];
     }],
     execute: function () {
       /**
@@ -12073,253 +12096,132 @@ System.register("lib/extra/functional", ["npm:babel-runtime@5.4.3/helpers/bind"]
     }
   };
 });
-System.register('lib/workers/worker-pool', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/map', 'npm:babel-runtime@5.4.3/core-js/promise', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'npm:babel-runtime@5.4.3/core-js/object/keys'], function (_export) {
-    var _classCallCheck, _Map, _Promise, _getIterator, _Object$keys, workerCount, taskCount, WorkerPool;
+System.register('lib/workers/model-splitter', ['lib/extra/worker-pool'], function (_export) {
+    'use strict';
 
+    var WorkerPool, workerpool;
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsMap) {
-            _Map = _npmBabelRuntime543CoreJsMap['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectKeys) {
-            _Object$keys = _npmBabelRuntime543CoreJsObjectKeys['default'];
+        setters: [function (_libExtraWorkerPool) {
+            WorkerPool = _libExtraWorkerPool['default'];
         }],
         execute: function () {
-            'use strict';
+            workerpool = WorkerPool.fromFunction(function (responder, geometry) {
 
-            workerCount = 0;
-            taskCount = 0;
+                var timerName = 'Splitting geometry';
 
-            /**
-             * A wrapper around Web Workers;
-             * Passes messages to the first available worker, or creates a new one.
-             * Kills workers not used for a certain time.
-             */
+                console.time(timerName);
 
-            WorkerPool = (function () {
-                function WorkerPool(sourceURL) {
-                    var _ref3 = arguments[1] === undefined ? {} : arguments[1];
+                var oldIndices = geometry.indices;
+                var oldVertices = geometry.vertices;
+                var oldNormals = geometry.normals;
+                var oldTexcoords = geometry.texcoords;
 
-                    var _ref3$poolSize = _ref3.poolSize;
-                    var poolSize = _ref3$poolSize === undefined ? 2 : _ref3$poolSize;
-                    var _ref3$spawnLazily = _ref3.spawnLazily;
-                    var spawnLazily = _ref3$spawnLazily === undefined ? true : _ref3$spawnLazily;
-                    var _ref3$timeout = _ref3.timeout;
-                    var timeout = _ref3$timeout === undefined ? 5 : _ref3$timeout;
+                var hasTexcoords = oldTexcoords.length > 0;
 
-                    _classCallCheck(this, WorkerPool);
+                var oldPointCount = oldVertices.length / 3;
+                var oldTriangleCount = oldIndices.length / 3;
 
-                    this._workerState = new _Map();
-                    this._timeout = timeout;
-                    this._sourceURL = sourceURL;
+                // The number of geometries to split into
+                var geometryCount = (oldPointCount >> 16) + 1;
 
-                    this.poolSize = poolSize;
+                // The (maximum) number of triangles in each split geometry
+                var splitTriangleCount = Math.ceil(oldTriangleCount / geometryCount);
 
-                    this._completers = new _Map();
-                    this._taskQueue = [];
+                // Repeat for each new geometry
+                for (var n = 0; n < geometryCount; ++n) {
 
-                    if (!spawnLazily) {
-                        for (var i = 0; i < poolSize; ++i) {
-                            this.spawnWorker();
+                    // the number of triangles in the current new geometry
+                    var triangleCount = n < geometryCount - 1 ? splitTriangleCount : oldTriangleCount - (geometryCount - 1) * splitTriangleCount;
+
+                    var pointCount = 0;
+                    var indexCount = 3 * triangleCount;
+
+                    // oldIndex -> newIndex
+                    var mappings = [];
+
+                    var newIndices = new Uint16Array(indexCount),
+                        vertices = [],
+                        normals = [],
+                        texcoords = [];
+
+                    // The current offset in the old index list
+                    var offset = 3 * n * splitTriangleCount;
+
+                    // Go through all indices
+                    for (var i = 0; i < indexCount; ++i) {
+
+                        // Fetch the old index
+                        var oldIndex = oldIndices[offset + i];
+
+                        // Fetch the new index by checking the mappings
+                        var newIndex = mappings[oldIndex];
+
+                        // If no point exists at the new index, add it
+                        if (newIndex === undefined) {
+                            newIndex = mappings[oldIndex] = pointCount++;
+
+                            // Add the new points
+                            var oldOffset = 3 * oldIndex;
+                            vertices.push(oldVertices[oldOffset], oldVertices[oldOffset + 1], oldVertices[oldOffset + 2]);
+                            normals.push(oldNormals[oldOffset], oldNormals[oldOffset + 1], oldNormals[oldOffset + 2]);
+
+                            if (hasTexcoords) {
+                                oldOffset = 2 * oldIndex;
+                                texcoords.push(oldTexcoords[oldOffset], oldTexcoords[oldOffset + 1]);
+                            }
                         }
+
+                        // Store the new index
+                        newIndices[i] = newIndex;
                     }
+
+                    var newVertices = new Float32Array(vertices),
+                        newNormals = new Float32Array(normals),
+                        newTexcoords = new Float32Array(texcoords);
+
+                    debugger;
+
+                    responder.progress({
+                        type: 'geometry',
+                        part: n,
+                        vertices: newVertices,
+                        normals: newNormals,
+                        texcoords: newTexcoords,
+                        indices: newIndices
+                    }, [newVertices.buffer, newNormals.buffer, newTexcoords.buffer, newIndices.buffer]);
                 }
 
-                WorkerPool.prototype._grabWork = function _grabWork(worker) {
-                    var state = this._workerState.get(worker);
-                    window.clearTimeout(state.timeout);
-                    state.ready = false;
+                console.timeEnd(timerName);
 
-                    var _taskQueue$shift = this._taskQueue.shift();
+                responder.done();
+            });
 
-                    var id = _taskQueue$shift.id;
-                    var message = _taskQueue$shift.message;
-                    var transfers = _taskQueue$shift.transfers;
-
-                    //console.log(`Started work #${id} on worker #${state.id}`);
-                    worker.postMessage({ id: id, message: message }, transfers);
-                };
-
-                WorkerPool.prototype.spawnWorker = function spawnWorker() {
-                    var _this = this;
-
-                    // If we are below the pool size limit
-                    if (this._workerState.size < this.poolSize) {
-                        var _ret = (function () {
-                            var worker = new Worker(_this._sourceURL);
-                            var that = _this;
-
-                            var onMessage = function onMessage(e) {
-                                var _e$data = e.data;
-                                var id = _e$data.id;
-                                var message = _e$data.message;
-
-                                var state = that._workerState.get(worker);
-
-                                var _that$_completers$get = that._completers.get(id);
-
-                                var resolve = _that$_completers$get.resolve;
-                                var reject = _that$_completers$get.reject;
-
-                                resolve(message);
-                                that._completers['delete'](id);
-                                state.ready = true;
-                                state.timeout = createTimeout();
-                                if (that._taskQueue.length !== 0) {
-                                    that._grabWork(worker);
-                                }
-                            };
-
-                            var createTimeout = function createTimeout() {
-                                return window.setTimeout(function () {
-                                    that._workerState['delete'](worker);
-                                    worker.removeEventListener('message', onMessage, false);
-                                    worker.terminate();
-                                }, 1000 * that._timeout);
-                            };
-
-                            worker.addEventListener('message', onMessage, false);
-
-                            _this._workerState.set(worker, {
-                                ready: true,
-                                timeout: createTimeout(),
-                                id: ++workerCount
-                            });
-
-                            return {
-                                v: worker
-                            };
-                        })();
-
-                        if (typeof _ret === 'object') return _ret.v;
-                    }
-                };
-
-                /**
-                 * Schedule work to run in the pool.
-                 * Each worker is passed a message of the form { id, message }, and must respond similarly.
-                 * The promise return the sent by the worker.
-                 */
-
-                WorkerPool.prototype.run = function run(message) {
-                    var _this2 = this;
-
-                    var _ref4 = arguments[1] === undefined ? {} : arguments[1];
-
-                    var transfers = _ref4.transfers;
-
-                    var id = ++taskCount;
-                    return new _Promise(function (resolve, reject) {
-                        _this2._completers.set(id, { resolve: resolve, reject: reject });
-                        _this2._taskQueue.push({ id: id, message: message, transfers: transfers });
-
-                        var worker = undefined;
-
-                        // Find an available worker
-                        for (var _iterator = _this2._workerState.entries(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
-                            var _ref;
-
-                            if (_isArray) {
-                                if (_i >= _iterator.length) break;
-                                _ref = _iterator[_i++];
-                            } else {
-                                _i = _iterator.next();
-                                if (_i.done) break;
-                                _ref = _i.value;
-                            }
-
-                            var w = _ref[0];
-                            var state = _ref[1];
-
-                            if (state.ready) {
-                                worker = w;
-                                break;
-                            }
-                        }
-
-                        // ...or spawn a new one if none is found
-                        if (worker === undefined) {
-                            worker = _this2.spawnWorker();
-                        }
-
-                        // It may still be undefined if pool is full, in which case work will start as soon as one finishes
-                        if (worker !== undefined) {
-                            _this2._grabWork(worker);
-                        }
-                    });
-                };
-
-                /**
-                 * Creates a WorkerPool by stringifying a function taking a resolve callback.
-                 */
-
-                WorkerPool.fromFunction = function fromFunction(fn) {
-                    var dependencies = arguments[1] === undefined ? [] : arguments[1];
-                    var options = arguments[2] === undefined ? {} : arguments[2];
-
-                    var variables = {
-                        'location': window.location
-                    };
-
-                    // Magic, magic, magic
-                    for (var i = 0; i < dependencies.length; ++i) {
-                        switch (typeof dependencies[i]) {
-                            case 'function':
-                                dependencies[i] = dependencies[i].toString();
-                                break;
-                            case 'object':
-                                for (var _iterator2 = _Object$keys(dependencies[i]), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
-                                    var _ref2;
-
-                                    if (_isArray2) {
-                                        if (_i2 >= _iterator2.length) break;
-                                        _ref2 = _iterator2[_i2++];
-                                    } else {
-                                        _i2 = _iterator2.next();
-                                        if (_i2.done) break;
-                                        _ref2 = _i2.value;
-                                    }
-
-                                    var key = _ref2;
-
-                                    variables[key] = dependencies[i][key];
-                                }}
-                    }
-
-                    // Hogwarts next
-                    var magic = _Object$keys(variables).map(function (key) {
-                        return 'var ' + key + ' = ' + JSON.stringify(variables[key]) + ';';
-                    });
-
-                    // TODO: rejection handler
-                    var worker = 'self.onmessage = function(event) {\n                (' + fn.toString() + ')(event.data.message, function resolve(message, transfers) {\n                    self.postMessage({ id: event.data.id, message: message }, transfers);\n                });\n            };';
-
-                    var blob = new Blob([[].concat(magic, dependencies, [worker]).join(';\n')], { type: 'application/javascript' });
-                    var url = window.URL.createObjectURL(blob);
-                    return new WorkerPool(url, options);
-                };
-
-                return WorkerPool;
-            })();
-
-            _export('default', WorkerPool);
+            _export('workerpool', workerpool);
         }
     };
 });
-System.register('lib/extra/errors', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check'], function (_export) {
+/*{
+type: 'end',
+vertices: oldVertices,
+normals: oldNormals,
+texcoords: oldTexcoords,
+indices: oldIndices
+}, [
+oldVertices.buffer,
+oldNormals.buffer,
+oldTexcoords.buffer,
+oldIndices.buffer
+]*/
+System.register('lib/extra/errors', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check'], function (_export) {
     var _inherits, _createClass, _classCallCheck, UnimplementedMethodError;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }],
         execute: function () {
             'use strict';
@@ -12349,22 +12251,22 @@ System.register('lib/extra/errors', ['npm:babel-runtime@5.4.3/helpers/inherits',
         }
     };
 });
-System.register('lib/extra/atlas', ['npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/math/log2', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'npm:babel-runtime@5.4.3/regenerator', 'npm:babel-runtime@5.4.3/core-js/symbol/iterator'], function (_export) {
+System.register('lib/extra/atlas', ['npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/math/log2', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'npm:babel-runtime@5.4.7/regenerator', 'npm:babel-runtime@5.4.7/core-js/symbol/iterator'], function (_export) {
     var _createClass, _classCallCheck, _Math$log2, _getIterator, _regeneratorRuntime, _Symbol$iterator, Atlas, Region;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsMathLog2) {
-            _Math$log2 = _npmBabelRuntime543CoreJsMathLog2['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
-        }, function (_npmBabelRuntime543Regenerator) {
-            _regeneratorRuntime = _npmBabelRuntime543Regenerator['default'];
-        }, function (_npmBabelRuntime543CoreJsSymbolIterator) {
-            _Symbol$iterator = _npmBabelRuntime543CoreJsSymbolIterator['default'];
+        setters: [function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsMathLog2) {
+            _Math$log2 = _npmBabelRuntime547CoreJsMathLog2['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime547Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime547Regenerator['default'];
+        }, function (_npmBabelRuntime547CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime547CoreJsSymbolIterator['default'];
         }],
         execute: function () {
             'use strict';
@@ -12700,7 +12602,7 @@ System.register('lib/extra/atlas', ['npm:babel-runtime@5.4.3/helpers/create-clas
         }
     };
 });
-System.register('lib/extra/color', ['github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/extra/color', ['github:toji/gl-matrix@2.2.1'], function (_export) {
     'use strict';
 
     var glm, vec3;
@@ -12718,14 +12620,14 @@ System.register('lib/extra/color', ['github:toji/gl-matrix@master'], function (_
         } else if ('length' in color) {
             // Vector of floats in range [0,1]
             vec3.copy(colorVector, color);
-        } else {}
+        }
 
         return colorVector;
     }
 
     return {
-        setters: [function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             vec3 = glm.vec3;
@@ -12734,18 +12636,18 @@ System.register('lib/extra/color', ['github:toji/gl-matrix@master'], function (_
 });
 
 // Unknown color type!
-System.register('lib/light/pointlight', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/object-without-properties', 'npm:babel-runtime@5.4.3/core-js/object/freeze', 'lib/extra/functional', 'lib/light/base', 'npm:memoizee@0.3.8'], function (_export) {
+System.register('lib/light/pointlight', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/object-without-properties', 'npm:babel-runtime@5.4.7/core-js/object/freeze', 'lib/extra/functional', 'lib/light/base', 'npm:memoizee@0.3.8'], function (_export) {
     var _inherits, _classCallCheck, _objectWithoutProperties, _Object$freeze, construct, Light, LightRenderer, memoize, PointLight, PointLightRenderer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersObjectWithoutProperties) {
-            _objectWithoutProperties = _npmBabelRuntime543HelpersObjectWithoutProperties['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectFreeze) {
-            _Object$freeze = _npmBabelRuntime543CoreJsObjectFreeze['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersObjectWithoutProperties) {
+            _objectWithoutProperties = _npmBabelRuntime547HelpersObjectWithoutProperties['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime547CoreJsObjectFreeze['default'];
         }, function (_libExtraFunctional) {
             construct = _libExtraFunctional.construct;
         }, function (_libLightBase) {
@@ -12828,20 +12730,20 @@ System.register('lib/light/pointlight', ['npm:babel-runtime@5.4.3/helpers/inheri
         }
     };
 });
-System.register('lib/light/spotlight', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/object-without-properties', 'npm:babel-runtime@5.4.3/core-js/object/freeze', 'github:toji/gl-matrix@master', 'lib/extra/functional', 'lib/light/base', 'npm:memoizee@0.3.8'], function (_export) {
+System.register('lib/light/spotlight', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/object-without-properties', 'npm:babel-runtime@5.4.7/core-js/object/freeze', 'github:toji/gl-matrix@2.2.1', 'lib/extra/functional', 'lib/light/base', 'npm:memoizee@0.3.8'], function (_export) {
     var _inherits, _classCallCheck, _objectWithoutProperties, _Object$freeze, glm, construct, Light, LightRenderer, memoize, vec3, deg2rad, SpotLight, SpotLightRenderer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersObjectWithoutProperties) {
-            _objectWithoutProperties = _npmBabelRuntime543HelpersObjectWithoutProperties['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectFreeze) {
-            _Object$freeze = _npmBabelRuntime543CoreJsObjectFreeze['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersObjectWithoutProperties) {
+            _objectWithoutProperties = _npmBabelRuntime547HelpersObjectWithoutProperties['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime547CoreJsObjectFreeze['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libExtraFunctional) {
             construct = _libExtraFunctional.construct;
         }, function (_libLightBase) {
@@ -12968,8 +12870,8 @@ System.register('lib/light/spotlight', ['npm:babel-runtime@5.4.3/helpers/inherit
         }
     };
 });
-System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/array/from', 'npm:babel-runtime@5.4.3/core-js/symbol/iterator', 'npm:babel-runtime@5.4.3/regenerator', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'lib/scene/base', 'lib/scene/model', 'github:toji/gl-matrix@master'], function (_export) {
-    var _bind, _inherits, _classCallCheck, _Array$from, _Symbol$iterator, _regeneratorRuntime, _getIterator, Scene, Model, glm, vec3, points, isDirty, Group, SplitGroup;
+System.register('lib/scene/group', ['npm:babel-runtime@5.4.7/helpers/bind', 'npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/array/from', 'npm:babel-runtime@5.4.7/core-js/symbol/iterator', 'npm:babel-runtime@5.4.7/regenerator', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'npm:babel-runtime@5.4.7/core-js/promise', 'lib/scene/base', 'lib/scene/model', 'lib/geometry/geometry', 'lib/material/phong', 'lib/extra/ajax', 'github:toji/gl-matrix@2.2.1', 'lib/workers/wavefront'], function (_export) {
+    var _bind, _inherits, _classCallCheck, _Array$from, _Symbol$iterator, _regeneratorRuntime, _getIterator, _Promise, Scene, Model, Geometry, PhongMaterial, getArrayBuffer, glm, wavefrontWorker, vec3, points, splitSize, Group, SplitGroup;
 
     function group() {
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
@@ -12980,26 +12882,36 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
     }
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersBind) {
-            _bind = _npmBabelRuntime543HelpersBind['default'];
-        }, function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsArrayFrom) {
-            _Array$from = _npmBabelRuntime543CoreJsArrayFrom['default'];
-        }, function (_npmBabelRuntime543CoreJsSymbolIterator) {
-            _Symbol$iterator = _npmBabelRuntime543CoreJsSymbolIterator['default'];
-        }, function (_npmBabelRuntime543Regenerator) {
-            _regeneratorRuntime = _npmBabelRuntime543Regenerator['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
+        setters: [function (_npmBabelRuntime547HelpersBind) {
+            _bind = _npmBabelRuntime547HelpersBind['default'];
+        }, function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsArrayFrom) {
+            _Array$from = _npmBabelRuntime547CoreJsArrayFrom['default'];
+        }, function (_npmBabelRuntime547CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime547CoreJsSymbolIterator['default'];
+        }, function (_npmBabelRuntime547Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime547Regenerator['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }, function (_libSceneBase) {
             Scene = _libSceneBase['default'];
         }, function (_libSceneModel) {
             Model = _libSceneModel['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_libGeometryGeometry) {
+            Geometry = _libGeometryGeometry['default'];
+        }, function (_libMaterialPhong) {
+            PhongMaterial = _libMaterialPhong['default'];
+        }, function (_libExtraAjax) {
+            getArrayBuffer = _libExtraAjax.getArrayBuffer;
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
+        }, function (_libWorkersWavefront) {
+            wavefrontWorker = _libWorkersWavefront.workerpool;
         }],
         execute: function () {
             'use strict';
@@ -13008,10 +12920,7 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
 
             vec3 = glm.vec3;
             points = new Float64Array(24);
-
-            isDirty = function isDirty(node) {
-                return node.dirty;
-            };
+            splitSize = 64;
 
             Group = (function (_Scene) {
                 function Group(name) {
@@ -13023,7 +12932,6 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
                     _Scene.call(this, name, options);
 
                     this.children = _Array$from(children);
-                    this.splitSize = 64;
 
                     for (var i = 0, len = children.length; i < len; ++i) {
                         children[i].parent = this;
@@ -13062,41 +12970,42 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
                     var i = undefined,
                         child = undefined;
 
-                    for (i = 0; i < len, child = children[i]; ++i) {
-                        // If any child is processing, so is the parent
-                        processing = processing || child.processing;
+                    for (i = 0; i < len; ++i) {
+                        child = children[i];
 
                         // If parent is dirty, set child to be dirty
                         child.dirty = child.dirty || dirtySubtree;
 
                         dirtySubtree = child.recalculate(existingNodes) || dirtySubtree;
+
+                        // If any child is processing, so is the parent
+                        processing = processing || child.processing;
                     }
 
                     if (dirtySubtree) {
-                        aabb.resetIntervals();
+                        aabb.reset();
                         for (i = 0; i < len; ++i) {
-                            aabb.expandFromIntervals(children[i].aabb.intervals);
+                            aabb.expandFromBox(children[i].aabb);
                         }
                         aabb.computePoints();
                     }
 
-                    this.processing = processing;
-
-                    if (!this.processing && children.length > this.splitSize) {
+                    if (!processing && children.length > splitSize) {
                         this.split();
                     }
+
+                    this.processing = processing;
 
                     return dirtySubtree;
                 };
 
                 Group.prototype.recalculateSubtreeIds = function recalculateSubtreeIds() {
-                    this.subtreeIds.length = 1;
-                    this.subtreeIds[0] = this.id;
+                    var subtreeIds = this.subtreeIds;
+                    subtreeIds.length = 1;
+                    subtreeIds[0] = this.id;
                     for (var i = 0, children = this.children, len = children.length, child = undefined; i < len, child = children[i]; ++i) {
-                        var _subtreeIds;
-
                         child.recalculateSubtreeIds();
-                        (_subtreeIds = this.subtreeIds).push.apply(_subtreeIds, child.subtreeIds);
+                        subtreeIds.push.apply(subtreeIds, child.subtreeIds);
                     }
                 };
 
@@ -13171,23 +13080,25 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
                 /// Split children into spatially divide subgroups
 
                 Group.prototype.split = function split() {
-                    var intervals = this.aabb.intervals;
-
-                    var midX = (intervals[0] + intervals[1]) / 2;
-                    var midY = (intervals[2] + intervals[3]) / 2;
-                    var midZ = (intervals[4] + intervals[5]) / 2;
-
+                    var center = this.aabb.center;
                     var octants = [[], [], [], [], [], [], [], []];
 
-                    for (var i = 0, children = this.children, len = children.length, child = undefined; i < len, child = children[i]; ++i) {
-                        var vec = child.aabb.center;
+                    var midX = center[0],
+                        midY = center[1],
+                        midZ = center[2];
+
+                    var vec = undefined,
+                        child = undefined;
+                    for (var i = 0, children = this.children, len = children.length; i < len; ++i) {
+                        child = children[i];
+                        vec = child.aabb.center;
                         octants[((vec[0] < midX) << 2) + ((vec[1] < midY) << 1) + (vec[2] < midZ)].push(child);
                     }
 
                     var splitGroups = [];
 
                     for (var i = 0, len = octants.length, octant = undefined; i < len, octant = octants[i]; ++i) {
-                        if (octant.length) {
+                        if (octant.length > 0) {
                             var _group = new SplitGroup(this, {}, octant);
                             _group.parent = this;
                             splitGroups.push(_group);
@@ -13195,6 +13106,56 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
                     }
 
                     this.children = splitGroups;
+                };
+
+                Group.fromObjFile = function fromObjFile(objFile) {
+                    var group = new Group();
+
+                    getArrayBuffer(objFile).then(function (stringBuffer) {
+
+                        var materials = {};
+
+                        wavefrontWorker.run(stringBuffer, [stringBuffer]).subscribe(function (_ref2) {
+                            var type = _ref2[0];
+                            var data = _ref2[1];
+
+                            switch (type) {
+                                case 'mtllib':
+                                    var mtlFile = objFile.substr(0, objFile.lastIndexOf('/') + 1) + data;
+                                    materials = PhongMaterial.fromMtlFile(mtlFile);
+                                    break;
+
+                                case 'geometry':
+                                    _Promise.resolve(materials).then(function (materials) {
+
+                                        var createModel = function createModel(geometry) {
+                                            var material = materials[data.materialName];
+                                            var model = new Model(name, {}, geometry, material);
+
+                                            group.add(model);
+                                        };
+
+                                        var handleGeometry = function handleGeometry(geometry) {
+                                            //if (geometry.vertices.length >= 3 * (1 << 16)) {
+                                            //    geometry.split().subscribe(createModel);
+                                            //} else {
+                                            createModel(geometry);
+                                            //}
+                                        };
+
+                                        var geometry = new Geometry(data);
+
+                                        if (geometry.normals.length === 0) {
+                                            geometry.generateNormals().then(handleGeometry);
+                                        } else {
+                                            handleGeometry(geometry);
+                                        }
+                                    });
+                            }
+                        });
+                    });
+
+                    return group;
                 };
 
                 return Group;
@@ -13233,22 +13194,24 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
                     var children = this.children;
                     var len = this.children.length;
 
-                    var dirtySubtree = this.dirty;
+                    var dirty = this.dirty;
+
+                    var dirtySubtree = dirty;
 
                     for (var i = 0, child = undefined; i < len, child = children[i]; ++i) {
-                        child.dirty = child.dirty || this.dirty;
+                        child.dirty = child.dirty || dirty;
                         dirtySubtree = child.recalculate(existingNodes) || dirtySubtree;
                     }
 
                     if (dirtySubtree) {
-                        aabb.resetIntervals();
+                        aabb.reset();
                         for (var i = 0; i < len; ++i) {
-                            aabb.expandFromIntervals(children[i].aabb.intervals);
+                            aabb.expandFromBox(children[i].aabb);
                         }
                         aabb.computePoints();
                     }
 
-                    if (!this.processing && children.length > this.splitSize) {
+                    if (children.length > splitSize) {
                         this.split();
                     }
 
@@ -13264,12 +13227,12 @@ System.register('lib/scene/group', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm
         }
     };
 });
-System.register('lib/environment/environment', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/extra/color'], function (_export) {
+System.register('lib/environment/environment', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/extra/color'], function (_export) {
     var _classCallCheck, convertColorToVector, GL, Environment;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libExtraColor) {
             convertColorToVector = _libExtraColor.convertColorToVector;
         }],
@@ -13312,16 +13275,16 @@ System.register('lib/environment/environment', ['npm:babel-runtime@5.4.3/helpers
         }
     };
 });
-System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/array/from'], function (_export) {
+System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/array/from'], function (_export) {
     var _createClass, _classCallCheck, _Array$from, Bitfield;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsArrayFrom) {
-            _Array$from = _npmBabelRuntime543CoreJsArrayFrom['default'];
+        setters: [function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsArrayFrom) {
+            _Array$from = _npmBabelRuntime547CoreJsArrayFrom['default'];
         }],
         execute: function () {
             'use strict';
@@ -13342,6 +13305,15 @@ System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.3/helpers/create-c
                     this._buffer = new Uint32Array(length);
                     this._emptyBuffer = new Uint32Array(length);
                 }
+
+                Bitfield.prototype.isEmpty = function isEmpty() {
+                    for (var i = 0, buffer = this._buffer, len = buffer.length; i < len; ++i) {
+                        if (buffer[i] !== 0) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
 
                 Bitfield.prototype.toString = function toString() {
                     return _Array$from(this._buffer, function (n) {
@@ -13403,74 +13375,64 @@ System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.3/helpers/create-c
                     for (i = 0, len = buffer.length; i < len; ++i) {
                         field = buffer[i];
                         for (j = 0; j < 32; ++j) {
-                            if (field & 1 << j !== 0) {
+                            if ((field & 1 << j) !== 0) {
                                 cb((i << 5) + j);
                             }
                         }
                     }
                 };
 
-                Bitfield.prototype.diff = function diff(bitfield) {
-                    var target = arguments[1] === undefined ? new Bitfield() : arguments[1];
-
-                    var buffer = this._buffer;
-                    var otherBuffer = bitfield._buffer;
-                    var targetBuffer = target._buffer;
-
-                    var size = Math.max(buffer.length, otherBuffer.length);
-
-                    if (targetBuffer.length < size) {
-                        target._resize((size << 5) - 1);
-                        targetBuffer = target._buffer;
+                Bitfield.applyUnaryFunction = function applyUnaryFunction(out, source, fn) {
+                    var buffer = source._buffer;
+                    var outBuffer = out._buffer;
+                    var size = buffer.length;
+                    if (outBuffer.length < size) {
+                        out._resize((size << 5) - 1);
+                        outBuffer = out._buffer;
                     }
 
                     for (var i = 0; i < size; ++i) {
-                        targetBuffer[i] = buffer[i] ^ otherBuffer[i];
+                        outBuffer[i] = fn(buffer[i]);
                     }
 
-                    return target;
+                    return out;
+                };
+
+                Bitfield.applyBinaryFunction = function applyBinaryFunction(out, sourceA, sourceB, fn) {
+                    var bufferA = sourceA._buffer;
+                    var bufferB = sourceB._buffer;
+                    var outBuffer = out._buffer;
+
+                    var size = Math.max(bufferA.length, bufferB.length);
+
+                    if (outBuffer.length < size) {
+                        out._resize((size << 5) - 1);
+                        outBuffer = out._buffer;
+                    }
+
+                    for (var i = 0; i < size; ++i) {
+                        outBuffer[i] = fn(bufferA[i], bufferB[i]);
+                    }
+
+                    return out;
+                };
+
+                Bitfield.prototype.diff = function diff(bitfield) {
+                    var target = arguments[1] === undefined ? new Bitfield() : arguments[1];
+
+                    return Bitfield.applyBinaryFunction(target, this, bitfield, Bitfield.xor);
                 };
 
                 Bitfield.prototype.union = function union(bitfield) {
                     var target = arguments[1] === undefined ? new Bitfield() : arguments[1];
 
-                    var buffer = this._buffer;
-                    var otherBuffer = bitfield._buffer;
-                    var targetBuffer = target._buffer;
-
-                    var size = Math.max(buffer.length, otherBuffer.length);
-
-                    if (targetBuffer.length < size) {
-                        target._resize((size << 5) - 1);
-                        targetBuffer = target._buffer;
-                    }
-
-                    for (var i = 0; i < size; ++i) {
-                        targetBuffer[i] = buffer[i] | otherBuffer[i];
-                    }
-
-                    return target;
+                    return Bitfield.applyBinaryFunction(target, this, bitfield, Bitfield.or);
                 };
 
-                Bitfield.prototype.intersect = function intersect(bitfield) {
+                Bitfield.prototype.intersection = function intersection(bitfield) {
                     var target = arguments[1] === undefined ? new Bitfield() : arguments[1];
 
-                    var buffer = this._buffer;
-                    var otherBuffer = bitfield._buffer;
-                    var targetBuffer = target._buffer;
-
-                    var size = Math.max(buffer.length, otherBuffer.length);
-
-                    if (targetBuffer.length < size) {
-                        target._resize((size << 5) - 1);
-                        targetBuffer = target._buffer;
-                    }
-
-                    for (var i = 0; i < size; ++i) {
-                        targetBuffer[i] = buffer[i] & otherBuffer[i];
-                    }
-
-                    return target;
+                    return Bitfield.applyBinaryFunction(target, this, bitfield, Bitfield.and);
                 };
 
                 Bitfield.prototype._resize = function _resize(i) {
@@ -13482,15 +13444,70 @@ System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.3/helpers/create-c
                 };
 
                 _createClass(Bitfield, [{
-                    key: 'isEmpty',
+                    key: 'length',
                     get: function () {
-                        for (var i = 0, buffer = this._buffer, len = buffer.length; i < len; ++i) {
-                            if (buffer[i] !== 0) {
-                                return false;
-                            }
+                        var buffer = this._buffer;
+                        var length = buffer.length << 5;
+                        var size = 0;
+                        for (var i = 0; i < length; ++i) {
+                            if ((buffer[i >> 5] & 1 << i % 32) !== 0) size++;
                         }
-                        return true;
+                        return size;
                     }
+                }], [{
+                    key: 'not',
+                    value: function (a) {
+                        return ~a;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'and',
+                    value: function (a, b) {
+                        return a & b;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'nand',
+                    value: function (a, b) {
+                        return ~(a & b);
+                    },
+                    enumerable: true
+                }, {
+                    key: 'or',
+                    value: function (a, b) {
+                        return a | b;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'nor',
+                    value: function (a, b) {
+                        return ~(a | b);
+                    },
+                    enumerable: true
+                }, {
+                    key: 'xor',
+                    value: function (a, b) {
+                        return a ^ b;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'xnor',
+                    value: function (a, b) {
+                        return ~(a ^ b);
+                    },
+                    enumerable: true
+                }, {
+                    key: 'added',
+                    value: function (a, b) {
+                        return ~a & b;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'removed',
+                    value: function (a, b) {
+                        return a & ~b;
+                    },
+                    enumerable: true
                 }]);
 
                 return Bitfield;
@@ -13500,20 +13517,20 @@ System.register('lib/extra/bitfield', ['npm:babel-runtime@5.4.3/helpers/create-c
         }
     };
 });
-System.register('lib/texture/cubemap', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/bind', 'npm:babel-runtime@5.4.3/core-js/promise', 'npm:babel-runtime@5.4.3/core-js/math/log2', 'lib/texture/common'], function (_export) {
-    var _classCallCheck, _bind, _Promise, _Math$log2, resizeImageData, getImage, MAX_SIZE, CubeMap;
+System.register('lib/texture/cubemap', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/bind', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:babel-runtime@5.4.7/core-js/math/log2', 'lib/texture/common'], function (_export) {
+    var _classCallCheck, _bind, _Promise, _Math$log2, resizeImage, getImage, MAX_SIZE, CubeMap;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersBind) {
-            _bind = _npmBabelRuntime543HelpersBind['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
-        }, function (_npmBabelRuntime543CoreJsMathLog2) {
-            _Math$log2 = _npmBabelRuntime543CoreJsMathLog2['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersBind) {
+            _bind = _npmBabelRuntime547HelpersBind['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_npmBabelRuntime547CoreJsMathLog2) {
+            _Math$log2 = _npmBabelRuntime547CoreJsMathLog2['default'];
         }, function (_libTextureCommon) {
-            resizeImageData = _libTextureCommon.resizeImageData;
+            resizeImage = _libTextureCommon.resizeImage;
             getImage = _libTextureCommon.getImage;
         }],
         execute: function () {
@@ -13556,7 +13573,7 @@ System.register('lib/texture/cubemap', ['npm:babel-runtime@5.4.3/helpers/class-c
                                 }, 0);
                                 var size = Math.min(MAX_SIZE, largest);
                                 images = images.map(function (image) {
-                                    return resizeImageData(image, size, size);
+                                    return resizeImage(image, size, size);
                                 });
                             })();
                         }
@@ -13572,18 +13589,18 @@ System.register('lib/texture/cubemap', ['npm:babel-runtime@5.4.3/helpers/class-c
         }
     };
 });
-System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/geometry/geometry', 'github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/geometry/geometry', 'github:toji/gl-matrix@2.2.1'], function (_export) {
     var _inherits, _classCallCheck, Geometry, glm, vec3, mat4, vec3buf, mat4buf, Cube, Plane;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libGeometryGeometry) {
             Geometry = _libGeometryGeometry['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             'use strict';
@@ -13649,7 +13666,7 @@ System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherit
                     } else {
                         width = heightmap.width;
                         height = heightmap.height;
-                        data = heightmap.imageData.data;
+                        data = heightmap.image.data;
                     }
 
                     var vertexCount = width * height;
@@ -13671,8 +13688,8 @@ System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherit
                             vertices[3 * offset + 1] = data ? data[4 * offset] / 255 : 0; // Sample R-value in texture
                             vertices[3 * offset + 2] = z / (height - 1) - 0.5;
 
-                            texcoords[2 * offset] = repeat ? x % 2 == !0 : x / width;
-                            texcoords[2 * offset + 1] = repeat ? z % 2 == !0 : 1 - z / height;
+                            texcoords[2 * offset] = repeat ? x % 2 == true : x / width;
+                            texcoords[2 * offset + 1] = repeat ? z % 2 == true : 1 - z / height;
                         }
                     }
 
@@ -13726,8 +13743,8 @@ System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherit
                                 return Math.min(Math.max(x, min), max);
                             };
 
-                            var width = _this.heightmap.imageData.width;
-                            var height = _this.heightmap.imageData.height;
+                            var width = _this.heightmap.image.width;
+                            var height = _this.heightmap.image.height;
 
                             var x = clamp(width * (localPosition[0] + 0.5), 0, width - 1);
                             var z = clamp(height * (localPosition[2] + 0.5), 0, height - 1);
@@ -13738,7 +13755,7 @@ System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherit
                             var z_down = Math.ceil(z);
 
                             var sample = function sample(x, z) {
-                                return _this.heightmap.imageData.data[4 * (x + z * width)] / 256;
+                                return _this.heightmap.image.data[4 * (x + z * width)] / 256;
                             };
 
                             var lerp = function lerp(a, b, t) {
@@ -13766,18 +13783,18 @@ System.register('lib/geometry/shapes', ['npm:babel-runtime@5.4.3/helpers/inherit
         }
     };
 });
-System.register('lib/camera/orthographic-camera', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/camera/orthographic-camera', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/camera/base', 'github:toji/gl-matrix@2.2.1'], function (_export) {
     var _inherits, _classCallCheck, Camera, glm, OrthographicCamera;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libCameraBase) {
             Camera = _libCameraBase['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             'use strict';
@@ -13846,18 +13863,18 @@ System.register('lib/camera/orthographic-camera', ['npm:babel-runtime@5.4.3/help
         }
     };
 });
-System.register('lib/environment/skybox', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/promise', 'github:toji/gl-matrix@master', 'lib/environment/environment', 'lib/webgl/program', 'lib/webgl/shader', 'lib/geometry/shapes', 'lib/texture/common'], function (_export) {
+System.register('lib/environment/skybox', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/promise', 'github:toji/gl-matrix@2.2.1', 'lib/environment/environment', 'lib/webgl/program', 'lib/webgl/shader', 'lib/geometry/shapes', 'lib/texture/common'], function (_export) {
     var _inherits, _classCallCheck, _Promise, glm, Environment, GLProgram, GLShader, Cube, allocateTextureUnit, mat4, GL, vertShaderSourceOLD, vertShaderSource, fragShaderSource, Skybox;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libEnvironmentEnvironment) {
             Environment = _libEnvironmentEnvironment['default'];
         }, function (_libWebglProgram) {
@@ -14000,12 +14017,12 @@ System.register('lib/environment/skybox', ['npm:babel-runtime@5.4.3/helpers/inhe
         }
     };
 });
-System.register('lib/webgl/shader', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/extra/ajax'], function (_export) {
+System.register('lib/webgl/shader', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/extra/ajax'], function (_export) {
     var _classCallCheck, getString, GL, GLShader;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libExtraAjax) {
             getString = _libExtraAjax.getString;
         }],
@@ -14061,193 +14078,12 @@ System.register('lib/webgl/shader', ['npm:babel-runtime@5.4.3/helpers/class-call
         }
     };
 });
-System.register('lib/workers/wavefront', ['lib/workers/worker-pool'], function (_export) {
-    'use strict';
-
-    var WorkerPool, workerpool;
-
-    function wavefrontWorker(stringBuffer, resolve) {
-
-        var timerName = 'Parsing OBJ file';
-
-        console.time(timerName);
-
-        var packed = { 'v': [], 'vt': [], 'vn': [], 'i': [] };
-
-        var array = new Uint8Array(stringBuffer),
-            char,
-            c1,
-            c2,
-            c3,
-            offset,
-            row = [],
-            len = array.length,
-            i = 0;
-
-        var times = [];
-
-        // Iterate UTF-8 byte stream, to convert to JavaScript UTF-16 characters
-        while (i < len) {
-
-            c1 = array[i++];
-            switch (c1 >> 4) {
-                case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
-                    // 0xxxxxxx
-                    char = c1;
-                    break;
-
-                case 12:case 13:
-                    // 110x xxxx   10xx xxxx
-                    c2 = array[i++];
-                    char = (c1 & 31) << 6 | c2 & 63;
-                    break;
-
-                case 14:
-                    // 1110 xxxx  10xx xxxx  10xx xxxx
-                    c2 = array[i++];
-                    c3 = array[i++];
-                    char = (c1 & 15) << 12 | (c2 & 63) << 6 | (c3 & 63) << 0;
-                    break;
-            }
-
-            // If new line, create string and process
-            if (char === 10) {
-
-                var line = String.fromCharCode.apply(undefined, row).trim().split(/\s+/);
-
-                var type = line[0],
-                    data = line.slice(1);
-
-                switch (type) {
-                    case 'v':
-                    case 'vn':
-                    case 'vt':
-                        for (var j = 0, len2 = data.length; j < len2; ++j) {
-                            packed[type].push(parseFloat(data[j]));
-                        }
-
-                        //Array.prototype.push.apply(packed[type], data.map(parseFloat));
-                        break;
-
-                    case 'f':
-
-                        var indices = [];
-                        for (var j = 0, len2 = data.length; j < len2; ++j) {
-                            indices.push(data[j].split('/').map(function (n, i) {
-                                n = parseInt(n);
-                                return n < 0 ? n + packed[['v', 'vt', 'vn'][i]].length / [3, 2, 3][i] : n - 1;
-                            }));
-                        }
-
-                        // Repeat points to form a triangle
-                        if (indices.length < 3) {
-                            for (var j = indices.length; j <= 3; ++j) {
-                                indices[j] = indices[indices.length - 1];
-                            }
-                        }
-
-                        for (var j = 1, len2 = indices.length; j < len2 - 1; ++j) {
-                            packed.i.push(indices[0], indices[j], indices[j + 1]);
-                        }
-                }
-
-                row = [];
-            } else {
-                row.push(char);
-            }
-        }
-
-        var uniqueIndices = {},
-            counter = 0,
-            unpackedUniqueIndices = [],
-            unpackedVertexIndices = [],
-            unpackedTexcoordIndices = [],
-            unpackedNormalIndices = [];
-
-        // Compute new, unique indices.
-        for (i = 0, len = packed.i.length; i < len; i += 3) {
-            for (var j = 0; j < 3; ++j) {
-                var ids = packed.i[i + j],
-                    v_id = ids[0],
-                    vt_id = ids[1],
-                    vn_id = ids[2],
-                    key = ids.join(':'),
-                    index = uniqueIndices[key];
-
-                if (index === undefined) {
-                    index = uniqueIndices[key] = counter++;
-                    unpackedVertexIndices.push(v_id);
-
-                    if (vt_id !== undefined) unpackedTexcoordIndices.push(vt_id);
-                    if (vn_id !== undefined) unpackedNormalIndices.push(vn_id);
-                }
-
-                unpackedUniqueIndices.push(index);
-            }
-        }
-
-        // The typed arrays to return.
-        var indices = new Uint16Array(unpackedUniqueIndices),
-            vertices = new Float32Array(3 * unpackedVertexIndices.length),
-            normals = new Float32Array(3 * unpackedNormalIndices.length),
-            texcoords = new Float32Array(2 * unpackedTexcoordIndices.length);
-
-        for (i = 0, len = unpackedVertexIndices.length; i < len; ++i) {
-            offset = 3 * i;
-
-            var v_offset = 3 * unpackedVertexIndices[i];
-
-            vertices[offset] = packed.v[v_offset];
-            vertices[offset + 1] = packed.v[v_offset + 1];
-            vertices[offset + 2] = packed.v[v_offset + 2];
-        }
-
-        for (i = 0, len = unpackedNormalIndices.length; i < len; ++i) {
-            offset = 3 * i;
-
-            var vn_offset = 3 * unpackedNormalIndices[i];
-
-            normals[offset] = packed.vn[vn_offset];
-            normals[offset + 1] = packed.vn[vn_offset + 1];
-            normals[offset + 2] = packed.vn[vn_offset + 2];
-        }
-
-        for (i = 0, len = unpackedTexcoordIndices.length; i < len; ++i) {
-            offset = 2 * i;
-
-            var vt_offset = 2 * unpackedTexcoordIndices[i];
-
-            texcoords[offset] = packed.vt[vt_offset];
-            texcoords[offset + 1] = packed.vt[vt_offset + 1];
-        }
-
-        console.timeEnd(timerName);
-
-        resolve({
-            indices: indices,
-            vertices: vertices,
-            normals: normals,
-            texcoords: texcoords
-        }, [indices.buffer, vertices.buffer, normals.buffer, texcoords.buffer]);
-    }
-
-    return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool['default'];
-        }],
-        execute: function () {
-            workerpool = WorkerPool.fromFunction(wavefrontWorker);
-
-            _export('workerpool', workerpool);
-        }
-    };
-});
-System.register('lib/workers/normal-vectors', ['lib/workers/worker-pool', 'github:toji/gl-matrix@master/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
+System.register('lib/workers/normal-vectors', ['lib/extra/worker-pool', 'github:toji/gl-matrix@2.2.1/src/gl-matrix/vec3.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
     'use strict';
 
     var WorkerPool, vec3Module, workerpool;
 
-    function normalVectorWorker(data, resolve) {
+    function normalVectorWorker(responder, data) {
 
         console.time('Calculating normals');
 
@@ -14295,20 +14131,20 @@ System.register('lib/workers/normal-vectors', ['lib/workers/worker-pool', 'githu
             var normal = vec3.cross(tmp0, vec3.subtract(tmp1, v1, v0), vec3.subtract(tmp2, v2, v0));
 
             // Store the calculated "normal"
-            triangleNormals[offset] = normal[0];
-            triangleNormals[offset + 1] = normal[1];
-            triangleNormals[offset + 2] = normal[2];
+            triangleNormals.set(normal, offset);
         }
 
         // Iterate all vertices
         for (var vertex = 0, _len = adjacentTriangles.length; vertex < _len; ++vertex) {
 
-            var vertexNormal = vec3.set(tmp0, 0, 0, 0);
             var triangles = adjacentTriangles[vertex];
+            var triangleOffset = triangles[0];
+
+            var vertexNormal = vec3.set(tmp0, triangleNormals[triangleOffset], triangleNormals[triangleOffset + 1], triangleNormals[triangleOffset + 2]);
 
             // Iterate all adjacent triangles
-            for (var _i = 0, len2 = triangles.length; _i < len2; ++_i) {
-                var triangleOffset = triangles[_i];
+            for (var _i = 1, len2 = triangles.length; _i < len2; ++_i) {
+                triangleOffset = triangles[_i];
 
                 vertexNormal[0] += triangleNormals[triangleOffset];
                 vertexNormal[1] += triangleNormals[triangleOffset + 1];
@@ -14319,15 +14155,12 @@ System.register('lib/workers/normal-vectors', ['lib/workers/worker-pool', 'githu
 
             var offset = 3 * vertex;
 
-            // Store calculated normal
-            normals[offset] = vertexNormal[0];
-            normals[offset + 1] = vertexNormal[1];
-            normals[offset + 2] = vertexNormal[2];
+            normals.set(vertexNormal, offset);
         }
 
         console.timeEnd('Calculating normals');
 
-        resolve({
+        responder.done({
             indices: indices,
             vertices: vertices,
             normals: normals
@@ -14335,24 +14168,26 @@ System.register('lib/workers/normal-vectors', ['lib/workers/worker-pool', 'githu
     }
 
     return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool['default'];
-        }, function (_githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002) {
-            vec3Module = _githubTojiGlMatrixMasterSrcGlMatrixVec3JsGithubSystemjsPluginText002['default'];
+        setters: [function (_libExtraWorkerPool) {
+            WorkerPool = _libExtraWorkerPool['default'];
+        }, function (_githubTojiGlMatrix221SrcGlMatrixVec3JsGithubSystemjsPluginText002) {
+            vec3Module = _githubTojiGlMatrix221SrcGlMatrixVec3JsGithubSystemjsPluginText002['default'];
         }],
         execute: function () {
-            workerpool = WorkerPool.fromFunction(normalVectorWorker, ['var GLMAT_ARRAY_TYPE = Float32Array;', vec3Module, 'var tmp0 = vec3.create(), tmp1 = vec3.create(), tmp2 = vec3.create();']);
+            workerpool = WorkerPool.fromFunction(normalVectorWorker, {
+                dependencies: ['var GLMAT_ARRAY_TYPE = Float32Array;', vec3Module, 'var tmp0 = vec3.create(), tmp1 = vec3.create(), tmp2 = vec3.create();']
+            });
 
             _export('workerpool', workerpool);
         }
     };
 });
-System.register('lib/material/base', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/extra/errors'], function (_export) {
+System.register('lib/material/base', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/extra/errors'], function (_export) {
   var _classCallCheck, UnimplementedMethodError, GL, Material, MaterialRenderer;
 
   return {
-    setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-      _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+    setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+      _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
     }, function (_libExtraErrors) {
       UnimplementedMethodError = _libExtraErrors.UnimplementedMethodError;
     }],
@@ -14413,21 +14248,21 @@ System.register('lib/material/base', ['npm:babel-runtime@5.4.3/helpers/class-cal
          * Should be used to set material uniforms independent of model drawn.
          */
 
-        MaterialRenderer.prototype.beforeRender = function beforeRender(renderer) {};
+        MaterialRenderer.prototype.beforeRender = function beforeRender() {};
 
         /**
          * Runs before drawing each model using the material.
          * Should be used to set material uniforms dependent on model drawn.
          */
 
-        MaterialRenderer.prototype.render = function render(model, renderer) {};
+        MaterialRenderer.prototype.render = function render(model) {};
 
         /**
          * Runs after all models using the bound material have been drawn.
          * Should be used to clean up modified state.
          */
 
-        MaterialRenderer.prototype.afterRender = function afterRender(renderer) {};
+        MaterialRenderer.prototype.afterRender = function afterRender() {};
 
         return MaterialRenderer;
       })();
@@ -14436,50 +14271,44 @@ System.register('lib/material/base', ['npm:babel-runtime@5.4.3/helpers/class-cal
     }
   };
 });
-System.register('lib/workers/tga', ['lib/workers/worker-pool', 'github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
+System.register('lib/workers/tga', ['lib/extra/worker-pool', 'github:maxdavidson/jsTGALoader@master/tga.js!github:systemjs/plugin-text@0.0.2'], function (_export) {
     'use strict';
 
     var WorkerPool, targaModule, workerpool;
 
-    function TGAworker(tgaBuffer, resolve) {
-        var tga = new TGA();
-        tga.load(new Uint8Array(tgaBuffer));
+    function TGAworker(responder, buffer) {
+        tga.load(new Uint8ClampedArray(buffer));
         var imageData = tga.getImageData();
-        var buffer = imageData.data.buffer;
-        resolve({
-            buffer: buffer,
-            height: imageData.height,
-            width: imageData.width
-        }, [buffer]);
+        responder.done(imageData, [imageData.data.buffer]);
     }
 
     return {
-        setters: [function (_libWorkersWorkerPool) {
-            WorkerPool = _libWorkersWorkerPool['default'];
+        setters: [function (_libExtraWorkerPool) {
+            WorkerPool = _libExtraWorkerPool['default'];
         }, function (_githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002) {
             targaModule = _githubMaxdavidsonJsTGALoaderMasterTgaJsGithubSystemjsPluginText002['default'];
         }],
         execute: function () {
-            workerpool = WorkerPool.fromFunction(TGAworker, [targaModule]);
+            workerpool = WorkerPool.fromFunction(TGAworker, { dependencies: [targaModule, 'var tga = new TGA();'] });
 
             _export('workerpool', workerpool);
         }
     };
 });
-System.register('lib/light/base', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/object-without-properties', 'npm:babel-runtime@5.4.3/core-js/weak-map', 'github:toji/gl-matrix@master', 'lib/scene/base', 'npm:memoizee@0.3.8', 'lib/extra/color'], function (_export) {
+System.register('lib/light/base', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/object-without-properties', 'npm:babel-runtime@5.4.7/core-js/weak-map', 'github:toji/gl-matrix@2.2.1', 'lib/scene/base', 'npm:memoizee@0.3.8', 'lib/extra/color'], function (_export) {
     var _inherits, _classCallCheck, _objectWithoutProperties, _WeakMap, glm, Scene, memoize, convertColorToVector, vec3, Light, lightCounts, LightRenderer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersObjectWithoutProperties) {
-            _objectWithoutProperties = _npmBabelRuntime543HelpersObjectWithoutProperties['default'];
-        }, function (_npmBabelRuntime543CoreJsWeakMap) {
-            _WeakMap = _npmBabelRuntime543CoreJsWeakMap['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersObjectWithoutProperties) {
+            _objectWithoutProperties = _npmBabelRuntime547HelpersObjectWithoutProperties['default'];
+        }, function (_npmBabelRuntime547CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime547CoreJsWeakMap['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libSceneBase) {
             Scene = _libSceneBase['default'];
         }, function (_npmMemoizee038) {
@@ -14592,7 +14421,7 @@ System.register('lib/light/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
         }
     };
 });
-System.register('lib/extra/helpers', ['npm:babel-runtime@5.4.3/helpers/bind', 'npm:babel-runtime@5.4.3/core-js/promise', 'npm:babel-runtime@5.4.3/core-js/object/keys', 'npm:babel-runtime@5.4.3/core-js/object/assign', 'lib/scene/model', 'lib/scene/group', 'lib/camera/perspective-camera', 'lib/geometry/geometry', 'lib/material/phong', 'lib/texture/texture2d', 'lib/texture/cubemap', 'lib/geometry/shapes'], function (_export) {
+System.register('lib/extra/helpers', ['npm:babel-runtime@5.4.7/helpers/bind', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:babel-runtime@5.4.7/core-js/object/keys', 'npm:babel-runtime@5.4.7/core-js/object/assign', 'lib/scene/model', 'lib/scene/group', 'lib/camera/perspective-camera', 'lib/geometry/geometry', 'lib/material/phong', 'lib/texture/texture2d', 'lib/texture/cubemap', 'lib/geometry/shapes'], function (_export) {
     var _bind, _Promise, _Object$keys, _Object$assign, Model, Group, PerspectiveCamera, Geometry, PhongMaterial, Texture2D, CubeMap, Plane, Cube;
 
     function terrain(url) {
@@ -14683,14 +14512,14 @@ System.register('lib/extra/helpers', ['npm:babel-runtime@5.4.3/helpers/bind', 'n
     }
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersBind) {
-            _bind = _npmBabelRuntime543HelpersBind['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectKeys) {
-            _Object$keys = _npmBabelRuntime543CoreJsObjectKeys['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectAssign) {
-            _Object$assign = _npmBabelRuntime543CoreJsObjectAssign['default'];
+        setters: [function (_npmBabelRuntime547HelpersBind) {
+            _bind = _npmBabelRuntime547HelpersBind['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectKeys) {
+            _Object$keys = _npmBabelRuntime547CoreJsObjectKeys['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectAssign) {
+            _Object$assign = _npmBabelRuntime547CoreJsObjectAssign['default'];
         }, function (_libSceneModel) {
             Model = _libSceneModel['default'];
         }, function (_libSceneGroup) {
@@ -14738,18 +14567,18 @@ System.register('lib/extra/helpers', ['npm:babel-runtime@5.4.3/helpers/bind', 'n
         }
     };
 });
-System.register('lib/webgl/program', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/bind', 'npm:babel-runtime@5.4.3/core-js/map', 'npm:babel-runtime@5.4.3/core-js/promise', 'lib/webgl/shader'], function (_export) {
+System.register('lib/webgl/program', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/bind', 'npm:babel-runtime@5.4.7/core-js/map', 'npm:babel-runtime@5.4.7/core-js/promise', 'lib/webgl/shader'], function (_export) {
     var _classCallCheck, _bind, _Map, _Promise, GLShader, GL, enums, GLProgram;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersBind) {
-            _bind = _npmBabelRuntime543HelpersBind['default'];
-        }, function (_npmBabelRuntime543CoreJsMap) {
-            _Map = _npmBabelRuntime543CoreJsMap['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersBind) {
+            _bind = _npmBabelRuntime547HelpersBind['default'];
+        }, function (_npmBabelRuntime547CoreJsMap) {
+            _Map = _npmBabelRuntime547CoreJsMap['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }, function (_libWebglShader) {
             GLShader = _libWebglShader['default'];
         }],
@@ -14832,6 +14661,8 @@ System.register('lib/webgl/program', ['npm:babel-runtime@5.4.3/helpers/class-cal
 
                 GLProgram.prototype.destroy = function destroy() {
                     this.gl.deleteProgram(this.handle);
+                    this.fragmentShader.destroy();
+                    this.vertexShader.destroy();
                 };
 
                 GLProgram.prototype.getUniformLocation = function getUniformLocation(location) {
@@ -14959,7 +14790,274 @@ System.register('lib/webgl/program', ['npm:babel-runtime@5.4.3/helpers/class-cal
         }
     };
 });
-System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'npm:babel-runtime@5.4.3/core-js/promise', 'lib/extra/ajax', 'lib/workers/tga'], function (_export) {
+System.register('lib/extra/async', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'npm:babel-runtime@5.4.7/core-js/object/seal', 'npm:babel-runtime@5.4.7/core-js/object/freeze'], function (_export) {
+    var _classCallCheck, _createClass, _Promise, _getIterator, _Object$seal, _Object$freeze, PromiseCompleter, StreamController, StreamSubscription, Stream;
+
+    return {
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectSeal) {
+            _Object$seal = _npmBabelRuntime547CoreJsObjectSeal['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime547CoreJsObjectFreeze['default'];
+        }],
+        execute: function () {
+            'use strict';
+
+            PromiseCompleter = function PromiseCompleter() {
+                var _this = this;
+
+                _classCallCheck(this, PromiseCompleter);
+
+                this.promise = new _Promise(function (resolve, reject) {
+                    _this.resolve = resolve;
+                    _this.reject = reject;
+                });
+            };
+
+            _export('PromiseCompleter', PromiseCompleter);
+
+            StreamController = (function () {
+                function StreamController() {
+                    var _this2 = this;
+
+                    var _ref3 = arguments[0] === undefined ? {} : arguments[0];
+
+                    var _ref3$closeOnError = _ref3.closeOnError;
+                    var closeOnError = _ref3$closeOnError === undefined ? true : _ref3$closeOnError;
+
+                    _classCallCheck(this, StreamController);
+
+                    this.completer = new PromiseCompleter();
+                    this.stream = new Stream(this);
+                    this.subscriptions = [];
+                    this.onSubscribeCompleter = new PromiseCompleter();
+
+                    this.onSubscribe = this.onSubscribeCompleter.promise.then(function () {
+                        for (var _iterator = _this2.buffer, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                            var _ref;
+
+                            if (_isArray) {
+                                if (_i >= _iterator.length) break;
+                                _ref = _iterator[_i++];
+                            } else {
+                                _i = _iterator.next();
+                                if (_i.done) break;
+                                _ref = _i.value;
+                            }
+
+                            var type = _ref[0];
+                            var payload = _ref[1];
+
+                            for (var _iterator2 = _this2.subscriptions, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
+                                var _ref2;
+
+                                if (_isArray2) {
+                                    if (_i2 >= _iterator2.length) break;
+                                    _ref2 = _iterator2[_i2++];
+                                } else {
+                                    _i2 = _iterator2.next();
+                                    if (_i2.done) break;
+                                    _ref2 = _i2.value;
+                                }
+
+                                var sub = _ref2;
+
+                                if (type === 'data') {
+                                    sub._cb(payload);
+                                } else {
+                                    sub._errorCb(payload);
+                                }
+                            }
+                        }
+                    });
+
+                    this.buffer = [];
+                    this.closeOnError = closeOnError;
+
+                    this.isClosed = false;
+
+                    _Object$seal(this);
+                }
+
+                StreamController.prototype.add = function add(data) {
+                    if (!this.isClosed) {
+                        if (this.subscriptions.length === 0) {
+                            this.buffer.push(['data', data]);
+                        } else {
+                            this.subscriptions.forEach(function (sub) {
+                                return sub._cb(data);
+                            });
+                        }
+                    }
+                };
+
+                StreamController.prototype.addError = function addError(error) {
+                    if (!this.isClosed) {
+                        if (this.closeOnError) {
+                            this.completer.reject(error);
+                        }
+                        if (this.subscriptions.length === 0) {
+                            this.buffer.push(['error', error]);
+                        } else {
+                            this.subscriptions.forEach(function (sub) {
+                                return sub._errorCb(data);
+                            });
+                        }
+                    }
+                };
+
+                StreamController.prototype.close = function close() {
+                    this.isClosed = true;
+                    this.completer.resolve(this);
+                };
+
+                return StreamController;
+            })();
+
+            _export('StreamController', StreamController);
+
+            StreamSubscription = (function () {
+                function StreamSubscription(stream, cb) {
+                    _classCallCheck(this, StreamSubscription);
+
+                    this.stream = stream;
+                    this._cb = cb;
+                    this._errorCb = function () {};
+
+                    _Object$seal(this);
+                }
+
+                StreamSubscription.prototype.onError = function onError(cb) {
+                    this._errorCb = cb;
+                };
+
+                StreamSubscription.prototype.unsubscribe = function unsubscribe() {
+                    this.stream._controller.subscriptions.splice(this.stream._controller.subscriptions.indexOf(this), 1);
+                };
+
+                return StreamSubscription;
+            })();
+
+            Stream = (function () {
+                function Stream(controller) {
+                    _classCallCheck(this, Stream);
+
+                    this._controller = controller;
+                    _Object$freeze(this);
+                }
+
+                Stream.prototype.subscribe = function subscribe(cb) {
+                    var subscription = new StreamSubscription(this, cb);
+                    this._controller.onSubscribeCompleter.resolve();
+                    this._controller.subscriptions.push(subscription);
+                    return subscription;
+                };
+
+                Stream.prototype.transform = function transform(transformer) {
+                    var _this3 = this;
+
+                    var ctrl = new StreamController();
+                    var sink = {
+                        add: ctrl.add.bind(ctrl),
+                        addError: ctrl.addError.bind(ctrl)
+                    };
+
+                    ctrl.onSubscribe.then(function () {
+                        var subscription = _this3.subscribe(function (data) {
+                            try {
+                                transformer(data, sink);
+                            } catch (error) {
+                                sink.addError(error);
+                            }
+                        });
+                        subscription.onError(function (error) {
+                            return ctrl.fail(error);
+                        });
+                        _this3.onComplete.then(function () {
+                            return ctrl.close();
+                        });
+                    });
+
+                    return ctrl.stream;
+                };
+
+                Stream.prototype.filter = function filter(test) {
+                    return this.transform(function (data, sink) {
+                        if (test(data)) {
+                            sink.add(data);
+                        }
+                    });
+                };
+
+                Stream.prototype.map = function map(mapper) {
+                    return this.transform(function (data, sink) {
+                        sink.add(mapper(data));
+                    });
+                };
+
+                Stream.prototype.scan = function scan(scanner) {
+                    var initialValue = arguments[1] === undefined ? {} : arguments[1];
+
+                    var accumulator = initialValue;
+                    return this.transform(function (data, sink) {
+                        sink.add(accumulator = scanner(accumulator, data));
+                    });
+                };
+
+                Stream.prototype.asyncMap = function asyncMap(mapper) {
+                    return this.transform(function (data, sink) {
+                        _Promise.resolve(mapper(data)).then(function (data) {
+                            return sink.add(data);
+                        })['catch'](function (error) {
+                            return sink.addError(error);
+                        });
+                    });
+                };
+
+                Stream.prototype.toArray = function toArray() {
+                    var results = [];
+                    this.subscribe(function (data) {
+                        return results.push(data);
+                    });
+                    return this.onComplete.then(function () {
+                        return results;
+                    });
+                };
+
+                _createClass(Stream, [{
+                    key: 'onComplete',
+                    get: function () {
+                        return this._controller.completer.promise;
+                    }
+                }, {
+                    key: 'first',
+                    get: function () {
+                        var _this4 = this;
+
+                        return new _Promise(function (resolve, reject) {
+                            var subscription = undefined;
+                            subscription = _this4.subscribe(function (data) {
+                                resolve(data);
+                                subscription.unsubscribe();
+                            });
+                            subscription.onError(reject);
+                        });
+                    }
+                }]);
+
+                return Stream;
+            })();
+        }
+    };
+});
+System.register('lib/texture/common', ['npm:babel-runtime@5.4.7/core-js/map', 'npm:babel-runtime@5.4.7/core-js/promise', 'lib/extra/ajax', 'lib/workers/tga'], function (_export) {
     var _Map, _Promise, getArrayBuffer, tgaWorker, textureCounts, source, target, converters;
 
     function allocateTextureUnit(gl) {
@@ -14968,14 +15066,19 @@ System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'n
         return count;
     }
 
-    function resizeImageData(imageData) {
-        var width = arguments[1] === undefined ? imageData.width : arguments[1];
-        var height = arguments[2] === undefined ? imageData.height : arguments[2];
+    function resizeImage(image) {
+        var width = arguments[1] === undefined ? image.width : arguments[1];
+        var height = arguments[2] === undefined ? image.height : arguments[2];
         return (function () {
             // Resize source canvas to image's dimensions
-            source.canvas.width = imageData.width;
-            source.canvas.height = imageData.height;
-            source.putImageData(imageData, 0, 0);
+            source.canvas.width = image.width;
+            source.canvas.height = image.height;
+
+            if ('data' in image) {
+                source.putImageData(image, 0, 0);
+            } else {
+                source.drawImage(image, 0, 0);
+            }
 
             // Resize target canvas to target dimensions
             target.canvas.width = width;
@@ -14999,15 +15102,8 @@ System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'n
             var img = document.createElement('img');
 
             var onLoad = function onLoad() {
-                // Convert image element to ImageData by drawing into a canvas and then extracting the content
-
-                source.canvas.width = img.width;
-                source.canvas.height = img.height;
-                source.drawImage(img, 0, 0);
-
-                var imageData = source.getImageData(0, 0, img.width, img.height);
                 removeListeners();
-                resolve(imageData);
+                resolve(img);
             };
 
             var onError = function onError(error) {
@@ -15030,34 +15126,23 @@ System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'n
 
     // Use the TGA library to download the image as a binary file and parse it.
     function getTgaImage(filename) {
-        return getArrayBuffer(filename).then(function (tgaBuffer) {
-            return tgaWorker.run(tgaBuffer, { transfers: [tgaBuffer] });
+        return getArrayBuffer(filename).then(function (buffer) {
+            return tgaWorker.run(buffer, [buffer]).first;
         }).then(function (_ref) {
-            var buffer = _ref.buffer;
+            var data = _ref.data;
             var width = _ref.width;
             var height = _ref.height;
 
-            var data = new Uint8ClampedArray(buffer);
-
-            var image = undefined;
-            try {
-                // Not suppported in all versions
-                image = new ImageData(data, width, height);
-            } catch (e) {
-                source.canvas.height = height;
-                source.canvas.width = width;
-                image = source.createImageData(width, height);
-                image.data.set(data);
-            }
-
-            return image;
+            var imageData = source.createImageData(width, height);
+            imageData.data.set(data);
+            return imageData;
         });
     }
     return {
-        setters: [function (_npmBabelRuntime543CoreJsMap) {
-            _Map = _npmBabelRuntime543CoreJsMap['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
+        setters: [function (_npmBabelRuntime547CoreJsMap) {
+            _Map = _npmBabelRuntime547CoreJsMap['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }, function (_libExtraAjax) {
             getArrayBuffer = _libExtraAjax.getArrayBuffer;
         }, function (_libWorkersTga) {
@@ -15068,7 +15153,7 @@ System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'n
 
             _export('allocateTextureUnit', allocateTextureUnit);
 
-            _export('resizeImageData', resizeImageData);
+            _export('resizeImage', resizeImage);
 
             _export('getImage', getImage);
 
@@ -15082,18 +15167,18 @@ System.register('lib/texture/common', ['npm:babel-runtime@5.4.3/core-js/map', 'n
         }
     };
 });
-System.register('lib/light/directional-light', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/object/freeze', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8', 'lib/extra/functional', 'lib/light/base'], function (_export) {
+System.register('lib/light/directional-light', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/object/freeze', 'github:toji/gl-matrix@2.2.1', 'npm:memoizee@0.3.8', 'lib/extra/functional', 'lib/light/base'], function (_export) {
     var _inherits, _classCallCheck, _Object$freeze, glm, memoize, construct, Light, LightRenderer, vec3, forward, DirectionalLight, DirectionalLightRenderer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectFreeze) {
-            _Object$freeze = _npmBabelRuntime543CoreJsObjectFreeze['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectFreeze) {
+            _Object$freeze = _npmBabelRuntime547CoreJsObjectFreeze['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_npmMemoizee038) {
             memoize = _npmMemoizee038['default'];
         }, function (_libExtraFunctional) {
@@ -15179,16 +15264,16 @@ System.register('lib/light/directional-light', ['npm:babel-runtime@5.4.3/helpers
         }
     };
 });
-System.register('lib/control/mouseview', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'github:baconjs/bacon.js@0.7.58', 'github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/control/mouseview', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'github:baconjs/bacon.js@0.7.59', 'github:toji/gl-matrix@2.2.1'], function (_export) {
     var _classCallCheck, Bacon, glm, vec3, mat4, quat, equals, buffer, MouseViewController;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_githubBaconjsBaconJs0758) {
-            Bacon = _githubBaconjsBaconJs0758['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_githubBaconjsBaconJs0759) {
+            Bacon = _githubBaconjsBaconJs0759['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             'use strict';
@@ -15213,10 +15298,14 @@ System.register('lib/control/mouseview', ['npm:babel-runtime@5.4.3/helpers/class
 
                     var _ref$speed = _ref.speed;
                     var speed = _ref$speed === undefined ? 1 : _ref$speed;
+                    var _ref$mode = _ref.mode;
+                    var mode = _ref$mode === undefined ? 'walk' : _ref$mode;
 
                     _classCallCheck(this, MouseViewController);
 
                     this.target = target;
+
+                    this.mode = mode;
 
                     this.yaw = 0;
                     this.pitch = 0;
@@ -15398,15 +15487,13 @@ System.register('lib/control/mouseview', ['npm:babel-runtime@5.4.3/helpers/class
                         target.lookForward();
                         target.rotateY(-this.yaw);
                         vec3.set(buffer, dt / 200 * this.speed * this.sideways, 0, dt / 200 * this.speed * this.forward);
-                        target.translateRelatively(buffer);
+                        if (this.mode === 'walk') target.translateRelatively(buffer);
                         target.rotateX(-this.pitch);
                         target.rotateZ(-this.roll);
+                        if (this.mode === 'fly') target.translateRelatively(buffer);
 
                         this.first = false;
                     }
-
-                    // TODO: less ugly
-                    //this.target.position[1] = this.getHeight(this.target);
                 };
 
                 return MouseViewController;
@@ -15416,7 +15503,7 @@ System.register('lib/control/mouseview', ['npm:babel-runtime@5.4.3/helpers/class
         }
     };
 });
-System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/object/keys'], function (_export) {
+System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.7/core-js/object/keys'], function (_export) {
   var _Object$keys, log, error, glValidEnumContexts, glEnums, enumStringToValue;
 
   /**
@@ -15550,15 +15637,6 @@ System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/objec
   }
 
   // Makes a function that calls a function on another object.
-  function makeFunctionWrapper(original, functionName) {
-    //log("wrap fn: " + functionName);
-    var f = original[functionName];
-    return function () {
-      //log("call: " + functionName);
-      var result = f.apply(original, arguments);
-      return result;
-    };
-  }
 
   /**
    * Given a WebGL context returns a wrapped context that calls
@@ -15717,7 +15795,7 @@ System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/objec
     var wrappedContext_ = {};
     var contextId_ = 1;
     var contextLost_ = false;
-    var resourceId_ = 0;
+
     var resourceDb_ = [];
     var numCallsToLoseContext_ = 0;
     var numCalls_ = 0;
@@ -15846,16 +15924,6 @@ System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/objec
     function isWebGLObject(obj) {
       //return false;
       return obj instanceof WebGLBuffer || obj instanceof WebGLFramebuffer || obj instanceof WebGLProgram || obj instanceof WebGLRenderbuffer || obj instanceof WebGLShader || obj instanceof WebGLTexture;
-    }
-
-    function checkResources(args) {
-      for (var ii = 0; ii < args.length; ++ii) {
-        var arg = args[ii];
-        if (isWebGLObject(arg)) {
-          return arg.__webglDebugContextLostId__ == contextId_;
-        }
-      }
-      return true;
     }
 
     function clearErrors() {
@@ -16034,8 +16102,8 @@ System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/objec
   }
 
   return {
-    setters: [function (_npmBabelRuntime543CoreJsObjectKeys) {
-      _Object$keys = _npmBabelRuntime543CoreJsObjectKeys['default'];
+    setters: [function (_npmBabelRuntime547CoreJsObjectKeys) {
+      _Object$keys = _npmBabelRuntime547CoreJsObjectKeys['default'];
     }],
     execute: function () {
       /*
@@ -16324,30 +16392,27 @@ System.register('lib/extra/webgl-debug', ['npm:babel-runtime@5.4.3/core-js/objec
     }
   };
 });
-System.register('lib/extra/bounding-box', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/array/from'], function (_export) {
-    var _classCallCheck, _Array$from, initialIntervals, BoundingBox;
+
+//log("wrap fn: " + functionName);
+
+//log("call: " + functionName);
+System.register('lib/extra/bounding-box', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/array/from'], function (_export) {
+    var _classCallCheck, _Array$from, BoundingBox;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsArrayFrom) {
-            _Array$from = _npmBabelRuntime543CoreJsArrayFrom['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsArrayFrom) {
+            _Array$from = _npmBabelRuntime547CoreJsArrayFrom['default'];
         }],
         execute: function () {
             'use strict';
-
-            initialIntervals = new Float64Array([Infinity, -Infinity, Infinity, -Infinity, Infinity, -Infinity]);
 
             BoundingBox = (function () {
                 function BoundingBox() {
                     _classCallCheck(this, BoundingBox);
 
                     this.points = new Float64Array(24);
-
-                    // (x-min, x-max, y-min, y-max, z-min, z-max)
-                    this.intervals = new Float64Array(6);
-
-                    // (x-mid, y-mid, z-mid)
                     this.center = new Float64Array(3);
                 }
 
@@ -16357,53 +16422,75 @@ System.register('lib/extra/bounding-box', ['npm:babel-runtime@5.4.3/helpers/clas
                     }).join(', ') + ')';
                 };
 
-                BoundingBox.prototype.resetIntervals = function resetIntervals() {
-                    this.intervals.set(initialIntervals);
+                BoundingBox.prototype.intersects = function intersects(box) {
+                    var ptsA = this.points;
+                    var ptsB = box.points;
+
+                    return ptsA[21] > ptsB[0] // a.max.x > b.min.x
+                     && ptsA[0] < ptsB[21] // a.min.x < b.max.x
+                     && ptsA[22] > ptsB[1] // a.max.y > b.min.y
+                     && ptsA[1] < ptsB[22] // a.min.y < b.max.y
+                     && ptsA[23] > ptsB[2] // a.max.z > b.min.z
+                     && ptsA[2] < ptsB[23]; //a.min.z > b.max.z
                 };
 
-                BoundingBox.prototype.expandIntervals = function expandIntervals(points) {
+                BoundingBox.prototype.reset = function reset() {
+                    var pts = this.points;
+
+                    pts[0] = Infinity;pts[1] = Infinity;pts[2] = Infinity;
+                    pts[21] = -Infinity;pts[22] = -Infinity;pts[23] = -Infinity;
+                };
+
+                BoundingBox.prototype.expandFromPoints = function expandFromPoints(points) {
                     var stride = arguments[1] === undefined ? 3 : arguments[1];
 
-                    var intervals = this.intervals;
-
+                    var pts = this.points;
+                    var p = undefined;
                     for (var offset = 0, len = points.length; offset < len; offset += stride) {
-                        var x = points[offset],
-                            y = points[offset + 1],
-                            z = points[offset + 2];
-                        if (x < intervals[0]) intervals[0] = x;else if (x > intervals[1]) intervals[1] = x;
-                        if (y < intervals[2]) intervals[2] = y;else if (y > intervals[3]) intervals[3] = y;
-                        if (z < intervals[4]) intervals[4] = z;else if (z > intervals[5]) intervals[5] = z;
+                        p = points[offset];
+                        if (p < pts[0]) pts[0] = p;else if (p > pts[21]) pts[21] = p;
+                        p = points[offset + 1];
+                        if (p < pts[1]) pts[1] = p;else if (p > pts[22]) pts[22] = p;
+                        p = points[offset + 2];
+                        if (p < pts[2]) pts[2] = p;else if (p > pts[23]) pts[23] = p;
                     }
                 };
 
-                BoundingBox.prototype.expandFromIntervals = function expandFromIntervals(otherIntervals) {
-                    var intervals = this.intervals;
+                BoundingBox.prototype.expandFromBox = function expandFromBox(box) {
+                    var pts = this.points;
+                    var points = box.points;
 
-                    if (otherIntervals[0] < intervals[0]) intervals[0] = otherIntervals[0];
-                    if (otherIntervals[1] > intervals[1]) intervals[1] = otherIntervals[1];
-                    if (otherIntervals[2] < intervals[2]) intervals[2] = otherIntervals[2];
-                    if (otherIntervals[3] > intervals[3]) intervals[3] = otherIntervals[3];
-                    if (otherIntervals[4] < intervals[4]) intervals[4] = otherIntervals[4];
-                    if (otherIntervals[5] > intervals[5]) intervals[5] = otherIntervals[5];
+                    if (points[0] < pts[0]) pts[0] = points[0];
+                    if (points[1] < pts[1]) pts[1] = points[1];
+                    if (points[2] < pts[2]) pts[2] = points[2];
+                    if (points[21] > pts[21]) pts[21] = points[21];
+                    if (points[22] > pts[22]) pts[22] = points[22];
+                    if (points[23] > pts[23]) pts[23] = points[23];
                 };
 
                 BoundingBox.prototype.computePoints = function computePoints() {
                     var points = this.points;
                     var center = this.center;
-                    var intervals = this.intervals;
 
-                    points[0] = intervals[0];points[1] = intervals[2];points[2] = intervals[4]; // (x-min, y-min, z-min)
-                    points[3] = intervals[0];points[4] = intervals[2];points[5] = intervals[5]; // (x-min, y-min, z-max)
-                    points[6] = intervals[0];points[7] = intervals[3];points[8] = intervals[4]; // (x-min, y-max, z-min)
-                    points[9] = intervals[0];points[10] = intervals[3];points[11] = intervals[5]; // (x-min, y-max, z-max)
-                    points[12] = intervals[1];points[13] = intervals[2];points[14] = intervals[4]; // (x-max, y-min, z-min)
-                    points[15] = intervals[1];points[16] = intervals[2];points[17] = intervals[5]; // (x-max, y-min, z-max)
-                    points[18] = intervals[1];points[19] = intervals[3];points[20] = intervals[4]; // (x-max, y-max, z-min)
-                    points[21] = intervals[1];points[22] = intervals[3];points[23] = intervals[5]; // (x-max, y-max, z-max)
+                    // Min and Max points are stored at first and last position
+                    var minX = points[0],
+                        minY = points[1],
+                        minZ = points[2],
+                        maxX = points[21],
+                        maxY = points[22],
+                        maxZ = points[23];
 
-                    center[0] = (intervals[0] + intervals[1]) / 2;
-                    center[1] = (intervals[2] + intervals[3]) / 2;
-                    center[2] = (intervals[4] + intervals[5]) / 2;
+                    // Store remaining points in super secret order
+                    points[3] = minX;points[4] = minY;points[5] = maxZ;
+                    points[6] = minX;points[7] = maxY;points[8] = minZ;
+                    points[9] = minX;points[10] = maxY;points[11] = maxZ;
+                    points[12] = maxX;points[13] = minY;points[14] = minZ;
+                    points[15] = maxX;points[16] = minY;points[17] = maxZ;
+                    points[18] = maxX;points[19] = maxY;points[20] = minZ;
+
+                    center[0] = (minX + maxX) / 2;
+                    center[1] = (minY + maxY) / 2;
+                    center[2] = (minZ + maxZ) / 2;
                 };
 
                 return BoundingBox;
@@ -16413,16 +16500,202 @@ System.register('lib/extra/bounding-box', ['npm:babel-runtime@5.4.3/helpers/clas
         }
     };
 });
-System.register('lib/texture/texture2d', ['npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'lib/texture/common'], function (_export) {
-    var _createClass, _classCallCheck, resizeImageData, getImage, MAX_SIZE, Texture2D;
+System.register('lib/extra/worker-pool', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/object-without-properties', 'npm:babel-runtime@5.4.7/core-js/map', 'npm:babel-runtime@5.4.7/core-js/object/seal', 'lib/extra/async'], function (_export) {
+    var _classCallCheck, _createClass, _objectWithoutProperties, _Map, _Object$seal, StreamController, PromiseCompleter, WorkerPool, Task;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersObjectWithoutProperties) {
+            _objectWithoutProperties = _npmBabelRuntime547HelpersObjectWithoutProperties['default'];
+        }, function (_npmBabelRuntime547CoreJsMap) {
+            _Map = _npmBabelRuntime547CoreJsMap['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectSeal) {
+            _Object$seal = _npmBabelRuntime547CoreJsObjectSeal['default'];
+        }, function (_libExtraAsync) {
+            StreamController = _libExtraAsync.StreamController;
+            PromiseCompleter = _libExtraAsync.PromiseCompleter;
+        }],
+        execute: function () {
+            'use strict';
+
+            WorkerPool = (function () {
+                function WorkerPool(url) {
+                    var _ref = arguments[1] === undefined ? {} : arguments[1];
+
+                    var _ref$poolSize = _ref.poolSize;
+                    var poolSize = _ref$poolSize === undefined ? 4 : _ref$poolSize;
+                    var _ref$timeout = _ref.timeout;
+                    var timeout = _ref$timeout === undefined ? 5 : _ref$timeout;
+
+                    _classCallCheck(this, WorkerPool);
+
+                    this.url = url;
+                    this.poolSize = poolSize;
+                    this.timeout = timeout;
+
+                    this._taskQueue = [];
+                    this._workerCount = 0;
+                    this._availableWorkers = [];
+
+                    this._timeouts = new _Map();
+
+                    _Object$seal(this);
+                }
+
+                WorkerPool.prototype.run = function run(payload) {
+                    var _this = this;
+
+                    var transferList = arguments[1] === undefined ? [] : arguments[1];
+
+                    // Create a task for running work
+                    var task = new Task(payload, transferList);
+
+                    // Try fetching a worker
+                    var worker = this._availableWorkers.shift();
+
+                    // If no worker found and we are below the pool size limit, create a new worker
+                    if (!worker && this._workerCount < this.poolSize) {
+                        worker = new Worker(this.url);
+                        this._workerCount++;
+                    }
+
+                    // If we succeeded in getting a worker
+                    if (worker) {
+                        // Clear timeout if it exists
+                        var timeout = this._timeouts.get(worker);
+                        if (timeout) {
+                            window.clearTimeout(timeout);
+                            this._timeouts['delete'](worker);
+                        }
+                        // Run task on the worker
+                        task.run(worker);
+                    } else {
+                        // Couldn't get a worker, push task to queue
+                        this._taskQueue.push(task);
+                    }
+
+                    task.onComplete.then(function () {
+                        // See if there are any tasks in queue
+                        var nextTask = _this._taskQueue.shift();
+
+                        if (nextTask) {
+                            // Run the next task on the same worker
+                            nextTask.run(task.worker);
+                        } else {
+                            // Set a timeout before terminating worker
+                            _this._availableWorkers.push(task.worker);
+                            _this._timeouts.set(task.worker, window.setTimeout(function () {
+                                _this._availableWorkers.splice(_this._availableWorkers.indexOf(task.worker), 1);
+                                task.worker.terminate();
+                                _this._workerCount--;
+                            }, 1000 * _this.timeout));
+                        }
+                    });
+
+                    return task.stream;
+                };
+
+                WorkerPool.fromFunction = function fromFunction(fn) {
+                    var _ref2 = arguments[1] === undefined ? {} : arguments[1];
+
+                    var _ref2$dependencies = _ref2.dependencies;
+                    var dependencies = _ref2$dependencies === undefined ? [] : _ref2$dependencies;
+
+                    var options = _objectWithoutProperties(_ref2, ['dependencies']);
+
+                    var worker = 'self.onmessage = function (e) {\n                (' + fn.toString() + ')({\n                    progress: function progress(payload, transferList) {\n                        self.postMessage([\'progress\', payload], transferList);\n                    },\n                    error: function reject(payload, transferList) {\n                        self.postMessage([\'error\', payload], transferList);\n                    },\n                    done: function resolve(payload, transferList) {\n                        self.postMessage([\'done\', payload], transferList);\n                    }\n                }, e.data);\n            };';
+
+                    var blob = new Blob([[].concat(dependencies, [worker]).join(';\n')], { type: 'application/javascript' });
+                    var url = URL.createObjectURL(blob);
+
+                    return new WorkerPool(url, options);
+                };
+
+                return WorkerPool;
+            })();
+
+            _export('default', WorkerPool);
+
+            Task = (function () {
+                function Task(payload) {
+                    var transferList = arguments[1] === undefined ? [] : arguments[1];
+
+                    _classCallCheck(this, Task);
+
+                    this.id = Task.count++;
+                    this.controller = new StreamController();
+
+                    this.payload = payload;
+                    this.transferList = transferList;
+
+                    this.worker = null;
+
+                    _Object$seal(this);
+                }
+
+                Task.prototype.run = function run(worker) {
+                    this.worker = worker;
+
+                    worker.postMessage(this.payload, this.transferList);
+
+                    var controller = this.controller;
+
+                    worker.addEventListener('message', function onMessage(_ref3) {
+                        var _ref3$data = _ref3.data;
+                        var type = _ref3$data[0];
+                        var payload = _ref3$data[1];
+
+                        switch (type) {
+                            case 'progress':
+                                controller.add(payload);
+                                break;
+                            case 'error':
+                                controller.addError(payload);
+                                break;
+                            case 'done':
+                                if (payload !== undefined) {
+                                    controller.add(payload);
+                                }
+                                controller.close();
+                                worker.removeEventListener('message', onMessage, false);
+                        }
+                    }, false);
+                };
+
+                _createClass(Task, [{
+                    key: 'stream',
+                    get: function () {
+                        return this.controller.stream;
+                    }
+                }, {
+                    key: 'onComplete',
+                    get: function () {
+                        return this.controller.completer.promise;
+                    }
+                }], [{
+                    key: 'count',
+                    value: 0,
+                    enumerable: true
+                }]);
+
+                return Task;
+            })();
+        }
+    };
+});
+System.register('lib/texture/texture2d', ['npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'lib/texture/common'], function (_export) {
+    var _createClass, _classCallCheck, resizeImage, getImage, MAX_SIZE, Texture2D;
+
+    return {
+        setters: [function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
         }, function (_libTextureCommon) {
-            resizeImageData = _libTextureCommon.resizeImageData;
+            resizeImage = _libTextureCommon.resizeImage;
             getImage = _libTextureCommon.getImage;
         }],
         execute: function () {
@@ -16435,34 +16708,34 @@ System.register('lib/texture/texture2d', ['npm:babel-runtime@5.4.3/helpers/creat
             })();
 
             Texture2D = (function () {
-                function Texture2D(imageData) {
+                function Texture2D(image) {
                     _classCallCheck(this, Texture2D);
 
-                    this.imageData = imageData;
+                    this.image = image;
                 }
 
                 Texture2D.fromFile = function fromFile(filename, format) {
-                    return getImage(filename, format).then(function (imageData) {
+                    return getImage(filename, format).then(function (image) {
 
                         // Shrink image if any dimension is bigger than the maxiumum size
                         // Aspect ratio does not need to be preserved, since texture coordinate are relative
-                        if (imageData.height > MAX_SIZE || imageData.width > MAX_SIZE) {
-                            imageData = resizeImageData(imageData, Math.min(MAX_SIZE, imageData.width), Math.min(MAX_SIZE, imageData.height));
+                        if (image.height > MAX_SIZE || image.width > MAX_SIZE) {
+                            image = resizeImage(image, Math.min(MAX_SIZE, image.width), Math.min(MAX_SIZE, image.height));
                         }
 
-                        return new Texture2D(imageData);
+                        return new Texture2D(image);
                     });
                 };
 
                 _createClass(Texture2D, [{
                     key: 'width',
                     get: function () {
-                        return this.imageData.width;
+                        return this.image.width;
                     }
                 }, {
                     key: 'height',
                     get: function () {
-                        return this.imageData.height;
+                        return this.image.height;
                     }
                 }]);
 
@@ -16473,22 +16746,22 @@ System.register('lib/texture/texture2d', ['npm:babel-runtime@5.4.3/helpers/creat
         }
     };
 });
-System.register("lib/extra/event-aggregator", ["npm:babel-runtime@5.4.3/helpers/create-class", "npm:babel-runtime@5.4.3/helpers/class-call-check", "npm:babel-runtime@5.4.3/core-js/map", "npm:babel-runtime@5.4.3/core-js/set", "npm:babel-runtime@5.4.3/core-js/get-iterator", "npm:babel-runtime@5.4.3/core-js/weak-map"], function (_export) {
+System.register("lib/extra/event-aggregator", ["npm:babel-runtime@5.4.7/helpers/create-class", "npm:babel-runtime@5.4.7/helpers/class-call-check", "npm:babel-runtime@5.4.7/core-js/map", "npm:babel-runtime@5.4.7/core-js/set", "npm:babel-runtime@5.4.7/core-js/get-iterator", "npm:babel-runtime@5.4.7/core-js/weak-map"], function (_export) {
     var _createClass, _classCallCheck, _Map, _Set, _getIterator, _WeakMap, debug, EventAggregator;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass["default"];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck["default"];
-        }, function (_npmBabelRuntime543CoreJsMap) {
-            _Map = _npmBabelRuntime543CoreJsMap["default"];
-        }, function (_npmBabelRuntime543CoreJsSet) {
-            _Set = _npmBabelRuntime543CoreJsSet["default"];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator["default"];
-        }, function (_npmBabelRuntime543CoreJsWeakMap) {
-            _WeakMap = _npmBabelRuntime543CoreJsWeakMap["default"];
+        setters: [function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass["default"];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck["default"];
+        }, function (_npmBabelRuntime547CoreJsMap) {
+            _Map = _npmBabelRuntime547CoreJsMap["default"];
+        }, function (_npmBabelRuntime547CoreJsSet) {
+            _Set = _npmBabelRuntime547CoreJsSet["default"];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator["default"];
+        }, function (_npmBabelRuntime547CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime547CoreJsWeakMap["default"];
         }],
         execute: function () {
             "use strict";
@@ -16645,30 +16918,308 @@ System.register("lib/extra/event-aggregator", ["npm:babel-runtime@5.4.3/helpers/
         }
     };
 });
-System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'npm:babel-runtime@5.4.3/core-js/object/assign', 'npm:babel-runtime@5.4.3/core-js/math/log2', 'npm:babel-runtime@5.4.3/core-js/map', 'npm:babel-runtime@5.4.3/core-js/set', 'github:toji/gl-matrix@master', 'npm:memoizee@0.3.8', 'lib/extra/atlas', 'lib/material/base', 'lib/texture/texture2d', 'lib/extra/functional', 'lib/light/directional-light', 'lib/light/pointlight', 'lib/light/spotlight', 'lib/webgl/program', 'lib/webgl/shader', 'lib/material/shaders/phong.vert.dot!lib/plugins/dot', 'lib/material/shaders/phong.frag.dot!lib/plugins/dot', 'lib/extra/color', 'lib/texture/common'], function (_export) {
-    var _inherits, _createClass, _classCallCheck, _getIterator, _Object$assign, _Math$log2, _Map, _Set, glm, memoize, Atlas, Region, Material, MaterialRenderer, Texture2D, construct, delegate, DirectionalLight, PointLight, SpotLight, GLProgram, GLShader, vertexTemplate, fragmentTemplate, convertColorToVector, allocateTextureUnit, vec3, vec4, mat3, mat4, GL, PhongMaterial, PhongRenderer, ColorStrategy, StaticColorStrategy, boundsBuffer, TextureRegion, TextureColorStrategy;
+System.register('lib/workers/wavefront', ['lib/extra/worker-pool'], function (_export) {
+    'use strict';
+
+    var WorkerPool, workerpool;
+
+    function wavefrontWorker(responder, stringBuffer) {
+
+        var timerName = 'Parsing OBJ file';
+
+        console.time(timerName);
+
+        var data = { v: [], vn: [], vt: [], f: [] };
+
+        var currentGroup = 'default',
+            firstGroup = true,
+            currentMaterial = 'default',
+            firstMaterial = true;
+
+        var packedTypes = ['v', 'vt', 'vn'];
+        var typeLengths = [3, 2, 3];
+        var faceIndices = [];
+
+        function processAndUploadFaces() {
+
+            var uniqueIndices = {},
+                counter = 0,
+                unpackedUniqueIndices = [],
+                unpackedVertexIndices = [],
+                unpackedTexcoordIndices = [],
+                unpackedNormalIndices = [],
+                faces = data.f;
+
+            // Compute new, unique indices.
+            for (var i = 0, len = faces.length; i < len; i += 3) {
+                for (var j = 0; j < 3; ++j) {
+                    var ids = faces[i + j],
+                        v_id = ids[0],
+                        vt_id = ids[1],
+                        vn_id = ids[2],
+                        key = ids.join(':'),
+                        index = uniqueIndices[key];
+
+                    if (index === undefined) {
+                        index = uniqueIndices[key] = counter++;
+                        unpackedVertexIndices.push(v_id);
+
+                        if (vt_id !== undefined) unpackedTexcoordIndices.push(vt_id);
+                        if (vn_id !== undefined) unpackedNormalIndices.push(vn_id);
+                    }
+
+                    unpackedUniqueIndices.push(index);
+                }
+            }
+
+            // The typed arrays to return.
+            var indices = new Uint16Array(unpackedUniqueIndices),
+                vertices = new Float32Array(3 * unpackedVertexIndices.length),
+                normals = new Float32Array(3 * unpackedNormalIndices.length),
+                texcoords = new Float32Array(2 * unpackedTexcoordIndices.length);
+
+            for (var i = 0, len = unpackedVertexIndices.length; i < len; ++i) {
+                offset = 3 * i;
+
+                var v_offset = 3 * unpackedVertexIndices[i];
+
+                vertices[offset] = data.v[v_offset];
+                vertices[offset + 1] = data.v[v_offset + 1];
+                vertices[offset + 2] = data.v[v_offset + 2];
+            }
+
+            for (var i = 0, len = unpackedNormalIndices.length; i < len; ++i) {
+                offset = 3 * i;
+
+                var vn_offset = 3 * unpackedNormalIndices[i];
+
+                normals[offset] = data.vn[vn_offset];
+                normals[offset + 1] = data.vn[vn_offset + 1];
+                normals[offset + 2] = data.vn[vn_offset + 2];
+            }
+
+            for (var i = 0, len = unpackedTexcoordIndices.length; i < len; ++i) {
+                offset = 2 * i;
+
+                var vt_offset = 2 * unpackedTexcoordIndices[i];
+
+                texcoords[offset] = data.vt[vt_offset];
+                texcoords[offset + 1] = data.vt[vt_offset + 1];
+            }
+
+            // console.log(currentGroup, currentMaterial);
+
+            responder.progress(['geometry', {
+                indices: indices,
+                vertices: vertices,
+                normals: normals,
+                texcoords: texcoords,
+                geometryName: currentGroup,
+                materialName: currentMaterial
+            }], [indices.buffer, vertices.buffer, normals.buffer, texcoords.buffer]);
+
+            data.f.length = 0;
+        }
+
+        function handleLine(line) {
+
+            var type = line[0];
+            var i,
+                len = line.length;
+
+            switch (type) {
+                case 'mtllib':
+
+                    var mtllib = line[1];
+                    for (i = 2; i < len; ++i) mtllib += line[i];
+                    responder.progress(['mtllib', mtllib]);
+                    break;
+
+                case '^^g':
+                    // End of previous group, unpack and send it back
+                    if (!firstGroup) processAndUploadFaces();
+
+                    // Set current object/group name
+                    currentGroup = line[1];
+                    for (i = 2; i < len; ++i) {
+                        currentGroup += ' ' + line[i];
+                    }
+
+                    // console.log('Changed group: ' + currentGroup);
+
+                    firstGroup = false;
+                    break;
+
+                case 'usemtl':
+                    // End of previous material, unpack and send it back
+                    if (!firstMaterial) processAndUploadFaces();
+
+                    //console.timeEnd(currentMaterial);
+
+                    currentMaterial = line[1];
+                    for (i = 2; i < len; ++i) {
+                        currentMaterial += ' ' + line[i];
+                    }
+
+                    //console.time(currentMaterial);
+
+                    //console.log('Changed material: ' + currentMaterial);
+
+                    firstMaterial = false;
+                    break;
+
+                case 'v':
+                case 'vn':
+                case 'vt':
+                    for (i = 1; i < len; ++i) {
+                        data[type].push(parseFloat(line[i]));
+                    }
+                    break;
+
+                case 'f':
+                    for (i = 1; i < len; ++i) {
+                        var lanes = line[i].split('/');
+                        for (var j = 0; j < lanes.length; ++j) {
+                            var n = parseInt(lanes[j]);
+                            if (n < 0) {
+                                // Relative index, add on the current length of the lane's type
+                                lanes[j] = n + data[packedTypes[j]].length / typeLengths[j];
+                            } else {
+                                // Absolute index, decrease by 1 so that it starts at 0
+                                lanes[j] = n - 1;
+                            }
+                        }
+                        faceIndices[i - 1] = lanes;
+                    }
+
+                    // Repeat points to form a triangle
+                    if (len < 4) {
+                        for (i = len - 1; i <= 3; ++i) {
+                            faceIndices[i] = faceIndices[len - 2];
+                        }
+                    }
+
+                    for (i = 1; i < len - 2; ++i) {
+                        data.f.push(faceIndices[0], faceIndices[i], faceIndices[i + 1]);
+                    }
+            }
+        }
+
+        var charArray = new Uint8Array(stringBuffer),
+            char,
+            c1,
+            c2,
+            c3,
+            offset,
+            row = [],
+            line = [],
+            column = 0,
+            len = charArray.length,
+            index = 0;
+
+        //console.time(currentMaterial);
+
+        // Iterate UTF-8 byte stream, to convert to JavaScript UTF-16 characters
+        while (index < len) {
+
+            c1 = charArray[index++];
+            switch (c1 >> 4) {
+                case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:
+                    // 0xxxxxxx
+                    char = c1;
+                    break;
+
+                case 12:case 13:
+                    // 110x xxxx   10xx xxxx
+                    c2 = charArray[index++];
+                    char = (c1 & 31) << 6 | c2 & 63;
+                    break;
+
+                case 14:
+                    // 1110 xxxx  10xx xxxx  10xx xxxx
+                    c2 = charArray[index++];
+                    c3 = charArray[index++];
+                    char = (c1 & 15) << 12 | (c2 & 63) << 6 | (c3 & 63) << 0;
+            }
+
+            // If new line, create string and process
+            if (char === 10 || char === 13) {
+                // Create string from byte row, trim off extra space, and split at spaces
+                // Faster than regex
+                line.length = 0;
+                var word = '',
+                    whitespace = true;
+
+                for (var i = 0; i < column; ++i) {
+                    char = row[i];
+                    if (char === 32 || char === 9) {
+                        if (!whitespace) line.push(word);
+                        word = '';
+                        whitespace = true;
+                    } else {
+                        word += String.fromCharCode(char);
+                        whitespace = false;
+                    }
+                }
+                if (!whitespace) line.push(word);
+
+                if (line.length) {
+                    handleLine(line);
+                }
+                column = 0;
+            } else {
+                row[column++] = char;
+            }
+        }
+
+        processAndUploadFaces();
+
+        //console.timeEnd(currentMaterial);
+
+        console.timeEnd(timerName);
+
+        responder.done();
+    }
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
-        }, function (_npmBabelRuntime543CoreJsObjectAssign) {
-            _Object$assign = _npmBabelRuntime543CoreJsObjectAssign['default'];
-        }, function (_npmBabelRuntime543CoreJsMathLog2) {
-            _Math$log2 = _npmBabelRuntime543CoreJsMathLog2['default'];
-        }, function (_npmBabelRuntime543CoreJsMap) {
-            _Map = _npmBabelRuntime543CoreJsMap['default'];
-        }, function (_npmBabelRuntime543CoreJsSet) {
-            _Set = _npmBabelRuntime543CoreJsSet['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_libExtraWorkerPool) {
+            WorkerPool = _libExtraWorkerPool['default'];
+        }],
+        execute: function () {
+            workerpool = WorkerPool.fromFunction(wavefrontWorker);
+
+            _export('workerpool', workerpool);
+        }
+    };
+});
+System.register('lib/material/phong', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:babel-runtime@5.4.7/core-js/object/assign', 'npm:babel-runtime@5.4.7/core-js/math/log2', 'npm:babel-runtime@5.4.7/core-js/map', 'npm:babel-runtime@5.4.7/core-js/set', 'github:toji/gl-matrix@2.2.1', 'npm:memoizee@0.3.8', 'lib/extra/ajax', 'lib/extra/atlas', 'lib/material/base', 'lib/texture/texture2d', 'lib/extra/functional', 'lib/light/directional-light', 'lib/light/pointlight', 'lib/light/spotlight', 'lib/webgl/program', 'lib/webgl/shader', 'lib/material/shaders/phong.vert.dot!lib/plugins/dot', 'lib/material/shaders/phong.frag.dot!lib/plugins/dot', 'lib/extra/color', 'lib/texture/common'], function (_export) {
+    var _inherits, _createClass, _classCallCheck, _getIterator, _Promise, _Object$assign, _Math$log2, _Map, _Set, glm, memoize, getString, Atlas, Region, Material, MaterialRenderer, Texture2D, construct, delegate, DirectionalLight, PointLight, SpotLight, GLProgram, GLShader, vertexTemplate, fragmentTemplate, convertColorToVector, allocateTextureUnit, vec3, vec4, mat3, mat4, GL, PhongMaterial, PhongRenderer, ColorStrategy, StaticColorStrategy, boundsBuffer, TextureRegion, TextureColorStrategy;
+
+    return {
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_npmBabelRuntime547CoreJsObjectAssign) {
+            _Object$assign = _npmBabelRuntime547CoreJsObjectAssign['default'];
+        }, function (_npmBabelRuntime547CoreJsMathLog2) {
+            _Math$log2 = _npmBabelRuntime547CoreJsMathLog2['default'];
+        }, function (_npmBabelRuntime547CoreJsMap) {
+            _Map = _npmBabelRuntime547CoreJsMap['default'];
+        }, function (_npmBabelRuntime547CoreJsSet) {
+            _Set = _npmBabelRuntime547CoreJsSet['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_npmMemoizee038) {
             memoize = _npmMemoizee038['default'];
+        }, function (_libExtraAjax) {
+            getString = _libExtraAjax.getString;
         }, function (_libExtraAtlas) {
             Atlas = _libExtraAtlas.Atlas;
             Region = _libExtraAtlas.Region;
@@ -16714,16 +17265,18 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
 
             PhongMaterial = (function (_Material) {
                 function PhongMaterial() {
-                    var _ref4 = arguments[0] === undefined ? {} : arguments[0];
+                    var _ref5 = arguments[0] === undefined ? {} : arguments[0];
 
-                    var _ref4$shininess = _ref4.shininess;
-                    var shininess = _ref4$shininess === undefined ? 40 : _ref4$shininess;
-                    var _ref4$ambient = _ref4.ambient;
-                    var ambient = _ref4$ambient === undefined ? 0 : _ref4$ambient;
-                    var _ref4$diffuse = _ref4.diffuse;
-                    var diffuse = _ref4$diffuse === undefined ? 8421504 : _ref4$diffuse;
-                    var _ref4$specular = _ref4.specular;
-                    var specular = _ref4$specular === undefined ? diffuse : _ref4$specular;
+                    var _ref5$shininess = _ref5.shininess;
+                    var shininess = _ref5$shininess === undefined ? 10 : _ref5$shininess;
+                    var _ref5$ambient = _ref5.ambient;
+                    var ambient = _ref5$ambient === undefined ? 0 : _ref5$ambient;
+                    var _ref5$diffuse = _ref5.diffuse;
+                    var diffuse = _ref5$diffuse === undefined ? 8421504 : _ref5$diffuse;
+                    var _ref5$specular = _ref5.specular;
+                    var specular = _ref5$specular === undefined ? diffuse : _ref5$specular;
+                    var _ref5$name = _ref5.name;
+                    var name = _ref5$name === undefined ? '' : _ref5$name;
 
                     _classCallCheck(this, PhongMaterial);
 
@@ -16732,6 +17285,7 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                     this.ambient = ambient;
                     this.diffuse = diffuse;
                     this.specular = specular;
+                    this.name = name;
 
                     // Object.seal(this);
                 }
@@ -16756,6 +17310,81 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                         default:
                             console.error('Incompatible material source color type');
                     }
+                };
+
+                PhongMaterial.fromMtlFile = function fromMtlFile(filename) {
+                    return getString(filename).then(function (text) {
+                        var promises = [];
+
+                        var rawMaterials = [];
+                        var i = -1;
+
+                        var prefix = filename.substr(0, filename.lastIndexOf('/') + 1);
+
+                        var _loop = function () {
+                            if (_isArray) {
+                                if (_i >= _iterator.length) return 'break';
+                                _ref = _iterator[_i++];
+                            } else {
+                                _i = _iterator.next();
+                                if (_i.done) return 'break';
+                                _ref = _i.value;
+                            }
+
+                            var line = _ref;
+
+                            line = line.trim().split(/\s+/);
+                            var type = line[0],
+                                data = line.slice(1);
+
+                            switch (type) {
+                                case 'newmtl':
+                                    rawMaterials[++i] = { name: data[0] };break;
+                                //case 'Ka': rawMaterials[i].ambient = data.map(parseFloat); break;
+                                case 'Kd':
+                                    rawMaterials[i].diffuse = data.map(parseFloat);break;
+                                //case 'Ks': rawMaterials[i].specular = data.map(parseFloat); break;
+                                //case 'Ns': rawMaterials[i].shininess = parseFloat(data[0]); break;
+                                case 'map_Kd':
+                                    promises.push((function (n) {
+                                        return Texture2D.fromFile(prefix + data[0].replace(/^\//, '')).then(function (texture) {
+                                            return rawMaterials[n].diffuse = texture;
+                                        });
+                                    })(i));
+                            }
+                        };
+
+                        for (var _iterator = text.split(/\r?\n/), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
+                            var _ref;
+
+                            var _ret = _loop();
+
+                            if (_ret === 'break') break;
+                        }
+
+                        return _Promise.all(promises).then(function () {
+                            var result = {};
+
+                            for (var _iterator2 = rawMaterials, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
+                                var _ref2;
+
+                                if (_isArray2) {
+                                    if (_i2 >= _iterator2.length) break;
+                                    _ref2 = _iterator2[_i2++];
+                                } else {
+                                    _i2 = _iterator2.next();
+                                    if (_i2.done) break;
+                                    _ref2 = _i2.value;
+                                }
+
+                                var rawMaterial = _ref2;
+
+                                result[rawMaterial.name] = new PhongMaterial(rawMaterial);
+                            }
+
+                            return result;
+                        });
+                    });
                 };
 
                 _createClass(PhongMaterial, [{
@@ -16789,12 +17418,8 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
 
                 _inherits(PhongRenderer, _MaterialRenderer);
 
-                PhongRenderer.prototype.init = function init() {
-                    var _ref5 = arguments[0] === undefined ? {} : arguments[0];
-
-                    var _ref5$_lightRenderers = _ref5._lightRenderers;
-
-                    var _lightRenderers = _ref5$_lightRenderers === undefined ? [] : _ref5$_lightRenderers;
+                PhongRenderer.prototype.init = function init(renderer) {
+                    this.renderer = renderer;
 
                     var lightTypeCounts = {
                         'MAX_DIRECTIONAL_LIGHTS': 0,
@@ -16802,21 +17427,9 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                         'MAX_POINT_LIGHTS': 0
                     };
 
-                    for (var _iterator = _lightRenderers, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _getIterator(_iterator);;) {
-                        var _ref;
-
-                        if (_isArray) {
-                            if (_i >= _iterator.length) break;
-                            _ref = _iterator[_i++];
-                        } else {
-                            _i = _iterator.next();
-                            if (_i.done) break;
-                            _ref = _i.value;
-                        }
-
-                        var lightRenderer = _ref;
-
-                        var light = lightRenderer.light;
+                    var lightRenderers = renderer._lightRenderers;
+                    for (var i = 0, len = lightRenderers.length; i < len; ++i) {
+                        var light = lightRenderers[i].light;
                         if (light instanceof DirectionalLight) lightTypeCounts['MAX_DIRECTIONAL_LIGHTS'] += 1;else if (light instanceof SpotLight) lightTypeCounts['MAX_SPOT_LIGHTS'] += 1;else if (light instanceof PointLight) lightTypeCounts['MAX_POINT_LIGHTS'] += 1;
                     }
 
@@ -16867,22 +17480,20 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                  * Should be used to set material uniforms independent of model drawn.
                  */
 
-                PhongRenderer.prototype.beforeRender = function beforeRender(_ref6) {
-                    var camera = _ref6.camera;
-                    var environment = _ref6.environment;
-                    var lightRenderers = _ref6._lightRenderers;
-
-                    var gl = this.program.gl;
+                PhongRenderer.prototype.beforeRender = function beforeRender() {
+                    var program = this.program;
+                    var gl = program.gl;
                     var locations = this.locations;
+                    var renderer = this.renderer;
+                    var lightRenderers = renderer._lightRenderers;
 
                     for (var i = 0, len = lightRenderers.length; i < len; ++i) {
-                        lightRenderers[i].render(this.program);
+                        lightRenderers[i].render(program);
                     }
 
-                    gl.uniform3fv(locations.viewPos, camera.worldPosition);
+                    gl.uniform3fv(locations.viewPos, renderer.camera.worldPosition);
                     gl.uniform1f(locations.shininess, this.material.shininess);
-
-                    gl.uniform3fv(locations.environmentAmbient, environment._ambientVector);
+                    gl.uniform3fv(locations.environmentAmbient, renderer.environment._ambientVector);
 
                     this.ambientStrategy.update();
                     this.diffuseStrategy.update();
@@ -16894,7 +17505,7 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                  * Should be used to set material uniforms dependent on model drawn.
                  */
 
-                PhongRenderer.prototype.render = function render(model, renderer) {
+                PhongRenderer.prototype.render = function render(model) {
                     var gl = this.program.gl;
                     var locations = this.locations;
 
@@ -16927,7 +17538,6 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                     _classCallCheck(this, ColorStrategy);
 
                     this.locations = {};
-
                     this.target = target;
                     this.source = source;
                     this.program = program;
@@ -16945,15 +17555,6 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                             'texture': TextureColorStrategy.create
                         })[PhongMaterial.getSourceType(source)](target, source, program);
                     }),
-
-                    /*
-                    static select = delegate((_, source) => {
-                        switch (PhongMaterial.getSourceType(source)) {
-                            case 'static':  return StaticColorStrategy.create;
-                            case 'texture': return TextureColorStrategy.create;
-                        }
-                    });
-                    */
                     enumerable: true
                 }]);
 
@@ -17016,19 +17617,19 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
 
                     vec4.set(boundsBuffer, subregion.left / size, (subregion.top + subregion.innerHeight) / size, subregion.innerWidth / size, -(subregion.innerHeight / size));
 
-                    for (var _iterator2 = this.strategies.get(subregion.image), _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _getIterator(_iterator2);;) {
-                        var _ref2;
+                    for (var _iterator3 = this.strategies.get(subregion.image), _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _getIterator(_iterator3);;) {
+                        var _ref3;
 
-                        if (_isArray2) {
-                            if (_i2 >= _iterator2.length) break;
-                            _ref2 = _iterator2[_i2++];
+                        if (_isArray3) {
+                            if (_i3 >= _iterator3.length) break;
+                            _ref3 = _iterator3[_i3++];
                         } else {
-                            _i2 = _iterator2.next();
-                            if (_i2.done) break;
-                            _ref2 = _i2.value;
+                            _i3 = _iterator3.next();
+                            if (_i3.done) break;
+                            _ref3 = _i3.value;
                         }
 
-                        var strategy = _ref2;
+                        var strategy = _ref3;
 
                         vec4.copy(strategy.texcoordBounds, boundsBuffer);
                         strategy.textureRegion = this;
@@ -17041,24 +17642,29 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                     // Resize and clear canvas
                     this.ctx.canvas.width = this.region.outerWidth;
                     this.ctx.canvas.height = this.region.outerHeight;
-                    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+                    //this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
                     // Draw subregion's imagedata into canvas
-                    for (var _iterator3 = this.region, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _getIterator(_iterator3);;) {
-                        var _ref3;
+                    for (var _iterator4 = this.region, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _getIterator(_iterator4);;) {
+                        var _ref4;
 
-                        if (_isArray3) {
-                            if (_i3 >= _iterator3.length) break;
-                            _ref3 = _iterator3[_i3++];
+                        if (_isArray4) {
+                            if (_i4 >= _iterator4.length) break;
+                            _ref4 = _iterator4[_i4++];
                         } else {
-                            _i3 = _iterator3.next();
-                            if (_i3.done) break;
-                            _ref3 = _i3.value;
+                            _i4 = _iterator4.next();
+                            if (_i4.done) break;
+                            _ref4 = _i4.value;
                         }
 
-                        var _subregion = _ref3;
+                        var _subregion = _ref4;
 
-                        this.ctx.putImageData(_subregion.image, _subregion.left, _subregion.top);
+                        if ('data' in _subregion.image) {
+                            this.ctx.putImageData(_subregion.image, _subregion.left, _subregion.top);
+                        } else {
+                            this.ctx.drawImage(_subregion.image, _subregion.left, _subregion.top);
+                        }
+
                         this.updateTexcoordBounds(_subregion);
                     }
 
@@ -17074,8 +17680,12 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
                 // Partial update
 
                 TextureRegion.prototype.uploadSubregion = function uploadSubregion(subregion) {
-                    // Draw imagedata into canvas
-                    this.ctx.putImageData(subregion.image, subregion.left, subregion.top);
+                    if ('data' in subregion.image) {
+                        this.ctx.putImageData(subregion.image, subregion.left, subregion.top);
+                    } else {
+                        this.ctx.drawImage(subregion.image, subregion.left, subregion.top);
+                    }
+
                     this.updateTexcoordBounds(subregion);
 
                     this.bind();
@@ -17133,14 +17743,14 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
 
                             var texture = strategy.source;
 
-                            var strategies = strategiesUsingImage.get(texture.imageData);
+                            var strategies = strategiesUsingImage.get(texture.image);
                             if (strategies === undefined) {
                                 strategies = new _Set();
-                                strategiesUsingImage.set(texture.imageData, strategies);
+                                strategiesUsingImage.set(texture.image, strategies);
                             }
                             strategies.add(strategy);
 
-                            var _atlas$insert = atlas.insert(texture.imageData);
+                            var _atlas$insert = atlas.insert(texture.image);
 
                             var result = _atlas$insert[0];
 
@@ -17189,8 +17799,8 @@ System.register('lib/material/phong', ['npm:babel-runtime@5.4.3/helpers/inherits
         }
     };
 });
-System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/create-class', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'npm:babel-runtime@5.4.3/core-js/symbol/iterator', 'npm:babel-runtime@5.4.3/regenerator', 'github:toji/gl-matrix@master', 'lib/extra/event-aggregator', 'lib/extra/bounding-box'], function (_export) {
-    var _inherits, _createClass, _classCallCheck, _getIterator, _Symbol$iterator, _regeneratorRuntime, glm, EventAggregator, BoundingBox, vec3, mat3, mat4, quat, deg2rad, tmp, instances, Scene;
+System.register('lib/scene/base', ['npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'npm:babel-runtime@5.4.7/core-js/symbol/iterator', 'npm:babel-runtime@5.4.7/regenerator', 'github:toji/gl-matrix@2.2.1', 'lib/extra/bounding-box'], function (_export) {
+    var _createClass, _classCallCheck, _getIterator, _Symbol$iterator, _regeneratorRuntime, glm, BoundingBox, vec3, mat3, mat4, quat, deg2rad, tmp, instances, Scene;
 
     function fromRotationTranslationScale(out, rotation, translation, scale) {
         var x = rotation[0],
@@ -17233,22 +17843,18 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
         return out;
     }
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
-        }, function (_npmBabelRuntime543CoreJsSymbolIterator) {
-            _Symbol$iterator = _npmBabelRuntime543CoreJsSymbolIterator['default'];
-        }, function (_npmBabelRuntime543Regenerator) {
-            _regeneratorRuntime = _npmBabelRuntime543Regenerator['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
-        }, function (_libExtraEventAggregator) {
-            EventAggregator = _libExtraEventAggregator['default'];
+        setters: [function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_npmBabelRuntime547CoreJsSymbolIterator) {
+            _Symbol$iterator = _npmBabelRuntime547CoreJsSymbolIterator['default'];
+        }, function (_npmBabelRuntime547Regenerator) {
+            _regeneratorRuntime = _npmBabelRuntime547Regenerator['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libExtraBoundingBox) {
             BoundingBox = _libExtraBoundingBox['default'];
         }],
@@ -17263,7 +17869,7 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
             tmp = vec3.create();
             instances = [];
 
-            Scene = (function (_EventAggregator) {
+            Scene = (function () {
                 function Scene(name) {
                     var _ref2 = arguments[1] === undefined ? {} : arguments[1];
 
@@ -17281,8 +17887,6 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
                     var scale = _ref2$scale === undefined ? 1 : _ref2$scale;
 
                     _classCallCheck(this, Scene);
-
-                    _EventAggregator.call(this, parent);
 
                     this.id = Scene.instances.length;
                     Scene.instances.push(this);
@@ -17305,7 +17909,7 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
                     this.aabb = new BoundingBox();
 
                     this.dirty = true;
-                    this.processing = true;
+                    this.processing = false;
 
                     // Order is important here
                     this.resize(scale);
@@ -17314,8 +17918,6 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
                     this.rotateY(rotateY); // yaw
                     this.translate(position);
                 }
-
-                _inherits(Scene, _EventAggregator);
 
                 Scene.prototype.toString = function toString() {
                     var _this = this;
@@ -17454,7 +18056,7 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
                 }]);
 
                 return Scene;
-            })(EventAggregator);
+            })();
 
             _export('default', Scene);
 
@@ -17462,16 +18064,16 @@ System.register('lib/scene/base', ['npm:babel-runtime@5.4.3/helpers/inherits', '
         }
     };
 });
-System.register('lib/camera/base', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'github:toji/gl-matrix@master', 'lib/scene/base'], function (_export) {
+System.register('lib/camera/base', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'github:toji/gl-matrix@2.2.1', 'lib/scene/base'], function (_export) {
     var _inherits, _classCallCheck, glm, Scene, mat3, mat4, vec3, vec4, Camera;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libSceneBase) {
             Scene = _libSceneBase['default'];
         }],
@@ -17657,14 +18259,18 @@ System.register('lib/camera/base', ['npm:babel-runtime@5.4.3/helpers/inherits', 
         }
     };
 });
-System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/helpers/create-class', 'npm:memoizee@0.3.8', 'lib/extra/bounding-box', 'lib/webgl/buffer', 'lib/webgl/program', 'lib/extra/functional', 'lib/extra/ajax', 'lib/workers/wavefront', 'lib/workers/normal-vectors'], function (_export) {
-    var _classCallCheck, _createClass, memoize, BoundingBox, GLBuffer, GLProgram, construct, getArrayBuffer, wavefrontWorker, normalsWorker, GL, Geometry, GeometryRenderer;
+System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/helpers/create-class', 'npm:babel-runtime@5.4.7/helpers/object-without-properties', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:memoizee@0.3.8', 'lib/extra/bounding-box', 'lib/webgl/buffer', 'lib/webgl/program', 'lib/extra/functional', 'lib/extra/ajax', 'lib/workers/wavefront', 'lib/workers/normal-vectors', 'lib/workers/model-splitter'], function (_export) {
+    var _classCallCheck, _createClass, _objectWithoutProperties, _Promise, memoize, BoundingBox, GLBuffer, GLProgram, construct, getArrayBuffer, wavefrontWorker, normalsWorker, splitterWorker, GL, Geometry, GeometryRenderer;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543HelpersCreateClass) {
-            _createClass = _npmBabelRuntime543HelpersCreateClass['default'];
+        setters: [function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547HelpersCreateClass) {
+            _createClass = _npmBabelRuntime547HelpersCreateClass['default'];
+        }, function (_npmBabelRuntime547HelpersObjectWithoutProperties) {
+            _objectWithoutProperties = _npmBabelRuntime547HelpersObjectWithoutProperties['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }, function (_npmMemoizee038) {
             memoize = _npmMemoizee038['default'];
         }, function (_libExtraBoundingBox) {
@@ -17681,6 +18287,8 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
             wavefrontWorker = _libWorkersWavefront.workerpool;
         }, function (_libWorkersNormalVectors) {
             normalsWorker = _libWorkersNormalVectors.workerpool;
+        }, function (_libWorkersModelSplitter) {
+            splitterWorker = _libWorkersModelSplitter.workerpool;
         }],
         execute: function () {
             'use strict';
@@ -17700,6 +18308,7 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
                     var texcoords = _ref.texcoords;
                     var _ref$normals = _ref.normals;
                     var normals = _ref$normals === undefined ? new Float32Array(vertices.length) : _ref$normals;
+                    var name = _ref.name;
 
                     _classCallCheck(this, Geometry);
 
@@ -17711,8 +18320,11 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
                     this.normals = ensureType(normals, Float32Array);
                     this.texcoords = ensureType(texcoords, Float32Array);
 
+                    this.name = name;
+
                     this.bounds = new BoundingBox();
-                    this.bounds.expandIntervals(this.vertices);
+                    this.bounds.reset();
+                    this.bounds.expandFromPoints(this.vertices);
                     this.bounds.computePoints();
                 }
 
@@ -17721,15 +18333,27 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
                     switch (extension) {
                         case 'obj':
                             return getArrayBuffer(filename).then(function (stringBuffer) {
-                                return wavefrontWorker.run(stringBuffer, { transfers: [stringBuffer] });
-                            }).then(function (data) {
-                                var geometry = new Geometry(data);
+                                return new _Promise(function (resolve, reject) {
+                                    var subscription = undefined;
+                                    subscription = wavefrontWorker.run(stringBuffer, [stringBuffer]).subscribe(function (_ref2) {
+                                        var type = _ref2[0];
+                                        var data = _ref2[1];
 
-                                if (geometry.normals.length === 0) {
-                                    return geometry.generateNormals();
-                                } else {
-                                    return geometry;
-                                }
+                                        if (type === 'geometry') {
+                                            data.name = data.geometryName;
+
+                                            var geometry = new Geometry(data);
+                                            if (geometry.normals.length === 0) {
+                                                geometry.generateNormals().then(resolve)['catch'](reject);
+                                            } else {
+                                                resolve(geometry);
+                                            }
+
+                                            subscription.unsubscribe();
+                                        }
+                                    });
+                                    subscription.onError(reject);
+                                });
                             });
 
                         default:
@@ -17745,15 +18369,37 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
                 Geometry.prototype.generateNormals = function generateNormals() {
                     var _this = this;
 
-                    return normalsWorker.run({ vertices: this.vertices, indices: this.indices }, { transfers: [this.vertices.buffer, this.indices.buffer] }).then(function (_ref2) {
-                        var vertices = _ref2.vertices;
-                        var indices = _ref2.indices;
-                        var normals = _ref2.normals;
+                    return normalsWorker.run({ vertices: this.vertices, indices: this.indices }, [this.vertices.buffer, this.indices.buffer]).first.then(function (_ref3) {
+                        var vertices = _ref3.vertices;
+                        var indices = _ref3.indices;
+                        var normals = _ref3.normals;
 
                         _this.vertices = vertices;
                         _this.indices = indices;
                         _this.normals = normals;
                         return _this;
+                    });
+                };
+
+                /**
+                 * Split the geometry into multiple new parts if it's too big to fit into
+                 */
+
+                Geometry.prototype.split = function split() {
+                    return splitterWorker.run({
+                        indices: this.indices,
+                        vertices: this.vertices,
+                        normals: this.normals,
+                        texcoords: this.texcoords
+                    }, [this.indices.buffer, this.vertices.buffer, this.normals.buffer, this.texcoords.buffer]).map(function (_ref4) {
+                        var part = _ref4.part;
+
+                        var data = _objectWithoutProperties(_ref4, ['part']);
+
+                        var geometry = new Geometry(data);
+                        geometry.name += '-part' + part;
+
+                        return geometry;
                     });
                 };
 
@@ -17825,16 +18471,16 @@ System.register('lib/geometry/geometry', ['npm:babel-runtime@5.4.3/helpers/class
         }
     };
 });
-System.register('lib/scene/model', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/promise', 'lib/scene/base', 'lib/geometry/geometry', 'lib/material/base', 'lib/material/phong', 'github:toji/gl-matrix@master'], function (_export) {
+System.register('lib/scene/model', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/promise', 'lib/scene/base', 'lib/geometry/geometry', 'lib/material/base', 'lib/material/phong', 'github:toji/gl-matrix@2.2.1'], function (_export) {
     var _inherits, _classCallCheck, _Promise, Scene, Geometry, Material, PhongMaterial, glm, vec3, mat4, buffer, Model;
 
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
         }, function (_libSceneBase) {
             Scene = _libSceneBase['default'];
         }, function (_libGeometryGeometry) {
@@ -17843,8 +18489,8 @@ System.register('lib/scene/model', ['npm:babel-runtime@5.4.3/helpers/inherits', 
             Material = _libMaterialBase.Material;
         }, function (_libMaterialPhong) {
             PhongMaterial = _libMaterialPhong['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }],
         execute: function () {
             'use strict';
@@ -17869,23 +18515,40 @@ System.register('lib/scene/model', ['npm:babel-runtime@5.4.3/helpers/inherits', 
 
                     _Scene.call(this, name, options);
 
-                    this.geometry = geometry instanceof Geometry ? geometry : null;
-                    this.material = material instanceof Material ? material : null;
+                    this.geometry = null;
+                    this.material = null;
 
-                    this.onGeometryLoaded = _Promise.resolve(geometry).then(function (geometry) {
-                        _this.geometry = geometry;
-                        _this.dirty = true;
-                        //this.recalculateAABB();
-                        return geometry;
-                    });
+                    var promises = [];
 
-                    this.onMaterialLoaded = _Promise.resolve(material).then(function (material) {
-                        return _this.material = material;
-                    });
+                    if (geometry instanceof _Promise) {
+                        promises.push(geometry);
+                        geometry.then(function (geometry) {
+                            _this.geometry = geometry;
+                            _this.dirty = true;
+                            return geometry;
+                        });
+                    } else {
+                        this.geometry = geometry;
+                    }
 
-                    this.onReady = _Promise.all([this.onGeometryLoaded, this.onMaterialLoaded]).then(function () {
-                        _this.processing = false;
-                    });
+                    if (material instanceof _Promise) {
+                        promises.push(material);
+                        material.then(function (material) {
+                            _this.material = material;
+                            return material;
+                        });
+                    } else {
+                        this.material = material;
+                    }
+
+                    if (promises.length > 0) {
+                        this.processing = true;
+
+                        this.onReady = _Promise.all(promises).then(function () {
+                            _this.processing = false;
+                            return _this;
+                        });
+                    }
 
                     this.mvpMatrix = mat4.create();
 
@@ -17899,10 +18562,11 @@ System.register('lib/scene/model', ['npm:babel-runtime@5.4.3/helpers/inherits', 
 
                     if (dirty && this.geometry) {
                         buffer.set(this.geometry.bounds.points);
+
                         vec3.forEach(buffer, 0, 0, 0, vec3.transformMat4, this.worldTransform);
 
-                        this.aabb.resetIntervals();
-                        this.aabb.expandIntervals(buffer);
+                        this.aabb.reset();
+                        this.aabb.expandFromPoints(buffer);
                         this.aabb.computePoints();
                     }
 
@@ -17918,8 +18582,8 @@ System.register('lib/scene/model', ['npm:babel-runtime@5.4.3/helpers/inherits', 
         }
     };
 });
-System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'npm:babel-runtime@5.4.3/helpers/class-call-check', 'npm:babel-runtime@5.4.3/core-js/promise', 'npm:babel-runtime@5.4.3/core-js/weak-map', 'npm:babel-runtime@5.4.3/core-js/get-iterator', 'npm:babel-runtime@5.4.3/core-js/weak-set', 'github:toji/gl-matrix@master', 'lib/extra/webgl-debug', 'lib/extra/event-aggregator', 'github:mrdoob/stats.js@master', 'lib/camera/base', 'lib/camera/perspective-camera', 'lib/scene/base', 'lib/scene/model', 'lib/scene/group', 'lib/light/base', 'lib/environment/environment', 'lib/extra/bitfield'], function (_export) {
-    var _inherits, _classCallCheck, _Promise, _WeakMap, _getIterator, _WeakSet, glm, WebGLDebugUtils, EventAggregator, Stats, Camera, PerspectiveCamera, Scene, Model, Group, Light, Environment, Bitfield, mat4, GL, maskBuffer, stack, Renderer;
+System.register('lib/renderer', ['npm:babel-runtime@5.4.7/helpers/inherits', 'npm:babel-runtime@5.4.7/helpers/class-call-check', 'npm:babel-runtime@5.4.7/core-js/promise', 'npm:babel-runtime@5.4.7/core-js/weak-map', 'npm:babel-runtime@5.4.7/core-js/weak-set', 'npm:babel-runtime@5.4.7/core-js/get-iterator', 'github:toji/gl-matrix@2.2.1', 'lib/extra/webgl-debug', 'lib/extra/event-aggregator', 'github:mrdoob/stats.js@master', 'lib/camera/base', 'lib/camera/perspective-camera', 'lib/scene/base', 'lib/scene/model', 'lib/scene/group', 'lib/light/base', 'lib/environment/environment', 'lib/extra/bitfield'], function (_export) {
+    var _inherits, _classCallCheck, _Promise, _WeakMap, _WeakSet, _getIterator, glm, WebGLDebugUtils, EventAggregator, Stats, Camera, PerspectiveCamera, Scene, Model, Group, Light, Environment, Bitfield, mat4, GL, maskBuffer, stack, Renderer;
 
     function binarySearch(_x4, _x5, _x6, _x7, _x8) {
         var _again = true;
@@ -17989,20 +18653,20 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
         });
     }
     return {
-        setters: [function (_npmBabelRuntime543HelpersInherits) {
-            _inherits = _npmBabelRuntime543HelpersInherits['default'];
-        }, function (_npmBabelRuntime543HelpersClassCallCheck) {
-            _classCallCheck = _npmBabelRuntime543HelpersClassCallCheck['default'];
-        }, function (_npmBabelRuntime543CoreJsPromise) {
-            _Promise = _npmBabelRuntime543CoreJsPromise['default'];
-        }, function (_npmBabelRuntime543CoreJsWeakMap) {
-            _WeakMap = _npmBabelRuntime543CoreJsWeakMap['default'];
-        }, function (_npmBabelRuntime543CoreJsGetIterator) {
-            _getIterator = _npmBabelRuntime543CoreJsGetIterator['default'];
-        }, function (_npmBabelRuntime543CoreJsWeakSet) {
-            _WeakSet = _npmBabelRuntime543CoreJsWeakSet['default'];
-        }, function (_githubTojiGlMatrixMaster) {
-            glm = _githubTojiGlMatrixMaster['default'];
+        setters: [function (_npmBabelRuntime547HelpersInherits) {
+            _inherits = _npmBabelRuntime547HelpersInherits['default'];
+        }, function (_npmBabelRuntime547HelpersClassCallCheck) {
+            _classCallCheck = _npmBabelRuntime547HelpersClassCallCheck['default'];
+        }, function (_npmBabelRuntime547CoreJsPromise) {
+            _Promise = _npmBabelRuntime547CoreJsPromise['default'];
+        }, function (_npmBabelRuntime547CoreJsWeakMap) {
+            _WeakMap = _npmBabelRuntime547CoreJsWeakMap['default'];
+        }, function (_npmBabelRuntime547CoreJsWeakSet) {
+            _WeakSet = _npmBabelRuntime547CoreJsWeakSet['default'];
+        }, function (_npmBabelRuntime547CoreJsGetIterator) {
+            _getIterator = _npmBabelRuntime547CoreJsGetIterator['default'];
+        }, function (_githubTojiGlMatrix221) {
+            glm = _githubTojiGlMatrix221['default'];
         }, function (_libExtraWebglDebug) {
             WebGLDebugUtils = _libExtraWebglDebug['default'];
         }, function (_libExtraEventAggregator) {
@@ -18084,7 +18748,9 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                     canvas.width = Math.round(canvas.clientWidth * pixelRatio);
                     canvas.height = Math.round(canvas.clientHeight * pixelRatio);
 
-                    var gl = canvas.getContext('webgl', { antialias: antialias }) || canvas.getContext('experimental-webgl', { antialias: antialias });
+                    var config = { antialias: antialias };
+
+                    var gl = canvas.getContext('webgl', config) || canvas.getContext('experimental-webgl', config);
 
                     if (gl === undefined) {
                         throw 'Your browser does not seem to support WebGL! Too bad!';
@@ -18149,6 +18815,29 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                     this.start = this.start.bind(this);
                     this._processNode = this._processNode.bind(this);
 
+                    this._processModelCallback = function (model) {
+                        var geometryRenderer = model.geometry.getRenderer(_this.gl);
+                        var materialRenderer = model.material.getRenderer(_this.gl);
+                        materialRenderer.init(_this);
+
+                        _this._geometryRenderers[model.id] = geometryRenderer;
+                        _this._materialRenderers[model.id] = materialRenderer;
+
+                        var materials = _this._materialsUsingGeometry.get(model.geometry);
+                        if (materials === undefined) {
+                            materials = new _WeakSet();
+                            _this._materialsUsingGeometry.set(model.geometry, new _WeakSet());
+                        }
+                        if (!materials.has(model.material)) {
+                            materialRenderer.setGeometryRenderer(geometryRenderer);
+                            materials.add(model.material);
+                        }
+
+                        insertSorted(model.id, _this._activeModels, _this._modelComparator);
+
+                        model.dirty = true;
+                    };
+
                     gl.enable(GL.DEPTH_TEST);
                     gl.enable(GL.CULL_FACE);
                     gl.cullFace(GL.BACK);
@@ -18212,34 +18901,12 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                  */
 
                 Renderer.prototype._processModel = function _processModel(model) {
-                    var _this2 = this;
-
-                    model.onReady.then(function () {
-                        var geometryRenderer = model.geometry.getRenderer(_this2.gl);
-                        var materialRenderer = model.material.getRenderer(_this2.gl);
-                        materialRenderer.init(_this2);
-
-                        _this2._geometryRenderers[model.id] = geometryRenderer;
-                        _this2._materialRenderers[model.id] = materialRenderer;
-
-                        var materials = _this2._materialsUsingGeometry.get(model.geometry);
-                        if (materials === undefined) {
-                            materials = new _WeakSet();
-                            _this2._materialsUsingGeometry.set(model.geometry, new _WeakSet());
-                        }
-                        if (!materials.has(model.material)) {
-                            materialRenderer.setGeometryRenderer(geometryRenderer);
-                            materials.add(model.material);
-                        }
-
-                        if (_this2._activeModels.indexOf(model.id) !== -1) debugger;
-
-                        insertSorted(model.id, _this2._activeModels, _this2._modelComparator);
-
-                        model.dirty = true;
-
-                        return model;
-                    });
+                    if (model.onReady) {
+                        model.onReady.then(this._processModelCallback);
+                    } else {
+                        //this._processModelCallback(model);
+                        window.setTimeout(this._processModelCallback, 0, model);
+                    }
                 };
 
                 Renderer.prototype._markVisibleNodes = function _markVisibleNodes(node) {
@@ -18266,8 +18933,8 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                                 for (var j = 0, ids = node.subtreeIds, len = ids.length; j < len; ++j) {
                                     visibleNodes.set(ids[j]);
                                 }
-
                                 break;
+
                             case 2:
                                 // Intersect, keep looking
                                 //node.visible = true;
@@ -18307,18 +18974,19 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                     var dirtyScene = scene.recalculate(newNodes);
 
                     // Diff the found nodes with the already processed nodes, yielding the new nodes
-                    newNodes.diff(processedNodes, newNodes);
+                    Bitfield.applyBinaryFunction(newNodes, processedNodes, newNodes, Bitfield.added);
+                    //Bitfield.applyBinaryFunction(removedNodes, processedNodes, removedNodes, Bitfield.removed);
 
                     // Process any new nodes
                     newNodes.forEach(this._processNode);
 
-                    // If any new nodes are found
-                    if (!newNodes.isEmpty) {
+                    // If any new nodes are found, recalculate subtreeIds for all groups
+                    if (!newNodes.isEmpty()) {
                         scene.recalculateSubtreeIds();
                     }
 
                     // Merge the new nodes with the set of processed nodes
-                    processedNodes.union(newNodes, processedNodes);
+                    Bitfield.applyBinaryFunction(processedNodes, newNodes, processedNodes, Bitfield.or);
 
                     // Don't rerender if nothing has changed
                     if (!dirtyScene) return;
@@ -18356,15 +19024,15 @@ System.register('lib/renderer', ['npm:babel-runtime@5.4.3/helpers/inherits', 'np
                             }
 
                             if (materialRenderer !== lastMaterialRenderer) {
-                                materialRenderer.beforeRender(this);
+                                materialRenderer.beforeRender();
                             }
 
-                            materialRenderer.render(model, this);
+                            materialRenderer.render(model);
 
-                            geometryRenderer.render(this);
+                            geometryRenderer.render();
 
                             if (materialRenderer !== lastMaterialRenderer) {
-                                materialRenderer.afterRender(this);
+                                materialRenderer.afterRender();
                             }
 
                             lastProgram = program;
