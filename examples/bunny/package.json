@@ -1,16 +1,11 @@
 {
-  "jspm": {
-    "directories": {
-      "lib": "."
-    },
-    "dependencies": {
-      "domready": "github:ded/domready@^1.0.7",
-      "tribus": "github:maxdavidson/tribus@master"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.4.7",
-      "babel-runtime": "npm:babel-runtime@^5.4.7",
-      "core-js": "npm:core-js@^0.9.12"
-    }
+  "dependencies": {
+    "domready": "^1.0.8",
+    "babel-runtime": "^5.8.20"
+  },
+  "devDependencies": {
+    "babel-core": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "webpack": "^1.12.0"
   }
 }

@@ -1,5 +1,9 @@
 import WorkerPool from '../lib/extra/worker-pool';
 
+function toArrayPromise(stream) {
+    return stream.scan((arr, value) => { arr.push(value); return arr; }, []).toPromise();
+}
+
 describe('WorkerPool', () => {
 
     it('creates a new workerpool from a function', async () => {
@@ -9,7 +13,7 @@ describe('WorkerPool', () => {
 
         const worker = WorkerPool.fromFunction(task);
 
-        expect(await worker.run('hello').first).to.equal('olleh');
+        expect(await worker.run('hello').toPromise()).to.equal('olleh');
     });
 
     it('supports multiple progress events', async () => {
@@ -22,7 +26,7 @@ describe('WorkerPool', () => {
 
         const worker = WorkerPool.fromFunction(task);
 
-        expect(await worker.run().toArray()).to.eql([1, 2, 3]);
+        expect(await toArrayPromise(worker.run())).to.eql([1, 2, 3]);
     });
 
     it('supports multiple, concurrently executing tasks', async () => {
@@ -33,7 +37,7 @@ describe('WorkerPool', () => {
         const numbers = Array.from({ length: 5 }, (n, i) => i);
 
         // Start 50 tasks in parallel and expect each task to return the same number
-        expect(await* numbers.map(n => worker.run(n).first)).to.eql(numbers);
+        expect(await* numbers.map(n => worker.run(n).toPromise())).to.eql(numbers);
     });
 
 });

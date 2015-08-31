@@ -1,20 +1,23 @@
 var fs = require('fs');
-
+var webpack = require("webpack");
 var gulp = require('gulp');
 var bump = require('gulp-bump');
 var git = require('gulp-git');
 var shell = require('gulp-shell');
 var watch = require('gulp-watch');
 var argv = require('yargs').argv;
-
-gulp.task('link', function () {
-  watch(['lib/**/*'], shell.task(['jspm link github:maxdavidson/tribus@master -y']));
-});
+var eslint = require('gulp-eslint');
 
 gulp.task('build', shell.task([
-  'jspm bundle-sfx lib/extra/exporter dist/tribus.js',
-  'jspm bundle-sfx lib/extra/exporter dist/tribus.min.js --minify --skip-source-maps'
+  'webpack --progress',
+  'webpack --progress --config webpack.config.minified.js'
 ]));
+
+gulp.task('lint', function () {
+  return gulp.src(['lib/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+});
 
 gulp.task('bump', function () {
   var type = argv.major ? 'major' : argv.minor ? 'minor' : 'patch';

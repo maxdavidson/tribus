@@ -1,36 +1,34 @@
 module.exports = function (config) {
-    config.set({
-        basePath: '',
+  config.set({
+    basePath: '',
 
-        frameworks: ['jspm', 'mocha', 'chai'],
+    frameworks: ['mocha', 'chai'],
 
-        jspm: {
-          loadFiles: ['test/**/*.js'],
-          serveFiles: ['{test,lib}/**/*']
-        },
+    files: [
+      'test/**/*.js'
+    ],
 
-        preprocessors: {
-            'test/**/*.js': ['babel']
-        },
+    preprocessors: {
+      'test/**/*.js': ['webpack'],
+      'lib/**/*': ['webpack']
+    },
 
-        // Options for tests only
-        'babelPreprocessor': {
-            options: {
-                sourceMap: 'inline',
-                modules: 'system',
-                moduleIds: false,
-                optional: ['runtime'],
-                stage: 0
-            }
-        },
+    webpack: {
+      module: {
+        loaders: [
+          { test: /\.js$/, exclude: /(node_modules|dist)/, loader: 'babel' }
+        ]
+      }
+    },
 
-        reporters: ['mocha'],
+    reporters: ['mocha'],
 
-        port: 9876,
-        colors: true,
-        logLevel: config.LOG_INFO,
-        autoWatch: false,
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: false,
+    browserNoActivityTimeout: 120000,
 
-        browsers: ['Chrome']
-    });
+    browsers: ['Chrome']
+  });
 };

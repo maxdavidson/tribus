@@ -2,7 +2,7 @@ import { Atlas } from '../lib/extra/atlas';
 
 describe('Atlas', () => {
 
-    let atlas: Atlas;
+    let atlas;
 
     beforeEach(() => {
        atlas = new Atlas({ initialSize: 9, maxSize: 12 });
